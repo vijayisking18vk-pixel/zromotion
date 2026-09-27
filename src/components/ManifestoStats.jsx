@@ -111,7 +111,7 @@ export default function ManifestoStats() {
           <div>
             <div className="signal-badge">
               <span className="signal-pulse-dot" />
-              <span>THE SIGNAL MANIFESTO</span>
+              <span>STUDIO MANIFESTO</span>
             </div>
 
             <h2

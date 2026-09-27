@@ -82,7 +82,7 @@ export default function FinalCTA({ onOpenContact }) {
           {/* Badge */}
           <div className="signal-badge" style={{ marginInline: 'auto', marginBottom: '2rem' }}>
             <span className="signal-pulse-dot" />
-            <span>TRANSMIT YOUR SIGNAL</span>
+            <span>INITIATE PARTNERSHIP</span>
           </div>
 
           {/* Massive Kinetic Headline */}
@@ -137,7 +137,7 @@ export default function FinalCTA({ onOpenContact }) {
             </MagneticButton>
 
             <a
-              href="mailto:hello@zromotion.agency?subject=Venture%20Inquiry%20%E2%80%94%20The%20Signal"
+              href="mailto:hello@zromotion.agency?subject=Venture%20Inquiry%20-%20Zromotion"
               className="btn btn-secondary"
               style={{
                 padding: '1.35rem 2.6rem',

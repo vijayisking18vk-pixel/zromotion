@@ -7,7 +7,7 @@ export default function ContactModal({ isOpen, onClose }) {
   const [loading, setLoading] = useState(false);
 
   const [selectedServices, setSelectedServices] = useState(['Brand Strategy & Resonance']);
-  const [selectedBudget, setSelectedBudget] = useState('$25k – $50k');
+  const [selectedBudget, setSelectedBudget] = useState('$25k - $50k');
 
   const servicesList = [
     'Brand Strategy & Resonance',
@@ -18,7 +18,7 @@ export default function ContactModal({ isOpen, onClose }) {
     'App Store Optimization (ASO)',
   ];
 
-  const budgetOptions = ['< $25,000', '$25k – $50k', '$50k – $100k', '$100,000+'];
+  const budgetOptions = ['< $25,000', '$25k - $50k', '$50k - $100k', '$100,000+'];
 
   const toggleService = (svc) => {
     if (selectedServices.includes(svc)) {

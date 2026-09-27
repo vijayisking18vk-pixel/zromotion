@@ -171,7 +171,7 @@ export default function PortfolioRail({ onSelectProject }) {
       >
         <div className="signal-badge">
           <span className="signal-pulse-dot" />
-          <span>PORTFOLIO RAIL // {PROJECTS.length} LIVE DEPLOYMENTS</span>
+          <span>SELECTED CLIENT DEPLOYMENTS</span>
         </div>
       </div>
 

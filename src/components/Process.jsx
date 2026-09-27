@@ -5,7 +5,7 @@ const STEPS = [
   {
     phase: '01',
     title: 'Signal Discovery & Category Audit',
-    timeframe: 'Weeks 1 – 2',
+    timeframe: 'Weeks 1-2',
     description:
       'We deconstruct your category landscape, analyze competitive blind spots, and unearth the unique resonance signals that will distinguish your brand from market noise.',
     signals: ['Competitor Moat Audit', 'Audience Psychographics', 'Value Proposition Stress-Test'],
@@ -13,7 +13,7 @@ const STEPS = [
   {
     phase: '02',
     title: 'Strategic Architecture & Positioning',
-    timeframe: 'Weeks 3 – 4',
+    timeframe: 'Weeks 3-4',
     description:
       'Crafting the positioning thesis, visual identity monographs, quantitative growth models, and message frameworks that establish unquestioned market authority.',
     signals: ['Brand Monograph', 'Acquisition Channel Matrix', 'Creative Direction Deck'],
@@ -21,7 +21,7 @@ const STEPS = [
   {
     phase: '03',
     title: 'Build & Full-Stack Deployment',
-    timeframe: 'Weeks 5 – 7',
+    timeframe: 'Weeks 5-7',
     description:
       'High-velocity creative production: interactive flagships, high-converting funnel infrastructure, cinematic motion assets, and programmatic ad matrices.',
     signals: ['WebGL / Next.js Flagships', 'Multi-Variant Ad Creative', 'Attribution Tracking'],

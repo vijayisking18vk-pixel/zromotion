@@ -47,7 +47,7 @@ export default function Hero({ onOpenContact }) {
       ref={heroRef}
       style={{
         position: 'relative',
-        minHeight: '100vh',
+        minHeight: '100dvh',
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
@@ -74,7 +74,7 @@ export default function Hero({ onOpenContact }) {
         >
           <div className="signal-badge">
             <span className="signal-pulse-dot" />
-            <span>THE SIGNAL // VENTURE & BRAND ACCELERATION</span>
+            <span>VENTURE & BRAND ACCELERATION STUDIO</span>
           </div>
         </motion.div>
 
@@ -182,7 +182,7 @@ export default function Hero({ onOpenContact }) {
           }}
         >
           <span>✦ Chennai & Global Studio</span>
-          <span>✦ 5 Flagship Deployments</span>
+          <span>✦ 9 Flagship Deployments</span>
           <span>✦ 100k+ Dispatched Shifts</span>
         </motion.div>
 

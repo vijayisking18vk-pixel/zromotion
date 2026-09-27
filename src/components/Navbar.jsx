@@ -7,11 +7,29 @@ export default function Navbar({ onOpenContact }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
+    // Zero-overhead scroll state via IntersectionObserver sentinel (Taste Skill 5.D)
+    const sentinel = document.createElement('div');
+    sentinel.style.position = 'absolute';
+    sentinel.style.top = '0px';
+    sentinel.style.height = '30px';
+    sentinel.style.width = '100%';
+    sentinel.style.pointerEvents = 'none';
+    sentinel.setAttribute('aria-hidden', 'true');
+    document.body.prepend(sentinel);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setScrolled(!entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+
+    observer.observe(sentinel);
+
+    return () => {
+      observer.disconnect();
+      sentinel.remove();
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [

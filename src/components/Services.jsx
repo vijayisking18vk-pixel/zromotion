@@ -78,25 +78,38 @@ export default function Services({ onOpenContact }) {
           </p>
         </div>
 
-        {/* 4-Card Liquid Morphing Grid */}
+        {/* Asymmetric Bento Grid Architecture */}
         <div
+          className="services-bento-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '1.75rem',
+            gridTemplateColumns: 'repeat(12, 1fr)',
+            gap: 'clamp(1.25rem, 2.5vw, 2rem)',
           }}
         >
           {SERVICES.map((service, idx) => {
             const IconComponent = service.icon;
+            // Asymmetric Bento Col Spans: Row 1 = 7 / 5, Row 2 = 5 / 7
+            const isWide = idx === 0 || idx === 3;
+            const colSpan = isWide ? 'span 7' : 'span 5';
+
             return (
               <div
                 key={idx}
-                className="liquid-card"
+                className="liquid-card services-bento-cell"
                 style={{
+                  gridColumn: colSpan,
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  minHeight: '380px',
+                  minHeight: '390px',
+                  backgroundColor: 'var(--surface)',
+                  borderRadius: '24px',
+                  border: '1px solid var(--surface-border)',
+                  padding: 'clamp(1.75rem, 3vw, 2.5rem)',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease',
                 }}
               >
                 {/* Subtle radial glow orb on hover */}
@@ -109,7 +122,7 @@ export default function Services({ onOpenContact }) {
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      marginBottom: '2rem',
+                      marginBottom: '1.75rem',
                     }}
                   >
                     <div
@@ -123,6 +136,7 @@ export default function Services({ onOpenContact }) {
                         alignItems: 'center',
                         justifyContent: 'center',
                         color: 'var(--primary-deep)',
+                        boxShadow: '0 4px 12px rgba(20, 16, 24, 0.04)',
                       }}
                     >
                       <IconComponent size={22} />
@@ -134,6 +148,7 @@ export default function Services({ onOpenContact }) {
                         fontSize: '1rem',
                         fontWeight: 700,
                         color: 'var(--ink-muted)',
+                        letterSpacing: '0.05em',
                       }}
                     >
                       {service.number}
@@ -160,12 +175,12 @@ export default function Services({ onOpenContact }) {
                   <h3
                     style={{
                       fontFamily: 'var(--font-display)',
-                      fontSize: '1.45rem',
+                      fontSize: isWide ? 'clamp(1.5rem, 2.2vw, 1.85rem)' : '1.45rem',
                       fontWeight: 700,
                       color: 'var(--ink)',
                       lineHeight: 1.2,
                       marginBottom: '1rem',
-                      letterSpacing: '-0.02em',
+                      letterSpacing: '-0.025em',
                     }}
                   >
                     {service.title}
@@ -174,10 +189,11 @@ export default function Services({ onOpenContact }) {
                   {/* Description */}
                   <p
                     style={{
-                      fontSize: '0.92rem',
+                      fontSize: '0.94rem',
                       color: 'var(--ink-secondary)',
-                      lineHeight: 1.6,
-                      marginBottom: '1.75rem',
+                      lineHeight: 1.65,
+                      marginBottom: '2rem',
+                      maxWidth: isWide ? '580px' : '440px',
                     }}
                   >
                     {service.description}
@@ -191,19 +207,21 @@ export default function Services({ onOpenContact }) {
                     paddingTop: '1.25rem',
                     display: 'flex',
                     flexWrap: 'wrap',
-                    gap: '0.4rem',
+                    gap: '0.5rem',
                   }}
                 >
                   {service.deliverables.map((item, dIdx) => (
                     <span
                       key={dIdx}
                       style={{
-                        fontSize: '0.72rem',
+                        fontSize: '0.75rem',
+                        fontFamily: 'var(--font-display)',
                         color: 'var(--ink)',
                         backgroundColor: '#FFFFFF',
                         border: '1px solid var(--surface-border)',
-                        padding: '0.2rem 0.55rem',
-                        borderRadius: '4px',
+                        padding: '0.3rem 0.7rem',
+                        borderRadius: '6px',
+                        fontWeight: 500,
                       }}
                     >
                       {item}

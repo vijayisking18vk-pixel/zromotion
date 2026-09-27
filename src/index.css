@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ZROMOTION — "THE SIGNAL" DESIGN SYSTEM
+   ZROMOTION - "THE SIGNAL" DESIGN SYSTEM
    Inspired by igloo.inc / Bureaux: Restraint + Tactility
    Palette: Primary (#B9A6F2), Deep (#8C7AE6), Surface (#F6F4FF), Ink (#141018)
    ========================================================================== */
@@ -352,5 +352,12 @@ button {
     height: auto;
     min-height: 80vh;
     padding: 3rem 1.5rem;
+  }
+  .services-bento-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .services-bento-cell {
+    grid-column: span 1 !important;
+    min-height: auto !important;
   }
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Lenis from 'lenis';
-import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ClientMarquee from './components/ClientMarquee';
@@ -229,13 +228,10 @@ export default function App() {
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh', backgroundColor: '#FFFFFF' }}>
-      {/* 2.8% Faint Film-Grain Overlay across whole page */}
+      {/* Subtle Film-Grain Texture */}
       <div className="grain-overlay" aria-hidden="true" />
 
-      {/* Spring Magnetic Custom Cursor */}
-      <CustomCursor />
-
-      {/* Sticky Navbar with Pinterest Brand Mark */}
+      {/* Sticky Navbar */}
       <Navbar onOpenContact={() => setContactOpen(true)} />
 
       {/* Main Single-Scroll Experience */}
