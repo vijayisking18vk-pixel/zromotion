@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ZONES } from '../data/zones';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -131,7 +130,7 @@ export default function Home() {
 
   const scrollToCollections = (e) => {
     e.preventDefault();
-    const el = document.getElementById('collections');
+    const el = document.getElementById('journal');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -201,7 +200,7 @@ export default function Home() {
 
         {/* Minimal Scroll Cue */}
         <a
-          href="#collections"
+          href="#journal"
           onClick={scrollToCollections}
           className="cr-hero-scroll-cue"
           style={{ opacity: 0 }}
@@ -214,12 +213,96 @@ export default function Home() {
         </a>
       </section>
 
-      {/* ——— FRAME 2: THE 4 COLLECTIONS AS CARDS (MIRRORING COLLECTION OVERLAY) ——— */}
-      <section id="collections" className="cr-section" style={{ background: 'var(--cr-bg)' }}>
+      {/* ——— NEW FRAME: CHENNAI RENTING JOURNAL (BLOGS) ——— */}
+      <section id="journal" className="cr-section" style={{ background: 'var(--cr-white)' }}>
+        <div className="cr-container">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '2rem', marginBottom: 'var(--gap-xl)' }}>
+            <div>
+              <p className="cr-eyebrow cr-reveal" style={{ marginBottom: '1rem' }}>
+                Chennai Renting Journal
+              </p>
+              <h2 className="cr-reveal cr-reveal--delay-1" style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'var(--text-h2)',
+                fontWeight: 600,
+                color: 'var(--cr-ink)',
+                lineHeight: 1.1,
+                letterSpacing: '-0.02em',
+                maxWidth: '680px'
+              }}>
+                Insights on living, leasing, and architecture in Chennai.
+              </h2>
+            </div>
+            <Link to="/journal" className="cr-btn-arrow cr-reveal cr-reveal--delay-2" style={{ color: 'var(--cr-ink)', borderColor: 'var(--cr-ink-20)' }}>
+              Read All Journals
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M3 15L15 3M15 3H5M15 3V13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </Link>
+          </div>
+
+          <div className="cr-journal-grid">
+            {/* Featured Large Article */}
+            <a href="#" className="cr-journal-featured cr-reveal">
+              <div className="cr-journal-featured__img-wrap">
+                <img 
+                  src="https://images.unsplash.com/photo-1577903808422-79010fc41961?w=1000&q=80&auto=format&fit=crop" 
+                  alt="Reading the Chennai Lease" 
+                  loading="lazy" 
+                />
+              </div>
+              <div className="cr-journal-featured__content">
+                <div className="cr-journal-meta">Market Insights &bull; October 2026</div>
+                <h3 className="cr-journal-featured__title">Navigating the Chennai Premium Rental Market: A Tenant's Guide</h3>
+                <p className="cr-journal-featured__excerpt">
+                  Understanding maintenance clauses, deposit structures, and what to look for when touring a luxury property in South Chennai's most sought-after neighborhoods.
+                </p>
+                <span className="cr-journal-read">Read Article &rarr;</span>
+              </div>
+            </a>
+
+            {/* Stacked Secondary Articles */}
+            <div className="cr-journal-stack">
+              <a href="#" className="cr-journal-stacked-card cr-reveal cr-reveal--delay-1">
+                <div className="cr-journal-stacked-card__img-wrap">
+                  <img 
+                    src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80&auto=format&fit=crop" 
+                    alt="Minimalist office space" 
+                    loading="lazy" 
+                  />
+                </div>
+                <div className="cr-journal-stacked-card__content">
+                  <div className="cr-journal-meta">Architecture &bull; September 2026</div>
+                  <h4 className="cr-journal-stacked-card__title">The Return of the Courtyard House in Modern Rentals</h4>
+                  <span className="cr-journal-read">Read Article &rarr;</span>
+                </div>
+              </a>
+
+              <a href="#" className="cr-journal-stacked-card cr-reveal cr-reveal--delay-2">
+                <div className="cr-journal-stacked-card__img-wrap">
+                  <img 
+                    src="https://images.unsplash.com/photo-1542665952-14513db15293?w=600&q=80&auto=format&fit=crop" 
+                    alt="Coastal ECR Life" 
+                    loading="lazy" 
+                  />
+                </div>
+                <div className="cr-journal-stacked-card__content">
+                  <div className="cr-journal-meta">Lifestyle &bull; August 2026</div>
+                  <h4 className="cr-journal-stacked-card__title">Why ECR is Becoming Chennai's Most Desired Address</h4>
+                  <span className="cr-journal-read">Read Article &rarr;</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ——— NEW FRAME: INSTAGRAM INTEGRATION ——— */}
+      <section className="cr-section" style={{ background: 'var(--cr-bg)', borderTop: '1px solid var(--cr-ink-10)' }}>
         <div className="cr-container">
           <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto var(--gap-lg)' }}>
             <p className="cr-eyebrow cr-reveal" style={{ marginBottom: '1rem' }}>
-              Our Collections
+              @chennairents.in
             </p>
             <h2 className="cr-reveal cr-reveal--delay-1" style={{
               fontFamily: 'var(--font-display)',
@@ -230,7 +313,7 @@ export default function Home() {
               color: 'var(--cr-ink)',
               marginBottom: '1.25rem'
             }}>
-              Four Living Moods Across Chennai.
+              Follow the ChennaiRents Lifestyle.
             </h2>
             <p className="cr-reveal cr-reveal--delay-2" style={{
               fontFamily: 'var(--font-body)',
@@ -239,193 +322,71 @@ export default function Home() {
               lineHeight: 1.75,
               color: 'var(--cr-ink-80)'
             }}>
-              Instead of endless portal clutter, we organize Chennai by genuine living moods. Select a collection below to discover handpicked homes.
+              Video tours, architectural details, and exclusive previews of our latest properties before they hit the market.
             </p>
           </div>
 
-          {/* 4 Grand Collection Cards (Overlay Style) */}
-          <div className="cr-collection-cards">
-            {ZONES.map((zone, idx) => (
-              <Link
-                key={zone.id}
-                to={`/${zone.slug}`}
-                className={`cr-collection-card cr-reveal cr-reveal--delay-${(idx % 4) + 1}`}
-                aria-label={`Explore ${zone.name}`}
+          {/* 4-Column Instagram Reel Grid */}
+          <div className="cr-insta-grid">
+            {[
+              {
+                id: 1,
+                img: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?w=500&q=80&auto=format&fit=crop',
+                views: '12.4K',
+                desc: 'A walking tour of the Adyar Garden Estate.'
+              },
+              {
+                id: 2,
+                img: 'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?w=500&q=80&auto=format&fit=crop',
+                views: '8.2K',
+                desc: 'Heritage details in our latest Mylapore listing.'
+              },
+              {
+                id: 3,
+                img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&q=80&auto=format&fit=crop',
+                views: '24.1K',
+                desc: 'Sunset views from the ECR Oceanfront Villa.'
+              },
+              {
+                id: 4,
+                img: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=500&q=80&auto=format&fit=crop',
+                views: '9.6K',
+                desc: 'Inside the luxury apartments at Poes Garden.'
+              }
+            ].map((reel, idx) => (
+              <a 
+                key={reel.id} 
+                href="https://www.instagram.com/chennairents.in/#" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={`cr-insta-card cr-reveal cr-reveal--delay-${(idx % 4) + 1}`}
+                aria-label="View Instagram Reel"
               >
-                {/* Background Photo */}
-                <img
-                  src={zone.heroImage}
-                  alt={`${zone.name} residence`}
-                  className="cr-collection-card__bg"
-                  loading="lazy"
-                />
-
-                {/* Dark Vignette Overlay */}
-                <div className="cr-collection-card__overlay" aria-hidden="true" />
-
-                {/* Rotating Arrow Indicator */}
-                <div className="cr-collection-card__arrow" aria-hidden="true">
-                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
-                    <path d="M2 13L13 2M13 2H4M13 2V11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-
-                {/* Card Content */}
-                <div className="cr-collection-card__content">
-                  <div className="cr-collection-card__monogram">
-                    {zone.monogram} &bull; {zone.name}
-                  </div>
-                  <h3 className="cr-collection-card__title">
-                    {zone.name}
-                  </h3>
-                  <div className="cr-collection-card__price">
-                    Starting {zone.pricePfx}{zone.priceFrom}
-                  </div>
-                  <p className="cr-collection-card__desc">
-                    {zone.shortDesc}
-                  </p>
-                  <span className="cr-collection-card__link">
-                    Explore Homes
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path d="M2 7H12M12 7L7.5 2.5M12 7L7.5 11.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <img src={reel.img} alt="Instagram Video Thumbnail" className="cr-insta-card__bg" loading="lazy" />
+                <div className="cr-insta-card__overlay">
+                  <div className="cr-insta-card__play">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z" />
                     </svg>
-                  </span>
+                  </div>
                 </div>
-              </Link>
+                <div className="cr-insta-card__content">
+                  <div className="cr-insta-card__views">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                    {reel.views}
+                  </div>
+                  <p className="cr-insta-card__desc">{reel.desc}</p>
+                </div>
+              </a>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ——— FRAME 3: FEATURED RESIDENCES SHOWCASE ——— */}
-      <section className="cr-section" style={{ background: 'var(--cr-ink)', color: 'var(--cr-white)' }}>
-        <div className="cr-container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '2rem', marginBottom: 'var(--gap-xl)' }}>
-            <div>
-              <p className="cr-eyebrow cr-eyebrow--gold cr-reveal" style={{ marginBottom: '1rem' }}>
-                Architectural Highlights
-              </p>
-              <h2 className="cr-reveal cr-reveal--delay-1" style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'var(--text-h2)',
-                fontWeight: 600,
-                color: 'var(--cr-white)',
-                lineHeight: 1.1,
-                letterSpacing: '-0.02em',
-                maxWidth: '680px'
-              }}>
-                Coastal Villas, Private Compounds & Character Bungalows.
-              </h2>
-            </div>
-            <Link to="/ecr-coastal" className="cr-btn-arrow cr-btn-arrow--light cr-reveal cr-reveal--delay-2">
-              Explore ECR Coastal Homes
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M3 15L15 3M15 3H5M15 3V13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </Link>
-          </div>
-
-          {/* 3 Real Villa Stock Cards */}
-          <div className="cr-villas-grid">
-            <div className="cr-villa-card cr-reveal">
-              <div className="cr-villa-card__img-wrap">
-                <img
-                  src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80&auto=format&fit=crop"
-                  alt="Modern sea-facing private villa with pool along ECR"
-                  loading="lazy"
-                />
-              </div>
-              <div className="cr-villa-card__content">
-                <div className="cr-villa-card__location">ECR Coastal &bull; Injambakkam</div>
-                <h4 className="cr-villa-card__title">The Oceanfront Palm Villa</h4>
-                <p className="cr-villa-card__text">
-                  Private lap pool, floor-to-ceiling sea-facing glazing, landscaped garden compound, and 24/7 private security.
-                </p>
-                <div className="cr-villa-card__footer">
-                  <div className="cr-villa-card__price">&#x20B9;1,25,000 / month</div>
-                  <Link to="/ecr-coastal" className="cr-villa-card__link">
-                    Details &rarr;
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="cr-villa-card cr-reveal cr-reveal--delay-1">
-              <div className="cr-villa-card__img-wrap">
-                <img
-                  src="https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?w=800&q=80&auto=format&fit=crop"
-                  alt="Heritage courtyard bungalow in Mylapore"
-                  loading="lazy"
-                />
-              </div>
-              <div className="cr-villa-card__content">
-                <div className="cr-villa-card__location">City Central &bull; Mylapore</div>
-                <h4 className="cr-villa-card__title">Heritage Courtyard Bungalow</h4>
-                <p className="cr-villa-card__text">
-                  Restored teakwood veranda, central open-to-sky courtyard with Athangudi tiles, shaded fruit trees, and walkable street life.
-                </p>
-                <div className="cr-villa-card__footer">
-                  <div className="cr-villa-card__price">&#x20B9;85,000 / month</div>
-                  <Link to="/city-central" className="cr-villa-card__link">
-                    Details &rarr;
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="cr-villa-card cr-reveal cr-reveal--delay-2">
-              <div className="cr-villa-card__img-wrap">
-                <img
-                  src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80&auto=format&fit=crop"
-                  alt="Architectural private villa in Adyar"
-                  loading="lazy"
-                />
-              </div>
-              <div className="cr-villa-card__content">
-                <div className="cr-villa-card__location">Signature Homes &bull; Adyar</div>
-                <h4 className="cr-villa-card__title">The Adyar Garden Estate</h4>
-                <p className="cr-villa-card__text">
-                  Independent compound with mature banyan trees, double-height living room, separate staff quarters, and dedicated relationship manager.
-                </p>
-                <div className="cr-villa-card__footer">
-                  <div className="cr-villa-card__price">&#x20B9;1,80,000 / month</div>
-                  <Link to="/signature-homes" className="cr-villa-card__link">
-                    Details &rarr;
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ——— FRAME 4: EDITORIAL PHILOSOPHY ——— */}
-      <section className="cr-section" style={{ background: 'var(--cr-bg)' }}>
-        <div className="cr-container" style={{ maxWidth: '980px', textAlign: 'center' }}>
-          <p className="cr-eyebrow cr-reveal" style={{ marginBottom: '1.25rem' }}>
-            The ChennaiRents Standard
-          </p>
-          <blockquote
-            className="cr-quote cr-reveal cr-reveal--delay-1"
-            style={{ fontSize: 'clamp(1.75rem, 3.4vw, 2.9rem)', marginBottom: '2.5rem' }}
-          >
-            "We do not aggregate thousands of listings. We handpick, inspect, and negotiate the homes we would be proud to live in ourselves."
-          </blockquote>
-          <p className="cr-reveal cr-reveal--delay-2" style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: 'var(--text-xl)',
-            fontWeight: 400,
-            lineHeight: 1.82,
-            color: 'var(--cr-ink-80)',
-            maxWidth: '760px',
-            margin: '0 auto 3rem'
-          }}>
-            Every property in ChennaiRents is verified for fair pricing, clean ownership documentation, and peaceful living. Zero spam calls. Zero hidden broker markups.
-          </p>
-          <div className="cr-reveal cr-reveal--delay-3">
-            <Link to="/about" className="cr-btn cr-btn--gold" style={{ borderRadius: '999px', padding: '1rem 2.5rem' }}>
-              Read Our Full Story &rarr;
-            </Link>
+          
+          <div className="cr-reveal cr-reveal--delay-3" style={{ textAlign: 'center', marginTop: '3rem' }}>
+             <a href="https://www.instagram.com/chennairents.in/#" target="_blank" rel="noopener noreferrer" className="cr-btn cr-btn--outline" style={{ borderRadius: '999px', padding: '1rem 2.5rem' }}>
+              Follow @chennairents.in
+            </a>
           </div>
         </div>
       </section>

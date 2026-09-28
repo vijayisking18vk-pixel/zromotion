@@ -1,34 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import CollectionOverlay from './CollectionOverlay';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [overlayOpen, setOverlayOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
 
-  // Pages with cream/light background — nav switches to dark text (Home, About, Contact, Reach Us)
-  const isLightPage = ['/', '/about', '/contact', '/reach-us'].includes(location.pathname);
+  // Light (cream) pages — nav text goes dark
+  const isLightPage = ['/', '/about', '/journal', '/contact', '/reach-us'].includes(location.pathname);
 
+  // Close mobile menu on route change
+  useEffect(() => { setMenuOpen(false); }, [location.pathname]);
+
+  // Track scroll
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 80);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close overlay on route change
+  // Lock body scroll when menu is open
   useEffect(() => {
-    setOverlayOpen(false);
-  }, [location.pathname]);
-
-  // Keyboard: Escape to close
-  useEffect(() => {
-    const onKeyDown = (e) => {
-      if (e.key === 'Escape') setOverlayOpen(false);
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, []);
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
 
   const navClass = [
     'cr-nav',
@@ -36,56 +31,75 @@ export default function Navbar() {
     scrolled ? 'is-scrolled' : '',
   ].filter(Boolean).join(' ');
 
+  const linkClass = ({ isActive }) =>
+    ['cr-nav__link', isActive ? 'cr-nav__link--active' : ''].filter(Boolean).join(' ');
+
   return (
     <>
       <nav className={navClass} aria-label="Main navigation">
-        {/* Left column: About */}
+        {/* LEFT: About + Journal */}
         <div className="cr-nav__col-left">
-          <Link to="/about" className="cr-nav__link">
-            About
-          </Link>
+          <NavLink to="/about"   className={linkClass}>About</NavLink>
+          <NavLink to="/journal" className={linkClass}>Journal</NavLink>
         </div>
 
-        {/* Center column: Brand Logo */}
+        {/* CENTER: Logo */}
         <div className="cr-nav__col-center">
-          <Link to="/" className="cr-nav__logo" aria-label="ChennaiRents home">
+          <Link to="/" className="cr-nav__logo" aria-label="ChennaiRents — Home">
             ChennaiRents
           </Link>
         </div>
 
-        {/* Right column: List Property, Contact & Collections Button */}
+        {/* RIGHT: CTA + Contact + Hamburger */}
         <div className="cr-nav__col-right">
           <a
             href="https://www.chennairents.in/"
             target="_blank"
             rel="noopener noreferrer"
-            className="cr-nav__link cr-nav__link--accent"
-            title="List your residential property on chennairents.in"
+            className="cr-nav__link cr-nav__link--accent cr-nav__link--desktop"
           >
             List Property ↗
           </a>
-          <Link to="/contact" className="cr-nav__link">
+          <NavLink to="/contact" className={({ isActive }) =>
+            ['cr-nav__link', 'cr-nav__link--desktop', isActive ? 'cr-nav__link--active' : ''].filter(Boolean).join(' ')
+          }>
             Contact
-          </Link>
+          </NavLink>
+
+          {/* Hamburger — mobile only */}
           <button
-            className="cr-nav__collections-btn"
-            onClick={() => setOverlayOpen(true)}
-            aria-expanded={overlayOpen}
-            aria-haspopup="dialog"
-            aria-label="Our Collections"
+            className="cr-nav__burger"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
           >
-            <span>Our Collections</span>
-            <svg className="cr-nav__grid-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-              <rect width="4" height="4" fill="currentColor"/>
-              <rect x="8" width="4" height="4" fill="currentColor"/>
-              <rect y="8" width="4" height="4" fill="currentColor"/>
-              <rect x="8" y="8" width="4" height="4" fill="currentColor"/>
-            </svg>
+            <span className={`cr-nav__burger-bar ${menuOpen ? 'open' : ''}`} />
+            <span className={`cr-nav__burger-bar ${menuOpen ? 'open' : ''}`} />
           </button>
         </div>
       </nav>
 
-      <CollectionOverlay isOpen={overlayOpen} onClose={() => setOverlayOpen(false)} />
+      {/* MOBILE FULLSCREEN MENU */}
+      <div className={`cr-mobile-menu ${menuOpen ? 'is-open' : ''}`} aria-hidden={!menuOpen}>
+        <div className="cr-mobile-menu__inner">
+          <nav className="cr-mobile-menu__nav">
+            <Link to="/"        className="cr-mobile-menu__link">Home</Link>
+            <Link to="/about"   className="cr-mobile-menu__link">About</Link>
+            <Link to="/journal" className="cr-mobile-menu__link">Journal</Link>
+            <Link to="/contact" className="cr-mobile-menu__link">Contact</Link>
+          </nav>
+          <div className="cr-mobile-menu__cta">
+            <a
+              href="https://www.chennairents.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cr-btn-primary-gold"
+            >
+              List Property on chennairents.in ↗
+            </a>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
