@@ -1,106 +1,136 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-
-/* ---- Shared scroll reveal ---- */
-function useScrollReveal() {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => {
-        if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); }
-      }),
-      { threshold: 0.1, rootMargin: '0px 0px -48px 0px' }
-    );
-    document.querySelectorAll('.cr-reveal').forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-}
-
-/* ---- Inline styles as shared objects ---- */
-const S = {
-  page: { background: 'var(--cr-bg)', minHeight: '100vh', display: 'flex', flexDirection: 'column' },
-  introHeading: {
-    fontFamily: 'var(--font-display)',
-    fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-    fontWeight: 600,
-    lineHeight: 1.1,
-    letterSpacing: '-0.02em',
-    color: 'var(--cr-ink)',
-    maxWidth: '900px',
-    margin: '0 auto',
-    textAlign: 'center'
-  },
-  bodyText: {
-    fontFamily: 'var(--font-body)',
-    fontSize: 'var(--text-xl)',
-    fontWeight: 400,
-    lineHeight: 1.82,
-    color: 'var(--cr-ink-80)',
-    maxWidth: '680px',
-    margin: '0 auto',
-    textAlign: 'center'
-  },
-  ctaHeading: {
-    fontFamily: 'var(--font-display)',
-    fontSize: 'var(--text-h2)',
-    fontWeight: 600,
-    color: 'var(--cr-white)',
-    letterSpacing: '-0.02em',
-    lineHeight: 1.08,
-    textAlign: 'center',
-    marginBottom: '2rem'
-  },
-};
+import MarinaDivider from '../components/MarinaDivider';
+import SEOHead from '../components/SEOHead';
+import { AutoRickshawDoodle, RiponBuildingDoodle, FilterCoffeeDoodle } from '../components/ChennaiDoodles';
+import { Instagram } from 'lucide-react';
+import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../config';
 
 export default function About() {
-  useScrollReveal();
-
   return (
-    <main style={S.page}>
+    <main style={{ paddingBottom: '3rem' }}>
+      
+      {/* ── SEO JSON-LD & META INJECTION ── */}
+      <SEOHead
+        title="About Chennai Rents: Why We Built an Honest Rental Guide"
+        description="Learn why Chennai Rents was founded: to replace spammy listing portals with honest locality rental intelligence and Instagram Reels in Chennai."
+        canonicalUrl="https://chennairents.in/about"
+        type="article"
+        breadcrumbs={[
+          { name: 'Home', url: 'https://chennairents.in/' },
+          { name: 'About', url: 'https://chennairents.in/about' }
+        ]}
+      />
 
-      {/* INTRO HERO */}
-      <section className="cr-section cr-container" style={{ paddingTop: 'calc(var(--nav-height) + 6rem)', paddingBottom: '4rem' }}>
-        <p className="cr-eyebrow cr-reveal" style={{ textAlign: 'center', marginBottom: '2rem' }}>About Us</p>
-        <h1 className="cr-reveal cr-reveal--delay-1" style={S.introHeading}>
-          A simple way to tag your property and connect with the right tenants.
-        </h1>
-      </section>
-
-      {/* EDITORIAL IMAGE & TEXT */}
-      <section className="cr-section cr-container" style={{ paddingBottom: '8rem' }}>
-        <div style={{ overflow: 'hidden', borderRadius: '4px', marginBottom: '4rem', aspectRatio: '16/7' }} className="cr-reveal cr-reveal--delay-2">
-          <img
-            src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1600&q=80&auto=format&fit=crop"
-            alt="A warm Chennai apartment interior"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
-        </div>
-        
-        <p className="cr-reveal cr-reveal--delay-3" style={S.bodyText}>
-          Chennai Rents simplifies the rental experience. We provide a seamless, premium platform where landlords can effortlessly list their homes, and tenants can easily find and connect with them directly. No clutter, no endless scrolling—just beautiful homes and genuine connections.
-        </p>
-      </section>
-
-      {/* CTA BAND */}
-      <section className="cr-cta-band" style={{ marginTop: 'auto' }}>
-        <h2 className="cr-reveal" style={S.ctaHeading}>
-          Ready to get started?
-        </h2>
-        
-        <div className="cr-cta-actions cr-reveal cr-reveal--delay-2" style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
-          <a
-            href="https://www.chennairents.in/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cr-btn-primary-gold"
-          >
-            List Your Property ↗
-          </a>
-
-          <Link to="/contact" className="cr-btn-secondary-light">
-            Contact Us
-          </Link>
+      {/* ── HEADER ── */}
+      <section style={{ backgroundColor: 'var(--c-header-bg)', paddingBlock: '3.5rem 2rem', borderBottom: '1px solid var(--c-border)' }}>
+        <div className="container" style={{ maxWidth: '820px', textAlign: 'center' }}>
+          <span className="tag-eyebrow" style={{ justifyContent: 'center' }}>
+            <span className="tag-bullet" /> ABOUT CHENNAI RENTS
+          </span>
+          <h1 style={{ color: 'var(--c-ink)', marginBottom: '0.6rem', lineHeight: 1.15 }}>
+            Why We Started Chennai Rents
+          </h1>
+          <div style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--c-ripon-red)', marginBottom: '0.5rem' }}>
+            Locality-First Rental Intelligence for Chennai
+          </div>
+          <p style={{ color: 'var(--c-ink-muted)', fontSize: '1.05rem', maxWidth: '640px', marginInline: 'auto' }}>
+            An independent, locality-first rental publication built for everyone moving to or relocating within Chennai.
+          </p>
         </div>
       </section>
+
+      <MarinaDivider />
+
+      {/* ── BACKSTORY & LOCAL MANIFESTO ── */}
+      <div className="container" style={{ maxWidth: '780px', marginTop: '2.5rem' }}>
+        
+        <article
+          style={{
+            fontSize: '1.12rem',
+            lineHeight: 1.8,
+            color: 'var(--c-ink)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1.75rem'
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
+            <p style={{ flex: 1, minWidth: '280px' }}>
+              If you have ever landed at Chennai Central with two heavy suitcases, hailed an auto-rickshaw to Velachery or Porur, 
+              and spent three weekends listening to brokers demand one month brokerage plus ten months of advance deposit in cash, 
+              you already know why Chennai Rents exists.
+            </p>
+            <AutoRickshawDoodle width={100} height={65} />
+          </div>
+
+          <p>
+            Renting in Chennai has always been a unique experience. On one hand, you have the warmth of house owners who send you 
+            steaming hot sweet pongal on festive mornings and treat you like family. On the other hand, you have the shock of discovering 
+            that your street floods up to knee-level every November, or that your tap water turns brackish by May, forcing you to dial 
+            private water tanker lorries every three days.
+          </p>
+
+          <div className="box-notice" style={{ padding: '1.5rem 1.75rem' }}>
+            <h3 style={{ fontSize: '1.3rem', color: 'var(--c-ink)', marginBottom: '0.5rem' }}>
+              The No-Listing Philosophy
+            </h3>
+            <p style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--c-ink-muted)' }}>
+              Most property listing portals are broken. They are filled with expired photos taken five years ago, phantom broker phone numbers, 
+              and robotic algorithms that do not know the difference between Dhandeeswaram Nagar and Baby Nagar. 
+              We decided not to build another spammy listing portal.
+            </p>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap', marginTop: '1rem' }}>
+            <h2 style={{ fontSize: '1.75rem', color: 'var(--c-ink)' }}>
+              What We Do Instead
+            </h2>
+            <RiponBuildingDoodle width={85} height={55} />
+          </div>
+
+          <ul style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', color: 'var(--c-ink-muted)' }}>
+            <li>
+              <strong style={{ color: 'var(--c-ink)' }}>1. Locality-First Intelligence:</strong> Honest guides for every Chennai neighborhood covering rent averages, metro routes, school zones, and genuine water and flood history.
+            </li>
+            <li>
+              <strong style={{ color: 'var(--c-ink)' }}>2. Instagram Video Reels:</strong> When a verified vacant home becomes available, we record a walk-through video reel and post it on <strong>{INSTAGRAM_HANDLE}</strong>. You see the actual sunlight, the bathroom tiles, the car park, and the street before deciding to visit.
+            </li>
+            <li>
+              <strong style={{ color: 'var(--c-ink)' }}>3. Respect for Privacy:</strong> We do not track you. No cookies, no ad retargeting, no phone number harvesting.
+            </li>
+          </ul>
+
+          <div className="box-water" style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.25rem' }}>
+            <div style={{ maxWidth: '520px' }}>
+              <h3 style={{ color: 'var(--c-marina-blue-dk)', fontSize: '1.25rem', marginBottom: '0.5rem' }}>
+                Connect with us on Instagram
+              </h3>
+              <p style={{ fontSize: '0.98rem', lineHeight: 1.6, marginBottom: '1.25rem', color: 'var(--c-ink-muted)' }}>
+                Looking for a home in Chennai right now? Watch our daily Reels or send us a DM on Instagram.
+              </p>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-dark"
+              >
+                <Instagram size={18} />
+                <span>{INSTAGRAM_HANDLE} on Instagram</span>
+              </a>
+            </div>
+            <FilterCoffeeDoodle width={60} height={65} />
+          </div>
+
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+            <Link to="/" className="btn-dark" style={{ backgroundColor: 'transparent', color: 'var(--c-ink) !important', border: '1px solid var(--c-border)' }}>
+              ← Return to Chennai Rents Home
+            </Link>
+          </div>
+
+        </article>
+
+      </div>
 
     </main>
   );

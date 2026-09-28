@@ -2,70 +2,42 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <script>
-      (function () {
-        var d = document.documentElement;
-        var w = d.clientWidth || window.innerWidth;
-        var h = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
-        d.style.setProperty("--px-vw", w * 0.01 + "px");
-        d.style.setProperty("--px-svh", h * 0.01 + "px");
-        var path = (location.pathname || "/").replace(/\/+$/, "") || "/";
-        if (path === "/" || path === "/index" || path === "/index.html") {
-          d.classList.add("site-preloader-pending");
-        }
-      })();
-    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#1B2340" />
-    <title>ChennaiRents — Homes Worth Renting. Chennai, Elevated.</title>
-    <meta name="description" content="ChennaiRents is a boutique rental-property agency curating Chennai's best long-term rental homes. Premium, editorial, visual-first — ECR Coastal, Green Belt, City Central & Signature Homes." />
-    <meta name="keywords" content="Chennai rental homes, ECR apartments, OMR flats, Mylapore rentals, Nungambakkam apartments, boutique rental agency Chennai, long-term rental Chennai" />
-    <meta name="author" content="ChennaiRents" />
-    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#F5B800" />
+    
+    <title>Chennai Rents: The Locality-First Rental Guide for Chennai</title>
+    <meta name="description" content="Chennai Rents: The #1 locality-first guide to renting homes in Chennai. Real 1 BHK, 2 BHK, 3 BHK rent rates, water reality, flood checks, and Instagram vacant home reels." />
+    <meta name="keywords" content="rent in valasaravakkam chennai, house for rent in valasaravakkam, rent in velachery, rent in adyar, advance deposit chennai, 10 months advance rent chennai, rental agreement chennai, tenant rules chennai, vacant homes chennai" />
+    <meta name="author" content="Chennai Rents" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="canonical" href="https://chennairents.in/" />
 
-    <!-- OG / Social -->
+    <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_IN" />
-    <meta property="og:site_name" content="ChennaiRents" />
-    <meta property="og:title" content="ChennaiRents — Homes Worth Renting." />
-    <meta property="og:description" content="Boutique rental-property agency curating Chennai's finest long-term homes." />
+    <meta property="og:site_name" content="Chennai Rents" />
+    <meta property="og:title" content="Chennai Rents: Renting in Chennai, Locality by Locality" />
+    <meta property="og:description" content="Real rent rates by BHK, water scores, flood history, and vacant home reels in Chennai. Locality-first rental guides." />
     <meta property="og:url" content="https://chennairents.in/" />
 
-    <!-- Preloader critical styles -->
-    <style>
-      html.site-preloader-pending,
-      html.site-preloader-pending body {
-        background: #1B2340;
-        overflow: hidden;
-      }
-      #site-preloader {
-        position: fixed;
-        inset: 0;
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #1B2340;
-        color: #F7F5F1;
-        pointer-events: none;
-      }
-      html:not(.site-preloader-pending) #site-preloader {
-        display: none;
-      }
-    </style>
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Chennai Rents: Renting in Chennai" />
+    <meta name="twitter:description" content="Real rent rates by BHK, water scores, flood history, and vacant home reels in Chennai." />
 
-    <!-- Google Fonts -->
+    <meta property="og:image" content="https://chennairents.in/chennai-rents-official-logo.jpg" />
+    <meta name="twitter:image" content="https://chennairents.in/chennai-rents-official-logo.jpg" />
+
+    <!-- Google Fonts: Uniform, Clean, and Simple (Poppins Headings + Outfit Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Favicon: Official Chennai Rents Logo -->
+    <link rel="icon" type="image/png" href="/chennai-rents-logo.png" />
+    <link rel="apple-touch-icon" href="/chennai-rents-official-logo.jpg" />
   </head>
   <body>
-    <!-- Preloader -->
-    <div id="site-preloader">
-      <div id="preloader-counter" style="font-family:'The Seasons','Cormorant Garamond','Playfair Display',serif;font-size:clamp(4.5rem,13vw,10rem);font-weight:400;letter-spacing:-0.04em;color:#F7F5F1;line-height:1;">00</div>
-    </div>
-
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
