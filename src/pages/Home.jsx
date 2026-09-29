@@ -1,311 +1,204 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { LOCALITY_POSTS, GUIDE_POSTS } from '../data/posts';
 import MarinaDivider from '../components/MarinaDivider';
 import SEOHead from '../components/SEOHead';
-import { AutoRickshawDoodle, RiponBuildingDoodle, FilterCoffeeDoodle } from '../components/ChennaiDoodles';
-import { 
-  MapPin, 
-  BookOpen, 
-  Droplet, 
-  Instagram
-} from 'lucide-react';
+import { AutoRickshawDoodle, RiponBuildingDoodle, FilterCoffeeDoodle, HandDrawnArrow } from '../components/ChennaiDoodles';
+import { Instagram } from 'lucide-react';
 import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../config';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('all');
+  const reduce = useReducedMotion();
+  
+  const filteredPosts = activeTab === 'all' 
+    ? [...LOCALITY_POSTS, ...GUIDE_POSTS].sort((a,b) => b.updatedDate.localeCompare(a.updatedDate))
+    : activeTab === 'localities' ? LOCALITY_POSTS : GUIDE_POSTS;
+
+  const springConfig = { type: 'spring', stiffness: 300, damping: 20 };
 
   return (
-    <main style={{ paddingBottom: '3rem' }}>
-      
-      {/* ── SEO JSON-LD & META INJECTION ── */}
-      <SEOHead
+    <motion.main 
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.3 }}
+      style={{ paddingBottom: '3rem' }}
+    >
+      <SEOHead 
         title="Chennai Rents: The Locality-First Rental Guide for Chennai"
-        description="Chennai Rents is an honest, locality-first guide to renting homes in Chennai. Real 1 BHK, 2 BHK, 3 BHK rent rates, water scores, flood history, and Instagram vacant home reels."
-        canonicalUrl="https://chennairents.in/"
-        type="website"
+        description="Real rent rates, water reality, flood history, and vacant home video tours in Chennai. Neighborhood by neighborhood, no brokers, no fake listings."
       />
 
-      {/* ── HERO BANNER MATCHING MOCK STYLE ── */}
+      {/* ── HERO SECTION ── */}
       <section className="hero-sky-section">
-        <div className="container">
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr',
-              alignItems: 'center',
-              gap: '2rem'
-            }}
-            className="home-hero-grid"
+        <div className="container home-hero-grid">
+          
+          <motion.div 
+            initial={reduce ? false : { opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            style={{ maxWidth: '580px' }}
           >
-            <div style={{ maxWidth: '820px' }}>
-              
-              {/* Top Eyebrow */}
-              <div className="tag-eyebrow">
-                <span className="tag-bullet" />
-                <span>CHENNAI RENTAL INTELLIGENCE • LOCALITY-FIRST</span>
-              </div>
-
-              {/* Main H1 Title */}
-              <h1 style={{ color: 'var(--c-ink)', marginBottom: '0.6rem', lineHeight: 1.15 }}>
-                Renting in Chennai: Locality by Locality
-              </h1>
-
-              {/* Subtitle in clean English */}
-              <div style={{ fontSize: 'clamp(1.15rem, 2.2vw, 1.45rem)', fontWeight: 600, color: 'var(--c-ripon-red)', marginBottom: '1.25rem' }}>
-                The honest, ground-reality guide to finding a rental home in Chennai
-              </div>
-
-              {/* Intro copy */}
-              <p
-                style={{
-                  fontSize: 'clamp(1.05rem, 2vw, 1.25rem)',
-                  lineHeight: 1.65,
-                  color: 'var(--c-ink-muted)',
-                  maxWidth: '720px'
-                }}
-              >
-                A practical, honest guide to rent rates, water reality, flood history, and daily living across Chennai neighborhoods. No fake listings, no brokers, and no tracking.
-              </p>
-
-              {/* Meta Editorial */}
-              <div className="meta-editorial">
-                OCTOBER 2026 • REGULARLY UPDATED • CHENNAI RENTS EDITORIAL
-              </div>
-
-            </div>
-
-            {/* Right Numeral & Chennai Doodles */}
-            <div className="home-numeral-col" style={{ display: 'none', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-              <div className="editorial-numeral">
-                CR
-              </div>
+            <div className="meta-editorial">OCTOBER 2026 • REGULARLY UPDATED • CHENNAI RENTS EDITORIAL</div>
+            <h1 style={{ marginTop: '0.75rem', marginBottom: '0.25rem' }}>
+              Renting in Chennai: Locality by Locality
+            </h1>
+            <p style={{ fontSize: '1.3rem', color: 'var(--c-ripon-red)', fontWeight: 600, fontFamily: 'var(--font-heading)', marginBottom: '1.25rem' }}>
+              The honest guide to finding a rental home in Chennai.
+            </p>
+            <p style={{ fontSize: '1.05rem', color: 'var(--c-ink-muted)', marginBottom: '1.5rem', maxWidth: '540px' }}>
+              Real rent rates, water reality, flood history, and Instagram reels of vacant homes. Neighborhood by neighborhood, no brokers, no fake listings.
+            </p>
+          </motion.div>
+          
+          <div className="home-numeral-col" style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <motion.div 
+              initial={reduce ? false : { scale: 0.8, opacity: 0, rotate: -5 }} 
+              animate={{ scale: 1, opacity: 1, rotate: 0 }} 
+              transition={{ delay: 0.2, type: 'spring' }}
+            >
+              <span className="editorial-numeral">CR</span>
+            </motion.div>
+            <div style={{ position: 'absolute', bottom: '-20px', left: '-10px' }}>
               <AutoRickshawDoodle width={110} height={70} />
             </div>
 
           </div>
+
         </div>
       </section>
 
-      {/* ── MARINA BEACH DIVIDER ── */}
-      <MarinaDivider />
+      <MarinaDivider variant="default" />
 
-      {/* ── CHENNAI CULTURAL INTRO STRIP ── */}
-      <div className="container" style={{ marginTop: '2.5rem', marginBottom: '2rem' }}>
-        <div
-          style={{
-            backgroundColor: '#F8F5EE',
-            border: '1px solid var(--c-border)',
-            borderRadius: '8px',
-            padding: '1.5rem 1.75rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '1.5rem'
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', maxWidth: '680px' }}>
-            <div
-              style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '50%',
-                backgroundColor: 'var(--c-auto-yellow)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'var(--c-ink)',
-                flexShrink: 0
-              }}
-            >
-              <Instagram size={24} />
-            </div>
-            <div>
-              <h3 style={{ color: 'var(--c-ink)', fontSize: '1.15rem', marginBottom: '0.25rem' }}>
-                Vacant homes are posted as Reels on our Instagram
-              </h3>
-              <p style={{ fontSize: '0.92rem', color: 'var(--c-ink-muted)', lineHeight: 1.5 }}>
-                Watch verified video walkthroughs of homes across Chennai neighborhoods. Follow <strong>{INSTAGRAM_HANDLE}</strong> to view real sunlight, parking, and street surroundings.
-              </p>
-            </div>
+      {/* ── INSTAGRAM CALLOUT STRIP ── */}
+      <section style={{ backgroundColor: 'var(--c-sand-light)', borderBottom: '1px solid var(--c-border)', borderTop: '1px solid var(--c-border)', paddingBlock: '2.5rem' }}>
+        <div className="container" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '1.5rem', textAlign: 'center' }}>
+          
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: 'center' }}>
+            <HandDrawnArrow width={40} height={40} direction="right" style={{ display: 'inline-block', transform: 'translateY(5px)' }} />
+            <h3 style={{ margin: 0, color: 'var(--c-ink)', fontSize: '1.15rem' }}>Vacant homes are posted as Reels on Instagram first.</h3>
           </div>
-
-          <a
+          
+          <motion.a 
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-dark"
-            style={{ fontSize: '0.92rem', padding: '0.6rem 1.25rem' }}
+            className="btn-dark instagram-pulse"
+            style={{ borderRadius: '30px', paddingInline: '1.5rem' }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
+            <Instagram size={18} />
             <span>Follow {INSTAGRAM_HANDLE}</span>
-          </a>
+          </motion.a>
+          
         </div>
-      </div>
-
-      {/* ── BLOG INDEX: LOCALITIES & GUIDES ── */}
-      <section className="container" id="localities" style={{ paddingBlock: '1.5rem' }}>
-        
-        {/* Navigation Tabs */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid var(--c-border)', paddingBottom: '1rem', marginBottom: '2.5rem' }}>
-          <div>
-            <h2 style={{ fontSize: '1.85rem', color: 'var(--c-ink)' }}>
-              Explore Chennai Localities & Guides
-            </h2>
-            <p style={{ color: 'var(--c-ink-muted)', fontSize: '0.95rem' }}>
-              Select a neighborhood or read essential rental advice
-            </p>
-          </div>
-
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
-            <button
-              onClick={() => setActiveTab('all')}
-              className={activeTab === 'all' ? 'btn-dark' : 'btn-yellow'}
-              style={{ padding: '0.45rem 1rem', fontSize: '0.88rem', cursor: 'pointer' }}
-            >
-              All Articles ({LOCALITY_POSTS.length + GUIDE_POSTS.length})
-            </button>
-            <button
-              onClick={() => setActiveTab('localities')}
-              className={activeTab === 'localities' ? 'btn-dark' : 'btn-yellow'}
-              style={{ padding: '0.45rem 1rem', fontSize: '0.88rem', cursor: 'pointer' }}
-            >
-              Localities ({LOCALITY_POSTS.length})
-            </button>
-            <button
-              onClick={() => setActiveTab('guides')}
-              className={activeTab === 'guides' ? 'btn-dark' : 'btn-yellow'}
-              style={{ padding: '0.45rem 1rem', fontSize: '0.88rem', cursor: 'pointer' }}
-            >
-              Guides ({GUIDE_POSTS.length})
-            </button>
-          </div>
-        </div>
-
-        {/* ── 1. LOCALITIES SECTION ── */}
-        {(activeTab === 'all' || activeTab === 'localities') && (
-          <div style={{ marginBottom: '4rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <MapPin size={22} color="var(--c-marina-blue)" />
-                <h3 style={{ fontSize: '1.5rem', color: 'var(--c-ink)' }}>
-                  Chennai Localities
-                </h3>
-              </div>
-              <RiponBuildingDoodle width={80} height={50} />
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.75rem' }}>
-              {LOCALITY_POSTS.map((post) => (
-                <article
-                  key={post.slug}
-                  className="content-card"
-                  style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '1.5rem' }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-                    <span className="tag-eyebrow" style={{ marginBottom: 0 }}>
-                      <span className="tag-bullet" /> {post.badge}
-                    </span>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--c-ink-light)', fontWeight: 600 }}>
-                      {post.readTime}
-                    </span>
-                  </div>
-
-                  <h3 style={{ fontSize: '1.4rem', marginBottom: '0.35rem', lineHeight: 1.25 }}>
-                    <Link to={`/${post.slug}`} style={{ color: 'var(--c-ink)', textDecoration: 'none' }}>
-                      {post.title.split(',')[0]}
-                    </Link>
-                  </h3>
-
-                  <p style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--c-ripon-red)', marginBottom: '0.75rem' }}>
-                    {post.subheading}
-                  </p>
-
-                  <p style={{ fontSize: '0.95rem', color: 'var(--c-ink-muted)', lineHeight: 1.6, marginBottom: '1.25rem', flexGrow: 1 }}>
-                    {post.summary}
-                  </p>
-
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--c-border-subtle)', paddingTop: '0.85rem', marginTop: 'auto' }}>
-                    <span style={{ fontSize: '0.85rem', color: 'var(--c-temple-green)', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
-                      <Droplet size={14} /> Water Score: {post.waterReality?.score}
-                    </span>
-                    <Link to={`/${post.slug}`} className="btn-dark" style={{ padding: '0.35rem 0.85rem', fontSize: '0.85rem' }}>
-                      Read Guide →
-                    </Link>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* ── 2. RENTING GUIDES SECTION ── */}
-        {(activeTab === 'all' || activeTab === 'guides') && (
-          <div id="guides">
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <BookOpen size={22} color="var(--c-ripon-red)" />
-                <h3 style={{ fontSize: '1.5rem', color: 'var(--c-ink)' }}>
-                  Renting Guides & Advice
-                </h3>
-              </div>
-              <FilterCoffeeDoodle width={45} height={50} />
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.75rem' }}>
-              {GUIDE_POSTS.map((post) => (
-                <article
-                  key={post.slug}
-                  className="content-card"
-                  style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '1.5rem' }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-                    <span className="tag-eyebrow" style={{ marginBottom: 0 }}>
-                      <span className="tag-bullet" /> {post.badge}
-                    </span>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--c-ink-light)', fontWeight: 600 }}>
-                      {post.readTime}
-                    </span>
-                  </div>
-
-                  <h3 style={{ fontSize: '1.4rem', marginBottom: '0.35rem', lineHeight: 1.25 }}>
-                    <Link to={`/${post.slug}`} style={{ color: 'var(--c-ink)', textDecoration: 'none' }}>
-                      {post.title}
-                    </Link>
-                  </h3>
-
-                  <p style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--c-ripon-red)', marginBottom: '0.75rem' }}>
-                    {post.subheading}
-                  </p>
-
-                  <p style={{ fontSize: '0.95rem', color: 'var(--c-ink-muted)', lineHeight: 1.6, marginBottom: '1.25rem', flexGrow: 1 }}>
-                    {post.summary}
-                  </p>
-
-                  <div style={{ borderTop: '1px solid var(--c-border-subtle)', paddingTop: '0.85rem', display: 'flex', justifyContent: 'flex-end', marginTop: 'auto' }}>
-                    <Link to={`/${post.slug}`} className="btn-dark" style={{ padding: '0.35rem 0.85rem', fontSize: '0.85rem' }}>
-                      Read Guide →
-                    </Link>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        )}
-
       </section>
 
-      <style>{`
-        @media (min-width: 900px) {
-          .home-hero-grid {
-            grid-template-columns: 1fr 200px !important;
-          }
-          .home-numeral-col {
-            display: flex !important;
-          }
-        }
-      `}</style>
+      {/* ── INDEX SECTION ── */}
+      <section id="localities" style={{ paddingTop: '3.5rem', paddingBottom: '2rem' }}>
+        <div className="container">
+          
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '2.5rem' }}>
+            <h2 style={{ textAlign: 'center' }}>Explore Chennai Localities & Guides</h2>
+            
+            {/* Filter Tabs */}
+            <div style={{ display: 'flex', gap: '0.5rem', backgroundColor: 'var(--c-sand-light)', padding: '0.4rem', borderRadius: '8px', marginTop: '1rem', border: '1px solid var(--c-border)' }}>
+              {['all', 'localities', 'guides'].map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  style={{
+                    padding: '0.45rem 1.1rem',
+                    borderRadius: '6px',
+                    border: 'none',
+                    background: activeTab === tab ? '#FFFFFF' : 'transparent',
+                    boxShadow: activeTab === tab ? '0 2px 4px rgba(0,0,0,0.05)' : 'none',
+                    color: activeTab === tab ? 'var(--c-ink)' : 'var(--c-ink-light)',
+                    fontWeight: activeTab === tab ? 700 : 500,
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '0.9rem',
+                    textTransform: 'capitalize',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          </div>
 
-    </main>
+          <motion.div 
+            layout
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(310px, 1fr))', gap: '1.75rem' }}
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredPosts.map((post, idx) => {
+                const rotations = [-0.5, 0.3, -0.2, 0.4, -0.3, 0.2];
+                const rotation = rotations[idx % 6];
+                
+                return (
+                  <motion.article
+                    layout
+                    key={post.slug}
+                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ ...springConfig, delay: reduce ? 0 : (idx % 8) * 0.05 }}
+                    viewport={{ once: true, amount: 0.1 }}
+                    whileHover={reduce ? {} : { y: -5, boxShadow: '0 12px 32px rgba(30,27,24,0.08)' }}
+                    className="content-card"
+                    style={{ display: 'flex', flexDirection: 'column', transform: `rotate(${rotation}deg)` }}
+                  >
+
+                    
+                    <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                      
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
+                        <span className="tag-eyebrow" style={{ margin: 0 }}>
+                          <span className="tag-bullet" /> {post.badge || (post.type === 'locality' ? 'LOCALITY' : 'GUIDE')}
+                        </span>
+                        {post.waterReality?.score && (
+                          <span className="stamp-badge stamp-blue" style={{ fontSize: '0.65rem' }}>💧 {post.waterReality.score}/10</span>
+                        )}
+                      </div>
+
+                      <h3 style={{ fontSize: '1.35rem', marginBottom: '0.25rem' }}>
+                        <Link to={`/${post.type === 'guide' ? 'guide' : 'rent'}/${post.slug}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                          {post.title}
+                        </Link>
+                      </h3>
+                      
+                      {post.subheading && (
+                        <div style={{ color: 'var(--c-ripon-red)', fontWeight: 600, fontSize: '0.95rem', marginBottom: '0.75rem' }}>
+                          {post.subheading}
+                        </div>
+                      )}
+                      
+                      <p style={{ fontSize: '0.95rem', marginBottom: '1.5rem', flex: 1 }}>
+                        {post.summary}
+                      </p>
+
+                      <Link 
+                        to={`/${post.type === 'guide' ? 'guide' : 'rent'}/${post.slug}`} 
+                        className="btn-yellow"
+                        style={{ alignSelf: 'flex-start', fontSize: '0.85rem', minHeight: '38px', padding: '0.4rem 1rem' }}
+                      >
+                        Read {post.type === 'guide' ? 'Guide' : 'Locality'} →
+                      </Link>
+                    </div>
+                  </motion.article>
+                );
+              })}
+            </AnimatePresence>
+          </motion.div>
+
+        </div>
+      </section>
+      
+    </motion.main>
   );
 }

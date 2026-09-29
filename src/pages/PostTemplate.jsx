@@ -1,543 +1,436 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getPostBySlug } from '../data/posts';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { getPostBySlug, LOCALITY_POSTS, GUIDE_POSTS } from '../data/posts';
 import MarinaDivider from '../components/MarinaDivider';
 import ReelEmbed from '../components/ReelEmbed';
 import SEOHead from '../components/SEOHead';
-import { AutoRickshawDoodle, FilterCoffeeDoodle } from '../components/ChennaiDoodles';
-import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../config';
 import { 
-  Droplet, 
-  CloudRain, 
-  Navigation, 
-  Utensils, 
-  GraduationCap, 
-  Building2, 
-  Instagram, 
-  MapPin, 
-  ArrowRight,
-  ChevronRight
-} from 'lucide-react';
+  AutoRickshawDoodle, 
+  FilterCoffeeDoodle, 
+
+  HandDrawnArrow,
+  MtcBusDoodle 
+} from '../components/ChennaiDoodles';
+import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../config';
+import { Instagram } from 'lucide-react';
+
+// Reusable animated section wrapper
+function AnimatedSection({ children, reduce, className = "", style = {} }) {
+  if (reduce) {
+    return <section className={className} style={style}>{children}</section>;
+  }
+  return (
+    <motion.section 
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+      className={className}
+      style={style}
+    >
+      {children}
+    </motion.section>
+  );
+}
+
+// Custom Animated Accordion
+function AnimatedFAQ({ faq }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const reduce = useReducedMotion();
+
+  return (
+    <div className="animated-faq">
+      <button 
+        className="animated-faq-summary" 
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+      >
+        <span>{faq.q}</span>
+        <motion.span 
+          animate={reduce ? {} : { rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+          style={{ display: 'inline-block', flexShrink: 0, color: 'var(--c-marina-blue)', fontSize: '1.2rem' }}
+        >
+          ↓
+        </motion.span>
+      </button>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={reduce ? { opacity: 0 } : { height: 0, opacity: 0 }}
+            animate={reduce ? { opacity: 1 } : { height: 'auto', opacity: 1 }}
+            exit={reduce ? { opacity: 0 } : { height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            style={{ overflow: 'hidden' }}
+          >
+            <div className="animated-faq-body">
+              {faq.a}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 export default function PostTemplate() {
   const { slug } = useParams();
+  const reduce = useReducedMotion();
   const post = getPostBySlug(slug);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [slug]);
 
   if (!post) {
     return (
-      <div className="container" style={{ paddingBlock: '6rem', textAlign: 'center' }}>
-        <h1 style={{ color: 'var(--c-ripon-red)', marginBottom: '1rem' }}>Page Not Found</h1>
-        <p style={{ marginBottom: '2rem', color: 'var(--c-ink-muted)' }}>
-          The rental locality or guide you are looking for has not been written yet or the URL is incorrect.
-        </p>
-        <Link to="/" className="btn-dark">
-          ← Back to Chennai Rents Home
-        </Link>
-      </div>
+      <main style={{ padding: '6rem 1rem', textAlign: 'center', minHeight: '60vh' }}>
+        <h2>Post Not Found</h2>
+        <p>Sorry, we couldn't find that guide or locality.</p>
+        <Link to="/" className="btn-dark" style={{ marginTop: '2rem' }}>Return to Home</Link>
+      </main>
     );
   }
 
   const isLocality = post.type === 'locality';
-  const canonicalUrl = `https://chennairents.in/${post.slug}`;
-  const seoTitle = `${post.title} | Chennai Rents`;
-  const seoDescription = `${post.summary} Discover real rent rates by BHK, water scores, flood history, and vacant homes on Instagram.`;
-
-  const breadcrumbs = [
-    { name: 'Home', url: 'https://chennairents.in/' },
-    { name: isLocality ? 'Localities' : 'Guides', url: `https://chennairents.in/#${isLocality ? 'localities' : 'guides'}` },
-    { name: post.title.split(',')[0], url: canonicalUrl }
-  ];
+  const mainTitle = post.title.split(',')[0];
 
   return (
-    <article className="post-landing-page" style={{ paddingBottom: '4rem' }}>
-      
-      {/* ── SEO JSON-LD & META INJECTION ── */}
-      <SEOHead
-        title={seoTitle}
-        description={seoDescription}
-        canonicalUrl={canonicalUrl}
+    <motion.article 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <SEOHead 
+        title={`${post.title} | ${isLocality ? 'Rent' : 'Guide'} | Chennai Rents`}
+        description={post.summary}
+        type="article"
         faqs={post.faqs || []}
-        type={post.type}
-        breadcrumbs={breadcrumbs}
+        breadcrumbs={[
+          { name: 'Home', url: 'https://chennairents.in/' },
+          { name: post.title, url: `https://chennairents.in/${slug}` }
+        ]}
       />
 
-      {/* ── 1. EXACT SKY-BLUE HERO MATCHING MOCK ── */}
+      {/* ── HERO SECTION ── */}
       <section className="hero-sky-section">
-        <div className="container">
-          
-          {/* Visible SEO Breadcrumb (Google Sitelinks booster) */}
-          <nav className="seo-breadcrumbs" aria-label="Breadcrumb">
-            <Link to="/">Home</Link>
-            <ChevronRight size={14} />
-            <Link to={`/#${isLocality ? 'localities' : 'guides'}`}>
-              {isLocality ? 'Localities' : 'Guides'}
-            </Link>
-            <ChevronRight size={14} />
-            <span style={{ color: 'var(--c-ink)', fontWeight: 600 }}>{post.title.split(',')[0]}</span>
-          </nav>
-
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr',
-              alignItems: 'center',
-              gap: '2rem'
-            }}
-            className="hero-grid"
+        <div className="container hero-grid">
+          <motion.div 
+            initial={reduce ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            {/* Left Content Column */}
-            <div style={{ maxWidth: '820px' }}>
-              
-              {/* Tag: 🟡 LOCALITY GUIDE • WEST CHENNAI */}
-              <div className="tag-eyebrow">
-                <span className="tag-bullet" />
-                <span>{post.badge || 'LOCALITY GUIDE • CHENNAI'}</span>
-              </div>
-
-              {/* Main H1 Title (Pure High-Volume Keyword) */}
-              <h1 style={{ color: 'var(--c-ink)', marginBottom: '0.4rem', lineHeight: 1.15 }}>
-                {post.title.split(',')[0]}
-              </h1>
-
-              {/* Clean English Subtitle */}
-              <div style={{ fontSize: 'clamp(1.15rem, 2.2vw, 1.45rem)', fontWeight: 600, color: 'var(--c-ripon-red)', marginBottom: '1.25rem' }}>
-                {post.subheading || 'A practical, locality-first rental guide for Chennai'}
-              </div>
-
-              {/* Description */}
-              <p
-                style={{
-                  fontSize: 'clamp(1.05rem, 2vw, 1.25rem)',
-                  lineHeight: 1.65,
-                  color: 'var(--c-ink-muted)',
-                  maxWidth: '720px'
-                }}
-              >
-                {post.tagline || post.summary}
+            <div className="seo-breadcrumbs">
+              <Link to="/">Home</Link> / 
+              <span style={{ color: 'var(--c-ink)' }}>{isLocality ? 'Localities' : 'Guides'}</span> / 
+              <span style={{ color: 'var(--c-ink)', fontWeight: 600 }}>{mainTitle}</span>
+            </div>
+            
+            <span className="tag-eyebrow">
+              <span className="tag-bullet" /> {post.badge || (isLocality ? 'LOCALITY GUIDE' : 'RENTING GUIDE')}
+            </span>
+            
+            <h1 style={{ marginTop: '0.25rem', marginBottom: '0.5rem' }}>{mainTitle}</h1>
+            
+            {post.subheading && (
+              <p style={{ fontSize: '1.25rem', color: 'var(--c-ripon-red)', fontWeight: 600, fontFamily: 'var(--font-heading)', marginBottom: '1.25rem' }}>
+                {post.subheading}
               </p>
-
-              {/* Metadata */}
-              <div className="meta-editorial">
-                {post.updatedDate || 'OCTOBER 2026'} • {post.readTime || '7 MIN READ'} • CHENNAI RENTS EDITORIAL
-              </div>
-
+            )}
+            
+            <p style={{ fontSize: '1.1rem', color: 'var(--c-ink)', maxWidth: '640px' }}>
+              {post.summary || post.tagline}
+            </p>
+            
+            <div className="meta-editorial" style={{ marginTop: '2rem' }}>
+              READ TIME: {post.readTime} MIN • UPDATED: {post.updatedDate}
             </div>
+          </motion.div>
 
-            {/* Right Big Numeral "01" (Matches User Screenshot) */}
-            <div className="hero-numeral-col" style={{ display: 'none', justifyContent: 'center' }}>
-              <div className="editorial-numeral">
-                01
-              </div>
-            </div>
-
+          <div className="hero-numeral-col">
+            <motion.div 
+              initial={reduce ? false : { scale: 0.8, opacity: 0, x: 20 }}
+              animate={{ scale: 1, opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <span className="editorial-numeral">
+                {isLocality ? '0' + (LOCALITY_POSTS.findIndex(p => p.slug === slug) + 1) : 'G'}
+              </span>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ── 2. MARINA BEACH SVG DIVIDER ── */}
-      <MarinaDivider />
+      <MarinaDivider variant="default" />
 
-      {/* ── 3. ARTICLE BODY (Clean, Human, SEO-Structured) ── */}
-      <div className="container" style={{ maxWidth: '860px', marginTop: '2.5rem' }}>
+      {/* ── MAIN CONTENT & DESKTOP SIDE RAIL ── */}
+      <div className="post-layout">
         
-        {/* Quick Jump / Table of Contents */}
-        {isLocality && (
-          <div className="quick-jump-box">
-            <h4>Quick Jump to Section:</h4>
-            <ul className="quick-jump-links">
-              <li><a href="#rent-rates">↓ Rent Rates by BHK</a></li>
-              <li><a href="#water-flood">↓ Water & Flood Reality</a></li>
-              <li><a href="#commute">↓ Metro & Roads</a></li>
-              <li><a href="#schools-hospitals">↓ Schools & Hospitals</a></li>
-              <li><a href="#food-spots">↓ Food & Markets</a></li>
-              <li><a href="#vacant-homes">↓ Vacant Home Reels</a></li>
-              <li><a href="#faqs">↓ Local FAQs</a></li>
-            </ul>
-          </div>
-        )}
-
-        {isLocality ? (
-          /* LOCALITY POST CONTENT */
-          <div>
-            
-            {/* Rent Ranges Table */}
-            <section id="rent-rates" style={{ marginBottom: '3.5rem', scrollMarginTop: '100px' }}>
-              <h2 style={{ fontSize: '1.75rem', marginBottom: '0.4rem', color: 'var(--c-ink)' }}>
-                Rent in {post.title.split(',')[0].replace('Rent in ', '')}: Typical Rates by BHK
-              </h2>
-              <p style={{ color: 'var(--c-ink-muted)', fontSize: '0.98rem', marginBottom: '1.25rem' }}>
-                If you are looking for a house for rent in {post.title.split(',')[0].replace('Rent in ', '')}, here are the prevailing 2026 rental price trends:
-              </p>
-
-              <div className="bhk-table-wrap">
-                <table className="bhk-table" aria-label="Rental rates in this locality">
-                  <thead>
-                    <tr>
-                      <th scope="col" style={{ width: '22%' }}>BHK Type</th>
-                      <th scope="col" style={{ width: '38%' }}>Typical Monthly Rent</th>
-                      <th scope="col" style={{ width: '40%' }}>What to Expect</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {post.rentRanges?.map((r, i) => (
-                      <tr key={i}>
-                        <td style={{ fontWeight: 800, color: 'var(--c-ripon-red)' }}>
-                          {r.bhk}
-                        </td>
-                        <td style={{ fontWeight: 800, color: 'var(--c-ink)', fontSize: '1.1rem' }}>
-                          {r.range}
-                        </td>
-                        <td style={{ color: 'var(--c-ink-muted)', fontSize: '0.92rem' }}>
-                          {r.note}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
-
-            {/* Water & Flooding Ground Reality */}
-            <section id="water-flood" style={{ marginBottom: '3.5rem', scrollMarginTop: '100px' }}>
-              <h2 style={{ fontSize: '1.75rem', marginBottom: '1rem', color: 'var(--c-ink)' }}>
-                Water Supply & Monsoon Flooding Ground Reality
-              </h2>
-
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
-                
-                <div className="box-water" style={{ marginBlock: 0 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                    <Droplet size={20} color="var(--c-marina-blue)" />
-                    <h3 style={{ fontSize: '1.2rem', color: 'var(--c-marina-blue-dk)' }}>
-                      Water Score: {post.waterReality?.score}
-                    </h3>
-                  </div>
-                  <p style={{ fontWeight: 700, fontSize: '0.92rem', marginBottom: '0.5rem', color: 'var(--c-marina-blue-dk)' }}>
-                    {post.waterReality?.status}
-                  </p>
-                  <p style={{ fontSize: '0.95rem', lineHeight: 1.6 }}>
-                    {post.waterReality?.detail}
-                  </p>
-                </div>
-
-                <div className="box-flood" style={{ marginBlock: 0 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                    <CloudRain size={20} color="var(--c-ripon-red)" />
-                    <h3 style={{ fontSize: '1.2rem', color: 'var(--c-ripon-red)' }}>
-                      Flood Risk & Waterlogging Check
-                    </h3>
-                  </div>
-                  <p style={{ fontWeight: 700, fontSize: '0.92rem', marginBottom: '0.5rem', color: 'var(--c-ripon-red)' }}>
-                    {post.floodCheck?.status}
-                  </p>
-                  <p style={{ fontSize: '0.95rem', lineHeight: 1.6 }}>
-                    {post.floodCheck?.detail}
-                  </p>
-                </div>
-
-              </div>
-            </section>
-
-            {/* Commute & Connectivity with Auto Rickshaw Doodle */}
-            <section id="commute" style={{ marginBottom: '3.5rem', scrollMarginTop: '100px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
-                <h2 style={{ fontSize: '1.75rem', color: 'var(--c-ink)' }}>
-                  Commute: Metro Lines, MTC Buses & Main Roads
-                </h2>
-                <AutoRickshawDoodle width={90} height={55} />
-              </div>
-              <div className="content-card" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                <div>
-                  <h4 style={{ color: 'var(--c-marina-blue)', display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.35rem' }}>
-                    <Navigation size={18} /> Metro Station Connectivity
-                  </h4>
-                  <p style={{ fontSize: '0.98rem', color: 'var(--c-ink-muted)' }}>{post.commute?.metro}</p>
-                </div>
-                <div style={{ borderTop: '1px solid var(--c-border-subtle)', paddingTop: '1rem' }}>
-                  <h4 style={{ color: 'var(--c-temple-green)', display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.35rem' }}>
-                    <Building2 size={18} /> Bus Routes & Bus Stands
-                  </h4>
-                  <p style={{ fontSize: '0.98rem', color: 'var(--c-ink-muted)' }}>{post.commute?.bus}</p>
-                </div>
-                <div style={{ borderTop: '1px solid var(--c-border-subtle)', paddingTop: '1rem' }}>
-                  <h4 style={{ color: 'var(--c-auto-yellow-dk)', display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.35rem' }}>
-                    <MapPin size={18} /> Road Links & Office Proximity
-                  </h4>
-                  <p style={{ fontSize: '0.98rem', color: 'var(--c-ink-muted)' }}>{post.commute?.road}</p>
-                </div>
-              </div>
-            </section>
-
-            {/* Schools, Hospitals & Everyday Living */}
-            <section id="schools-hospitals" style={{ marginBottom: '3.5rem', scrollMarginTop: '100px' }}>
-              <h2 style={{ fontSize: '1.75rem', marginBottom: '1rem', color: 'var(--c-ink)' }}>
-                Schools, Hospitals & Everyday Conveniences
-              </h2>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
-                
-                <div className="content-card" style={{ padding: '1.25rem' }}>
-                  <h4 style={{ color: 'var(--c-ink)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                    <GraduationCap size={18} color="var(--c-ripon-red)" /> Reputed Schools in Area
-                  </h4>
-                  <ul style={{ paddingLeft: '1.2rem', fontSize: '0.92rem', color: 'var(--c-ink-muted)' }}>
-                    {post.amenities?.schools?.map((s, i) => (
-                      <li key={i} style={{ marginBottom: '0.35rem' }}>{s}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="content-card" style={{ padding: '1.25rem' }}>
-                  <h4 style={{ color: 'var(--c-ink)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                    <Building2 size={18} color="var(--c-temple-green)" /> Multi-Speciality Hospitals
-                  </h4>
-                  <ul style={{ paddingLeft: '1.2rem', fontSize: '0.92rem', color: 'var(--c-ink-muted)' }}>
-                    {post.amenities?.hospitals?.map((h, i) => (
-                      <li key={i} style={{ marginBottom: '0.35rem' }}>{h}</li>
-                    ))}
-                  </ul>
-                </div>
-
-              </div>
-            </section>
-
-            {/* Food Spots with Filter Coffee Doodle */}
-            <section id="food-spots" style={{ marginBottom: '3.5rem', scrollMarginTop: '100px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
-                <h2 style={{ fontSize: '1.75rem', color: 'var(--c-ink)' }}>
-                  Famous Food Spots & Local Markets
-                </h2>
-                <FilterCoffeeDoodle width={50} height={55} />
-              </div>
-              <div className="content-card" style={{ padding: '1.25rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                  <Utensils size={20} color="var(--c-ripon-red)" />
-                  <span style={{ fontWeight: 700, color: 'var(--c-ink)' }}>
-                    Resident-Favorite Messes & Restaurants
-                  </span>
-                </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.65rem' }}>
-                  {post.foodSpots?.map((food, i) => (
-                    <span
-                      key={i}
-                      style={{
-                        backgroundColor: '#F8F5EE',
-                        border: '1px solid var(--c-border)',
-                        padding: '0.4rem 0.85rem',
-                        borderRadius: '4px',
-                        fontSize: '0.9rem',
-                        fontWeight: 600,
-                        color: 'var(--c-ink)'
-                      }}
-                    >
-                      ☕ {food}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* Verdict */}
-            <div className="box-notice">
-              <h3 style={{ color: 'var(--c-ink)', fontSize: '1.25rem', marginBottom: '0.35rem' }}>
-                Summary Verdict: Who Should Rent in this Locality?
-              </h3>
-              <p style={{ fontSize: '1rem', lineHeight: 1.6, color: 'var(--c-ink-muted)' }}>
-                {post.whoItSuits}
-              </p>
+        <main className="post-main">
+          
+          {/* Quick Jump (TOC) */}
+          <AnimatedSection reduce={reduce}>
+            <div className="quick-jump-box">
+              <h4>Quick Jump</h4>
+              <nav className="quick-jump-links">
+                {isLocality && (
+                  <>
+                    <a href="#rent-rates">Rent Rates</a>
+                    <a href="#water-flood">Water & Flooding</a>
+                    <a href="#commute">Commute</a>
+                  </>
+                )}
+                {!isLocality && post.guideSections?.map((sec, i) => (
+                  <a key={i} href={`#guide-${i}`}>{sec.heading}</a>
+                ))}
+                {post.reels?.length > 0 && <a href="#vacant-homes">Vacant Homes (Reels)</a>}
+                {post.faqs?.length > 0 && <a href="#faq">FAQs</a>}
+              </nav>
             </div>
+          </AnimatedSection>
 
-          </div>
-        ) : (
-          /* GUIDE POST CONTENT */
-          <div className="guide-content">
-            {post.guideSections?.map((section, idx) => (
-              <section key={idx} style={{ marginBottom: '2.5rem' }}>
-                <h2 style={{ fontSize: '1.65rem', color: 'var(--c-ink)', marginBottom: '1rem' }}>
-                  {section.heading}
+          {/* LOCALITY CONTENT */}
+          {isLocality && (
+            <>
+              {/* Rent Rates */}
+              {post.rentRanges && (
+                <AnimatedSection reduce={reduce} style={{ marginTop: '3rem' }}>
+                  <h2 id="rent-rates" style={{ borderBottom: '2px solid var(--c-border)', paddingBottom: '0.75rem', marginBottom: '1.5rem' }}>
+                    Average Rent in {mainTitle}
+                  </h2>
+                  <div className="bhk-table-wrap">
+                    <table className="bhk-table">
+                      <thead>
+                        <tr>
+                          <th>Configuration</th>
+                          <th>Typical Monthly Rent</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {post.rentRanges.map((range, i) => (
+                          <tr key={i}>
+                            <td style={{ fontWeight: 600 }}>{range.bhk}</td>
+                            <td>{range.range}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--c-ink-light)' }}>
+                    *These are ground-reality asking rates (including typical maintenance) directly from owners as of late 2026, avoiding inflated broker listings.
+                  </p>
+                </AnimatedSection>
+              )}
+
+              {/* Water & Flooding */}
+              {post.waterReality && (
+                <AnimatedSection reduce={reduce} style={{ marginTop: '3.5rem' }}>
+                  <h2 id="water-flood" style={{ borderBottom: '2px solid var(--c-border)', paddingBottom: '0.75rem', marginBottom: '1.5rem' }}>
+                    Water & Flood Reality
+                  </h2>
+                  
+                  <div className="box-water">
+                    <h3 style={{ color: 'var(--c-marina-blue-dk)', fontSize: '1.1rem' }}>💧 Summer Water Reality ({post.waterReality.score}/10)</h3>
+                    <p style={{ color: 'var(--c-ink)', marginBottom: 0, marginTop: '0.5rem' }}>{post.waterReality.detail}</p>
+                  </div>
+                  
+                  <div className="box-flood">
+                    <h3 style={{ color: 'var(--c-ripon-red)', fontSize: '1.1rem' }}>🌧️ Monsoon Flood Check</h3>
+                    <p style={{ color: 'var(--c-ink)', marginBottom: 0, marginTop: '0.5rem' }}>{post.floodCheck.detail}</p>
+                  </div>
+                </AnimatedSection>
+              )}
+
+              {/* Commute */}
+              {post.commute && (
+                <AnimatedSection reduce={reduce} style={{ marginTop: '3.5rem', position: 'relative' }}>
+                  <div style={{ position: 'absolute', top: '-10px', right: 0, opacity: 0.6 }}>
+                    <AutoRickshawDoodle width={70} height={45} />
+                  </div>
+                  <h2 id="commute" style={{ borderBottom: '2px solid var(--c-border)', paddingBottom: '0.75rem', marginBottom: '1.5rem' }}>
+                    Commute & Transport
+                  </h2>
+                  <ul style={{ paddingLeft: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    {Object.entries(post.commute).map(([key, value], i) => (
+                      <li key={i}>
+                        <strong style={{ textTransform: 'capitalize' }}>{key}: </strong>
+                        {value}
+                      </li>
+                    ))}
+                  </ul>
+                </AnimatedSection>
+              )}
+
+              {/* Food Spots */}
+              {post.foodSpots && (
+                <AnimatedSection reduce={reduce} style={{ marginTop: '3.5rem', position: 'relative' }}>
+                  <div style={{ position: 'absolute', top: '-5px', right: 0, opacity: 0.8 }}>
+                    <FilterCoffeeDoodle width={50} height={55} />
+                  </div>
+                  <h2 id="food" style={{ borderBottom: '2px solid var(--c-border)', paddingBottom: '0.75rem', marginBottom: '1.5rem' }}>
+                    Local Food Spots
+                  </h2>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                    {post.foodSpots.map((spot, i) => (
+                      <span key={i} style={{ backgroundColor: '#F8F5EE', padding: '0.4rem 0.85rem', borderRadius: '4px', fontSize: '0.9rem', fontWeight: 500 }}>
+                        {spot}
+                      </span>
+                    ))}
+                  </div>
+                </AnimatedSection>
+              )}
+
+              {/* Who it suits */}
+              {post.whoItSuits && (
+                <AnimatedSection reduce={reduce} style={{ marginTop: '3.5rem' }}>
+                  <div className="box-notice" style={{ backgroundColor: '#FAF7F2', borderColor: 'var(--c-ink)', borderRadius: '8px', borderLeftWidth: '6px' }}>
+                    <h3 style={{ fontSize: '1.15rem' }}>Who should rent here?</h3>
+                    <p style={{ marginBottom: 0, marginTop: '0.5rem', color: 'var(--c-ink)' }}>{post.whoItSuits}</p>
+                  </div>
+                </AnimatedSection>
+              )}
+            </>
+          )}
+
+          {/* GUIDE CONTENT */}
+          {!isLocality && post.guideSections && (
+            <div style={{ marginTop: '2rem' }}>
+              {post.guideSections.map((section, idx) => (
+                <AnimatedSection key={idx} reduce={reduce} style={{ marginTop: '3.5rem' }}>
+                  <h2 id={`guide-${idx}`} style={{ borderBottom: '2px solid var(--c-border)', paddingBottom: '0.75rem', marginBottom: '1.5rem' }}>
+                    {section.heading}
+                  </h2>
+                  {section.content.split('\n\n').map((para, i) => (
+                    <p key={i} dangerouslySetInnerHTML={{ __html: para }} />
+                  ))}
+                  {section.alertBox && (
+                    <div className={section.alertBox.type === 'warning' ? 'box-flood' : 'box-notice'}>
+                      <p style={{ margin: 0, color: 'var(--c-ink)', fontWeight: 500 }}>{section.alertBox.text}</p>
+                    </div>
+                  )}
+                </AnimatedSection>
+              ))}
+            </div>
+          )}
+
+          {/* ── REELS (VACANT HOMES) ── */}
+          {post.reels?.length > 0 && (
+            <AnimatedSection reduce={reduce} style={{ marginTop: '4rem', padding: '3rem 0', backgroundColor: '#F8F5EE', borderRadius: '12px', position: 'relative', overflow: 'hidden' }}>
+
+              
+              <div style={{ paddingInline: '1.5rem', marginBottom: '1.5rem' }}>
+                <h2 id="vacant-homes" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  Vacant Homes in {mainTitle}
                 </h2>
-                <div
-                  style={{
-                    fontSize: '1.05rem',
-                    lineHeight: 1.8,
-                    color: 'var(--c-ink-muted)',
-                    whiteSpace: 'pre-line'
-                  }}
+                <p>We post genuine, verified vacant homes as video walk-throughs on our Instagram.</p>
+              </div>
+
+              <div className="reels-row-mobile">
+                {post.reels.map((reel) => (
+                  <div key={reel.id} className="reel-snap-item">
+                    <ReelEmbed reel={reel} />
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ paddingInline: '1.5rem', marginTop: '2.5rem', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '1rem' }}>
+                <motion.a 
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-dark instagram-pulse"
+                  style={{ borderRadius: '30px' }}
+                  whileHover={reduce ? {} : { scale: 1.05 }}
+                  whileTap={reduce ? {} : { scale: 0.95 }}
                 >
-                  {section.content}
-                </div>
-              </section>
-            ))}
+                  <Instagram size={18} />
+                  <span>Follow @chennai_rents for new homes</span>
+                </motion.a>
+                <HandDrawnArrow width={40} height={40} direction="right" style={{ transform: 'rotate(180deg) translateY(5px)' }} />
+              </div>
+            </AnimatedSection>
+          )}
+
+          {/* ── FAQS ── */}
+          {post.faqs?.length > 0 && (
+            <AnimatedSection reduce={reduce} style={{ marginTop: '4rem' }}>
+              <h2 id="faq" style={{ borderBottom: '2px solid var(--c-border)', paddingBottom: '0.75rem', marginBottom: '1.5rem' }}>
+                Frequently Asked Questions
+              </h2>
+              <div>
+                {post.faqs.map((faq, i) => (
+                  <AnimatedFAQ key={i} faq={faq} />
+                ))}
+              </div>
+            </AnimatedSection>
+          )}
+
+        </main>
+
+        {/* ── DESKTOP SIDE RAIL ── */}
+        <aside className="side-rail">
+          {post.nearbyAreas?.length > 0 && (
+            <div className="rail-card">
+              <h4 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <MtcBusDoodle width={24} height={18} /> Nearby Areas
+              </h4>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {post.nearbyAreas.map((area, i) => {
+                  const areaPost = LOCALITY_POSTS.find(p => p.slug === area.slug);
+                  return (
+                    <Link key={i} to={`/rent/${area.slug}`} className="rail-link">
+                      {area.name} {areaPost?.waterReality?.score && <span style={{ color: 'var(--c-marina-blue)', fontSize: '0.75rem', fontWeight: 500, marginLeft: '0.4rem' }}>💧 {areaPost.waterReality.score}/10</span>}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {post.relatedGuides?.length > 0 && (
+            <div className="rail-card">
+              <h4>Related Guides</h4>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {post.relatedGuides.map((guide, i) => (
+                  <Link key={i} to={`/guide/${guide.slug}`} className="rail-link">
+                    {guide.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Always show popular guides */}
+          <div className="rail-card" style={{ backgroundColor: '#FAF7F2', borderColor: 'var(--c-auto-yellow)' }}>
+            <h4 style={{ borderColor: 'var(--c-auto-yellow-dk)', color: 'var(--c-ink)' }}>Must Read</h4>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {GUIDE_POSTS.slice(0, 3).map((guide, i) => (
+                <Link key={i} to={`/guide/${guide.slug}`} className="rail-link" style={{ borderColor: 'var(--c-border)' }}>
+                  {guide.title}
+                </Link>
+              ))}
+            </div>
           </div>
-        )}
+        </aside>
 
       </div>
 
-      {/* ── 4. VACANT HOMES IN THIS AREA (Instagram Reels) ── */}
-      {post.reels && post.reels.length > 0 && (
-        <section
-          id="vacant-homes"
-          style={{
-            backgroundColor: '#F8F5EE',
-            paddingBlock: '3.5rem',
-            marginBlock: '3rem',
-            borderTop: '1px solid var(--c-border)',
-            borderBottom: '1px solid var(--c-border)',
-            scrollMarginTop: '80px'
-          }}
-        >
-          <div className="container">
-            
-            <div style={{ textAlign: 'center', maxWidth: '640px', marginInline: 'auto', marginBottom: '2.5rem' }}>
-              <span className="tag-eyebrow" style={{ color: 'var(--c-ripon-red)' }}>
-                INSTAGRAM VIDEO TOURS
-              </span>
-              <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.35rem)', color: 'var(--c-ink)', marginBottom: '0.75rem' }}>
-                {isLocality ? `Vacant Homes for Rent in ${post.title.split(',')[0].replace('Rent in ', '')}` : 'Vacant Homes with Fair Deposit'}
-              </h2>
-              <p style={{ color: 'var(--c-ink-muted)', fontSize: '0.98rem', lineHeight: 1.6 }}>
-                New vacant rental homes are posted on our Instagram first. Follow <strong>{INSTAGRAM_HANDLE}</strong> and DM us there for video walkthroughs and direct owner connects.
-              </p>
-            </div>
+      <MarinaDivider variant="compact" />
 
-            {/* Reels Grid */}
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                gap: '2rem',
-                justifyContent: 'center',
-                maxWidth: '920px',
-                marginInline: 'auto'
-              }}
-            >
-              {post.reels.map((reel) => (
-                <ReelEmbed key={reel.id} reel={reel} />
-              ))}
-            </div>
-
-            <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
-              <a
-                href={INSTAGRAM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-dark"
-                style={{ padding: '0.75rem 1.75rem', fontSize: '1rem' }}
-              >
-                <Instagram size={18} />
-                <span>Follow {INSTAGRAM_HANDLE} on Instagram</span>
-              </a>
-            </div>
-
-          </div>
-        </section>
-      )}
-
-      {/* ── 5. SHORT FAQ ACCORDION ── */}
-      {post.faqs && post.faqs.length > 0 && (
-        <section id="faqs" className="container" style={{ maxWidth: '860px', marginBlock: '3rem', scrollMarginTop: '80px' }}>
-          <h2 style={{ fontSize: '1.75rem', marginBottom: '1.25rem', color: 'var(--c-ink)' }}>
-            Frequently Asked Questions about Renting in {post.title.split(',')[0].replace('Rent in ', '')}
-          </h2>
-          <div>
-            {post.faqs.map((faq, idx) => (
-              <details key={idx} className="clean-faq" open={idx === 0}>
-                <summary>
-                  {faq.q}
-                </summary>
-                <div className="faq-body">
-                  <p>{faq.a}</p>
-                </div>
-              </details>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* ── 6. NEARBY AREAS & RELATED GUIDES ── */}
-      <section className="container" style={{ maxWidth: '860px', marginTop: '3.5rem' }}>
-        <div style={{ borderTop: '1px solid var(--c-border)', paddingTop: '2.5rem' }}>
-          
-          {post.nearbyAreas && post.nearbyAreas.length > 0 && (
-            <div style={{ marginBottom: '2.5rem' }}>
-              <h3 style={{ fontSize: '1.35rem', marginBottom: '1rem', color: 'var(--c-ink)' }}>
-                Compare Other Nearby Chennai Localities
-              </h3>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-                {post.nearbyAreas.map((area, idx) => (
-                  <Link
-                    key={idx}
-                    to={`/${area.slug}`}
-                    className="content-card"
-                    style={{
-                      padding: '1.15rem',
-                      textDecoration: 'none',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '0.25rem'
-                    }}
-                  >
-                    <span style={{ fontWeight: 700, color: 'var(--c-marina-blue)', fontSize: '1.05rem' }}>
-                      Rent in {area.name} →
-                    </span>
-                    <span style={{ fontSize: '0.85rem', color: 'var(--c-ink-muted)' }}>
-                      {area.note}
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {post.relatedGuides && post.relatedGuides.length > 0 && (
-            <div>
-              <h3 style={{ fontSize: '1.35rem', marginBottom: '1rem', color: 'var(--c-ink)' }}>
-                Essential Rental Guides & Rights in Chennai
-              </h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {post.relatedGuides.map((guide, idx) => (
-                  <Link
-                    key={idx}
-                    to={`/${guide.slug}`}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      padding: '1rem 1.25rem',
-                      backgroundColor: '#FFFFFF',
-                      border: '1px solid var(--c-border)',
-                      borderRadius: '6px',
-                      textDecoration: 'none',
-                      color: 'var(--c-ink)',
-                      fontWeight: 600
-                    }}
-                  >
-                    <span>📖 {guide.title}</span>
-                    <ArrowRight size={18} color="var(--c-ripon-red)" />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
-
+      {/* ── BOTTOM MOBILE LINKS ── */}
+      <div className="container hide-desktop" style={{ paddingBlock: '3rem', borderTop: '1px solid var(--c-border)' }}>
+        <h3 style={{ marginBottom: '1.25rem' }}>Explore More</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          {post.nearbyAreas?.map((area, i) => (
+            <Link key={`mob-near-${i}`} to={`/rent/${area.slug}`} className="btn-dark" style={{ backgroundColor: '#F8F5EE', color: 'var(--c-ink) !important', border: '1px solid var(--c-border)', justifyContent: 'flex-start' }}>
+              📍 {area.name}
+            </Link>
+          ))}
+          {post.relatedGuides?.map((guide, i) => (
+            <Link key={`mob-guide-${i}`} to={`/guide/${guide.slug}`} className="btn-dark" style={{ backgroundColor: '#EBF3FA', color: 'var(--c-ink) !important', border: '1px solid var(--c-marina-blue)', justifyContent: 'flex-start' }}>
+              📘 {guide.title}
+            </Link>
+          ))}
         </div>
-      </section>
+      </div>
 
-      {/* Responsive styles for numeral column */}
-      <style>{`
-        @media (min-width: 900px) {
-          .hero-grid {
-            grid-template-columns: 1fr 220px !important;
-          }
-          .hero-numeral-col {
-            display: flex !important;
-          }
-        }
-      `}</style>
-
-    </article>
+    </motion.article>
   );
 }
