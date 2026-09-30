@@ -110,11 +110,14 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav
-          style={{ display: 'none', alignItems: 'center', gap: '1.5rem' }}
+          style={{ display: 'none', alignItems: 'center', gap: '1.25rem' }}
           className="cr-desktop-nav"
         >
-          <a href="/listings/index.html" style={{ ...navLinkStyle({ isActive: false }), color: 'var(--c-ripon-red)', borderBottom: '2px solid var(--c-ripon-red)' }}>
-            Browse Rentals
+          <a href="/listings/index.html" style={{ ...navLinkStyle({ isActive: false }), color: 'var(--c-ink)' }}>
+            🗺️ Rent Map
+          </a>
+          <a href="/listings/listings.html" style={{ ...navLinkStyle({ isActive: false }), color: 'var(--c-ink)' }}>
+            📋 Listings
           </a>
           <NavLink to="/#localities" style={navLinkStyle}>
             Localities
@@ -125,6 +128,28 @@ export default function Header() {
           <NavLink to="/about" style={navLinkStyle}>
             About
           </NavLink>
+
+          {/* List Property CTA Button */}
+          <a
+            href="/listings/list-property.html"
+            style={{
+              fontFamily: 'var(--font-heading)',
+              fontSize: '0.88rem',
+              fontWeight: 800,
+              backgroundColor: 'var(--c-ripon-red)',
+              color: '#FFFFFF',
+              textDecoration: 'none',
+              padding: '0.45rem 1.1rem',
+              borderRadius: '20px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              boxShadow: '0 2px 8px rgba(178, 58, 46, 0.25)',
+              transition: 'transform 0.15s ease',
+            }}
+          >
+            <span>+ List Flat</span>
+          </a>
 
           {/* Instagram Button — motion.a with pulsing glow */}
           <motion.a
@@ -191,15 +216,44 @@ export default function Header() {
             }}
           >
             <a
+              href="/listings/list-property.html"
+              style={{
+                fontFamily: 'var(--font-heading)',
+                fontWeight: 800,
+                backgroundColor: 'var(--c-ripon-red)',
+                color: '#FFFFFF',
+                textDecoration: 'none',
+                padding: '0.6rem 1rem',
+                borderRadius: '8px',
+                textAlign: 'center',
+              }}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              💼 + List My Flat (0% Brokerage)
+            </a>
+            <a
               href="/listings/index.html"
               style={{
                 fontFamily: 'var(--font-heading)',
-                fontWeight: 600,
-                color: 'var(--c-ripon-red)',
+                fontWeight: 700,
+                color: 'var(--c-ink)',
                 textDecoration: 'none',
               }}
+              onClick={() => setMobileMenuOpen(false)}
             >
-              Browse Rentals
+              🗺️ Interactive Rent Map
+            </a>
+            <a
+              href="/listings/listings.html"
+              style={{
+                fontFamily: 'var(--font-heading)',
+                fontWeight: 700,
+                color: 'var(--c-ink)',
+                textDecoration: 'none',
+              }}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              📋 Browse All Listings
             </a>
             <Link
               to="/#localities"
