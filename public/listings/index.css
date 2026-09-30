@@ -1541,3 +1541,65 @@ html, body {
 /* Tutorial Modal fixes */
 .modal-title { color: var(--c-ink) !important; }
 
+/* -- ADDITIONAL LAYOUT FIXES FOR MODAL DATA ROWS -- */
+.detail-meta-item {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 10px 0 !important;
+    border-bottom: 1px solid var(--c-border-subtle) !important;
+    font-size: 14px !important;
+    color: var(--c-ink-muted) !important;
+}
+
+.detail-meta-item:last-child {
+    border-bottom: none !important;
+}
+
+.detail-meta-item strong {
+    color: var(--c-ink) !important;
+    font-family: var(--font-heading) !important;
+    font-weight: 700 !important;
+    flex: 1;
+    text-align: left;
+    margin-left: 8px;
+}
+
+.detail-amount {
+    color: var(--c-ripon-red) !important;
+    font-size: 32px !important;
+    font-family: var(--font-heading) !important;
+    font-weight: 900 !important;
+}
+
+.rating-section span {
+    color: var(--c-ink-muted) !important;
+}
+
+.rating-section span[style*="uppercase"] {
+    color: var(--c-ink) !important;
+    font-family: var(--font-heading) !important;
+}
+
+.leaflet-popup-content-wrapper {
+    background: var(--c-card-bg) !important;
+    color: var(--c-ink) !important;
+    border: 1px solid var(--c-border) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 12px 32px rgba(30,27,24,0.12) !important;
+}
+
+.leaflet-popup-tip {
+    background: var(--c-card-bg) !important;
+    border-bottom: 1px solid var(--c-border) !important;
+    border-right: 1px solid var(--c-border) !important;
+}
+
+.popup-society {
+    color: var(--c-ink) !important;
+    font-family: var(--font-heading) !important;
+}
+.popup-type {
+    color: var(--c-ink-muted) !important;
+}
+

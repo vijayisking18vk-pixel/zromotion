@@ -225,7 +225,7 @@
                 <label class="field-label">Rent Range (₹/month)</label>
                 <div style="display:flex; align-items:center; gap:8px;">
                     <input type="number" id="f-rent-min" placeholder="Min" class="form-input" onchange="setFilterRent()" />
-                    <span style="color:#6b7280; font-size:13px;">to</span>
+                    <span style="color:var(--c-ink-muted); font-size:13px;">to</span>
                     <input type="number" id="f-rent-max" placeholder="Max" class="form-input" onchange="setFilterRent()" />
                 </div>
             </div>
@@ -286,7 +286,7 @@
                 <div style="width:10px; height:10px; border-radius:50%; background:#ff3e00; box-shadow:0 0 10px #ff3e00;"></div>
                 <span class="welcome-brand" style="font-size:20px; font-weight:700; color:#ff6b35;">chennairents.in</span>
             </div>
-            <p style="color:#6b7280; font-size:12px; margin-bottom:18px;">Chennai's Crowdsourced Rental Transparency Map</p>
+            <p style="color:var(--c-ink-muted); font-size:12px; margin-bottom:18px;">Chennai's Crowdsourced Rental Transparency Map</p>
             
             <div class="intro-checklist">
                 <div class="intro-step">
@@ -345,7 +345,7 @@
                 <div class="stats-row"><span class="stats-row-label">Loading city-wide averages...</span></div>
             </div>
             <hr style="border:none; border-top:1px solid rgba(255,255,255,0.06); margin:16px 0;">
-            <p style="font-size:11px; color:#6b7280; text-align:center;">Updated in real-time on every anonymous tenant contribution.</p>
+            <p style="font-size:11px; color:var(--c-ink-muted); text-align:center;">Updated in real-time on every anonymous tenant contribution.</p>
         </div>
     </div>
 
@@ -477,7 +477,7 @@
                 <span class="modal-title">List Property</span>
                 <button class="close-btn" onclick="closeModal('owner-type-modal')">&times;</button>
             </div>
-            <p style="color:#9ca3af; font-size:13px; margin-bottom:12px;">What option best fits your property?</p>
+            <p style="color:var(--c-ink-muted); font-size:13px; margin-bottom:12px;">What option best fits your property?</p>
             <div class="l2-card" onclick="openOwnerWholeForm()">
                 <span class="l2-card-icon">🏢</span>
                 <div>
@@ -661,7 +661,7 @@
             <!-- Information Banner -->
             <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 12px; margin-bottom: 16px; display: flex; align-items: flex-start; gap: 10px;">
                 <div style="font-size: 18px; line-height: 1;">💡</div>
-                <div style="font-size: 12px; line-height: 1.4; color: #cbd5e1; text-align: left;">
+                <div style="font-size: 12px; line-height: 1.4; color: var(--c-ink-muted); text-align: left;">
                     You're sharing what <strong>YOU</strong> pay in rent — to help map real prices in Chennai.<br>
                     <span style="color: #9ca3af;">Not for finding a flat. Looking for a flat? <span style="text-decoration: underline; color: #ff6b35; cursor: pointer; font-weight: 600;" onclick="switchFromPinToSeeker()">Tap here.</span></span>
                 </div>
@@ -918,7 +918,7 @@
 
                 <!-- Express Interest Form -->
                 <div id="detail-interest-form-wrap">
-                    <span style="font-size:11px; text-transform:uppercase; font-weight:700; color:#6b7280; display:block; margin-bottom:12px;">Express Interest in this Flat</span>
+                    <span style="font-size:11px; text-transform:uppercase; font-weight:700; color:var(--c-ink-muted); display:block; margin-bottom:12px;">Express Interest in this Flat</span>
                     <form id="express-interest-form">
                         <input type="hidden" id="ei-lat">
                         <input type="hidden" id="ei-lng">
@@ -966,7 +966,7 @@
                             <input type="tel" id="ei-phone" class="form-input" placeholder="10-digit mobile" required>
                         </div>
 
-                        <p style="font-size:11px; color:#6b7280; margin:10px 0 16px 0; line-height:1.4;">
+                        <p style="font-size:11px; color:var(--c-ink-muted); margin:10px 0 16px 0; line-height:1.4;">
                             Private — only shared when we find a match for you. Please enter a valid email address.
                         </p>
 
@@ -977,12 +977,12 @@
 
             <!-- Rating Segment -->
             <div class="rating-section">
-                <span style="font-size:11px; text-transform:uppercase; font-weight:700; color:#6b7280; display:block; margin-bottom:4px;">Renter Ratings</span>
-                <div style="display:flex; justify-content:space-between; font-size:12px; color:#cbd5e1; margin-bottom:6px;">
+                <span style="font-size:11px; text-transform:uppercase; font-weight:700; color:var(--c-ink-muted); display:block; margin-bottom:4px;">Renter Ratings</span>
+                <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--c-ink-muted); margin-bottom:6px;">
                     <span>Locality Quality:</span>
                     <span id="label-locality-rating">No Ratings</span>
                 </div>
-                <div style="display:flex; justify-content:space-between; font-size:12px; color:#cbd5e1;">
+                <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--c-ink-muted);">
                     <span>Flat / Asset Maintenance:</span>
                     <span id="label-quality-rating">No Ratings</span>
                 </div>
@@ -998,7 +998,7 @@
 
             <!-- Comments Section -->
             <div class="comments-section">
-                <span style="font-size:11px; text-transform:uppercase; font-weight:700; color:#6b7280; display:block; margin-bottom:8px;">Occupant Chatter</span>
+                <span style="font-size:11px; text-transform:uppercase; font-weight:700; color:var(--c-ink-muted); display:block; margin-bottom:8px;">Occupant Chatter</span>
                 <div class="comments-thread" id="detail-comments-container">
                     <!-- Injected comments -->
                 </div>
@@ -1028,7 +1028,7 @@
                 <span class="modal-title" style="color:#fbbf24;">Existing Search Alerts Active</span>
                 <button class="close-btn" onclick="closeModal('seeker-dup-modal')">&times;</button>
             </div>
-            <p style="color:#cbd5e1; font-size:13px; line-height:1.5; margin-bottom:16px;">
+            <p style="color:var(--c-ink-muted); font-size:13px; line-height:1.5; margin-bottom:16px;">
                 You already have active search alerts registered with this email or phone. Adding a new one will replace your old preferences.
             </p>
             <div style="display:flex; flex-direction:column; gap:8px;">
