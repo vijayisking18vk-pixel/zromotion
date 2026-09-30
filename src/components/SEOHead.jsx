@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { INSTAGRAM_URL } from '../config';
 
+// robots prop: 'index, follow' | 'noindex, follow' | 'noindex, nofollow'
+// canonical prop: absolute URL string
+
 /**
  * Dynamic SEO Head Component
  * Injects Google-friendly structured data (Schema.org JSON-LD):
@@ -10,7 +13,8 @@ import { INSTAGRAM_URL } from '../config';
  * - Dynamic Document Title & Meta Description for maximum search CTR
  * - Pure English metadata for high global and regional search indexing
  */
-export default function SEOHead({ title, description, canonicalUrl, faqs = [], type = 'article', breadcrumbs = [] }) {
+export default function SEOHead({ title, description, canonicalUrl, canonical, robots, faqs = [], type = 'article', breadcrumbs = [] }) {
+  const resolvedCanonical = canonical || canonicalUrl;
   useEffect(() => {
     // 1. Update Document Title
     if (title) {
@@ -29,14 +33,25 @@ export default function SEOHead({ title, description, canonicalUrl, faqs = [], t
     }
 
     // 3. Update Canonical Tag
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.rel = 'canonical';
-      document.head.appendChild(canonical);
+    let canonicalEl = document.querySelector('link[rel="canonical"]');
+    if (!canonicalEl) {
+      canonicalEl = document.createElement('link');
+      canonicalEl.rel = 'canonical';
+      document.head.appendChild(canonicalEl);
     }
-    if (canonicalUrl) {
-      canonical.href = canonicalUrl;
+    if (resolvedCanonical) {
+      canonicalEl.href = resolvedCanonical;
+    }
+
+    // 3b. Update Robots Meta
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (robots) {
+      if (!robotsMeta) {
+        robotsMeta = document.createElement('meta');
+        robotsMeta.name = 'robots';
+        document.head.appendChild(robotsMeta);
+      }
+      robotsMeta.content = robots;
     }
 
     // 4. Inject JSON-LD Schema
@@ -111,7 +126,7 @@ export default function SEOHead({ title, description, canonicalUrl, faqs = [], t
       const el = document.getElementById(scriptId);
       if (el) el.remove();
     };
-  }, [title, description, canonicalUrl, faqs, type, breadcrumbs]);
+  }, [title, description, resolvedCanonical, robots, faqs, type, breadcrumbs]);
 
   return null;
 }
