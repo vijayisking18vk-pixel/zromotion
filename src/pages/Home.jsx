@@ -72,6 +72,32 @@ export default function Home() {
 
       <MarinaDivider variant="default" />
 
+      {/* ── BROWSE LISTINGS CTA STRIP ── */}
+      <section style={{ backgroundColor: '#0d0d0d', paddingBlock: '3rem', textAlign: 'center' }}>
+        <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+          <h2 style={{ margin: 0, color: 'white', fontSize: '2rem' }}>Direct Owner Rentals Map</h2>
+          <p style={{ color: '#9ca3af', fontSize: '1.1rem', maxWidth: '600px', marginBottom: '1rem' }}>
+            Browse actual rent rates shared by tenants, and contact flat owners directly with zero broker fees.
+          </p>
+          <a
+            href="/listings/"
+            style={{
+              backgroundColor: '#ff3e00',
+              color: 'white',
+              padding: '1rem 2rem',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              fontWeight: 700,
+              fontSize: '1.1rem',
+              boxShadow: '0 8px 24px rgba(255, 62, 0, 0.4)',
+              display: 'inline-block'
+            }}
+          >
+            Launch Interactive Map
+          </a>
+        </div>
+      </section>
+
       {/* ── INSTAGRAM CALLOUT STRIP ── */}
       <section style={{ backgroundColor: 'var(--c-sand-light)', borderBottom: '1px solid var(--c-border)', borderTop: '1px solid var(--c-border)', paddingBlock: '2.5rem' }}>
         <div className="container" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '1.5rem', textAlign: 'center' }}>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Flats & Listings | chennairents.in</title>
+    <meta name="description" content="Browse direct owner listings with no broker fees in Chennai. Filter by rent, BHK, and gated community status." />
+    <link rel="stylesheet" href="index.css">
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #cbd5e1;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .nav-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(8, 8, 18, 0.72);
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        
+        .brand-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ff3e00;
+            box-shadow: 0 0 10px #ff3e00;
+        }
+        
+        .brand-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ff6b35;
+        }
+
+        .back-link {
+            font-size: 13px;
+            font-weight: 600;
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: white;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── Left Sidebar: Filters & CTA ── */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .filter-panel {
+            background: #161625;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 24px;
+        }
+        
+        .filter-header {
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .clear-btn {
+            background: none;
+            border: none;
+            color: #ff6b35;
+            font-size: 12px;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        /* Reusing some index.css form styles */
+        .field-group { margin-bottom: 20px; }
+        .field-label { color: #9ca3af; font-size: 12.5px; font-weight: 500; margin-bottom: 8px; display: block; }
+        
+        .cta-box {
+            background: rgba(255, 62, 0, 0.05);
+            border: 1px dashed rgba(255, 62, 0, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .cta-box h3 {
+            color: white;
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .cta-box p {
+            font-size: 13px;
+            color: #9ca3af;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .btn-list-flat {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #ff3e00;
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-list-flat:hover {
+            background: #d63400;
+        }
+
+        /* ── Right Content: Listing Grid ── */
+        .feed-header {
+            margin-bottom: 24px;
+        }
+
+        .feed-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .feed-subtitle {
+            font-size: 14px;
+            color: #9ca3af;
+        }
+
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        /* Listing Card */
+        .listing-card {
+            background: #161625;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .listing-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .card-img-placeholder {
+            height: 160px;
+            background: #1f1f33;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .card-img-placeholder svg {
+            color: #4b5563;
+            width: 40px;
+            height: 40px;
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            backdrop-filter: blur(4px);
+        }
+        
+        .gated-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(37, 99, 235, 0.9);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .card-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-rent {
+            font-size: 26px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+        }
+
+        .card-rent span {
+            font-size: 14px;
+            color: #9ca3af;
+            font-weight: 500;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 12px;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        .card-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-date {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .btn-view {
+            background: transparent;
+            color: #ff3e00;
+            border: 1px solid rgba(255, 62, 0, 0.4);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-view:hover {
+            background: rgba(255, 62, 0, 0.1);
+            border-color: #ff3e00;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="nav-header">
+        <a href="/" class="brand">
+            <div class="brand-dot"></div>
+            <div class="brand-text">chennairents.in</div>
+        </a>
+        <div style="display: flex; gap: 16px; align-items: center;">
+            <a href="index.html" class="back-link">🗺️ Map View</a>
+            <a href="/" class="back-link">&larr; Back to Home</a>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- Sidebar Filters -->
+        <aside class="sidebar">
+            
+            <div class="cta-box">
+                <h3>List Your Flat</h3>
+                <p>Find direct tenants without broker fees. Listings are verified and matched with active seekers instantly.</p>
+                <a href="#" onclick="alert('This will open the list flat modal logic from index.js')" class="btn-list-flat">List Property for Free</a>
+            </div>
+
+            <div class="filter-panel">
+                <div class="filter-header">
+                    <span>Filters</span>
+                    <button class="clear-btn">Clear All</button>
+                </div>
+                
+                <div class="field-group">
+                    <label class="field-label">Location</label>
+                    <select class="form-select">
+                        <option value="">All Chennai</option>
+                        <option value="OMR">OMR</option>
+                        <option value="Anna Nagar">Anna Nagar</option>
+                        <option value="Velachery">Velachery</option>
+                        <option value="Adyar">Adyar</option>
+                    </select>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">BHK Size</label>
+                    <div class="chips-row">
+                        <div class="option-chip">1 BHK</div>
+                        <div class="option-chip active">2 BHK</div>
+                        <div class="option-chip">3 BHK</div>
+                        <div class="option-chip">4+ BHK</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Rent Range (₹)</label>
+                    <div style="display:flex; gap:8px;">
+                        <input type="number" class="form-input" placeholder="Min" />
+                        <input type="number" class="form-input" placeholder="Max" />
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Furnishing</label>
+                    <div class="chips-row">
+                        <div class="option-chip">Fully</div>
+                        <div class="option-chip">Semi</div>
+                        <div class="option-chip">Unfurnished</div>
+                    </div>
+                </div>
+                
+                <div class="field-group" style="margin-bottom: 0;">
+                    <label class="field-label">Community</label>
+                    <div class="chips-row">
+                        <div class="option-chip">Gated</div>
+                        <div class="option-chip">Standalone</div>
+                    </div>
+                </div>
+            </div>
+            
+        </aside>
+
+        <!-- Main Feed -->
+        <main class="feed-content">
+            <div class="feed-header">
+                <h1 class="feed-title">Available Flats in Chennai</h1>
+                <p class="feed-subtitle">Showing direct owner listings. No broker fees.</p>
+            </div>
+
+            <div class="listings-grid">
+                
+                <!-- Card 1 -->
+                <div class="listing-card">
+                    <div class="card-img-placeholder">
+                        <span class="status-badge">Available ASAP</span>
+                        <span class="gated-badge">Gated</span>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-rent">₹28,000<span>/mo</span></div>
+                        <div class="card-title">2 BHK in Appaswamy Cerus, Saligramam</div>
+                        <div class="card-meta">
+                            <div class="card-meta-item">🛏️ 2 Bed</div>
+                            <div class="card-meta-item">🛋️ Semi</div>
+                            <div class="card-meta-item">🚗 1 Park</div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-date">Listed 2 days ago</span>
+                            <button class="btn-view">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="listing-card">
+                    <div class="card-img-placeholder">
+                        <span class="status-badge" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border-color: rgba(245, 158, 11, 0.3);">Next Month</span>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-rent">₹42,000<span>/mo</span></div>
+                        <div class="card-title">3 BHK Independent House in Anna Nagar West</div>
+                        <div class="card-meta">
+                            <div class="card-meta-item">🛏️ 3 Bed</div>
+                            <div class="card-meta-item">📦 Unfurnished</div>
+                            <div class="card-meta-item">🚗 2 Park</div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-date">Listed 5 days ago</span>
+                            <button class="btn-view">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="listing-card">
+                    <div class="card-img-placeholder">
+                        <span class="status-badge">Available ASAP</span>
+                        <span class="gated-badge">Gated</span>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-rent">₹18,500<span>/mo</span></div>
+                        <div class="card-title">1 BHK in DLF Commander's Court, Egmore</div>
+                        <div class="card-meta">
+                            <div class="card-meta-item">🛏️ 1 Bed</div>
+                            <div class="card-meta-item">🛋️ Fully</div>
+                            <div class="card-meta-item">🏍️ Bike Only</div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-date">Listed today</span>
+                            <button class="btn-view">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="listing-card">
+                    <div class="card-img-placeholder">
+                        <span class="status-badge">Available ASAP</span>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-rent">₹14,000<span>/mo</span></div>
+                        <div class="card-title">Flatmate (Private Room) in 3BHK, Velachery</div>
+                        <div class="card-meta">
+                            <div class="card-meta-item">🛏️ Room</div>
+                            <div class="card-meta-item">🧑 Male Only</div>
+                            <div class="card-meta-item">🚭 Non-smoker</div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-date">Listed 1 week ago</span>
+                            <button class="btn-view">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+        
+    </div>
+
+</body>
+</html>

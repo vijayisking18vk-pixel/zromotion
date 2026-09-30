@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>chennairents.in — Chennai Crowdsourced Rental Transparency Map</title>
+    <meta name="description" content="An anonymous, crowdsourced rental transparency registry for Chennai. Real tenant reports pinned on the map, direct owner listings with no broker fees, and daily rent alert matching. 100% free." />
+    <meta name="keywords" content="chennai rent map, chennai rents, rent in chennai, no broker chennai, OMR rent, Anna Nagar rent, Velachery rent, rent transparency, chennai flats for rent" />
+    <link rel="canonical" href="https://www.chennairents.in/" />
+    <link rel="stylesheet" href="index.css">
+    
+    <!-- Open Graph Metadata (Facebook / LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="chennairents.in — Chennai Crowdsourced Rental Transparency Map" />
+    <meta property="og:description" content="Real rents pinned anonymously by tenants in Chennai. Spot broker inflation, browse direct owner listings, and setup automated matching alerts. No logins, 100% free." />
+    <meta property="og:url" content="https://www.chennairents.in/" />
+    <meta property="og:site_name" content="chennairents.in" />
+    <meta property="og:image" content="https://www.chennairents.in/assets/og-image.png" />
+    
+    <!-- Twitter Card Metadata -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="chennairents.in — Chennai Crowdsourced Rental Transparency Map" />
+    <meta name="twitter:description" content="Real rents pinned anonymously by tenants in Chennai. Browse direct owner listings with no broker fees." />
+    <meta name="twitter:image" content="https://www.chennairents.in/assets/og-image.png" />
+
+    <!-- Leaflet.js Mapping Library (Standard Leaflet, tiles swapped to CartoDB Positron Dark) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    
+    <!-- Supabase UMD Javascript SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+    <!-- Schema FAQPage JSON-LD (Statically declared for indexing) -->
+    <script type="application/ld+json" id="faq-schema">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does chennairents.in work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tap anywhere on the map and drop your rent anonymously. Other renters see real prices in their area. If you're flat-hunting, drop a seeker pin with your budget — we email you when matching listings appear within 2.5km."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is chennairents.in free? Do I need to sign up?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, free for everyone. No signup, no login, no app required. We don't charge tenants or owners and have no plans to. Rents are crowdsourced for local transparency."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is chennairents.in different from broker sites?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard sites show broker-quoted listings, which are often inflated. chennairents.in shows real rents shared by actual current and past tenants, letting you see historical averages to guide negotiation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my data anonymous? Will my landlord know?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, anonymous. Your IP address is never displayed. The pin shows only the rent amount, BHK, and approximate location (rounded to ~100m for privacy). Your landlord cannot trace it back to you."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you prevent fake or inflated rents?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We validate that rent falls within a plausible range for the BHK, auto-flag statistical outliers (3x above/below area median), and auto-hide pins that accumulate 3 community reports."
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Schema Organization JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "chennairents.in",
+      "url": "https://www.chennairents.in/",
+      "logo": "https://www.chennairents.in/assets/logo.png",
+      "sameAs": [
+        "https://github.com/subaneshdev/Chennairents"
+      ]
+    }
+    </script>
+</head>
+<body class="map-page">
+
+    <!-- Main Full-Screen Map Container -->
+    <div id="map"></div>
+
+    <!-- Floating Selection Hints (shown in Pin Mode) -->
+    <div id="pin-mode-banner" style="display: none;">
+        <span class="pmb-text">👆 <strong id="pmb-action">Tap anywhere on the map</strong> to place your pin</span>
+        <button class="pmb-cancel" onclick="cancelPinMode()">Cancel</button>
+    </div>
+
+    <div id="available-flats-banner" style="display: none;">
+        <div class="pmb-text">
+            <strong>🏠 Now showing all available flats</strong><br>
+            <span style="font-size: 11px; opacity: 0.85;">Tap Cancel or clear from Filters ↗</span>
+        </div>
+        <button class="afb-cancel" onclick="exitAvailableOnlyMode()">Cancel</button>
+    </div>
+
+    <!-- Pulsing Tap-hint Cursor for Pin Selection -->
+    <div id="tap-hint">
+        <span class="tap-ripple"></span>
+        <span class="tap-finger">👆</span>
+    </div>
+
+    <!-- Floating Search & Filter Wrapper -->
+    <div class="search-wrap">
+        <input id="search-input" class="search-input" type="text" placeholder="Search neighbourhood or area in Chennai..." />
+        <button class="filter-btn" id="filter-btn" onclick="openFilters()">
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h18M7 12h10M10 20h4"/>
+            </svg>
+            Filter
+            <span class="filter-count-badge" id="filter-count-badge">0</span>
+        </button>
+    </div>
+
+    <!-- Chicklet Action Bar Shortcuts -->
+    <div class="chicklet-bar" id="chicklet-bar">
+        <button class="chicklet" onclick="window.location.href='/'"><span class="chicklet-icon">🏠</span>Back to Home</button>
+        <button class="chicklet" id="chicklet-pin" onclick="startPinFlow()"><span class="chicklet-icon">📌</span>Pin My Rent</button>
+        <button class="chicklet" onclick="openTutorial()"><span class="chicklet-icon">🎓</span>How to use</button>
+        <button class="chicklet" onclick="window.location.href='listings.html'"><span class="chicklet-icon">📋</span>Browse Listings</button>
+        <button class="chicklet" onclick="openLiveStats()"><span class="chicklet-icon">📊</span>Live Stats</button>
+        <button class="chicklet" onclick="openContentPortal()"><span class="chicklet-icon">📚</span>Guides & Stories</button>
+        <button class="chicklet" id="chicklet-avlb" onclick="toggleAvailableOnly()"><span class="chicklet-icon">🏠</span>Avlb Flats</button>
+        <button class="chicklet" onclick="startSeekerFlow()"><span class="chicklet-icon">🔍</span>Find a Flat</button>
+        <button class="chicklet" onclick="window.location.href='list-property.html'"><span class="chicklet-icon">💼</span>List My Flat</button>
+        <button class="chicklet" onclick="openFaq()"><span class="chicklet-icon">❓</span>FAQ</button>
+    </div>
+
+    <!-- Map Control Stack (Right Side Floating HUD) -->
+    <div class="side-buttons-stack">
+        <button class="map-control-btn" id="metro-btn" onclick="toggleMetroLines()" title="Toggle Metro Lines">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="3" width="16" height="16" rx="2"/>
+                <line x1="4" y1="11" x2="20" y2="11"/>
+                <line x1="8" y1="15" x2="8" y2="19"/>
+                <line x1="16" y1="15" x2="16" y2="19"/>
+                <circle cx="8" cy="7" r="1"/>
+                <circle cx="16" cy="7" r="1"/>
+            </svg>
+            <span class="control-btn-label">Metro</span>
+        </button>
+        <button class="map-control-btn" id="sat-btn" onclick="toggleMapType()" title="Satellite View">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>
+            </svg>
+            <span class="control-btn-label">Sat</span>
+        </button>
+        <button class="map-control-btn" id="hide-pins-btn" onclick="togglePinsHidden()" title="Toggle Pin Visibility">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+            </svg>
+            <span class="control-btn-label">Hide</span>
+        </button>
+        <button class="map-control-btn" id="locate-btn" onclick="locateUser()" title="Locate Me">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+            </svg>
+            <span class="control-btn-label">Locate</span>
+        </button>
+    </div>
+
+    <!-- Map Legend -->
+    <div class="legend">
+        <div class="legend-pill">
+            <span class="leg-dot" style="background:#2563eb"></span> Gated
+            <span class="leg-dot" style="background:#d97706"></span> Standalone
+            <span class="leg-dot" style="background:#22c55e"></span> Listed Flat
+            <span class="leg-sep"></span>
+            <button class="leg-btn" onclick="openFaq()">FAQ</button>
+        </div>
+    </div>
+
+
+    <!-- ── MODAL: Filter Options ── -->
+    <div class="modal-backdrop" id="filter-modal" onclick="closeFilters()">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+                <span class="modal-title">Filter Pins</span>
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <button onclick="clearFilters()" style="background:none; border:none; color:#ff6b35; font-size:12px; cursor:pointer;">Clear All</button>
+                    <button class="close-btn" onclick="closeFilters()">&times;</button>
+                </div>
+            </div>
+            
+            <div class="field-group">
+                <label class="field-label">Available Flats Only</label>
+                <div class="chips-row">
+                    <div class="option-chip" id="filter-avail-only" onclick="toggleFilterAvailOnly()">Show listings only</div>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">BHK Size</label>
+                <div class="chips-row">
+                    <div class="option-chip" id="f-bhk-1" onclick="toggleFilterBhk(1)">1 BHK</div>
+                    <div class="option-chip" id="f-bhk-2" onclick="toggleFilterBhk(2)">2 BHK</div>
+                    <div class="option-chip" id="f-bhk-3" onclick="toggleFilterBhk(3)">3 BHK</div>
+                    <div class="option-chip" id="f-bhk-4" onclick="toggleFilterBhk(4)">4 BHK</div>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">Rent Range (₹/month)</label>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <input type="number" id="f-rent-min" placeholder="Min" class="form-input" onchange="setFilterRent()" />
+                    <span style="color:#6b7280; font-size:13px;">to</span>
+                    <input type="number" id="f-rent-max" placeholder="Max" class="form-input" onchange="setFilterRent()" />
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">Neighbourhood</label>
+                <select id="f-area" class="form-select" onchange="setFilterArea(this.value)">
+                    <option value="">All Chennai</option>
+                    <option value="OMR">OMR</option>
+                    <option value="Anna Nagar">Anna Nagar</option>
+                    <option value="Adyar">Adyar</option>
+                    <option value="Velachery">Velachery</option>
+                    <option value="T. Nagar">T. Nagar</option>
+                    <option value="Tambaram">Tambaram</option>
+                    <option value="Porur">Porur</option>
+                    <option value="Chromepet">Chromepet</option>
+                    <option value="Nungambakkam">Nungambakkam</option>
+                    <option value="Perambur">Perambur</option>
+                    <option value="Kilpauk">Kilpauk</option>
+                    <option value="Mylapore">Mylapore</option>
+                    <option value="Sholinganallur">Sholinganallur</option>
+                    <option value="Perungudi">Perungudi</option>
+                    <option value="Pallikaranai">Pallikaranai</option>
+                    <option value="Ambattur">Ambattur</option>
+                    <option value="Kodambakkam">Kodambakkam</option>
+                    <option value="West Mambalam">West Mambalam</option>
+                    <option value="Guindy">Guindy</option>
+                    <option value="Saidapet">Saidapet</option>
+                    <option value="Madipakkam">Madipakkam</option>
+                    <option value="Thoraipakkam">Thoraipakkam</option>
+                    <option value="Medavakkam">Medavakkam</option>
+                    <option value="Poonamallee">Poonamallee</option>
+                    <option value="Avadi">Avadi</option>
+                    <option value="ECR">ECR</option>
+                    <option value="Besant Nagar">Besant Nagar</option>
+                    <option value="Thiruvanmiyur">Thiruvanmiyur</option>
+                    <option value="Nanganallur">Nanganallur</option>
+                </select>
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">Gated Status</label>
+                <div class="chips-row">
+                    <div class="option-chip" id="f-gated-yes" onclick="toggleFilterGated(true)">Gated Complex</div>
+                    <div class="option-chip" id="f-gated-no" onclick="toggleFilterGated(false)">Standalone / Independent</div>
+                </div>
+            </div>
+
+            <button class="btn btn-submit" onclick="closeFilters()" style="width:100%">Apply Filters</button>
+        </div>
+    </div>
+
+
+    <!-- ── MODAL: Welcome Onboarding ── -->
+    <div class="modal-backdrop" id="welcome-modal">
+        <div class="modal-card">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                <div style="width:10px; height:10px; border-radius:50%; background:#ff3e00; box-shadow:0 0 10px #ff3e00;"></div>
+                <span class="welcome-brand" style="font-size:20px; font-weight:700; color:#ff6b35;">chennairents.in</span>
+            </div>
+            <p style="color:#6b7280; font-size:12px; margin-bottom:18px;">Chennai's Crowdsourced Rental Transparency Map</p>
+            
+            <div class="intro-checklist">
+                <div class="intro-step">
+                    <span class="intro-step-num">1.</span>
+                    <p class="intro-step-text"><strong>Pin what you pay:</strong> Share your rent anonymously to help other tenants avoid broker inflation.</p>
+                </div>
+                <div class="intro-step">
+                    <span class="intro-step-num">2.</span>
+                    <p class="intro-step-text"><strong>List your flat:</strong> List directly to find bachelors, couples, or families. Zero fee match alerts.</p>
+                </div>
+                <div class="intro-step">
+                    <span class="intro-step-num">3.</span>
+                    <p class="intro-step-text"><strong>Find a flat:</strong> Set budgets and receive email notifications when direct matching landlord listings go online.</p>
+                </div>
+            </div>
+            <button class="btn btn-submit" onclick="closeWelcomeModal()" style="width: 100%;">Explore Chennai Map</button>
+        </div>
+    </div>
+
+
+    <!-- ── MODAL: How to Use (Tutorial) ── -->
+    <div class="modal-backdrop" id="tutorial-modal" onclick="closeModal('tutorial-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <span class="modal-title">How to use chennairents.in</span>
+                <button class="close-btn" onclick="closeModal('tutorial-modal')">&times;</button>
+            </div>
+            <div class="intro-checklist">
+                <div class="intro-step">
+                    <span class="intro-step-num">A.</span>
+                    <p class="intro-step-text"><strong>Check Rents:</strong> Look at the map pins. Blue represent gated complexes, orange represent standalone properties. Click any to view detailed listings, occupant reviews, and ratings.</p>
+                </div>
+                <div class="intro-step">
+                    <span class="intro-step-num">B.</span>
+                    <p class="intro-step-text"><strong>Place Pins:</strong> Tap the <strong>Pin My Rent</strong> button, then click anywhere on the map grid to specify details. Location values are rounded to 100m to preserve absolute user anonymity.</p>
+                </div>
+                <div class="intro-step">
+                    <span class="intro-step-num">C.</span>
+                    <p class="intro-step-text"><strong>Find Matches:</strong> Click <strong>Find a Flat</strong>, drop your interest marker, and set budget values. We automatically scan matches daily and trigger direct owner notifications.</p>
+                </div>
+            </div>
+            <button class="btn btn-submit" onclick="closeModal('tutorial-modal')" style="width: 100%;">Got it</button>
+        </div>
+    </div>
+
+
+    <!-- ── MODAL: Live Stats ── -->
+    <div class="modal-backdrop" id="stats-modal" onclick="closeModal('stats-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <span class="modal-title">📊 Chennai Live Index Stats</span>
+                <button class="close-btn" onclick="closeModal('stats-modal')">&times;</button>
+            </div>
+            <div class="stats-list" id="stats-list-container">
+                <!-- Populated dynamically via stats view -->
+                <div class="stats-row"><span class="stats-row-label">Loading city-wide averages...</span></div>
+            </div>
+            <hr style="border:none; border-top:1px solid rgba(255,255,255,0.06); margin:16px 0;">
+            <p style="font-size:11px; color:#6b7280; text-align:center;">Updated in real-time on every anonymous tenant contribution.</p>
+        </div>
+    </div>
+
+
+    <!-- ── MODAL: Guides, Indexes & Data Stories Portal ── -->
+    <div class="modal-backdrop" id="content-portal-modal" onclick="closeModal('content-portal-modal')">
+        <div class="modal-card content-portal-card" onclick="event.stopPropagation()">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+                <span class="modal-title">📚 Guides & Data Stories</span>
+                <button class="close-btn" onclick="closeModal('content-portal-modal')">&times;</button>
+            </div>
+            
+            <!-- Tab Headers -->
+            <div class="portal-tabs">
+                <button class="portal-tab active" id="btn-tab-localities" onclick="switchPortalTab('tab-localities')">Locality Indexes</button>
+                <button class="portal-tab" id="btn-tab-renters" onclick="switchPortalTab('tab-renters')">Renter Guides</button>
+                <button class="portal-tab" id="btn-tab-owners" onclick="switchPortalTab('tab-owners')">Owner Guides</button>
+                <button class="portal-tab" id="btn-tab-stories" onclick="switchPortalTab('tab-stories')">Data Stories</button>
+            </div>
+
+            <!-- Tab Content: Locality Indexes -->
+            <div class="portal-tab-content active" id="tab-localities">
+                <p class="portal-tab-desc">Browse crowdsourced average rent rates and map views by sector:</p>
+                <div class="portal-links-grid">
+                    <a href="/neighbourhood/omr.html" class="portal-link-item"><span class="item-icon">📍</span>OMR (IT Corridor)</a>
+                    <a href="/neighbourhood/velachery.html" class="portal-link-item"><span class="item-icon">📍</span>Velachery</a>
+                    <a href="/neighbourhood/anna-nagar.html" class="portal-link-item"><span class="item-icon">📍</span>Anna Nagar</a>
+                    <a href="/neighbourhood/adyar.html" class="portal-link-item"><span class="item-icon">📍</span>Adyar</a>
+                    <a href="/neighbourhood/t-nagar.html" class="portal-link-item"><span class="item-icon">📍</span>T. Nagar</a>
+                    <a href="/neighbourhood/tambaram.html" class="portal-link-item"><span class="item-icon">📍</span>Tambaram</a>
+                    <a href="/neighbourhood/sholinganallur.html" class="portal-link-item"><span class="item-icon">📍</span>Sholinganallur</a>
+                    <a href="/neighbourhood/perungudi.html" class="portal-link-item"><span class="item-icon">📍</span>Perungudi</a>
+                    <a href="/neighbourhood/porur.html" class="portal-link-item"><span class="item-icon">📍</span>Porur</a>
+                    <a href="/neighbourhood/medavakkam.html" class="portal-link-item"><span class="item-icon">📍</span>Medavakkam</a>
+                </div>
+            </div>
+
+            <!-- Tab Content: Renter Guides -->
+            <div class="portal-tab-content" id="tab-renters">
+                <p class="portal-tab-desc">Navigate Chennai's rental market with crowdsourced insights:</p>
+                <div class="portal-articles-list">
+                    <a href="/guides/how-much-rent-2026.html" class="portal-article-item">
+                        <div class="article-title">How much rent should you pay in Chennai in 2026?</div>
+                        <div class="article-snippet">Analysis of current rent segments (budget, mid-market, luxury) in Chennai with real crowdsourced ranges.</div>
+                    </a>
+                    <a href="/guides/broker-fee-vs-direct-owner.html" class="portal-article-item">
+                        <div class="article-title">Broker fee vs direct owner listing: what Chennai renters should know</div>
+                        <div class="article-snippet">Understanding broker commissions, hidden landlord requirements, and the direct listing model.</div>
+                    </a>
+                    <a href="/guides/how-to-negotiate-rent.html" class="portal-article-item">
+                        <div class="article-title">How to negotiate rent in Chennai using local rent data</div>
+                        <div class="article-snippet">Practical tips on leveraging crowdsourced rent averages to negotiate effectively.</div>
+                    </a>
+                    <a href="/guides/checklist-rental-advance.html" class="portal-article-item">
+                        <div class="article-title">Checklist before paying rental advance in Chennai</div>
+                        <div class="article-snippet">Essential checklist for tenancy contracts, advance amounts, lock-in clauses, and utility bills.</div>
+                    </a>
+                    <a href="/guides/best-chennai-areas.html" class="portal-article-item">
+                        <div class="article-title">Best Chennai areas for bachelors, families, and IT workers</div>
+                        <div class="article-snippet">A quick guide to finding the right neighbourhood based on commute times and budget.</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tab Content: Owner Guides -->
+            <div class="portal-tab-content" id="tab-owners">
+                <p class="portal-tab-desc">Learn how to attract high-quality tenants directly:</p>
+                <div class="portal-articles-list">
+                    <a href="/guides/how-to-list-flat-directly.html" class="portal-article-item">
+                        <div class="article-title">How to list your Chennai flat directly without broker dependency</div>
+                        <div class="article-snippet">Step-by-step walkthrough to get your flat listed on ChennaiRents and match with verified seekers.</div>
+                    </a>
+                    <a href="/guides/how-to-price-flat-fairly.html" class="portal-article-item">
+                        <div class="article-title">How to price your flat fairly using tenant-reported rent data</div>
+                        <div class="article-snippet">Prevent high vacancy times by pricing your apartment using actual market averages.</div>
+                    </a>
+                    <a href="/guides/how-to-write-rental-listing.html" class="portal-article-item">
+                        <div class="article-title">How to write a rental listing that gets serious tenants</div>
+                        <div class="article-snippet">How to structure BHK details, amenities, gating status, and policies to get tenant interest.</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tab Content: Data Stories -->
+            <div class="portal-tab-content" id="tab-stories">
+                <p class="portal-tab-desc">In-depth data analysis of rent trends and premiums across Chennai:</p>
+                <div class="portal-articles-list">
+                    <a href="/stories/localities-heating-up.html" class="portal-article-item">
+                        <div class="article-title">Which Chennai localities are heating up?</div>
+                        <div class="article-snippet">A look at high-growth zones and OMR clusters driven by the tech workforce.</div>
+                    </a>
+                    <a href="/stories/where-2bhk-moving-fastest.html" class="portal-article-item">
+                        <div class="article-title">Where 2BHK rents are moving fastest</div>
+                        <div class="article-snippet">Analyzing demand and average costs for 2BHK apartments in the city.</div>
+                    </a>
+                    <a href="/stories/gated-vs-standalone.html" class="portal-article-item">
+                        <div class="article-title">Gated vs standalone rent difference in Chennai</div>
+                        <div class="article-snippet">A data study comparing rent rates of gated communities vs standalone buildings.</div>
+                    </a>
+                    <a href="/stories/metro-access-rent-premiums.html" class="portal-article-item">
+                        <div class="article-title">Metro access and rent premiums</div>
+                        <div class="article-snippet">Measuring the exact price premiums associated with close proximity to Chennai Metro.</div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ── MODAL: FAQ Accordions ── -->
+    <div class="modal-backdrop" id="faq-modal" onclick="closeModal('faq-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <span class="modal-title">❓ Frequently Asked Questions</span>
+                <button class="close-btn" onclick="closeModal('faq-modal')">&times;</button>
+            </div>
+            <div class="faq-list" id="faq-list-container" style="max-height: 60vh; overflow-y:auto; padding-right:4px;">
+                <!-- FAQ entries injected dynamically from index.js -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ── MODAL: Owner Listing Selector L2 ── -->
+    <div class="modal-backdrop" id="owner-type-modal" onclick="closeModal('owner-type-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                <span class="modal-title">List Property</span>
+                <button class="close-btn" onclick="closeModal('owner-type-modal')">&times;</button>
+            </div>
+            <p style="color:#9ca3af; font-size:13px; margin-bottom:12px;">What option best fits your property?</p>
+            <div class="l2-card" onclick="openOwnerWholeForm()">
+                <span class="l2-card-icon">🏢</span>
+                <div>
+                    <div class="l2-card-title">Rent out whole flat</div>
+                    <div class="l2-card-sub">List the entire apartment/house for direct leasing.</div>
+                </div>
+            </div>
+            <div class="l2-card" onclick="openOwnerRoomForm()">
+                <span class="l2-card-icon">🛏️</span>
+                <div>
+                    <div class="l2-card-title">Find a Flatmate (Room)</div>
+                    <div class="l2-card-sub">Rent out a single room inside a shared apartment.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ── MODAL: Owner Whole Flat Form ── -->
+    <div class="modal-backdrop" id="owner-whole-modal" onclick="closeModal('owner-whole-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span class="modal-title">🏢 List Entire Flat</span>
+                <button class="close-btn" onclick="closeModal('owner-whole-modal')">&times;</button>
+            </div>
+            <form id="owner-whole-form">
+                <input type="hidden" id="ow-lat">
+                <input type="hidden" id="ow-lng">
+                
+                <div class="field-group">
+                    <label class="field-label">Available From<span>*</span></label>
+                    <div class="chips-row" id="ow-avail-chips">
+                        <div class="option-chip active" onclick="selectFormChip('ow-avail', 'asap')">ASAP</div>
+                        <div class="option-chip" onclick="selectFormChip('ow-avail', 'next_month')">Next Month</div>
+                        <div class="option-chip" onclick="selectFormChip('ow-avail', 'flexible')">Flexible</div>
+                    </div>
+                </div>
+                
+                <div class="field-group">
+                    <label class="field-label">BHK Size<span>*</span></label>
+                    <div class="chips-row" id="ow-bhk-chips">
+                        <div class="option-chip active" onclick="selectFormChip('ow-bhk', '1')">1 BHK</div>
+                        <div class="option-chip" onclick="selectFormChip('ow-bhk', '2')">2 BHK</div>
+                        <div class="option-chip" onclick="selectFormChip('ow-bhk', '3')">3 BHK</div>
+                        <div class="option-chip" onclick="selectFormChip('ow-bhk', '4')">4 BHK</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Rent (₹/month)<span>*</span></label>
+                    <input type="number" id="ow-rent" class="form-input" placeholder="e.g. 25000" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Deposit (₹)<span>*</span></label>
+                    <input type="number" id="ow-deposit" class="form-input" placeholder="e.g. 150000" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Furnishing Status<span>*</span></label>
+                    <div class="chips-row" id="ow-furnishing-chips">
+                        <div class="option-chip active" onclick="selectFormChip('ow-furnishing', 'semi')">Semi-Furnished</div>
+                        <div class="option-chip" onclick="selectFormChip('ow-furnishing', 'unfurnished')">Unfurnished</div>
+                        <div class="option-chip" onclick="selectFormChip('ow-furnishing', 'furnished')">Fully Furnished</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Gated Complex?<span>*</span></label>
+                    <div class="chips-row" id="ow-gated-chips">
+                        <div class="option-chip active" onclick="selectFormChip('ow-gated', 'true')">Yes</div>
+                        <div class="option-chip" onclick="selectFormChip('ow-gated', 'false')">No</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Car/Bike Parking (Number of Spots)<span>*</span></label>
+                    <input type="number" id="ow-parking" class="form-input" placeholder="e.g. 1" min="0" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Your Email Address<span>*</span></label>
+                    <input type="email" id="ow-email" class="form-input" placeholder="owner@email.com" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Contact Phone<span>*</span></label>
+                    <input type="tel" id="ow-phone" class="form-input" placeholder="e.g. +91 98765 43210" required>
+                </div>
+
+                <button type="submit" class="btn btn-submit" style="width:100%; margin-top:8px;">Submit Listing</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ── MODAL: Owner Room / Flatmate Form ── -->
+    <div class="modal-backdrop" id="owner-room-modal" onclick="closeModal('owner-room-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span class="modal-title">🛏️ Find a Flatmate (Room)</span>
+                <button class="close-btn" onclick="closeModal('owner-room-modal')">&times;</button>
+            </div>
+            <form id="owner-room-form">
+                <input type="hidden" id="or-lat">
+                <input type="hidden" id="or-lng">
+
+                <div class="field-group">
+                    <label class="field-label">Rent Per Room (₹/month)<span>*</span></label>
+                    <input type="number" id="or-rent" class="form-input" placeholder="e.g. 12000" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Available From<span>*</span></label>
+                    <div class="chips-row" id="or-avail-chips">
+                        <div class="option-chip active" onclick="selectFormChip('or-avail', 'asap')">ASAP</div>
+                        <div class="option-chip" onclick="selectFormChip('or-avail', 'next_month')">Next Month</div>
+                        <div class="option-chip" onclick="selectFormChip('or-avail', 'flexible')">Flexible</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Flatmate Gender Preference<span>*</span></label>
+                    <div class="chips-row" id="or-gender-chips">
+                        <div class="option-chip active" onclick="selectFormChip('or-gender', 'any')">Any</div>
+                        <div class="option-chip" onclick="selectFormChip('or-gender', 'male')">Male Only</div>
+                        <div class="option-chip" onclick="selectFormChip('or-gender', 'female')">Female Only</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Smoking Policy<span>*</span></label>
+                    <div class="chips-row" id="or-smoke-chips">
+                        <div class="option-chip active" onclick="selectFormChip('or-smoke', 'any')">No Preference</div>
+                        <div class="option-chip" onclick="selectFormChip('or-smoke', 'no')">Non-smoker Only</div>
+                        <div class="option-chip" onclick="selectFormChip('or-smoke', 'yes')">Allowed</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Food Preference<span>*</span></label>
+                    <div class="chips-row" id="or-food-chips">
+                        <div class="option-chip active" onclick="selectFormChip('or-food', 'any')">No Preference</div>
+                        <div class="option-chip" onclick="selectFormChip('or-food', 'veg')">Veg Only</div>
+                        <div class="option-chip" onclick="selectFormChip('or-food', 'nonveg')">Non-veg OK</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Gated Complex?<span>*</span></label>
+                    <div class="chips-row" id="or-gated-chips">
+                        <div class="option-chip active" onclick="selectFormChip('or-gated', 'true')">Yes</div>
+                        <div class="option-chip" onclick="selectFormChip('or-gated', 'false')">No</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Your Email Address<span>*</span></label>
+                    <input type="email" id="or-email" class="form-input" placeholder="your@email.com" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Contact Phone<span>*</span></label>
+                    <input type="tel" id="or-phone" class="form-input" placeholder="e.g. +91 98765 43210" required>
+                </div>
+
+                <button type="submit" class="btn btn-submit" style="width:100%; margin-top:8px;">Submit Room Listing</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ── MODAL: Drop a Pin (Submit Anonymous Rent) ── -->
+    <div class="modal-backdrop" id="pin-add-modal" onclick="closeModal('pin-add-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span class="modal-title">Pin Rent Here</span>
+                <button class="close-btn" onclick="closeModal('pin-add-modal')">&times;</button>
+            </div>
+            
+            <!-- Information Banner -->
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 12px; margin-bottom: 16px; display: flex; align-items: flex-start; gap: 10px;">
+                <div style="font-size: 18px; line-height: 1;">💡</div>
+                <div style="font-size: 12px; line-height: 1.4; color: #cbd5e1; text-align: left;">
+                    You're sharing what <strong>YOU</strong> pay in rent — to help map real prices in Chennai.<br>
+                    <span style="color: #9ca3af;">Not for finding a flat. Looking for a flat? <span style="text-decoration: underline; color: #ff6b35; cursor: pointer; font-weight: 600;" onclick="switchFromPinToSeeker()">Tap here.</span></span>
+                </div>
+            </div>
+
+            <form id="pin-add-form">
+                <input type="hidden" id="pa-lat">
+                <input type="hidden" id="pa-lng">
+
+                <!-- Bedrooms (BHK)* -->
+                <div class="field-group">
+                    <label class="field-label">Bedrooms (BHK)<span>*</span></label>
+                    <div class="chips-row" id="pa-bhk-chips">
+                        <div class="option-chip active" onclick="selectFormChip('pa-bhk', '1')">1</div>
+                        <div class="option-chip" onclick="selectFormChip('pa-bhk', '2')">2</div>
+                        <div class="option-chip" onclick="selectFormChip('pa-bhk', '3')">3</div>
+                        <div class="option-chip" onclick="selectFormChip('pa-bhk', '4')">4</div>
+                        <div class="option-chip" onclick="selectFormChip('pa-bhk', '5')">5+</div>
+                    </div>
+                </div>
+
+                <!-- Monthly Rent (₹)* -->
+                <div class="field-group">
+                    <label class="field-label">Monthly Rent (₹)<span>*</span></label>
+                    <div style="position: relative; display: flex; align-items: center;">
+                        <span style="position: absolute; left: 12px; color: #9ca3af; font-size: 14px;">₹</span>
+                        <input type="number" id="pa-rent" class="form-input" placeholder="Rent amount" style="padding-left: 28px;" required>
+                    </div>
+                </div>
+
+                <!-- Furnishing* -->
+                <div class="field-group">
+                    <label class="field-label">Furnishing<span>*</span></label>
+                    <div class="chips-row" id="pa-furnishing-chips">
+                        <div class="option-chip active" onclick="selectFormChip('pa-furnishing', 'furnished')">🛋 Furnished</div>
+                        <div class="option-chip" onclick="selectFormChip('pa-furnishing', 'unfurnished')">📦 Unfurnished</div>
+                    </div>
+                </div>
+
+                <!-- Includes Maintenance -->
+                <div class="field-group">
+                    <div class="toggle-row" onclick="toggleFormSwitch('pa-maintenance')">
+                        <div style="text-align: left;">
+                            <div class="toggle-title">Includes Maintenance</div>
+                            <div class="toggle-hint">Is maintenance bundled in rent?</div>
+                        </div>
+                        <div class="toggle" id="pa-maintenance-switch">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="pa-maintenance" value="false">
+                </div>
+
+                <!-- Gated Society* -->
+                <div class="field-group">
+                    <label class="field-label">Gated Society<span>*</span></label>
+                    <div class="chips-row" id="pa-gated-chips">
+                        <div class="option-chip active" onclick="selectFormChip('pa-gated', 'true')">🏘 Gated</div>
+                        <div class="option-chip" onclick="selectFormChip('pa-gated', 'false')">🚪 Not Gated</div>
+                    </div>
+                </div>
+
+                <!-- Who lives here? (optional) -->
+                <div class="field-group">
+                    <label class="field-label">Who lives here? (optional)</label>
+                    <div class="chips-row" id="pa-occupant-chips">
+                        <div class="option-chip" onclick="selectFormChip('pa-occupant', 'family')">👨‍👩‍👧 Family</div>
+                        <div class="option-chip" onclick="selectFormChip('pa-occupant', 'bachelor')">🎓 Bachelor</div>
+                    </div>
+                </div>
+
+                <!-- Deposit paid (optional) -->
+                <div class="field-group">
+                    <label class="field-label">Deposit paid (optional)</label>
+                    <input type="number" id="pa-deposit" class="form-input" placeholder="Deposit amount">
+                </div>
+
+                <!-- Pets allowed? (optional) -->
+                <div class="field-group">
+                    <label class="field-label">Pets allowed? (optional)</label>
+                    <div class="chips-row" id="pa-pets-chips">
+                        <div class="option-chip" onclick="selectFormChip('pa-pets', 'yes')">🐕 Yes</div>
+                        <div class="option-chip" onclick="selectFormChip('pa-pets', 'no')">🚫 No</div>
+                        <div class="option-chip" onclick="selectFormChip('pa-pets', 'not_sure')">🤷 Not sure</div>
+                    </div>
+                </div>
+
+                <!-- Parking for* -->
+                <div class="field-group">
+                    <label class="field-label">Parking for<span>*</span></label>
+                    <div style="position: relative; display: flex; align-items: center;">
+                        <input type="number" id="pa-parking" class="form-input" value="0" min="0" style="padding-right: 50px;" required>
+                        <span style="position: absolute; right: 16px; color: #9ca3af; font-size: 13px; pointer-events: none;">cars</span>
+                    </div>
+                    <div style="font-size: 11px; color: #4b5563; margin-top: 4px; text-align: left;">Enter 0 if there's no parking. 1 for one spot, 2 for two, and so on.</div>
+                </div>
+
+                <!-- Square Footage (optional) -->
+                <div class="field-group">
+                    <label class="field-label">Square Footage (optional)</label>
+                    <div style="position: relative; display: flex; align-items: center;">
+                        <input type="number" id="pa-sqft" class="form-input" placeholder="e.g. 1200" style="padding-right: 55px;">
+                        <span style="position: absolute; right: 16px; color: #9ca3af; font-size: 13px; pointer-events: none;">sq.ft</span>
+                    </div>
+                </div>
+
+                <!-- Your email (compulsory) -->
+                <div class="field-group">
+                    <label class="field-label">Your email<span>*</span></label>
+                    <input type="email" id="pa-email" class="form-input" placeholder="your@email.com" required>
+                    <div style="font-size: 11px; color: #4b5563; margin-top: 4px; text-align: left;">Never shown publicly. Used only for alerts and owner matches.</div>
+                </div>
+
+                <!-- One-liner on the stay (optional) -->
+                <div class="field-group">
+                    <label class="field-label">One-liner on the stay (optional)</label>
+                    <input type="text" id="pa-feedback" class="form-input" placeholder="e.g. Gated complex with high security, good water supply">
+                </div>
+
+                <!-- List My Flat Option CTA block -->
+                <div class="list-flat-cta" onclick="switchFromPinToListing()" style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; margin-top: 14px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); cursor: pointer; margin-bottom: 12px;">
+                    <span style="font-size: 20px;">🏠</span>
+                    <div style="flex: 1; text-align: left;">
+                        <div style="font-size: 12px; color: white; font-weight: 600;">Looking to rent out or find a flatmate?</div>
+                        <div style="font-size: 11px; color: #10b981; font-weight: 500;">List my flat &rarr;</div>
+                    </div>
+                </div>
+
+                <div class="btn-row" style="margin-top: 20px;">
+                    <button type="button" class="btn btn-cancel" onclick="closeModal('pin-add-modal')" style="background: rgba(255,255,255,0.06); color: white; border: 1px solid rgba(255,255,255,0.08);">Cancel</button>
+                    <button type="submit" class="btn btn-submit" style="background: #ff3e00; color: white;">Pin It</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ── MODAL: Seeker Alerts Alert signup form ── -->
+    <div class="modal-backdrop" id="seeker-add-modal" onclick="closeModal('seeker-add-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span class="modal-title">🔍 Setup Seeker alerts</span>
+                <button class="close-btn" onclick="closeModal('seeker-add-modal')">&times;</button>
+            </div>
+            <form id="seeker-add-form">
+                <input type="hidden" id="sa-lat">
+                <input type="hidden" id="sa-lng">
+
+                <div class="field-group">
+                    <label class="field-label">I am looking for<span>*</span></label>
+                    <div class="chips-row" id="sa-type-chips">
+                        <div class="option-chip active" onclick="selectFormChip('sa-type', 'whole_flat')">Whole Flat</div>
+                        <div class="option-chip" onclick="selectFormChip('sa-type', 'room')">Room in shared flat</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Max Budget (₹/month)<span>*</span></label>
+                    <input type="number" id="sa-budget" class="form-input" placeholder="e.g. 20000" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Minimum BHK Requirement<span>*</span></label>
+                    <div class="chips-row" id="sa-bhk-chips">
+                        <div class="option-chip active" onclick="selectFormChip('sa-bhk', '1')">1 BHK</div>
+                        <div class="option-chip" onclick="selectFormChip('sa-bhk', '2')">2 BHK</div>
+                        <div class="option-chip" onclick="selectFormChip('sa-bhk', '3')">3 BHK</div>
+                        <div class="option-chip" onclick="selectFormChip('sa-bhk', '4')">4 BHK</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Move-in Timeline<span>*</span></label>
+                    <div class="chips-row" id="sa-move-chips">
+                        <div class="option-chip active" onclick="selectFormChip('sa-move', 'asap')">ASAP</div>
+                        <div class="option-chip" onclick="selectFormChip('sa-move', 'next_month')">Next Month</div>
+                        <div class="option-chip" onclick="selectFormChip('sa-move', 'flexible')">Flexible</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Your Email Address<span>*</span></label>
+                    <input type="email" id="sa-email" class="form-input" placeholder="seeker@email.com" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Contact Phone<span>*</span></label>
+                    <input type="tel" id="sa-phone" class="form-input" placeholder="10-digit mobile" required>
+                </div>
+
+                <div style="display:flex; gap:10px; margin-top:20px;">
+                    <button type="button" class="btn btn-cancel" onclick="closeModal('seeker-add-modal')">Cancel</button>
+                    <button type="submit" class="btn btn-submit">Drop Seeker Pin</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ── MODAL: Pin Detail View ── -->
+    <div class="modal-backdrop" id="pin-detail-modal" onclick="closeModal('pin-detail-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div class="detail-header">
+                <div>
+                    <div class="detail-eyebrow" id="detail-area-label">locality</div>
+                    <div class="detail-amount" id="detail-rent-label">₹--,--</div>
+                </div>
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <button class="close-btn" onclick="closeModal('pin-detail-modal')">&times;</button>
+                </div>
+            </div>
+
+            <!-- Share Options -->
+            <div style="margin: 12px 0 16px 0; display: flex; gap: 8px;">
+                <button class="btn btn-cancel" style="display:flex; align-items:center; justify-content:center; gap:6px; font-size:12px; padding: 6px 12px; border-radius: 8px; margin:0;" id="share-wa-btn" onclick="shareWhatsApp()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12.012 2c-5.506 0-9.988 4.481-9.988 9.987 0 2.01.6 3.887 1.625 5.462l-1.649 6.051 6.205-1.629c1.517.822 3.245 1.295 5.082 1.295 5.507 0 9.988-4.481 9.988-9.987s-4.481-9.987-9.988-9.987zm.006 1.838c4.493 0 8.15 3.657 8.15 8.15s-3.657 8.15-8.15 8.15c-1.666 0-3.21-.502-4.512-1.356l-.323-.211-3.345.877.893-3.279-.232-.367c-.896-1.423-1.411-3.111-1.411-4.919l.006-.002c-.006-4.492 3.651-8.148 8.144-8.148zm-3.529 3.649c-.19 0-.395.034-.582.164-.236.166-.807.728-.807 1.777s.762 2.059.867 2.203c.106.144 1.47 2.378 3.623 3.284.512.215.912.344 1.222.441.514.161.982.138 1.353.083.413-.061 1.267-.518 1.447-1.02s.181-.933.127-1.021-.19-.133-.402-.239c-.212-.106-1.267-.625-1.463-.695-.195-.072-.338-.106-.481.106-.144.212-.555.696-.68.839-.126.143-.25.161-.462.055-.212-.106-.897-.33-1.708-1.054-.631-.563-1.057-1.258-1.181-1.471-.124-.213-.013-.328.093-.433.095-.095.212-.246.318-.369.106-.123.141-.212.212-.353.07-.141.035-.264-.018-.37-.053-.106-.481-1.161-.66-1.591-.174-.421-.347-.363-.48-.369-.121-.005-.261-.007-.403-.007z"/>
+                    </svg>
+                    WhatsApp
+                </button>
+                <button class="btn btn-cancel" style="display:flex; align-items:center; justify-content:center; gap:6px; font-size:12px; padding: 6px 12px; border-radius: 8px; margin:0;" id="share-ig-btn" onclick="shareInstagramStory()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                    </svg>
+                    Instagram Story
+                </button>
+            </div>
+
+            <div class="detail-badges" id="detail-badges-container">
+                <!-- Dynamically populated tags (Furnished, gated, listed status) -->
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
+                <div class="detail-meta-item" id="detail-society-row">🏡 <strong>Society:</strong> <span id="detail-society">society name</span></div>
+                <div class="detail-meta-item">💰 <strong>Security Deposit:</strong> <span id="detail-deposit">₹--</span></div>
+                <div class="detail-meta-item" id="detail-maintenance-row">🔧 <strong>Maintenance:</strong> <span id="detail-maintenance">--</span></div>
+                <div class="detail-meta-item">🚗 <strong>Parking:</strong> <span id="detail-parking">0 spots</span></div>
+                <div class="detail-meta-item" id="detail-sqft-row">📐 <strong>Area Size:</strong> <span id="detail-sqft">-- sq.ft</span></div>
+                <div class="detail-meta-item" id="detail-pets-row">🐕 <strong>Pets Allowed:</strong> <span id="detail-pets">--</span></div>
+                <div class="detail-meta-item">👥 <strong>Tenant Category:</strong> <span id="detail-occupant">Family</span></div>
+                <div class="detail-meta-item">📝 <strong>Feedback:</strong> <span id="detail-feedback" style="font-style:italic;">No comments provided.</span></div>
+            </div>
+
+            <!-- Embedded Express Interest / Landlord Contact Form -->
+            <div id="detail-express-interest-container" style="display: none; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px; margin-top: 16px;">
+                <!-- Already Booked Banner -->
+                <div id="detail-booked-banner" style="display: none; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); padding: 12px 14px; border-radius: 12px; margin-bottom: 12px; align-items: center; gap: 10px;">
+                    <span style="font-size: 20px;">🔒</span>
+                    <div style="text-align: left;">
+                        <div style="font-size: 12px; color: white; font-weight: 600;">Already Booked</div>
+                        <div style="font-size: 11px; color: #f87171; font-weight: 500;">This property is no longer available — it has already been taken.</div>
+                    </div>
+                </div>
+
+                <!-- Express Interest Form -->
+                <div id="detail-interest-form-wrap">
+                    <span style="font-size:11px; text-transform:uppercase; font-weight:700; color:#6b7280; display:block; margin-bottom:12px;">Express Interest in this Flat</span>
+                    <form id="express-interest-form">
+                        <input type="hidden" id="ei-lat">
+                        <input type="hidden" id="ei-lng">
+                        <input type="hidden" id="ei-bhk">
+                        <input type="hidden" id="ei-type">
+                        
+                        <div class="field-group">
+                            <label class="field-label">Your budget (₹/month, editable)<span>*</span></label>
+                            <input type="number" id="ei-budget" class="form-input" required>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Move-in Timeline<span>*</span></label>
+                            <div class="chips-row" id="ei-move-chips">
+                                <div class="option-chip active" onclick="selectFormChip('ei-move', 'asap')">ASAP</div>
+                                <div class="option-chip" onclick="selectFormChip('ei-move', 'next_month')">Next month</div>
+                                <div class="option-chip" onclick="selectFormChip('ei-move', 'flexible')">Flexible</div>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">You are (optional but helps matching)</label>
+                            <div class="chips-row" id="ei-gender-chips">
+                                <div class="option-chip" onclick="selectFormChip('ei-gender', 'male')">Male</div>
+                                <div class="option-chip" onclick="selectFormChip('ei-gender', 'female')">Female</div>
+                                <div class="option-chip" onclick="selectFormChip('ei-gender', 'other')">Other</div>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">🚗 Parking required?<span>*</span></label>
+                            <div class="chips-row" id="ei-parking-chips">
+                                <div class="option-chip active" onclick="selectFormChip('ei-parking', 'yes')">Yes, need parking</div>
+                                <div class="option-chip" onclick="selectFormChip('ei-parking', 'no')">No preference</div>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Your email<span>*</span></label>
+                            <input type="email" id="ei-email" class="form-input" placeholder="you@example.com" required>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Phone number<span>*</span></label>
+                            <input type="tel" id="ei-phone" class="form-input" placeholder="10-digit mobile" required>
+                        </div>
+
+                        <p style="font-size:11px; color:#6b7280; margin:10px 0 16px 0; line-height:1.4;">
+                            Private — only shared when we find a match for you. Please enter a valid email address.
+                        </p>
+
+                        <button type="submit" class="btn btn-submit" style="width: 100%;">Submit Interest & Seeker Pin</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Rating Segment -->
+            <div class="rating-section">
+                <span style="font-size:11px; text-transform:uppercase; font-weight:700; color:#6b7280; display:block; margin-bottom:4px;">Renter Ratings</span>
+                <div style="display:flex; justify-content:space-between; font-size:12px; color:#cbd5e1; margin-bottom:6px;">
+                    <span>Locality Quality:</span>
+                    <span id="label-locality-rating">No Ratings</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-size:12px; color:#cbd5e1;">
+                    <span>Flat / Asset Maintenance:</span>
+                    <span id="label-quality-rating">No Ratings</span>
+                </div>
+                <!-- Interactive Rating Inputs -->
+                <div class="rating-stars" id="rating-stars-container">
+                    <span class="rating-star" onclick="ratePin(1)">★</span>
+                    <span class="rating-star" onclick="ratePin(2)">★</span>
+                    <span class="rating-star" onclick="ratePin(3)">★</span>
+                    <span class="rating-star" onclick="ratePin(4)">★</span>
+                    <span class="rating-star" onclick="ratePin(5)">★</span>
+                </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comments-section">
+                <span style="font-size:11px; text-transform:uppercase; font-weight:700; color:#6b7280; display:block; margin-bottom:8px;">Occupant Chatter</span>
+                <div class="comments-thread" id="detail-comments-container">
+                    <!-- Injected comments -->
+                </div>
+                <form id="comment-add-form" class="comment-input-row">
+                    <input type="text" id="comment-content" class="comment-input" placeholder="Ask a question or add feedback..." required>
+                    <button type="submit" class="comment-send-btn">Post</button>
+                </form>
+            </div>
+
+            <!-- Owner Action (Delete listing if creator) -->
+            <div class="btn-row" id="detail-owner-actions" style="display:none; margin-top:20px; border-top:1px solid rgba(255,255,255,0.06); padding-top:16px;">
+                <button class="btn" style="background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.25); color:#f87171;" onclick="deleteCurrentPin()">Delete My Pin</button>
+            </div>
+            
+            <!-- Standard Flag Button -->
+            <div class="btn-row" id="detail-report-row" style="margin-top:12px;">
+                <button class="btn" style="background:none; border:1px solid rgba(239,68,68,0.2); color:#f87171; font-size:11px;" onclick="reportCurrentPin()">Report / Flag Pin</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ── MODAL: Seeker Duplicate Confirmation ── -->
+    <div class="modal-backdrop" id="seeker-dup-modal" onclick="closeModal('seeker-dup-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span class="modal-title" style="color:#fbbf24;">Existing Search Alerts Active</span>
+                <button class="close-btn" onclick="closeModal('seeker-dup-modal')">&times;</button>
+            </div>
+            <p style="color:#cbd5e1; font-size:13px; line-height:1.5; margin-bottom:16px;">
+                You already have active search alerts registered with this email or phone. Adding a new one will replace your old preferences.
+            </p>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+                <button class="btn btn-submit" onclick="confirmReplaceSeeker()">Replace & Add New</button>
+                <button class="btn btn-cancel" onclick="closeModal('seeker-dup-modal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEO Optimization & Semantic Accessibility Section (Visually Hidden) -->
+    <section class="visually-hidden">
+        <h1>chennairents.in — Chennai Crowdsourced Rent Map & Rental Transparency Registry</h1>
+        <p>An anonymous, crowdsourced rental transparency platform for Chennai. Real tenant rent reports pinned on the map, helping tenants spot broker price inflation. Browse direct owner listings with no broker fees, and set up automated matching alerts. 100% free and open.</p>
+        
+        <h2>Explore Chennai Rental Markets by Locality</h2>
+        <ul>
+            <li><a href="/neighbourhood/omr.html">OMR (Old Mahabalipuram Road) Rent Index</a></li>
+            <li><a href="/neighbourhood/anna-nagar.html">Anna Nagar Rent Index</a></li>
+            <li><a href="/neighbourhood/velachery.html">Velachery Rent Index</a></li>
+            <li><a href="/neighbourhood/t-nagar.html">T. Nagar Rent Index</a></li>
+            <li><a href="/neighbourhood/adyar.html">Adyar Rent Index</a></li>
+            <li><a href="/neighbourhood/tambaram.html">Tambaram Rent Index</a></li>
+            <li><a href="/neighbourhood/sholinganallur.html">Sholinganallur Rent Index</a></li>
+            <li><a href="/neighbourhood/perungudi.html">Perungudi Rent Index</a></li>
+            <li><a href="/neighbourhood/porur.html">Porur Rent Index</a></li>
+            <li><a href="/neighbourhood/medavakkam.html">Medavakkam Rent Index</a></li>
+        </ul>
+        
+        <h2>Renter & Owner Guides</h2>
+        <ul>
+            <li><a href="/guides/how-much-rent-2026.html">How much rent should you pay in Chennai in 2026?</a></li>
+            <li><a href="/guides/broker-fee-vs-direct-owner.html">Broker fee vs direct owner listing: what Chennai renters should know</a></li>
+            <li><a href="/guides/how-to-negotiate-rent.html">How to negotiate rent in Chennai using local rent data</a></li>
+            <li><a href="/guides/checklist-rental-advance.html">Checklist before paying rental advance in Chennai</a></li>
+            <li><a href="/guides/best-chennai-areas.html">Best Chennai areas for bachelors, families, and IT workers</a></li>
+            <li><a href="/guides/how-to-list-flat-directly.html">How to list your Chennai flat directly without broker dependency</a></li>
+            <li><a href="/guides/how-to-price-flat-fairly.html">How to price your flat fairly using tenant-reported rent data</a></li>
+            <li><a href="/guides/how-to-write-rental-listing.html">How to write a rental listing that gets serious tenants</a></li>
+        </ul>
+
+        <h2>Data Stories & Rent Trends</h2>
+        <ul>
+            <li><a href="/stories/localities-heating-up.html">Which Chennai localities are heating up?</a></li>
+            <li><a href="/stories/where-2bhk-moving-fastest.html">Where 2BHK rents are moving fastest</a></li>
+            <li><a href="/stories/gated-vs-standalone.html">Gated vs standalone rent difference in Chennai</a></li>
+            <li><a href="/stories/metro-access-rent-premiums.html">Metro access and rent premiums</a></li>
+        </ul>
+
+        <h2>Legal & Support</h2>
+        <ul>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/contact.html">Contact Us & Data Deletion Requests</a></li>
+        </ul>
+        
+        <h2>Frequently Asked Questions about Renting in Chennai</h2>
+        <article>
+            <h3>How does chennairents.in work?</h3>
+            <p>Tap anywhere on the map and drop your rent anonymously. Other renters see real prices in their area. If you're flat-hunting, drop a seeker pin with your budget — we email you when matching listings appear within 2.5km.</p>
+        </article>
+        <article>
+            <h3>Is chennairents.in free? Do I need to sign up?</h3>
+            <p>Yes, free for everyone. No signup, no login, no app required. We don't charge tenants or owners and have no plans to. Rents are crowdsourced for local transparency.</p>
+        </article>
+        <article>
+            <h3>How is chennairents.in different from broker sites?</h3>
+            <p>Standard sites show broker-quoted listings, which are often inflated. chennairents.in shows real rents shared by actual current and past tenants, letting you see historical averages to guide negotiation.</p>
+        </article>
+    </section>
+
+    <!-- main app scripts -->
+    <script src="index.js"></script>
+</body>
+</html>

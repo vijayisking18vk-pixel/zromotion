@@ -113,6 +113,9 @@ export default function Header() {
           style={{ display: 'none', alignItems: 'center', gap: '1.5rem' }}
           className="cr-desktop-nav"
         >
+          <a href="/listings/" style={{ ...navLinkStyle({ isActive: false }), color: 'var(--c-ripon-red)', borderBottom: '2px solid var(--c-ripon-red)' }}>
+            Browse Rentals
+          </a>
           <NavLink to="/#localities" style={navLinkStyle}>
             Localities
           </NavLink>
@@ -187,6 +190,17 @@ export default function Header() {
               boxShadow: '0 8px 24px rgba(30, 27, 24, 0.08)',
             }}
           >
+            <a
+              href="/listings/"
+              style={{
+                fontFamily: 'var(--font-heading)',
+                fontWeight: 600,
+                color: 'var(--c-ripon-red)',
+                textDecoration: 'none',
+              }}
+            >
+              Browse Rentals
+            </a>
             <Link
               to="/#localities"
               onClick={() => setMobileMenuOpen(false)}
