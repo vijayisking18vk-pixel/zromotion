@@ -7,11 +7,13 @@
     <title>Available Flats & Listings | chennairents.in</title>
     <meta name="description" content="Browse direct owner listings with no broker fees in Chennai. Filter by rent, BHK, and gated community status." />
     <link rel="stylesheet" href="index.css">
+    <!-- Premium Editorial Fonts (Cabinet Grotesk + Satoshi) via Fontshare -->
+    <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,500,700,900&f[]=satoshi@900,700,500,400&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: var(--c-page-bg);
             color: var(--c-ink);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: var(--font-body);
             margin: 0;
             padding: 0;
             min-height: 100vh;
@@ -22,7 +24,7 @@
             position: sticky;
             top: 0;
             z-index: 50;
-            background: rgba(8, 8, 18, 0.72);
+            background: var(--c-header-bg);
             backdrop-filter: blur(20px) saturate(1.4);
             -webkit-backdrop-filter: blur(20px) saturate(1.4);
             border-bottom: 1px solid var(--c-border);
@@ -35,7 +37,7 @@
         .brand {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             text-decoration: none;
         }
         
@@ -43,26 +45,32 @@
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: #ff3e00;
-            box-shadow: 0 0 10px #ff3e00;
+            background: var(--c-ripon-red);
+            box-shadow: 0 0 10px rgba(178, 58, 46, 0.4);
         }
         
         .brand-text {
+            font-family: var(--font-heading);
             font-size: 20px;
-            font-weight: 700;
-            color: #ff6b35;
+            font-weight: 900;
+            color: var(--c-ink);
+            letter-spacing: -0.3px;
         }
 
         .back-link {
-            font-size: 13px;
-            font-weight: 600;
+            font-family: var(--font-heading);
+            font-size: 13.5px;
+            font-weight: 700;
             color: var(--c-ink-muted);
             text-decoration: none;
-            transition: color 0.2s;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
         }
 
         .back-link:hover {
-            color: white;
+            color: var(--c-ripon-red);
+            background: var(--c-sand-light);
         }
 
         .container {
@@ -90,14 +98,16 @@
         .filter-panel {
             background: var(--c-card-bg);
             border: 1px solid var(--c-border);
-            border-radius: 20px;
+            border-radius: 16px;
             padding: 24px;
+            box-shadow: 0 4px 16px rgba(30, 27, 24, 0.05);
         }
         
         .filter-header {
+            font-family: var(--font-heading);
             font-size: 16px;
-            font-weight: 700;
-            color: white;
+            font-weight: 800;
+            color: var(--c-ink);
             margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
@@ -107,25 +117,32 @@
         .clear-btn {
             background: none;
             border: none;
-            color: #ff6b35;
+            color: var(--c-ripon-red);
             font-size: 12px;
+            font-weight: 700;
+            font-family: var(--font-heading);
             cursor: pointer;
             padding: 0;
         }
 
-        /* Reusing some index.css form styles */
+        .clear-btn:hover {
+            text-decoration: underline;
+        }
+
         .field-group { margin-bottom: 20px; }
-        .field-label { color: var(--c-ink-muted); font-size: 12.5px; font-weight: 500; margin-bottom: 8px; display: block; }
+        .field-label { color: var(--c-ink); font-size: 13px; font-weight: 700; font-family: var(--font-heading); margin-bottom: 8px; display: block; }
         
         .cta-box {
-            background: rgba(255, 62, 0, 0.05);
-            border: 1px dashed rgba(255, 62, 0, 0.3);
+            background: var(--c-sand-light);
+            border: 1.5px dashed var(--c-border);
             border-radius: 16px;
             padding: 24px;
         }
 
         .cta-box h3 {
-            color: white;
+            font-family: var(--font-heading);
+            color: var(--c-ink);
+            font-weight: 800;
             margin-top: 0;
             margin-bottom: 8px;
             font-size: 16px;
@@ -142,20 +159,23 @@
             display: block;
             width: 100%;
             padding: 12px;
-            background: #ff3e00;
-            color: white;
+            background: var(--c-ripon-red);
+            color: #FFFFFF;
             text-align: center;
             border-radius: 10px;
             text-decoration: none;
-            font-weight: 600;
+            font-family: var(--font-heading);
+            font-weight: 700;
             font-size: 14px;
             border: none;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(178, 58, 46, 0.2);
         }
 
         .btn-list-flat:hover {
-            background: #d63400;
+            background: var(--c-ripon-red-dk);
+            transform: translateY(-1px);
         }
 
         /* ── Right Content: Listing Grid ── */
@@ -164,10 +184,12 @@
         }
 
         .feed-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 8px;
+            font-family: var(--font-heading);
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--c-ink);
+            margin-bottom: 6px;
+            letter-spacing: -0.4px;
         }
 
         .feed-subtitle {
@@ -187,19 +209,22 @@
             border: 1px solid var(--c-border);
             border-radius: 16px;
             overflow: hidden;
-            transition: transform 0.2s, border-color 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
             display: flex;
             flex-direction: column;
+            box-shadow: 0 4px 12px rgba(30, 27, 24, 0.04);
         }
 
         .listing-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(255, 255, 255, 0.2);
+            border-color: var(--c-ink);
+            box-shadow: 0 12px 28px rgba(30, 27, 24, 0.08);
         }
 
         .card-img-placeholder {
             height: 160px;
-            background: #1f1f33;
+            background: var(--c-sand-light);
+            border-bottom: 1px solid var(--c-border-subtle);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -207,22 +232,23 @@
         }
 
         .card-img-placeholder svg {
-            color: #4b5563;
-            width: 40px;
-            height: 40px;
+            color: var(--c-border);
+            width: 44px;
+            height: 44px;
         }
 
         .status-badge {
             position: absolute;
             top: 12px;
             left: 12px;
-            background: rgba(16, 185, 129, 0.15);
-            color: #34d399;
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            background: #EBF6EE;
+            color: var(--c-temple-green-dk);
+            border: 1.5px solid rgba(47, 125, 79, 0.4);
             padding: 4px 10px;
             border-radius: 20px;
             font-size: 11px;
             font-weight: 700;
+            font-family: var(--font-heading);
             backdrop-filter: blur(4px);
         }
         
@@ -230,12 +256,14 @@
             position: absolute;
             top: 12px;
             right: 12px;
-            background: rgba(37, 99, 235, 0.9);
-            color: white;
+            background: #EBF3FA;
+            color: var(--c-marina-blue-dk);
+            border: 1.5px solid rgba(31, 111, 168, 0.4);
             padding: 4px 10px;
             border-radius: 20px;
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
+            font-family: var(--font-heading);
         }
 
         .card-content {
@@ -246,9 +274,10 @@
         }
 
         .card-rent {
+            font-family: var(--font-heading);
             font-size: 26px;
-            font-weight: 700;
-            color: white;
+            font-weight: 900;
+            color: var(--c-ink);
             letter-spacing: -0.5px;
             margin-bottom: 4px;
         }
@@ -257,12 +286,14 @@
             font-size: 14px;
             color: var(--c-ink-muted);
             font-weight: 500;
+            font-family: var(--font-body);
         }
 
         .card-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #e2e8f0;
+            font-family: var(--font-heading);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--c-ink);
             margin-bottom: 12px;
         }
 
@@ -277,12 +308,12 @@
         .card-meta-item {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
 
         .card-footer {
             margin-top: auto;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-top: 1px solid var(--c-border-subtle);
             padding-top: 16px;
             display: flex;
             justify-content: space-between;
@@ -291,26 +322,27 @@
 
         .card-date {
             font-size: 12px;
-            color: #6b7280;
+            color: var(--c-ink-light);
+            font-weight: 500;
         }
 
         .btn-view {
             background: transparent;
-            color: #ff3e00;
-            border: 1px solid rgba(255, 62, 0, 0.4);
+            color: var(--c-ripon-red);
+            border: 1.5px solid var(--c-ripon-red);
             padding: 6px 14px;
             border-radius: 8px;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 700;
+            font-family: var(--font-heading);
             cursor: pointer;
             transition: all 0.2s;
         }
 
         .btn-view:hover {
-            background: rgba(255, 62, 0, 0.1);
-            border-color: #ff3e00;
+            background: var(--c-ripon-red);
+            color: #FFFFFF;
         }
-        
     </style>
 </head>
 <body>

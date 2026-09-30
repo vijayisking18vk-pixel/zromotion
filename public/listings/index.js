@@ -659,9 +659,7 @@ async function loadPinRatingsAndComments(pinId) {
                 `;
                 commentsContainer.appendChild(div);
             });
-        } else {
-            commentsContainer.innerHTML = `<p style="font-size:12px; color:#4b5563; text-align:center; padding:10px 0;">No comments posted yet.</p>`;
-        }
+            commentsContainer.innerHTML = `<p style="font-size:13px; color:var(--c-ink-muted); text-align:center; padding:14px 0; font-style:italic;">No comments posted yet.</p>`;
 
     } catch (e) {
         console.error("Error loading pin details:", e);
@@ -1542,9 +1540,9 @@ function calculateAvgRentNearCoords(coords, name) {
     if (nearbyPins.length === 0) {
         const popup = L.popup()
             .setLatLng(coords)
-            .setContent(`<div style="font-family:'Inter',sans-serif; color:white; padding:8px; font-size:12px; line-height:1.4; text-align:left;">
-                <strong>${name} Metro Station</strong><br>
-                <span style="color:#9ca3af; display:block; margin-top:4px;">No crowdsourced rent pins found within 1km yet. Be the first to pin here!</span>
+            .setContent(`<div style="font-family:var(--font-body); color:var(--c-ink); padding:8px; font-size:12.5px; line-height:1.4; text-align:left;">
+                <strong style="font-family:var(--font-heading); font-size:14px; color:var(--c-ink);">${name} Metro Station</strong><br>
+                <span style="color:var(--c-ink-muted); display:block; margin-top:4px;">No crowdsourced rent pins found within 1km yet. Be the first to pin here!</span>
             </div>`)
             .openOn(map);
         return;
@@ -1560,19 +1558,19 @@ function calculateAvgRentNearCoords(coords, name) {
         countByBhk[pin.bhk].count++;
     });
     
-    let statsHtml = `<div style="font-family:'Inter',sans-serif; color:white; padding:6px; min-width:210px; text-align:left;">`;
-    statsHtml += `<p style="font-size:12px; margin:0 0 6px 0; color:#9ca3af; font-weight:500;">Crowdsourced rents within 1km of</p>`;
-    statsHtml += `<p style="font-size:14px; margin:0 0 10px 0; font-weight:700; color:#ff6b35; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">${name} Station</p>`;
-    statsHtml += `<div style="font-size:12.5px; font-weight:700; margin-bottom:10px;">Average Rent: ₹${avgRent.toLocaleString('en-IN')}/mo</div>`;
+    let statsHtml = `<div style="font-family:var(--font-body); color:var(--c-ink); padding:6px; min-width:210px; text-align:left;">`;
+    statsHtml += `<p style="font-size:11.5px; margin:0 0 4px 0; color:var(--c-ink-muted); font-weight:600; text-transform:uppercase; letter-spacing:0.04em;">Crowdsourced rents within 1km</p>`;
+    statsHtml += `<p style="font-family:var(--font-heading); font-size:15px; margin:0 0 10px 0; font-weight:800; color:var(--c-ink); border-bottom:1.5px solid var(--c-border); padding-bottom:6px;">${name} Station</p>`;
+    statsHtml += `<div style="font-family:var(--font-heading); font-size:14px; font-weight:800; margin-bottom:10px; color:var(--c-ripon-red);">Average Rent: ₹${avgRent.toLocaleString('en-IN')}/mo</div>`;
     
     // Sort BHK keys
     const bhkKeys = Object.keys(countByBhk).sort();
     bhkKeys.forEach(bhk => {
         const data = countByBhk[bhk];
         const avg = Math.round(data.total / data.count);
-        statsHtml += `<div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px; color:#cbd5e1;">
+        statsHtml += `<div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px; color:var(--c-ink-muted);">
             <span>${bhk} BHK (${data.count} pin${data.count > 1 ? 's' : ''}):</span>
-            <strong style="color:white;">₹${avg.toLocaleString('en-IN')}/mo</strong>
+            <strong style="color:var(--c-ink); font-weight:700;">₹${avg.toLocaleString('en-IN')}/mo</strong>
         </div>`;
     });
     statsHtml += `</div>`;

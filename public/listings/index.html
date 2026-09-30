@@ -9,6 +9,8 @@
     <meta name="keywords" content="chennai rent map, chennai rents, rent in chennai, no broker chennai, OMR rent, Anna Nagar rent, Velachery rent, rent transparency, chennai flats for rent" />
     <link rel="canonical" href="https://www.chennairents.in/" />
     <link rel="stylesheet" href="index.css">
+    <!-- Premium Editorial Fonts (Cabinet Grotesk + Satoshi) via Fontshare matching landing page -->
+    <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,500,700,900&f[]=satoshi@900,700,500,400&display=swap" rel="stylesheet">
     
     <!-- Open Graph Metadata (Facebook / LinkedIn) -->
     <meta property="og:type" content="website" />
@@ -866,27 +868,25 @@
         <div class="modal-card" onclick="event.stopPropagation()">
             <div class="detail-header">
                 <div>
-                    <div class="detail-eyebrow" id="detail-area-label">locality</div>
+                    <div class="detail-eyebrow" id="detail-area-label">LOCALITY</div>
                     <div class="detail-amount" id="detail-rent-label">₹--,--</div>
                 </div>
-                <div style="display:flex; gap:10px; align-items:center;">
-                    <button class="close-btn" onclick="closeModal('pin-detail-modal')">&times;</button>
-                </div>
+                <button class="close-btn" onclick="closeModal('pin-detail-modal')" aria-label="Close modal">&times;</button>
             </div>
 
-            <!-- Share Options -->
-            <div style="margin: 12px 0 16px 0; display: flex; gap: 8px;">
-                <button class="btn btn-cancel" style="display:flex; align-items:center; justify-content:center; gap:6px; font-size:12px; padding: 6px 12px; border-radius: 8px; margin:0;" id="share-wa-btn" onclick="shareWhatsApp()">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <!-- Share Options (Blended with Chennai Theme: Temple Green & Ripon Red) -->
+            <div class="modal-share-bar">
+                <button class="share-btn share-wa" id="share-wa-btn" onclick="shareWhatsApp()">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12.012 2c-5.506 0-9.988 4.481-9.988 9.987 0 2.01.6 3.887 1.625 5.462l-1.649 6.051 6.205-1.629c1.517.822 3.245 1.295 5.082 1.295 5.507 0 9.988-4.481 9.988-9.987s-4.481-9.987-9.988-9.987zm.006 1.838c4.493 0 8.15 3.657 8.15 8.15s-3.657 8.15-8.15 8.15c-1.666 0-3.21-.502-4.512-1.356l-.323-.211-3.345.877.893-3.279-.232-.367c-.896-1.423-1.411-3.111-1.411-4.919l.006-.002c-.006-4.492 3.651-8.148 8.144-8.148zm-3.529 3.649c-.19 0-.395.034-.582.164-.236.166-.807.728-.807 1.777s.762 2.059.867 2.203c.106.144 1.47 2.378 3.623 3.284.512.215.912.344 1.222.441.514.161.982.138 1.353.083.413-.061 1.267-.518 1.447-1.02s.181-.933.127-1.021-.19-.133-.402-.239c-.212-.106-1.267-.625-1.463-.695-.195-.072-.338-.106-.481.106-.144.212-.555.696-.68.839-.126.143-.25.161-.462.055-.212-.106-.897-.33-1.708-1.054-.631-.563-1.057-1.258-1.181-1.471-.124-.213-.013-.328.093-.433.095-.095.212-.246.318-.369.106-.123.141-.212.212-.353.07-.141.035-.264-.018-.37-.053-.106-.481-1.161-.66-1.591-.174-.421-.347-.363-.48-.369-.121-.005-.261-.007-.403-.007z"/>
                     </svg>
-                    WhatsApp
+                    <span>WhatsApp</span>
                 </button>
-                <button class="btn btn-cancel" style="display:flex; align-items:center; justify-content:center; gap:6px; font-size:12px; padding: 6px 12px; border-radius: 8px; margin:0;" id="share-ig-btn" onclick="shareInstagramStory()">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <button class="share-btn share-ig" id="share-ig-btn" onclick="shareInstagramStory()">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
                     </svg>
-                    Instagram Story
+                    <span>Instagram Story</span>
                 </button>
             </div>
 
@@ -894,31 +894,56 @@
                 <!-- Dynamically populated tags (Furnished, gated, listed status) -->
             </div>
 
-            <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
-                <div class="detail-meta-item" id="detail-society-row">🏡 <strong>Society:</strong> <span id="detail-society">society name</span></div>
-                <div class="detail-meta-item">💰 <strong>Security Deposit:</strong> <span id="detail-deposit">₹--</span></div>
-                <div class="detail-meta-item" id="detail-maintenance-row">🔧 <strong>Maintenance:</strong> <span id="detail-maintenance">--</span></div>
-                <div class="detail-meta-item">🚗 <strong>Parking:</strong> <span id="detail-parking">0 spots</span></div>
-                <div class="detail-meta-item" id="detail-sqft-row">📐 <strong>Area Size:</strong> <span id="detail-sqft">-- sq.ft</span></div>
-                <div class="detail-meta-item" id="detail-pets-row">🐕 <strong>Pets Allowed:</strong> <span id="detail-pets">--</span></div>
-                <div class="detail-meta-item">👥 <strong>Tenant Category:</strong> <span id="detail-occupant">Family</span></div>
-                <div class="detail-meta-item">📝 <strong>Feedback:</strong> <span id="detail-feedback" style="font-style:italic;">No comments provided.</span></div>
+            <!-- Clean, Structured, Highly Legible Meta Table -->
+            <div class="detail-meta-table">
+                <div class="detail-meta-item" id="detail-society-row">
+                    <span class="meta-label">🏡 Society:</span>
+                    <span class="meta-val" id="detail-society">society name</span>
+                </div>
+                <div class="detail-meta-item">
+                    <span class="meta-label">💰 Security Deposit:</span>
+                    <span class="meta-val" id="detail-deposit">₹--</span>
+                </div>
+                <div class="detail-meta-item" id="detail-maintenance-row">
+                    <span class="meta-label">🔧 Maintenance:</span>
+                    <span class="meta-val" id="detail-maintenance">--</span>
+                </div>
+                <div class="detail-meta-item">
+                    <span class="meta-label">🚗 Parking:</span>
+                    <span class="meta-val" id="detail-parking">0 spots</span>
+                </div>
+                <div class="detail-meta-item" id="detail-sqft-row">
+                    <span class="meta-label">📐 Area Size:</span>
+                    <span class="meta-val" id="detail-sqft">-- sq.ft</span>
+                </div>
+                <div class="detail-meta-item" id="detail-pets-row">
+                    <span class="meta-label">🐕 Pets Allowed:</span>
+                    <span class="meta-val" id="detail-pets">--</span>
+                </div>
+                <div class="detail-meta-item">
+                    <span class="meta-label">👥 Tenant Category:</span>
+                    <span class="meta-val" id="detail-occupant">Family</span>
+                </div>
+                <div class="detail-meta-item">
+                    <span class="meta-label">📝 Feedback:</span>
+                    <span class="meta-val" id="detail-feedback" style="font-style:italic;">No comments provided.</span>
+                </div>
             </div>
 
             <!-- Embedded Express Interest / Landlord Contact Form -->
-            <div id="detail-express-interest-container" style="display: none; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px; margin-top: 16px;">
+            <div id="detail-express-interest-container" style="display: none; border-top: 1px solid var(--c-border); padding-top: 16px; margin-top: 16px;">
                 <!-- Already Booked Banner -->
-                <div id="detail-booked-banner" style="display: none; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); padding: 12px 14px; border-radius: 12px; margin-bottom: 12px; align-items: center; gap: 10px;">
+                <div id="detail-booked-banner" style="display: none; background: #FDF2F0; border: 1.5px solid var(--c-ripon-red); padding: 12px 14px; border-radius: 12px; margin-bottom: 12px; align-items: center; gap: 10px;">
                     <span style="font-size: 20px;">🔒</span>
                     <div style="text-align: left;">
-                        <div style="font-size: 12px; color: white; font-weight: 600;">Already Booked</div>
-                        <div style="font-size: 11px; color: #f87171; font-weight: 500;">This property is no longer available — it has already been taken.</div>
+                        <div style="font-size: 13px; color: var(--c-ink); font-weight: 700; font-family: var(--font-heading);">Already Booked</div>
+                        <div style="font-size: 12px; color: var(--c-ripon-red); font-weight: 600;">This property is no longer available — it has already been taken.</div>
                     </div>
                 </div>
 
                 <!-- Express Interest Form -->
                 <div id="detail-interest-form-wrap">
-                    <span style="font-size:11px; text-transform:uppercase; font-weight:700; color:var(--c-ink-muted); display:block; margin-bottom:12px;">Express Interest in this Flat</span>
+                    <span class="section-heading">Express Interest in this Flat</span>
                     <form id="express-interest-form">
                         <input type="hidden" id="ei-lat">
                         <input type="hidden" id="ei-lng">
@@ -966,7 +991,7 @@
                             <input type="tel" id="ei-phone" class="form-input" placeholder="10-digit mobile" required>
                         </div>
 
-                        <p style="font-size:11px; color:var(--c-ink-muted); margin:10px 0 16px 0; line-height:1.4;">
+                        <p style="font-size:12px; color:var(--c-ink-muted); margin:10px 0 16px 0; line-height:1.4;">
                             Private — only shared when we find a match for you. Please enter a valid email address.
                         </p>
 
@@ -977,14 +1002,14 @@
 
             <!-- Rating Segment -->
             <div class="rating-section">
-                <span style="font-size:11px; text-transform:uppercase; font-weight:700; color:var(--c-ink-muted); display:block; margin-bottom:4px;">Renter Ratings</span>
-                <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--c-ink-muted); margin-bottom:6px;">
-                    <span>Locality Quality:</span>
-                    <span id="label-locality-rating">No Ratings</span>
+                <span class="section-heading">Renter Ratings</span>
+                <div class="rating-row">
+                    <span class="rating-label">Locality Quality:</span>
+                    <span class="rating-value" id="label-locality-rating">No Ratings</span>
                 </div>
-                <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--c-ink-muted);">
-                    <span>Flat / Asset Maintenance:</span>
-                    <span id="label-quality-rating">No Ratings</span>
+                <div class="rating-row">
+                    <span class="rating-label">Flat / Asset Maintenance:</span>
+                    <span class="rating-value" id="label-quality-rating">No Ratings</span>
                 </div>
                 <!-- Interactive Rating Inputs -->
                 <div class="rating-stars" id="rating-stars-container">
@@ -998,7 +1023,7 @@
 
             <!-- Comments Section -->
             <div class="comments-section">
-                <span style="font-size:11px; text-transform:uppercase; font-weight:700; color:var(--c-ink-muted); display:block; margin-bottom:8px;">Occupant Chatter</span>
+                <span class="section-heading">Occupant Chatter</span>
                 <div class="comments-thread" id="detail-comments-container">
                     <!-- Injected comments -->
                 </div>
@@ -1009,13 +1034,13 @@
             </div>
 
             <!-- Owner Action (Delete listing if creator) -->
-            <div class="btn-row" id="detail-owner-actions" style="display:none; margin-top:20px; border-top:1px solid rgba(255,255,255,0.06); padding-top:16px;">
-                <button class="btn" style="background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.25); color:#f87171;" onclick="deleteCurrentPin()">Delete My Pin</button>
+            <div class="btn-row" id="detail-owner-actions" style="display:none; margin-top:16px; border-top:1px solid var(--c-border); padding-top:16px;">
+                <button class="btn" style="background:#FDF2F0; border:1.5px solid var(--c-ripon-red); color:var(--c-ripon-red); font-weight:700;" onclick="deleteCurrentPin()">Delete My Pin</button>
             </div>
             
             <!-- Standard Flag Button -->
-            <div class="btn-row" id="detail-report-row" style="margin-top:12px;">
-                <button class="btn" style="background:none; border:1px solid rgba(239,68,68,0.2); color:#f87171; font-size:11px;" onclick="reportCurrentPin()">Report / Flag Pin</button>
+            <div style="margin-top:12px;">
+                <button class="report-flag-btn" onclick="reportCurrentPin()">Report / Flag Pin</button>
             </div>
         </div>
     </div>
