@@ -9,6 +9,18 @@ import Home from './pages/Home';
 import About from './pages/About';
 import PostTemplate from './pages/PostTemplate';
 
+// Hard-redirect helper to cleanly transition from React SPA router to static listings app
+function ListingsRedirect() {
+  useEffect(() => {
+    window.location.replace('/listings/index.html');
+  }, []);
+  return (
+    <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-heading)' }}>
+      <p style={{ color: 'var(--c-ink-muted)', fontSize: '1.1rem' }}>Loading Chennai Rents Map...</p>
+    </div>
+  );
+}
+
 export default function App() {
   const [lang, setLang] = useState('ta'); // 'ta' (Tamil) or 'en' (English)
   const location = useLocation();
@@ -53,6 +65,9 @@ export default function App() {
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home lang={lang} />} />
             <Route path="/about" element={<About lang={lang} />} />
+            <Route path="/listings" element={<ListingsRedirect />} />
+            <Route path="/listings/*" element={<ListingsRedirect />} />
+            <Route path="/map" element={<ListingsRedirect />} />
             <Route path="/:slug" element={<PostTemplate lang={lang} />} />
             <Route path="/rent/:slug" element={<PostTemplate lang={lang} />} />
             <Route path="/guide/:slug" element={<PostTemplate lang={lang} />} />

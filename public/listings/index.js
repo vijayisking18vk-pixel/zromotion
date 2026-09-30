@@ -659,7 +659,9 @@ async function loadPinRatingsAndComments(pinId) {
                 `;
                 commentsContainer.appendChild(div);
             });
+        } else {
             commentsContainer.innerHTML = `<p style="font-size:13px; color:var(--c-ink-muted); text-align:center; padding:14px 0; font-style:italic;">No comments posted yet.</p>`;
+        }
 
     } catch (e) {
         console.error("Error loading pin details:", e);
