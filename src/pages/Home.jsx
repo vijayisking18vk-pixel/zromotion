@@ -73,24 +73,26 @@ export default function Home() {
       <MarinaDivider variant="default" />
 
       {/* ── BROWSE LISTINGS CTA STRIP ── */}
-      <section style={{ backgroundColor: '#0d0d0d', paddingBlock: '3rem', textAlign: 'center' }}>
+      <section style={{ backgroundColor: 'var(--c-bg)', paddingBlock: '4rem', textAlign: 'center', borderBottom: '1px solid var(--c-border)' }}>
         <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-          <h2 style={{ margin: 0, color: 'white', fontSize: '2rem' }}>Direct Owner Rentals Map</h2>
-          <p style={{ color: '#9ca3af', fontSize: '1.1rem', maxWidth: '600px', marginBottom: '1rem' }}>
+          <h2 style={{ margin: 0, color: 'var(--c-ink)', fontSize: '2.5rem', fontFamily: 'var(--font-heading)', fontWeight: 900 }}>Direct Owner Rentals Map</h2>
+          <p style={{ color: 'var(--c-ink-muted)', fontSize: '1.15rem', maxWidth: '600px', marginBottom: '1.5rem', fontFamily: 'var(--font-body)' }}>
             Browse actual rent rates shared by tenants, and contact flat owners directly with zero broker fees.
           </p>
           <a
-            href="/listings/"
+            href="/listings/index.html"
+            className="btn-dark"
             style={{
-              backgroundColor: '#ff3e00',
-              color: 'white',
-              padding: '1rem 2rem',
-              borderRadius: '8px',
+              padding: '1rem 2.5rem',
+              borderRadius: '30px',
               textDecoration: 'none',
               fontWeight: 700,
               fontSize: '1.1rem',
-              boxShadow: '0 8px 24px rgba(255, 62, 0, 0.4)',
-              display: 'inline-block'
+              boxShadow: '0 8px 24px rgba(30, 27, 24, 0.15)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.5rem'
             }}
           >
             Launch Interactive Map

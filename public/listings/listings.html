@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="index.css">
     <style>
         body {
-            background-color: #0d0d0d;
-            color: #cbd5e1;
+            background-color: var(--c-page-bg);
+            color: var(--c-ink);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -25,7 +25,7 @@
             background: rgba(8, 8, 18, 0.72);
             backdrop-filter: blur(20px) saturate(1.4);
             -webkit-backdrop-filter: blur(20px) saturate(1.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid var(--c-border);
             padding: 16px 24px;
             display: flex;
             justify-content: space-between;
@@ -56,7 +56,7 @@
         .back-link {
             font-size: 13px;
             font-weight: 600;
-            color: #9ca3af;
+            color: var(--c-ink-muted);
             text-decoration: none;
             transition: color 0.2s;
         }
@@ -88,8 +88,8 @@
         }
 
         .filter-panel {
-            background: #161625;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: var(--c-card-bg);
+            border: 1px solid var(--c-border);
             border-radius: 20px;
             padding: 24px;
         }
@@ -115,7 +115,7 @@
 
         /* Reusing some index.css form styles */
         .field-group { margin-bottom: 20px; }
-        .field-label { color: #9ca3af; font-size: 12.5px; font-weight: 500; margin-bottom: 8px; display: block; }
+        .field-label { color: var(--c-ink-muted); font-size: 12.5px; font-weight: 500; margin-bottom: 8px; display: block; }
         
         .cta-box {
             background: rgba(255, 62, 0, 0.05);
@@ -133,7 +133,7 @@
 
         .cta-box p {
             font-size: 13px;
-            color: #9ca3af;
+            color: var(--c-ink-muted);
             line-height: 1.5;
             margin-bottom: 16px;
         }
@@ -172,7 +172,7 @@
 
         .feed-subtitle {
             font-size: 14px;
-            color: #9ca3af;
+            color: var(--c-ink-muted);
         }
 
         .listings-grid {
@@ -183,8 +183,8 @@
 
         /* Listing Card */
         .listing-card {
-            background: #161625;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: var(--c-card-bg);
+            border: 1px solid var(--c-border);
             border-radius: 16px;
             overflow: hidden;
             transition: transform 0.2s, border-color 0.2s;
@@ -255,7 +255,7 @@
 
         .card-rent span {
             font-size: 14px;
-            color: #9ca3af;
+            color: var(--c-ink-muted);
             font-weight: 500;
         }
 
@@ -271,7 +271,7 @@
             gap: 12px;
             margin-bottom: 16px;
             font-size: 13px;
-            color: #9ca3af;
+            color: var(--c-ink-muted);
         }
 
         .card-meta-item {

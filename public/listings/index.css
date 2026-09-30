@@ -1268,3 +1268,276 @@ body.map-page {
 }
 
 
+:root {
+  --c-auto-yellow:    #F5B800;
+  --c-auto-yellow-dk: #DE9F00;
+  --c-marina-blue:    #1F6FA8;
+  --c-marina-blue-dk: #154D76;
+  --c-ripon-red:      #B23A2E;
+  --c-temple-green:   #2F7D4F;
+  --c-temple-green-dk:#205937;
+
+  --c-hero-sky:        #EBF3FA;
+  --c-header-bg:       #FAF7F2;
+  --c-page-bg:         #FDFBF7;
+  --c-card-bg:         #FFFFFF;
+  --c-border:          #E8DFC8;
+  --c-border-subtle:   #F0EAE1;
+  --c-sand-light:      #F8F5EE;
+  --c-sand-muted:      #E8DFC8;
+  --c-sand-dark:       #D4C9B0;
+
+  --c-ink:            #1E1B18;
+  --c-ink-muted:      #4A433B;
+  --c-ink-light:      #7A7064;
+
+  --font-heading: 'Cabinet Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body:    'Satoshi', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* -- LIGHT THEME OVERRIDES TO BLEND WITH ZROMOTION -- */
+
+html, body {
+    background-color: var(--c-page-bg) !important;
+    color: var(--c-ink) !important;
+    font-family: var(--font-body) !important;
+}
+
+#map {
+    background-color: var(--c-page-bg) !important;
+}
+
+.search-wrap {
+    background: var(--c-header-bg) !important;
+    border: 1px solid var(--c-border) !important;
+    box-shadow: 0 4px 16px rgba(30, 27, 24, 0.08) !important;
+}
+
+.search-input {
+    background: var(--c-card-bg) !important;
+    color: var(--c-ink) !important;
+    border: 1px solid var(--c-border) !important;
+}
+
+.search-input::placeholder {
+    color: var(--c-ink-light) !important;
+}
+
+.filter-btn {
+    background: var(--c-card-bg) !important;
+    color: var(--c-ink) !important;
+    border: 1px solid var(--c-border) !important;
+}
+
+.filter-btn:hover {
+    background: var(--c-sand-light) !important;
+}
+
+.chicklet {
+    background: var(--c-card-bg) !important;
+    border: 1px solid var(--c-border) !important;
+    color: var(--c-ink) !important;
+    font-family: var(--font-heading) !important;
+    font-weight: 700 !important;
+    box-shadow: 0 2px 8px rgba(30, 27, 24, 0.05) !important;
+}
+
+.chicklet:hover {
+    background: var(--c-sand-light) !important;
+    border-color: var(--c-border-subtle) !important;
+}
+
+.map-control-btn {
+    background: var(--c-card-bg) !important;
+    border: 1px solid var(--c-border) !important;
+    color: var(--c-ink) !important;
+    box-shadow: 0 4px 12px rgba(30, 27, 24, 0.1) !important;
+}
+
+.map-control-btn:hover {
+    background: var(--c-sand-light) !important;
+    color: var(--c-ink) !important;
+}
+
+.legend-pill {
+    background: var(--c-header-bg) !important;
+    color: var(--c-ink-muted) !important;
+    border: 1px solid var(--c-border) !important;
+    box-shadow: 0 4px 24px rgba(30, 27, 24, 0.15) !important;
+}
+
+.modal-backdrop {
+    background: rgba(30, 27, 24, 0.4) !important;
+    backdrop-filter: blur(4px) !important;
+}
+
+.modal-card {
+    background: var(--c-card-bg) !important;
+    border: 1px solid var(--c-border) !important;
+    box-shadow: 0 25px 80px rgba(30, 27, 24, 0.15) !important;
+}
+
+.modal-title, .feed-title, .page-title {
+    color: var(--c-ink) !important;
+    font-family: var(--font-heading) !important;
+    font-weight: 900 !important;
+}
+
+.modal-sub, .feed-subtitle, .page-subtitle {
+    color: var(--c-ink-muted) !important;
+}
+
+.field-label {
+    color: var(--c-ink) !important;
+    font-weight: 700 !important;
+}
+
+.form-input, .form-select {
+    background: var(--c-sand-light) !important;
+    color: var(--c-ink) !important;
+    border: 1px solid var(--c-border) !important;
+}
+
+.option-chip {
+    background: var(--c-card-bg) !important;
+    border: 1px solid var(--c-border) !important;
+    color: var(--c-ink-muted) !important;
+}
+
+.option-chip:hover {
+    background: var(--c-sand-light) !important;
+    color: var(--c-ink) !important;
+}
+
+.option-chip.active {
+    background: var(--c-ripon-red) !important;
+    border-color: var(--c-ripon-red) !important;
+    color: white !important;
+}
+
+.btn-submit, .btn-submit-form, #pin-mode-banner, .btn-list-flat {
+    background: var(--c-ripon-red) !important;
+    color: white !important;
+    border: none !important;
+    font-family: var(--font-heading) !important;
+    letter-spacing: 0.02em;
+}
+
+.btn-submit:hover, .btn-submit-form:hover, .btn-list-flat:hover {
+    background: #9a2b21 !important;
+}
+
+.close-btn {
+    background: var(--c-sand-light) !important;
+    color: var(--c-ink-muted) !important;
+}
+
+.close-btn:hover {
+    background: var(--c-border) !important;
+    color: var(--c-ink) !important;
+}
+
+/* Listings page specific */
+.nav-header {
+    background: var(--c-header-bg) !important;
+    border-bottom: 1px solid var(--c-border) !important;
+}
+
+.brand-text {
+    color: var(--c-ink) !important;
+    font-family: var(--font-heading) !important;
+    font-weight: 900 !important;
+}
+
+.back-link {
+    color: var(--c-ink-muted) !important;
+}
+
+.back-link:hover {
+    color: var(--c-ink) !important;
+}
+
+.filter-panel {
+    background: var(--c-card-bg) !important;
+    border: 1px solid var(--c-border) !important;
+}
+
+.filter-header {
+    color: var(--c-ink) !important;
+}
+
+.cta-box {
+    background: var(--c-sand-light) !important;
+    border: 1px dashed var(--c-border) !important;
+}
+
+.cta-box h3 {
+    color: var(--c-ink) !important;
+    font-family: var(--font-heading) !important;
+}
+
+.listing-card {
+    background: var(--c-card-bg) !important;
+    border: 1px solid var(--c-border) !important;
+}
+
+.listing-card:hover {
+    border-color: var(--c-ink) !important;
+    box-shadow: 0 12px 32px rgba(30,27,24,0.08) !important;
+}
+
+.card-img-placeholder {
+    background: var(--c-sand-light) !important;
+}
+
+.card-img-placeholder svg {
+    color: var(--c-border) !important;
+}
+
+.card-rent {
+    color: var(--c-ink) !important;
+    font-family: var(--font-heading) !important;
+}
+
+.card-title {
+    color: var(--c-ink) !important;
+}
+
+.card-meta {
+    color: var(--c-ink-muted) !important;
+}
+
+.card-date {
+    color: var(--c-ink-light) !important;
+}
+
+.card-footer {
+    border-top: 1px solid var(--c-border) !important;
+}
+
+.btn-view {
+    color: var(--c-ripon-red) !important;
+    border: 1px solid var(--c-ripon-red) !important;
+}
+
+.btn-view:hover {
+    background: var(--c-sand-light) !important;
+}
+
+/* L2 Cards */
+.l2-card {
+    background: var(--c-card-bg) !important;
+    border: 1px solid var(--c-border) !important;
+}
+.l2-card:hover {
+    background: var(--c-sand-light) !important;
+}
+.l2-card-title { color: var(--c-ink) !important; }
+.l2-card-sub { color: var(--c-ink-muted) !important; }
+.intro-step-text { color: var(--c-ink-muted) !important; }
+.intro-step-text strong { color: var(--c-ink) !important; }
+.intro-step-num { color: var(--c-ink) !important; background: var(--c-sand-light) !important; }
+
+/* Tutorial Modal fixes */
+.modal-title { color: var(--c-ink) !important; }
+
