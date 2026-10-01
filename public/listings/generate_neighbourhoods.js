@@ -1,0 +1,723 @@
+const fs = require('fs');
+const path = require('path');
+
+const LOCALITIES = {
+  "omr": {
+    name: "OMR (Old Mahabalipuram Road)",
+    center: [12.9229, 80.2312],
+    db_name: "OMR",
+    title: "Rented House in OMR Chennai: Average Rent & Tenant Reports | chennairents.in",
+    meta_desc: "Explore real tenant rent reports, average prices, and historical trends for OMR (Old Mahabalipuram Road) Chennai. Find broker-free rented houses directly from owners.",
+    desc: "OMR (Old Mahabalipuram Road) is Chennai's primary IT corridor, stretching from Madhya Kailash down to Siruseri. It hosts major technology parks like TIDEL Park, and attracts a massive population of working professionals and students. Over the last decade, rent prices along OMR have experienced double-digit yearly inflation, heavily driven by broker cartels. Real tenant records gathered here cut through inflated agency listings to reveal actual base rents paid across major high-rises in Sholinganallur, Perungudi, and Karapakkam.",
+    faqs: [
+      {
+        q: "How much is the average rent for a 2BHK flat in OMR Chennai?",
+        a: "Based on tenant-reported data on chennairents.in, a 2BHK in a standalone building on OMR ranges between ₹18,000 and ₹25,000 per month, while premium gated communities in areas like Sholinganallur and Perungudi command between ₹26,000 and ₹35,000 per month."
+      },
+      {
+        q: "What is the typical rental deposit on OMR?",
+        a: "Landlords along the IT corridor traditionally request a 10-month rental advance. However, with the transparency provided by OMR rent indexes, many tenants negotiate this down to 5-6 months."
+      },
+      {
+        q: "Is it possible to find a rented house in OMR without broker fees?",
+        a: "Yes. By using the crowdsourced map on chennairents.in, you can connect directly with owners listing their flats, skipping the standard 1-month brokerage fee commonly charged by local agents."
+      }
+    ]
+  },
+  "anna-nagar": {
+    name: "Anna Nagar",
+    center: [13.0850, 80.2101],
+    db_name: "Anna Nagar",
+    title: "Rented House in Anna Nagar Chennai: Average Rent & Tenant Reports | chennairents.in",
+    meta_desc: "Check crowdsourced rents, average prices, and tenant reviews for flats and houses in Anna Nagar, Chennai. Access broker-free rentals directly from owners.",
+    desc: "Anna Nagar is a premium, well-planned residential layout in North-Western Chennai. Renowned for its grid-patterned layout, wide tree-lined avenues, elite schools, upscale restaurants, and the iconic Anna Tower Park. Rents in Anna Nagar command a premium due to high demand from families wanting access to top-tier schools and shopping. Standalone bungalows and luxury gated properties are common, making broker-free transparency highly crucial for tenants navigating this residential market.",
+    faqs: [
+      {
+        q: "What is the average rent for flats in Anna Nagar Chennai?",
+        a: "Anna Nagar is one of Chennai's most premium residential areas. Standalone 2BHK apartments range from ₹22,000 to ₹32,000, while premium 3BHK apartments in gated societies start at ₹45,000 and can exceed ₹70,000 per month."
+      },
+      {
+        q: "Why are rents so high in Anna Nagar?",
+        a: "The high rent premium in Anna Nagar is driven by its exceptional grid planning, premium schools, abundant green cover (Tower Park), upscale commercial hubs, and metro connectivity."
+      },
+      {
+        q: "How can I negotiate rent in Anna Nagar?",
+        a: "Use the historical rent pins on the chennairents.in map to compare what current neighbours are paying. Having verified data points allows you to counter high initial broker quotes."
+      }
+    ]
+  },
+  "velachery": {
+    name: "Velachery",
+    center: [12.9796, 80.2201],
+    db_name: "Velachery",
+    title: "Rented House in Velachery Chennai: Average Rent & Tenant Reports | chennairents.in",
+    meta_desc: "Explore real tenant rent reports, average prices, and waterlogging-impacted rental trends in Velachery Chennai. Connect directly with owners.",
+    desc: "Velachery is a fast-developing commercial and residential hub in South Chennai. It is highly favored by IT workers due to its proximity to OMR and the MRTS commuter train line, and contains major shopping centers like Phoenix Marketcity. Velachery is subject to severe water logging during monsoons, causing rental variations across ground and upper floors. Real tenant reports here provide critical insights into deposit levels and floor-specific rent differentials.",
+    faqs: [
+      {
+        q: "What is the average rent in Velachery Chennai?",
+        a: "Rents for a 2BHK flat in Velachery typically range from ₹18,000 to ₹24,000 per month. Standalone 1BHK builder floors cost between ₹10,000 and ₹14,000, depending on proximity to the MRTS station."
+      },
+      {
+        q: "Does waterlogging affect rent prices in Velachery?",
+        a: "Yes. Due to seasonal waterlogging in low-lying areas of Velachery (like Madipakkam borders), ground-floor apartments often have lower rents and deposits compared to higher floors in the same building."
+      },
+      {
+        q: "Are deposits negotiable in Velachery?",
+        a: "Yes. While landlords often ask for a 10-month advance, the high student and bachelor density makes many owners flexible to 6-8 months, particularly if you show proof of employment."
+      }
+    ]
+  },
+  "t-nagar": {
+    name: "T. Nagar (Thyagaraya Nagar)",
+    center: [13.0418, 80.2341],
+    db_name: "T. Nagar",
+    title: "Rented House in T. Nagar Chennai: Average Rent & Tenant Reports | chennairents.in",
+    meta_desc: "Find average rents, tenant reviews, and broker-free house listings in T. Nagar (Thyagaraya Nagar) Chennai. Check crowdsourced rental metrics.",
+    desc: "Thyagaraya Nagar (T. Nagar) is the retail and shopping heart of Chennai, famous for saree shops and jewelry stores. It is also a highly dense, central residential zone with traditional independent houses and modern low-rise apartments. Rents here are steep due to central city location and commercial proximity. Finding broker-free homes in T. Nagar is notoriously difficult due to agency dominance, making the crowdsourced registry highly valuable.",
+    faqs: [
+      {
+        q: "What is the average rent for a house in T. Nagar Chennai?",
+        a: "Central location and commercial density command high rent in T. Nagar. A 2BHK apartment ranges from ₹20,000 to ₹30,000, while older independent houses may cost between ₹18,000 and ₹25,000."
+      },
+      {
+        q: "How do I find a broker-free house in T. Nagar?",
+        a: "Finding broker-free flats in T. Nagar is difficult due to local broker monopolies. Utilizing the crowdsourced map on chennairents.in allows you to identify owner-listed pins directly."
+      }
+    ]
+  },
+  "adyar": {
+    name: "Adyar",
+    center: [13.0012, 80.2565],
+    db_name: "Adyar",
+    title: "Rented House in Adyar Chennai: Average Rent & Tenant Reports | chennairents.in",
+    meta_desc: "View real rents, average prices, and tenant reviews for apartments in Adyar Chennai. Find broker-free owner rentals directly.",
+    desc: "Adyar is an upscale, historic neighbourhood in South Chennai, bordered by the Adyar River. It features quiet residential lanes, premium institutes like IIT Madras, and proximity to Elliott's Beach in Besant Nagar. Adyar is known for high deposits (often the traditional 10-month advance) and long tenancy periods. Tenant inputs on this platform reveal negotiated rates that bypass inflated real estate listing platforms.",
+    faqs: [
+      {
+        q: "How much is the average rent in Adyar Chennai?",
+        a: "A standard 2BHK flat in Adyar averages between ₹22,000 and ₹30,000. Luxury apartments and independent floors in quiet residential zones range from ₹35,000 to ₹50,000+."
+      },
+      {
+        q: "What are the rental deposit standards in Adyar?",
+        a: "Adyar landlords traditionally ask for a 10-month rent advance. Due to high demand from families and students of IIT-M and NIFT, negotiation can be challenging without concrete market data."
+      }
+    ]
+  },
+  "tambaram": {
+    name: "Tambaram",
+    center: [12.9262, 80.1289],
+    db_name: "Tambaram",
+    title: "Rented House in Tambaram Chennai: Average Rent & Tenant Reports | chennairents.in",
+    meta_desc: "Explore affordable rent indices and tenant reports for flats in Tambaram Chennai. Find direct owner rentals without brokers.",
+    desc: "Tambaram is a prominent residential and commercial gateway in South-Western Chennai. Famously known for its historic railway station and the Madras Christian College (MCC), it serves as a massive transport node. Over the last few years, Tambaram has seen rapid residential development, offering affordable to mid-range flats. Real tenant entries help separate true rental value from speculative broker pricing near transit lines.",
+    faqs: [
+      {
+        q: "What is the average rent for a 2BHK flat in Tambaram?",
+        a: "Tambaram offers affordable suburban rents. A 2BHK flat typically costs between ₹10,000 and ₹14,000, while a 1BHK ranges from ₹7,000 to ₹9,000 per month."
+      },
+      {
+        q: "Is Tambaram good for bachelors and students?",
+        a: "Yes. Tambaram is highly popular with students of MCC and bachelors working in nearby SEZs. Rents near the railway station and college campus are slightly higher but offer excellent connectivity."
+      }
+    ]
+  },
+  "sholinganallur": {
+    name: "Sholinganallur",
+    center: [12.9010, 80.2266],
+    db_name: "Sholinganallur",
+    title: "Rented House in Sholinganallur: Average Rent & Tenant Reports | chennairents.in",
+    meta_desc: "Get crowdsourced rent data for Sholinganallur Chennai. View averages for gated complexes near ELCOT SEZ. List and match directly.",
+    desc: "Sholinganallur is the beating heart of OMR's IT hub, hosting the massive ELCOT SEZ and offices of top tech firms. Rents here are heavily influenced by corporate budgets and demand from tech professionals. The area features massive gated communities alongside independent low-rise apartments. Using crowdsourced rents helps renters side-step the OMR broker premium.",
+    faqs: [
+      {
+        q: "What is the average rent in Sholinganallur Chennai?",
+        a: "Rents for 2BHK flats in Sholinganallur range from ₹18,000 to ₹25,000. In large gated communities like DLF Gardencity or Bollineni Hillside, rents for 3BHK units average around ₹28,000 to ₹38,000."
+      },
+      {
+        q: "How do I avoid broker inflation in Sholinganallur?",
+        a: "As a key IT hub, brokers inflate rents by targeting incoming tech workers. Compare prices with tenant-reported averages on our map to secure fair rates."
+      }
+    ]
+  },
+  "perungudi": {
+    name: "Perungudi",
+    center: [12.9637, 80.2397],
+    db_name: "Perungudi",
+    title: "Rented House in Perungudi Chennai: Average Rent & Tenant Reports | chennairents.in",
+    meta_desc: "Explore real tenant rent reports, average prices, and transit-friendly rentals in Perungudi Chennai. View direct owner listings.",
+    desc: "Perungudi is an active residential sector bordering the Pallikaranai marshland and Velachery. It offers quick access to TIDEL Park and RMZ Millenia, making it highly popular for working professionals. Over-inflated rent rates by local agents are common here. Spotting the real average from tenant reports helps negotiate fair rents.",
+    faqs: [
+      {
+        q: "How much does a 2BHK cost in Perungudi Chennai?",
+        a: "A typical 2BHK flat in Perungudi costs between ₹17,000 and ₹24,000. Standard standalone builder apartments are available near the RMZ Millenia side."
+      },
+      {
+        q: "What is the average advance amount in Perungudi?",
+        a: "Advance deposits range from 6 to 10 months of rent. Tenants can use the verified rents on chennairents.in to negotiate more reasonable advance amounts."
+      }
+    ]
+  },
+  "porur": {
+    name: "Porur",
+    center: [13.0406, 80.1569],
+    db_name: "Porur",
+    title: "Rented House in Porur Chennai: Average Rent & Tenant Reports | chennairents.in",
+    meta_desc: "Find average rents, student housing trends, and broker-free flats in Porur Chennai. Access real crowdsourced rent data.",
+    desc: "Porur is a major manufacturing and IT hub in Western Chennai, hosting DLF IT Park and Ramachandra Medical College. Rents have surged due to massive influxes of medical students and tech workforce. Crowdsourced averages help check realistic advances and rents near Mount-Poonamallee Road.",
+    faqs: [
+      {
+        q: "What is the rent price for flats in Porur Chennai?",
+        a: "A 2BHK flat near DLF IT Park in Porur ranges from ₹15,000 to ₹22,000. Standalone 1BHKs for students average between ₹9,000 and ₹12,000."
+      },
+      {
+        q: "How does the medical college affect rents in Porur?",
+        a: "The constant demand from Sri Ramachandra University students drives high occupancy rates and steady rent prices, particularly for furnished rooms and 1BHKs."
+      }
+    ]
+  },
+  "medavakkam": {
+    name: "Medavakkam",
+    center: [12.9146, 80.1924],
+    db_name: "Medavakkam",
+    title: "Rented House in Medavakkam Chennai: Average Rent & Tenant Reports | chennairents.in",
+    meta_desc: "Check budget-friendly rent indexes and direct listings in Medavakkam Chennai. Connect directly with owners with zero broker fees.",
+    desc: "Medavakkam is a fast-growing residential suburb situated close to OMR and Velachery. Known for offering relatively budget-friendly housing options compared to its upscale neighbours, it is a preferred choice for young families and IT professionals. The crowdsourced map helps monitor sub-market averages.",
+    faqs: [
+      {
+        q: "What is the average rent for a flat in Medavakkam?",
+        a: "Medavakkam offers excellent value, with 2BHK flats averaging between ₹12,000 and ₹17,000, and 3BHK flats costing ₹18,000 to ₹25,000."
+      },
+      {
+        q: "Is Medavakkam well-connected to OMR and Velachery?",
+        a: "Yes, Medavakkam is situated on the Tambaram-Velachery main road, offering excellent road connectivity to both the OMR IT corridor and Velachery commercial hubs."
+      }
+    ]
+  }
+};
+
+const TEMPLATE_PATH = path.join(__dirname, 'neighbourhood_template.html');
+
+// Create directory if not exists
+const outputDir = path.join(__dirname, 'neighbourhood');
+if (!fs.existsSync(outputDir)) {
+  fs.mkdirSync(outputDir);
+}
+
+// 1. Read template HTML (which we will create based on neighbourhood.html)
+const template = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#TITLE#</title>
+    <meta name="description" content="#META_DESC#" />
+    <meta name="keywords" content="rented house in #NAME#, rent in #NAME#, flat for rent #NAME#, chennai rent map, chennai rents, no broker chennai, rent transparency" />
+    <link rel="canonical" href="https://www.chennairents.in/neighbourhood/#KEY#.html" />
+    <link rel="stylesheet" href="/index.css">
+    
+    <!-- Open Graph Metadata (Facebook / LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="#TITLE#" />
+    <meta property="og:description" content="#META_DESC#" />
+    <meta property="og:url" content="https://www.chennairents.in/neighbourhood/#KEY#.html" />
+    <meta property="og:image" content="https://www.chennairents.in/assets/og-image.png" />
+
+    <!-- Twitter Card Metadata -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="#TITLE#" />
+    <meta name="twitter:description" content="#META_DESC#" />
+    <meta name="twitter:image" content="https://www.chennairents.in/assets/og-image.png" />
+    
+    <!-- Leaflet.js Mapping Library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    
+    <!-- Supabase UMD Client SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+    #SCHEMA_JSON_LD#
+
+    <style>
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #ff3e00;
+            text-decoration: underline;
+        }
+        .back-link:hover {
+            color: #ff5a1f;
+        }
+        .desc-text {
+            font-size: 14px;
+            line-height: 1.65;
+            margin-bottom: 24px;
+            color: #cbd5e1;
+            text-align: justify;
+        }
+        .faq-item {
+            margin-bottom: 20px;
+            padding: 16px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 8px;
+        }
+        .faq-q {
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+            font-size: 14.5px;
+        }
+        .faq-a {
+            color: #94a3b8;
+            font-size: 13.5px;
+            line-height: 1.55;
+        }
+    </style>
+</head>
+<body style="background-color: #0d0d0d;">
+
+    <div class="app-container" style="display: grid; grid-template-columns: 1.2fr 1fr; height: 100vh; width: 100vw; overflow: hidden;">
+        
+        <!-- Left Section: Localized Map -->
+        <div class="map-pane" style="position: relative; height: 100%; width: 100%; border-right: 1px solid rgba(255,255,255,0.08);">
+            <div id="map"></div>
+            <div class="info-banner" style="position: absolute; bottom: 0; left: 0; right: 0; z-index: 1000; border-top: 1px solid rgba(255,255,255,0.08); background: rgba(8,8,18,0.85); backdrop-filter: blur(10px); color: #cbd5e1;" id="local-banner">
+                Showing rent data for #NAME#.
+            </div>
+        </div>
+
+        <!-- Right Section: Newspaper Editorial Content -->
+        <div class="content-pane" style="background-color: #161625; overflow-y: auto; display: flex; flex-direction: column;">
+            
+            <!-- Newspaper Header -->
+            <header class="newspaper-header" style="padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.08); text-align: center;">
+                <div class="newspaper-meta" style="color: #6b7280;">
+                    <span>Vol. 1 • No. 1</span>
+                    <span id="header-date">FRIDAY, JUNE 19, 2026</span>
+                    <span>Chennai Edition</span>
+                </div>
+                <a href="/" class="newspaper-title" style="color: #ff3e00; font-size: 32px; font-weight: 800; text-decoration: none;">chennairents.in</a>
+                <div class="newspaper-tagline" id="neighbourhood-subtitle" style="color: #9ca3af; font-size: 12px; margin-top: 6px;">Special Broadsheet Report: #NAME#</div>
+            </header>
+
+            <!-- Page Body Content -->
+            <main class="pane-body" style="padding: 24px; flex: 1;">
+                <a href="/" class="back-link">&larr; Return to main Chennai Map</a>
+                
+                <section class="editorial-section" style="margin-bottom: 32px;">
+                    <h1 class="editorial-title" id="locality-title" style="font-size: 24px; font-weight: 700; color: white; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-bottom: 16px;">#NAME# Rental Index</h1>
+                    <div class="desc-text" id="locality-desc">
+                        #DESC#
+                    </div>
+                </section>
+
+                <!-- Local Averages Stats Table -->
+                <section class="editorial-section" style="margin-bottom: 32px;">
+                    <h2 class="editorial-title" style="font-size: 16px; font-weight: 700; color: white; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-bottom: 16px;">Verified Local Average Rents</h2>
+                    <div class="stats-list" id="local-stats-table">
+                        <div class="stats-row"><span class="stats-row-label">Loading local averages...</span></div>
+                    </div>
+                </section>
+
+                <!-- Local FAQ Section (AEO & GEO Optimization) -->
+                <section class="editorial-section" style="margin-bottom: 32px;">
+                    <h2 class="editorial-title" style="font-size: 16px; font-weight: 700; color: white; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-bottom: 16px;">Frequently Asked Questions (FAQ)</h2>
+                    <div class="faq-container">
+                        #FAQ_HTML#
+                    </div>
+                </section>
+
+                <!-- City comparison note -->
+                <section class="editorial-section" style="margin-top: 32px;">
+                    <p style="font-size: 11px; line-height: 1.5; font-style: italic; color: #6b7280;">
+                        The figures above represent actual rent prices logged anonymously by tenants living in this sector. Outlier points (entries 3x above or below the area median) are automatically flagged and hidden to maintain registry accuracy.
+                    </p>
+                </section>
+
+            </main>
+
+            <footer style="border-top:1px solid rgba(255,255,255,0.08); padding: 24px; text-align:center; font-size:12px; color:#6b7280; background: rgba(8,8,18,0.2);">
+                <a href="/" style="color:#94a3b8; text-decoration:none; margin: 0 8px;">Map</a> · 
+                <a href="/contact.html" style="color:#94a3b8; text-decoration:none; margin: 0 8px;">Contact</a> · 
+                <a href="/privacy.html" style="color:#94a3b8; text-decoration:none; margin: 0 8px;">Privacy</a>
+            </footer>
+
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://hnnkhmfrpwdrkkjbgckv.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhubmtobWZycHdkcmtramJnY2t2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4NDk1ODgsImV4cCI6MjA5NzQyNTU4OH0.oCXDCH1J80HLb8AfQA31Fdqi-vbVN2cMdCTZm-NWngc';
+        const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        let map;
+        let pinsData = [];
+        let metroLinesGroup;
+
+        const LOCALITY_DATA = {
+            "omr": { center: [12.9229, 80.2312], db_name: "OMR" },
+            "anna-nagar": { center: [13.0850, 80.2101], db_name: "Anna Nagar" },
+            "velachery": { center: [12.9796, 80.2201], db_name: "Velachery" },
+            "t-nagar": { center: [13.0418, 80.2341], db_name: "T. Nagar" },
+            "adyar": { center: [13.0012, 80.2565], db_name: "Adyar" },
+            "tambaram": { center: [12.9262, 80.1289], db_name: "Tambaram" },
+            "sholinganallur": { center: [12.9010, 80.2266], db_name: "Sholinganallur" },
+            "perungudi": { center: [12.9637, 80.2397], db_name: "Perungudi" },
+            "porur": { center: [13.0406, 80.1569], db_name: "Porur" },
+            "medavakkam": { center: [12.9146, 80.1924], db_name: "Medavakkam" }
+        };
+
+        const METRO_LINES = {
+            "Blue Line": {
+                color: "#0072bc",
+                weight: 3.5,
+                opacity: 0.85,
+                stations: [
+                    { name: "Washermanpet", coords: [13.1028, 80.2811] },
+                    { name: "Mannadi", coords: [13.0950, 80.2880] },
+                    { name: "High Court", coords: [13.0880, 80.2890] },
+                    { name: "Chennai Central Metro", coords: [13.0827, 80.2755] },
+                    { name: "Government Estate", coords: [13.0678, 80.2721] },
+                    { name: "LIC", coords: [13.0617, 80.2635] },
+                    { name: "Thousand Lights", coords: [13.0583, 80.2570] },
+                    { name: "AG-DMS", coords: [13.0450, 80.2486] },
+                    { name: "Teynampet", coords: [13.0410, 80.2443] },
+                    { name: "Nandanam", coords: [13.0305, 80.2435] },
+                    { name: "Saidapet", coords: [13.0223, 80.2294] },
+                    { name: "Little Mount", coords: [13.0163, 80.2227] },
+                    { name: "Guindy", coords: [13.0083, 80.2201] },
+                    { name: "Alandur", coords: [13.0038, 80.2014] },
+                    { name: "Nanganallur Road", coords: [12.9897, 80.1775] },
+                    { name: "Meenambakkam", coords: [12.9868, 80.1762] },
+                    { name: "Chennai Airport", coords: [12.9806, 80.1652] }
+                ]
+            },
+            "Green Line": {
+                color: "#009639",
+                weight: 3.5,
+                opacity: 0.85,
+                stations: [
+                    { name: "Chennai Central Metro", coords: [13.0827, 80.2755] },
+                    { name: "Egmore Metro", coords: [13.0782, 80.2618] },
+                    { name: "Nehru Park", coords: [13.0792, 80.2520] },
+                    { name: "Kilpauk", coords: [13.0787, 80.2413] },
+                    { name: "Shenoy Nagar", coords: [13.0789, 80.2272] },
+                    { name: "Anna Nagar East", coords: [13.0842, 80.2185] },
+                    { name: "Anna Nagar Tower", coords: [13.0853, 80.2104] },
+                    { name: "Thirumangalam", coords: [13.0851, 80.1994] },
+                    { name: "Koyambedu", coords: [13.0735, 80.1950] },
+                    { name: "Arumbakkam", coords: [13.0617, 80.2117] },
+                    { name: "Vadapalani", coords: [13.0504, 80.2119] },
+                    { name: "Ashok Nagar", coords: [13.0354, 80.2118] },
+                    { name: "Ekkattuthangal", coords: [13.0169, 80.2064] },
+                    { name: "Alandur", coords: [13.0038, 80.2014] },
+                    { name: "St. Thomas Mount", coords: [13.0055, 80.2001] }
+                ]
+            },
+            "MRTS Line": {
+                color: "#d97706",
+                weight: 2.8,
+                opacity: 0.75,
+                stations: [
+                    { name: "Chennai Beach", coords: [13.0963, 80.2917] },
+                    { name: "Chennai Fort", coords: [13.0881, 80.2862] },
+                    { name: "Chennai Park Town", coords: [13.0822, 80.2789] },
+                    { name: "Chintadripet", coords: [13.0772, 80.2741] },
+                    { name: "Chepauk", coords: [13.0645, 80.2818] },
+                    { name: "Triplicane", coords: [13.0577, 80.2798] },
+                    { name: "Light House", coords: [13.0396, 80.2790] },
+                    { name: "Thirumayilai", coords: [13.0335, 80.2690] },
+                    { name: "Mandaveli", coords: [13.0232, 80.2635] },
+                    { name: "Greenways Road", coords: [13.0205, 80.2520] },
+                    { name: "Kotturpuram", coords: [13.0182, 80.2443] },
+                    { name: "Kasturiba Nagar", coords: [13.0076, 80.2528] },
+                    { name: "Indira Nagar", coords: [12.9978, 80.2543] },
+                    { name: "Thiruvanmiyur", coords: [12.9890, 80.2530] },
+                    { name: "Taramani", coords: [12.9785, 80.2458] },
+                    { name: "Perungudi", coords: [12.9691, 80.2396] },
+                    { name: "Velachery", coords: [12.9796, 80.2201] }
+                ]
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById("header-date").innerText = new Date().toLocaleDateString('en-US', options).toUpperCase();
+
+            const areaKey = "#KEY#";
+            const areaInfo = LOCALITY_DATA[areaKey];
+
+            // Init Map
+            map = L.map('map', { zoomControl: false }).setView(areaInfo.center, 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Initialize Metro & MRTS Lines
+            metroLinesGroup = L.layerGroup().addTo(map);
+            initMetroLines();
+
+            // Fetch and render data
+            loadLocalData(areaInfo);
+        });
+
+        function initMetroLines() {
+            for (const [lineName, lineInfo] of Object.entries(METRO_LINES)) {
+                const latlngs = lineInfo.stations.map(s => s.coords);
+                L.polyline(latlngs, {
+                    color: lineInfo.color,
+                    weight: lineInfo.weight,
+                    opacity: lineInfo.opacity,
+                    dashArray: lineName === "MRTS Line" ? "5, 8" : null
+                }).addTo(metroLinesGroup);
+                
+                lineInfo.stations.forEach(station => {
+                    const circle = L.circleMarker(station.coords, {
+                        radius: 5,
+                        color: lineInfo.color,
+                        weight: 1.5,
+                        fillColor: '#ffffff',
+                        fillOpacity: 1
+                    });
+                    
+                    circle.bindTooltip(\`\${station.name} (\${lineName})\`, {
+                        direction: 'top',
+                        offset: [0, -5],
+                        className: 'custom-metro-tooltip'
+                    });
+                    
+                    circle.on('click', (e) => {
+                        L.DomEvent.stopPropagation(e);
+                        map.setView(station.coords, 14);
+                        calculateAvgRentNearCoords(station.coords, station.name);
+                    });
+                    
+                    circle.addTo(metroLinesGroup);
+                });
+            }
+        }
+
+        function calculateAvgRentNearCoords(coords, name) {
+            const radiusMeters = 1000;
+            const center = L.latLng(coords[0], coords[1]);
+            
+            const nearbyPins = pinsData.filter(pin => {
+                const pinLoc = L.latLng(pin.latitude, pin.longitude);
+                return center.distanceTo(pinLoc) <= radiusMeters;
+            });
+            
+            if (nearbyPins.length === 0) {
+                const popup = L.popup()
+                    .setLatLng(coords)
+                    .setContent(\`<div style="font-family:'Inter',sans-serif; color:white; padding:8px; font-size:12px; line-height:1.4; text-align:left;">
+                        <strong>\${name} Metro Station</strong><br>
+                        <span style="color:#9ca3af; display:block; margin-top:4px;">No crowdsourced rent pins found within 1km in this locality yet.</span>
+                    </div>\`)
+                    .openOn(map);
+                return;
+            }
+            
+            const totalRent = nearbyPins.reduce((acc, pin) => acc + Number(pin.rent), 0);
+            const avgRent = Math.round(totalRent / nearbyPins.length);
+            
+            const countByBhk = {};
+            nearbyPins.forEach(pin => {
+                countByBhk[pin.bhk] = countByBhk[pin.bhk] || { total: 0, count: 0 };
+                countByBhk[pin.bhk].total += Number(pin.rent);
+                countByBhk[pin.bhk].count++;
+            });
+            
+            let statsHtml = \`<div style="font-family:'Inter',sans-serif; color:white; padding:6px; min-width:210px; text-align:left;">\`;
+            statsHtml += \`<p style="font-size:12px; margin:0 0 6px 0; color:#9ca3af; font-weight:500;">Crowdsourced rents within 1km of</p>\`;
+            statsHtml += \`<p style="font-size:14px; margin:0 0 10px 0; font-weight:700; color:#ff3e00; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">\${name} Station</p>\`;
+            statsHtml += \`<div style="font-size:12.5px; font-weight:700; margin-bottom:10px;">Average Rent: ₹\${avgRent.toLocaleString('en-IN')}/mo</div>\`;
+            
+            const bhkKeys = Object.keys(countByBhk).sort();
+            bhkKeys.forEach(bhk => {
+                const data = countByBhk[bhk];
+                const avg = Math.round(data.total / data.count);
+                statsHtml += \`<div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px; color:#cbd5e1;">
+                    <span>\${bhk} BHK (\${data.count} pin\${data.count > 1 ? 's' : ''}):</span>
+                    <strong style="color:white;">₹\${avg.toLocaleString('en-IN')}/mo</strong>
+                </div>\`;
+            });
+            statsHtml += \`</div>\`;
+            
+            L.popup()
+                .setLatLng(coords)
+                .setContent(statsHtml)
+                .openOn(map);
+        }
+
+        async function loadLocalData(areaInfo) {
+            try {
+                const { data: stats, error: statsErr } = await db
+                    .from('neighbourhood_stats')
+                    .select('*')
+                    .eq('area', areaInfo.db_name)
+                    .order('bhk', { ascending: true });
+
+                const tbody = document.getElementById("local-stats-table");
+                tbody.innerHTML = '';
+
+                if (statsErr || !stats || stats.length === 0) {
+                    tbody.innerHTML = \`<div class="stats-row"><span class="stats-row-label">No crowdsourced pins found in \${areaInfo.db_name} yet. Be the first to pin!</span></div>\`;
+                } else {
+                    stats.forEach(row => {
+                        const div = document.createElement("div");
+                        div.className = "stats-row";
+                        div.innerHTML = \`
+                            <span class="stats-row-label">\${row.bhk} BHK Local Average</span>
+                            <span class="stats-row-value">₹\${Math.round(row.avg_rent).toLocaleString('en-IN')} / month</span>
+                        \`;
+                        tbody.appendChild(div);
+                    });
+                }
+
+                const { data: pins, error: pinsErr } = await db
+                    .from('pins_public')
+                    .select('*')
+                    .eq('area', areaInfo.db_name);
+
+                if (!pinsErr && pins) {
+                    pinsData = pins;
+                    pins.forEach(pin => {
+                        const rentK = Math.round(pin.rent / 1000) + 'k';
+                        const gatedClass = pin.is_listing ? 'listing' : (pin.gated ? 'gated' : 'not-gated');
+                        const labelIcon = pin.is_listing ? '🏠 ' : '';
+
+                        const marker = L.marker([pin.latitude, pin.longitude], {
+                            icon: L.divIcon({
+                                className: 'custom-pin-marker-wrapper',
+                                html: \`<div class="pin-marker" id="pin-id-\${pin.id}">
+                                         <div class="pin-label \${gatedClass}">
+                                            \${labelIcon}\${rentK}
+                                         </div>
+                                         <div class="pin-caret \${gatedClass}"></div>
+                                       </div>\`,
+                                iconSize: [40, 30],
+                                iconAnchor: [20, 30]
+                            })
+                        });
+                        
+                        const popupContent = \`
+                            <div style="font-family: 'Inter', sans-serif; font-size: 12px; line-height: 1.5; padding: 4px; color: #fff;">
+                                <strong style="display:block; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; margin-bottom: 6px;">Rent Report</strong>
+                                <strong>BHK:</strong> \${pin.bhk} BHK<br>
+                                <strong>Rent:</strong> ₹\${Number(pin.rent).toLocaleString('en-IN')} / mo<br>
+                                <strong>Furnishing:</strong> \${pin.furnishing.toUpperCase()}<br>
+                                <strong>Gated Complex:</strong> \${pin.gated ? 'Yes' : 'No'}
+                            </div>
+                        \`;
+                        marker.bindPopup(popupContent);
+                        marker.addTo(map);
+                    });
+                }
+
+            } catch (e) {
+                console.error("Error loading local page data:", e);
+            }
+        }
+    </script>
+</body>
+</html>`;
+
+for (const [key, info] of Object.entries(LOCALITIES)) {
+  // Generate FAQ HTML
+  let faqHtml = '';
+  info.faqs.forEach(faq => {
+    faqHtml += `
+      <div class="faq-item">
+        <div class="faq-q">Q: ${faq.q}</div>
+        <div class="faq-a">A: ${faq.a}</div>
+      </div>`;
+  });
+
+  // Generate Schema.org JSON-LD (FAQPage, RealEstateAgent, BreadcrumbList)
+  const faqSchemaEntities = info.faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.a
+    }
+  }));
+
+  const schemaJsonLd = `
+    <!-- Schema.org Article, FAQPage, RealEstateAgent & Breadcrumbs JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "FAQPage",
+          "@id": "https://www.chennairents.in/neighbourhood/${key}.html#faq",
+          "url": "https://www.chennairents.in/neighbourhood/${key}.html",
+          "mainEntity": ${JSON.stringify(faqSchemaEntities, null, 8)}
+        },
+        {
+          "@type": "RealEstateAgent",
+          "name": "chennairents.in — ${info.name} Rent Index",
+          "description": "${info.meta_desc}",
+          "url": "https://www.chennairents.in/neighbourhood/${key}.html",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "${info.name}",
+            "addressRegion": "Tamil Nadu",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": ${info.center[0]},
+            "longitude": ${info.center[1]}
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://www.chennairents.in/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Chennai Rents",
+              "item": "https://www.chennairents.in/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "${info.name}",
+              "item": "https://www.chennairents.in/neighbourhood/${key}.html"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  `;
+
+  // Perform replacements
+  let fileContent = template
+    .replace(/#TITLE#/g, info.title)
+    .replace(/#META_DESC#/g, info.meta_desc)
+    .replace(/#NAME#/g, info.name)
+    .replace(/#DESC#/g, info.desc)
+    .replace(/#KEY#/g, key)
+    .replace('#FAQ_HTML#', faqHtml)
+    .replace('#SCHEMA_JSON_LD#', schemaJsonLd);
+
+  // Write file
+  const outputPath = path.join(outputDir, `${key}.html`);
+  fs.writeFileSync(outputPath, fileContent, 'utf8');
+  console.log(`Generated: ${outputPath}`);
+}

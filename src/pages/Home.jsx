@@ -48,9 +48,48 @@ export default function Home() {
             <p style={{ fontSize: '1.3rem', color: 'var(--c-ripon-red)', fontWeight: 600, fontFamily: 'var(--font-heading)', marginBottom: '1.25rem' }}>
               The honest guide to finding a rental home in Chennai.
             </p>
-            <p style={{ fontSize: '1.05rem', color: 'var(--c-ink-muted)', marginBottom: '1.5rem', maxWidth: '540px' }}>
+            <p style={{ fontSize: '1.05rem', color: 'var(--c-ink-muted)', marginBottom: '1.75rem', maxWidth: '540px' }}>
               Real rent rates, water reality, flood history, and Instagram reels of vacant homes. Neighborhood by neighborhood, no brokers, no fake listings.
             </p>
+
+            {/* Quick Hero CTAs */}
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
+              <a
+                href="/listings/index.html"
+                className="btn-dark"
+                style={{
+                  borderRadius: '30px',
+                  padding: '0.65rem 1.4rem',
+                  fontSize: '0.95rem',
+                  fontWeight: 700,
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                }}
+              >
+                🗺️ Explore Rent Map
+              </a>
+              <a
+                href="/listings/list-property.html"
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  backgroundColor: 'var(--c-ripon-red)',
+                  color: '#FFFFFF',
+                  borderRadius: '30px',
+                  padding: '0.65rem 1.4rem',
+                  fontSize: '0.95rem',
+                  fontWeight: 800,
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  boxShadow: '0 4px 14px rgba(178, 58, 46, 0.3)',
+                }}
+              >
+                💼 + List My Flat (0% Broker)
+              </a>
+            </div>
           </motion.div>
           
           <div className="home-numeral-col" style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -71,6 +110,161 @@ export default function Home() {
       </section>
 
       <MarinaDivider variant="default" />
+
+      {/* ── DUAL HIGHLIGHT SECTION: RENT MAP & LIST PROPERTY ── */}
+      <section style={{ backgroundColor: 'var(--c-bg)', paddingBlock: '4rem', borderBottom: '1px solid var(--c-border)' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+            <span className="tag-eyebrow" style={{ display: 'inline-flex', marginBottom: '0.5rem' }}>
+              <span className="tag-bullet" /> ZERO BROKER RENTALS
+            </span>
+            <h2 style={{ fontSize: '2.2rem', fontFamily: 'var(--font-heading)', fontWeight: 900, margin: '0 0 0.5rem 0' }}>
+              Direct Connection Between Tenants & Flat Owners
+            </h2>
+            <p style={{ color: 'var(--c-ink-muted)', fontSize: '1.1rem', maxWidth: '620px', margin: '0 auto' }}>
+              Whether you're looking for an honest rental home or have a vacant flat to lease in Chennai — connect directly with zero middleman fees.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
+            {/* Card 1: Interactive Map & Live Rates */}
+            <div
+              style={{
+                backgroundColor: 'var(--c-card-bg)',
+                border: '1.5px solid var(--c-border)',
+                borderRadius: '16px',
+                padding: '2rem',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                boxShadow: '0 6px 20px rgba(30, 27, 24, 0.05)',
+              }}
+            >
+              <div>
+                <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>🗺️</div>
+                <h3 style={{ fontSize: '1.45rem', fontFamily: 'var(--font-heading)', fontWeight: 800, margin: '0 0 0.75rem 0', color: 'var(--c-ink)' }}>
+                  Interactive Crowdsourced Rent Map
+                </h3>
+                <p style={{ color: 'var(--c-ink-muted)', fontSize: '0.98rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+                  Explore actual rent rates pinned anonymously by tenants across Anna Nagar, OMR, Velachery, and Adyar. Spot broker inflation and view vacant homes.
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1.5rem', fontSize: '0.9rem', color: 'var(--c-ink)' }}>
+                  <div>✓ <strong>100% Anonymous</strong> crowdsourced tenant reports</div>
+                  <div>✓ <strong>Filter by BHK</strong>, rent bracket & gated society</div>
+                  <div>✓ <strong>Pin your own rent</strong> to help fellow Chennaiites</div>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <a
+                  href="/listings/index.html"
+                  className="btn-dark"
+                  style={{
+                    padding: '0.75rem 1.5rem',
+                    borderRadius: '30px',
+                    textDecoration: 'none',
+                    fontWeight: 700,
+                    fontSize: '0.92rem',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                  }}
+                >
+                  Launch Live Map →
+                </a>
+                <a
+                  href="/listings/listings.html"
+                  style={{
+                    padding: '0.75rem 1.25rem',
+                    borderRadius: '30px',
+                    border: '1.5px solid var(--c-border)',
+                    color: 'var(--c-ink)',
+                    textDecoration: 'none',
+                    fontWeight: 700,
+                    fontSize: '0.92rem',
+                    fontFamily: 'var(--font-heading)',
+                    backgroundColor: 'var(--c-sand-light)',
+                  }}
+                >
+                  View Feed List
+                </a>
+              </div>
+            </div>
+
+            {/* Card 2: List Property (Zero Commission) */}
+            <div
+              style={{
+                backgroundColor: '#FAF5EE',
+                border: '2px solid var(--c-auto-yellow)',
+                borderRadius: '16px',
+                padding: '2rem',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                boxShadow: '0 6px 24px rgba(245, 184, 0, 0.15)',
+                position: 'relative',
+              }}
+            >
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '-12px',
+                  right: '24px',
+                  backgroundColor: 'var(--c-ripon-red)',
+                  color: '#FFFFFF',
+                  fontSize: '0.72rem',
+                  fontWeight: 900,
+                  fontFamily: 'var(--font-heading)',
+                  padding: '4px 12px',
+                  borderRadius: '20px',
+                  letterSpacing: '0.05em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Zero Brokerage
+              </div>
+
+              <div>
+                <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>💼</div>
+                <h3 style={{ fontSize: '1.45rem', fontFamily: 'var(--font-heading)', fontWeight: 800, margin: '0 0 0.75rem 0', color: 'var(--c-ink)' }}>
+                  List Your Property Directly
+                </h3>
+                <p style={{ color: 'var(--c-ink-muted)', fontSize: '0.98rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+                  Have a whole apartment or a room to let out in a shared flat? List directly to thousands of active Chennai tenants with zero commission fees.
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1.5rem', fontSize: '0.9rem', color: 'var(--c-ink)' }}>
+                  <div>✓ <strong>Direct Tenant Inquiries</strong> via WhatsApp & Phone</div>
+                  <div>✓ <strong>No 15-day / 1-month</strong> broker commission taken</div>
+                  <div>✓ <strong>Instant Listing</strong> — takes less than 2 minutes</div>
+                </div>
+              </div>
+
+              <div>
+                <a
+                  href="/listings/list-property.html"
+                  style={{
+                    backgroundColor: 'var(--c-ripon-red)',
+                    color: '#FFFFFF',
+                    padding: '0.8rem 1.75rem',
+                    borderRadius: '30px',
+                    textDecoration: 'none',
+                    fontWeight: 800,
+                    fontSize: '0.95rem',
+                    fontFamily: 'var(--font-heading)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    boxShadow: '0 4px 16px rgba(178, 58, 46, 0.35)',
+                    transition: 'transform 0.15s ease',
+                  }}
+                >
+                  + List My Property Free →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ── INSTAGRAM CALLOUT STRIP ── */}
       <section style={{ backgroundColor: 'var(--c-sand-light)', borderBottom: '1px solid var(--c-border)', borderTop: '1px solid var(--c-border)', paddingBlock: '2.5rem' }}>

@@ -22,6 +22,18 @@ function LegacyRedirect() {
   return <PostTemplate />;
 }
 
+// Hard-redirect helper to cleanly transition from React SPA router to static listings app
+function ListingsRedirect() {
+  useEffect(() => {
+    window.location.replace('/listings/index.html');
+  }, []);
+  return (
+    <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-heading)' }}>
+      <p style={{ color: 'var(--c-ink-muted)', fontSize: '1.1rem' }}>Loading Chennai Rents Map...</p>
+    </div>
+  );
+}
+
 export default function App() {
   const [lang, setLang] = useState('ta');
   const location = useLocation();
@@ -63,6 +75,10 @@ export default function App() {
             {/* ── PRIMARY ROUTES ── */}
             <Route path="/" element={<Home lang={lang} />} />
             <Route path="/about" element={<About lang={lang} />} />
+            {/* ── LISTINGS & MAP (Direct to Chennai Rents Map app) ── */}
+            <Route path="/listings" element={<ListingsRedirect />} />
+            <Route path="/listings/*" element={<ListingsRedirect />} />
+            <Route path="/map" element={<ListingsRedirect />} />
 
             {/* ── SEO GEO ROUTES ── */}
             {/* City hub */}

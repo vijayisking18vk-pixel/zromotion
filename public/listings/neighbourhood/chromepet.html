@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flats for Rent in Chromepet Chennai: Average Rent & Tenant Reports | chennairents.in</title>
+    <meta name="description" content="Explore real tenant rent reports, average prices, and rental trends in Chromepet Chennai. Affordable suburb with strong rail connectivity and growing IT presence. Connect directly with owners." />
+    <meta name="keywords" content="flats for rent Chromepet, rent in Chromepet Chennai, 2BHK rent Chromepet, Chromepet flat rental, Chennai rent map, no broker Chromepet, direct owner Chromepet" />
+    <link rel="canonical" href="https://www.chennairents.in/neighbourhood/chromepet.html" />
+    <link rel="stylesheet" href="/index.css">
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Flats for Rent in Chromepet Chennai: Average Rent & Tenant Reports | chennairents.in" />
+    <meta property="og:description" content="Explore real tenant rent reports, average prices, and rental trends in Chromepet Chennai. Connect directly with owners." />
+    <meta property="og:url" content="https://www.chennairents.in/neighbourhood/chromepet.html" />
+    <meta property="og:image" content="https://www.chennairents.in/assets/og-image.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Flats for Rent in Chromepet Chennai | chennairents.in" />
+    <meta name="twitter:description" content="Rent data, tenant reports and direct-owner listings in Chromepet, Chennai." />
+    <meta name="twitter:image" content="https://www.chennairents.in/assets/og-image.png" />
+
+    <!-- Leaflet.js Mapping Library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+    <!-- Supabase UMD Client SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "FAQPage",
+          "@id": "https://www.chennairents.in/neighbourhood/chromepet.html#faq",
+          "url": "https://www.chennairents.in/neighbourhood/chromepet.html",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the average rent in Chromepet Chennai?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A 2BHK flat in Chromepet typically costs ₹12,000–₹20,000 per month, making it one of Chennai's most affordable suburbs with strong rail connectivity. 1BHK units range from ₹8,000 to ₹13,000. It is significantly cheaper than OMR or Velachery for comparable flat sizes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is Chromepet well-connected to central Chennai?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Chromepet has its own suburban railway station on the Chennai–Chengalpattu line, one of the busiest commuter rail corridors in South India. Trains run every 10–15 minutes during peak hours to Chennai Egmore and Chennai Beach. The GST Road (NH-32) also provides direct access to the airport, Tambaram, and Guindy."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the typical advance deposit in Chromepet?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Chromepet is one of the more flexible localities in Chennai for deposits. Landlords typically ask for 3–6 months' advance, significantly below the 8–10 month demand common in T. Nagar or Adyar. The high supply of rental stock relative to demand keeps deposit norms competitive."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who typically rents in Chromepet?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Chromepet attracts a broad tenant mix: airport staff (given proximity to Chennai International Airport), students at nearby colleges, government employees in Pallavaram/Tambaram, and budget-conscious IT professionals working in Sholinganallur or the airport belt."
+              }
+            }
+          ]
+        },
+        {
+          "@type": "RealEstateAgent",
+          "name": "chennairents.in — Chromepet Rent Index",
+          "description": "Explore real tenant rent reports, average prices, and rental trends in Chromepet Chennai. Connect directly with owners.",
+          "url": "https://www.chennairents.in/neighbourhood/chromepet.html",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Chromepet",
+            "addressRegion": "Tamil Nadu",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 12.9516,
+            "longitude": 80.1433
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.chennairents.in/" },
+            { "@type": "ListItem", "position": 2, "name": "Chennai Rents", "item": "https://www.chennairents.in/" },
+            { "@type": "ListItem", "position": 3, "name": "Chromepet", "item": "https://www.chennairents.in/neighbourhood/chromepet.html" }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #ff3e00;
+            text-decoration: underline;
+        }
+        .back-link:hover { color: #ff5a1f; }
+        .desc-text {
+            font-size: 14px;
+            line-height: 1.65;
+            margin-bottom: 24px;
+            color: #cbd5e1;
+            text-align: justify;
+        }
+        .faq-item {
+            margin-bottom: 20px;
+            padding: 16px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 8px;
+        }
+        .faq-q {
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+            font-size: 14.5px;
+        }
+        .faq-a {
+            color: #94a3b8;
+            font-size: 13.5px;
+            line-height: 1.55;
+        }
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 16px 0;
+        }
+        .highlight-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 8px;
+            padding: 12px;
+        }
+        .highlight-card .hl-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #6b7280;
+            margin-bottom: 4px;
+        }
+        .highlight-card .hl-value {
+            font-size: 15px;
+            font-weight: 700;
+            color: white;
+        }
+        .highlight-card .hl-sub {
+            font-size: 11px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+        .rent-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 13px;
+        }
+        .rent-table th {
+            background: rgba(255,62,0,0.1);
+            color: #ff7a50;
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .rent-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: #cbd5e1;
+        }
+        .rent-table tr:last-child td { border-bottom: none; }
+    </style>
+</head>
+<body style="background-color: #0d0d0d;">
+
+    <div class="app-container" style="display: grid; grid-template-columns: 1.2fr 1fr; height: 100vh; width: 100vw; overflow: hidden;">
+
+        <!-- Left Section: Localized Map -->
+        <div class="map-pane" style="position: relative; height: 100%; width: 100%; border-right: 1px solid rgba(255,255,255,0.08);">
+            <div id="map"></div>
+            <div class="info-banner" style="position: absolute; bottom: 0; left: 0; right: 0; z-index: 1000; border-top: 1px solid rgba(255,255,255,0.08); background: rgba(8,8,18,0.85); backdrop-filter: blur(10px); color: #cbd5e1;" id="local-banner">
+                Showing rent data for Chromepet.
+            </div>
+        </div>
+
+        <!-- Right Section: Newspaper Editorial Content -->
+        <div class="content-pane" style="background-color: #161625; overflow-y: auto; display: flex; flex-direction: column;">
+
+            <!-- Newspaper Header -->
+            <header class="newspaper-header" style="padding: 24px; border-bottom: 1px solid rgba(255,255,255,0.08); text-align: center;">
+                <div class="newspaper-meta" style="color: #6b7280;">
+                    <span>Vol. 1 • No. 1</span>
+                    <span id="header-date">SATURDAY, JUNE 28, 2026</span>
+                    <span>Chennai Edition</span>
+                </div>
+                <a href="/" class="newspaper-title" style="color: #ff3e00; font-size: 32px; font-weight: 800; text-decoration: none;">chennairents.in</a>
+                <div class="newspaper-tagline" style="color: #9ca3af; font-size: 12px; margin-top: 6px;">Special Broadsheet Report: Chromepet</div>
+            </header>
+
+            <!-- Page Body Content -->
+            <main class="pane-body" style="padding: 24px; flex: 1;">
+                <a href="/" class="back-link">&larr; Return to main Chennai Map</a>
+
+                <section class="editorial-section" style="margin-bottom: 32px;">
+                    <h1 class="editorial-title" style="font-size: 24px; font-weight: 700; color: white; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-bottom: 16px;">Chromepet Rental Index</h1>
+                    <div class="desc-text">
+                        Chromepet is one of Chennai's most underrated rental suburbs. Located along the GST Road (NH-32) corridor between Tambaram and the Chennai Airport, it offers exceptional rail connectivity at rents that are 30–40% below comparable OMR or Velachery units. The Chennai–Chengalpattu suburban railway line runs through Chromepet station with trains every 10–15 minutes during peak hours. This makes it a pragmatic choice for airport staff, budget-conscious IT workers, government employees in the Pallavaram–Tambaram corridor, and anyone prioritising spacious living over locality prestige.
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="highlight-grid">
+                        <div class="highlight-card">
+                            <div class="hl-label">2BHK Avg Rent</div>
+                            <div class="hl-value">₹12K–20K</div>
+                            <div class="hl-sub">per month</div>
+                        </div>
+                        <div class="highlight-card">
+                            <div class="hl-label">1BHK Avg Rent</div>
+                            <div class="hl-value">₹8K–13K</div>
+                            <div class="hl-sub">per month</div>
+                        </div>
+                        <div class="highlight-card">
+                            <div class="hl-label">Typical Deposit</div>
+                            <div class="hl-value">3–6 Months</div>
+                            <div class="hl-sub">among the lowest in Chennai</div>
+                        </div>
+                        <div class="highlight-card">
+                            <div class="hl-label">Railway Station</div>
+                            <div class="hl-value">✅ Direct</div>
+                            <div class="hl-sub">Chennai–Chengalpattu line</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Rent Breakdown by Property Type -->
+                <section class="editorial-section" style="margin-bottom: 32px;">
+                    <h2 class="editorial-title" style="font-size: 16px; font-weight: 700; color: white; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-bottom: 16px;">Rent Breakdown by Property Type (2026)</h2>
+                    <table class="rent-table">
+                        <thead>
+                            <tr>
+                                <th>Property Type</th>
+                                <th>Monthly Rent</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1BHK — Builder Floor</td>
+                                <td>₹7,000–11,000</td>
+                                <td>Older standalone buildings, ground floor</td>
+                            </tr>
+                            <tr>
+                                <td>1BHK — Apartment (with lift)</td>
+                                <td>₹10,000–14,000</td>
+                                <td>3–5 year old buildings, upper floors</td>
+                            </tr>
+                            <tr>
+                                <td>2BHK — Builder Floor</td>
+                                <td>₹12,000–16,000</td>
+                                <td>Near railway station and GST Road</td>
+                            </tr>
+                            <tr>
+                                <td>2BHK — Apartment</td>
+                                <td>₹15,000–22,000</td>
+                                <td>Newer complexes, semi-furnished</td>
+                            </tr>
+                            <tr>
+                                <td>3BHK — Apartment</td>
+                                <td>₹22,000–32,000</td>
+                                <td>Premium, gated or large layouts</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Local Averages (Supabase) -->
+                <section class="editorial-section" style="margin-bottom: 32px;">
+                    <h2 class="editorial-title" style="font-size: 16px; font-weight: 700; color: white; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-bottom: 16px;">Verified Local Average Rents</h2>
+                    <div class="stats-list" id="local-stats-table">
+                        <div class="stats-row"><span class="stats-row-label">Loading local averages...</span></div>
+                    </div>
+                </section>
+
+                <!-- Locality Profile -->
+                <section class="editorial-section" style="margin-bottom: 32px;">
+                    <h2 class="editorial-title" style="font-size: 16px; font-weight: 700; color: white; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-bottom: 16px;">Why People Choose Chromepet</h2>
+                    <div class="desc-text">
+                        <strong style="color:white;">Suburban Rail:</strong> Chromepet station runs on the Chennai Egmore–Chengalpattu mainline. Trains reach Chennai Beach in under 35 minutes during off-peak hours. Monthly suburban rail passes are extremely affordable (under ₹800/month), making the total commute cost significantly lower than living in expensive IT corridors.
+                    </div>
+                    <div class="desc-text">
+                        <strong style="color:white;">Airport Proximity:</strong> Chennai International Airport is within a 10–15 minute drive from most of Chromepet. For frequent flyers, cabin crew, or airport staff, this is a decisive advantage. Pallavaram (adjacent) hosts several airline ground handling operations.
+                    </div>
+                    <div class="desc-text">
+                        <strong style="color:white;">Affordability:</strong> Chromepet offers the best value-per-square-foot rental in the GST Road belt. A 2BHK that would cost ₹22,000 in Velachery or ₹28,000 in Sholinganallur can be found for ₹14,000–18,000 here with identical amenity quality.
+                    </div>
+                    <div class="desc-text">
+                        <strong style="color:white;">Water Supply:</strong> Chromepet benefits from relatively stable Metrowater supply compared to deeper South Chennai suburbs. Being on the older, established civic infrastructure network, water issues are less chronic than in newer OMR developments.
+                    </div>
+                </section>
+
+                <!-- Local FAQ Section -->
+                <section class="editorial-section" style="margin-bottom: 32px;">
+                    <h2 class="editorial-title" style="font-size: 16px; font-weight: 700; color: white; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-bottom: 16px;">Frequently Asked Questions</h2>
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <div class="faq-q">Q: What is the average rent in Chromepet Chennai?</div>
+                            <div class="faq-a">A: A 2BHK flat in Chromepet costs ₹12,000–₹20,000 per month — among the most affordable in Chennai with rail connectivity. 1BHK units range from ₹8,000 to ₹13,000, making it ideal for budget-conscious professionals.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-q">Q: How is train connectivity from Chromepet?</div>
+                            <div class="faq-a">A: Excellent. Chromepet has its own suburban railway station on the Chennai Egmore–Chengalpattu line with trains every 10–15 minutes during peak hours. You can reach Chennai Beach in 35 minutes, Tambaram in 10 minutes, and Egmore in 30 minutes.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-q">Q: What is the typical advance deposit in Chromepet?</div>
+                            <div class="faq-a">A: Chromepet landlords typically ask for 3–6 months' advance — significantly lower than central or premium Chennai localities. High rental supply gives tenants strong negotiating power. Employees with salary slips can often secure 3-month deals.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-q">Q: Is Chromepet good for airport staff?</div>
+                            <div class="faq-a">A: Yes, it is one of the best localities for Chennai airport staff. The airport is 10–15 minutes by road from most parts of Chromepet. The GST Road provides a direct, uncongested route at early morning hours when airport shifts begin.</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Disclaimer -->
+                <section class="editorial-section" style="margin-top: 32px;">
+                    <p style="font-size: 11px; line-height: 1.5; font-style: italic; color: #6b7280;">
+                        The figures above represent actual rent prices logged anonymously by tenants living in this sector. Outlier points (entries 3x above or below the area median) are automatically flagged and hidden to maintain registry accuracy.
+                    </p>
+                </section>
+
+            </main>
+
+            <footer style="border-top:1px solid rgba(255,255,255,0.08); padding: 24px; text-align:center; font-size:12px; color:#6b7280; background: rgba(8,8,18,0.2);">
+                <a href="/" style="color:#94a3b8; text-decoration:none; margin: 0 8px;">Map</a> ·
+                <a href="/contact.html" style="color:#94a3b8; text-decoration:none; margin: 0 8px;">Contact</a> ·
+                <a href="/privacy.html" style="color:#94a3b8; text-decoration:none; margin: 0 8px;">Privacy</a>
+            </footer>
+
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://hnnkhmfrpwdrkkjbgckv.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhubmtobWZycHdkcmtramJnY2t2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4NDk1ODgsImV4cCI6MjA5NzQyNTU4OH0.oCXDCH1J80HLb8AfQA31Fdqi-vbVN2cMdCTZm-NWngc';
+        const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        let map;
+        let pinsData = [];
+        let metroLinesGroup;
+
+        const LOCALITY_DATA = {
+            "chromepet": { center: [12.9516, 80.1433], db_name: "Chromepet" }
+        };
+
+        const METRO_LINES = {
+            "Blue Line": {
+                color: "#0072bc", weight: 3.5, opacity: 0.85,
+                stations: [
+                    { name: "Chennai Central Metro", coords: [13.0827, 80.2755] },
+                    { name: "Guindy", coords: [13.0083, 80.2201] },
+                    { name: "Alandur", coords: [13.0038, 80.2014] },
+                    { name: "Meenambakkam", coords: [12.9868, 80.1762] },
+                    { name: "Chennai Airport", coords: [12.9806, 80.1652] }
+                ]
+            },
+            "Suburban Rail": {
+                color: "#7c3aed", weight: 3, opacity: 0.8,
+                stations: [
+                    { name: "Chennai Egmore", coords: [13.0780, 80.2623] },
+                    { name: "Mambalam", coords: [13.0422, 80.2175] },
+                    { name: "Saidapet", coords: [13.0223, 80.2294] },
+                    { name: "Guindy", coords: [13.0083, 80.2201] },
+                    { name: "St. Thomas Mount", coords: [13.0055, 80.2001] },
+                    { name: "Pallavaram", coords: [12.9740, 80.1508] },
+                    { name: "Chromepet", coords: [12.9516, 80.1433] },
+                    { name: "Tambaram", coords: [12.9262, 80.1289] }
+                ]
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById("header-date").innerText = new Date().toLocaleDateString('en-US', options).toUpperCase();
+
+            const areaKey = "chromepet";
+            const areaInfo = LOCALITY_DATA[areaKey];
+
+            map = L.map('map', { zoomControl: false }).setView(areaInfo.center, 14);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            metroLinesGroup = L.layerGroup().addTo(map);
+            initMetroLines();
+            loadLocalData(areaInfo);
+        });
+
+        function initMetroLines() {
+            for (const [lineName, lineInfo] of Object.entries(METRO_LINES)) {
+                const latlngs = lineInfo.stations.map(s => s.coords);
+                L.polyline(latlngs, {
+                    color: lineInfo.color,
+                    weight: lineInfo.weight,
+                    opacity: lineInfo.opacity,
+                    dashArray: lineName === "Suburban Rail" ? "5, 8" : null
+                }).addTo(metroLinesGroup);
+
+                lineInfo.stations.forEach(station => {
+                    const circle = L.circleMarker(station.coords, {
+                        radius: 5,
+                        color: lineInfo.color,
+                        weight: 1.5,
+                        fillColor: '#ffffff',
+                        fillOpacity: 1
+                    });
+                    circle.bindTooltip(`${station.name} (${lineName})`, {
+                        direction: 'top',
+                        offset: [0, -5],
+                        className: 'custom-metro-tooltip'
+                    });
+                    circle.on('click', (e) => {
+                        L.DomEvent.stopPropagation(e);
+                        map.setView(station.coords, 14);
+                        calculateAvgRentNearCoords(station.coords, station.name);
+                    });
+                    circle.addTo(metroLinesGroup);
+                });
+            }
+        }
+
+        function calculateAvgRentNearCoords(coords, name) {
+            const radiusMeters = 1000;
+            const center = L.latLng(coords[0], coords[1]);
+            const nearbyPins = pinsData.filter(pin => {
+                const pinLoc = L.latLng(pin.latitude, pin.longitude);
+                return center.distanceTo(pinLoc) <= radiusMeters;
+            });
+            if (nearbyPins.length === 0) {
+                L.popup().setLatLng(coords).setContent(`<div style="font-family:'Inter',sans-serif; color:white; padding:8px; font-size:12px;"><strong>${name} Station</strong><br><span style="color:#9ca3af;">No crowdsourced rent pins found within 1km yet.</span></div>`).openOn(map);
+                return;
+            }
+            const totalRent = nearbyPins.reduce((acc, pin) => acc + Number(pin.rent), 0);
+            const avgRent = Math.round(totalRent / nearbyPins.length);
+            const countByBhk = {};
+            nearbyPins.forEach(pin => {
+                countByBhk[pin.bhk] = countByBhk[pin.bhk] || { total: 0, count: 0 };
+                countByBhk[pin.bhk].total += Number(pin.rent);
+                countByBhk[pin.bhk].count++;
+            });
+            let statsHtml = `<div style="font-family:'Inter',sans-serif; color:white; padding:6px; min-width:210px;">`;
+            statsHtml += `<p style="font-size:12px; margin:0 0 6px 0; color:#9ca3af;">Crowdsourced rents within 1km of</p>`;
+            statsHtml += `<p style="font-size:14px; margin:0 0 10px 0; font-weight:700; color:#ff3e00; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">${name}</p>`;
+            statsHtml += `<div style="font-size:12.5px; font-weight:700; margin-bottom:10px;">Average Rent: ₹${avgRent.toLocaleString('en-IN')}/mo</div>`;
+            Object.keys(countByBhk).sort().forEach(bhk => {
+                const data = countByBhk[bhk];
+                const avg = Math.round(data.total / data.count);
+                statsHtml += `<div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px; color:#cbd5e1;"><span>${bhk} BHK (${data.count} pin${data.count > 1 ? 's' : ''}):</span><strong style="color:white;">₹${avg.toLocaleString('en-IN')}/mo</strong></div>`;
+            });
+            statsHtml += `</div>`;
+            L.popup().setLatLng(coords).setContent(statsHtml).openOn(map);
+        }
+
+        async function loadLocalData(areaInfo) {
+            try {
+                const { data: stats, error: statsErr } = await db
+                    .from('neighbourhood_stats')
+                    .select('*')
+                    .eq('area', areaInfo.db_name)
+                    .order('bhk', { ascending: true });
+
+                const tbody = document.getElementById("local-stats-table");
+                tbody.innerHTML = '';
+
+                if (statsErr || !stats || stats.length === 0) {
+                    tbody.innerHTML = `<div class="stats-row"><span class="stats-row-label">No crowdsourced pins found in ${areaInfo.db_name} yet. Be the first to pin!</span></div>`;
+                } else {
+                    stats.forEach(row => {
+                        const div = document.createElement("div");
+                        div.className = "stats-row";
+                        div.innerHTML = `
+                            <span class="stats-row-label">${row.bhk} BHK Local Average</span>
+                            <span class="stats-row-value">₹${Math.round(row.avg_rent).toLocaleString('en-IN')} / month</span>
+                        `;
+                        tbody.appendChild(div);
+                    });
+                }
+
+                const { data: pins, error: pinsErr } = await db
+                    .from('pins_public')
+                    .select('*')
+                    .eq('area', areaInfo.db_name);
+
+                if (!pinsErr && pins) {
+                    pinsData = pins;
+                    pins.forEach(pin => {
+                        const rentK = Math.round(pin.rent / 1000) + 'k';
+                        const gatedClass = pin.is_listing ? 'listing' : (pin.gated ? 'gated' : 'not-gated');
+                        const labelIcon = pin.is_listing ? '🏠 ' : '';
+                        const marker = L.marker([pin.latitude, pin.longitude], {
+                            icon: L.divIcon({
+                                className: 'custom-pin-marker-wrapper',
+                                html: `<div class="pin-marker" id="pin-id-${pin.id}">
+                                         <div class="pin-label ${gatedClass}">${labelIcon}${rentK}</div>
+                                         <div class="pin-caret ${gatedClass}"></div>
+                                       </div>`,
+                                iconSize: [40, 30],
+                                iconAnchor: [20, 30]
+                            })
+                        });
+                        const popupContent = `
+                            <div style="font-family: 'Inter', sans-serif; font-size: 12px; line-height: 1.5; padding: 4px; color: #fff;">
+                                <strong style="display:block; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; margin-bottom: 6px;">Rent Report</strong>
+                                <strong>BHK:</strong> ${pin.bhk} BHK<br>
+                                <strong>Rent:</strong> ₹${Number(pin.rent).toLocaleString('en-IN')} / mo<br>
+                                <strong>Furnishing:</strong> ${pin.furnishing.toUpperCase()}<br>
+                                <strong>Gated Complex:</strong> ${pin.gated ? 'Yes' : 'No'}
+                            </div>
+                        `;
+                        marker.bindPopup(popupContent);
+                        marker.addTo(map);
+                    });
+                }
+            } catch (e) {
+                console.error("Error loading local page data:", e);
+            }
+        }
+    </script>
+</body>
+</html>

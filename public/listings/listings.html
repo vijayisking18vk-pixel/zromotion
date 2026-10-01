@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Flats & Listings | chennairents.in</title>
+    <meta name="description" content="Browse direct owner listings with no broker fees in Chennai. Filter by rent, BHK, and gated community status." />
+    <link rel="stylesheet" href="index.css">
+    <!-- Premium Editorial Fonts (Cabinet Grotesk + Satoshi) via Fontshare -->
+    <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,500,700,900&f[]=satoshi@900,700,500,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: var(--c-page-bg);
+            color: var(--c-ink);
+            font-family: var(--font-body);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .nav-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: var(--c-header-bg);
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            border-bottom: 1px solid var(--c-border);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        
+        .brand-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--c-ripon-red);
+            box-shadow: 0 0 10px rgba(178, 58, 46, 0.4);
+        }
+        
+        .brand-text {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--c-ink);
+            letter-spacing: -0.3px;
+        }
+
+        .back-link {
+            font-family: var(--font-heading);
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--c-ink-muted);
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--c-ripon-red);
+            background: var(--c-sand-light);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── Left Sidebar: Filters & CTA ── */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .filter-panel {
+            background: var(--c-card-bg);
+            border: 1px solid var(--c-border);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(30, 27, 24, 0.05);
+        }
+        
+        .filter-header {
+            font-family: var(--font-heading);
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--c-ink);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .clear-btn {
+            background: none;
+            border: none;
+            color: var(--c-ripon-red);
+            font-size: 12px;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .clear-btn:hover {
+            text-decoration: underline;
+        }
+
+        .field-group { margin-bottom: 20px; }
+        .field-label { color: var(--c-ink); font-size: 13px; font-weight: 700; font-family: var(--font-heading); margin-bottom: 8px; display: block; }
+        
+        .cta-box {
+            background: var(--c-sand-light);
+            border: 1.5px dashed var(--c-border);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .cta-box h3 {
+            font-family: var(--font-heading);
+            color: var(--c-ink);
+            font-weight: 800;
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .cta-box p {
+            font-size: 13px;
+            color: var(--c-ink-muted);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .btn-list-flat {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--c-ripon-red);
+            color: #FFFFFF;
+            text-align: center;
+            border-radius: 10px;
+            text-decoration: none;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(178, 58, 46, 0.2);
+        }
+
+        .btn-list-flat:hover {
+            background: var(--c-ripon-red-dk);
+            transform: translateY(-1px);
+        }
+
+        /* ── Right Content: Listing Grid ── */
+        .feed-header {
+            margin-bottom: 24px;
+        }
+
+        .feed-title {
+            font-family: var(--font-heading);
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--c-ink);
+            margin-bottom: 6px;
+            letter-spacing: -0.4px;
+        }
+
+        .feed-subtitle {
+            font-size: 14px;
+            color: var(--c-ink-muted);
+        }
+
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        /* Listing Card */
+        .listing-card {
+            background: var(--c-card-bg);
+            border: 1px solid var(--c-border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 12px rgba(30, 27, 24, 0.04);
+        }
+
+        .listing-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--c-ink);
+            box-shadow: 0 12px 28px rgba(30, 27, 24, 0.08);
+        }
+
+        .card-img-placeholder {
+            height: 160px;
+            background: var(--c-sand-light);
+            border-bottom: 1px solid var(--c-border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .card-img-placeholder svg {
+            color: var(--c-border);
+            width: 44px;
+            height: 44px;
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #EBF6EE;
+            color: var(--c-temple-green-dk);
+            border: 1.5px solid rgba(47, 125, 79, 0.4);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            backdrop-filter: blur(4px);
+        }
+        
+        .gated-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #EBF3FA;
+            color: var(--c-marina-blue-dk);
+            border: 1.5px solid rgba(31, 111, 168, 0.4);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            font-family: var(--font-heading);
+        }
+
+        .card-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-rent {
+            font-family: var(--font-heading);
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--c-ink);
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+        }
+
+        .card-rent span {
+            font-size: 14px;
+            color: var(--c-ink-muted);
+            font-weight: 500;
+            font-family: var(--font-body);
+        }
+
+        .card-title {
+            font-family: var(--font-heading);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--c-ink);
+            margin-bottom: 12px;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: var(--c-ink-muted);
+        }
+
+        .card-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            border-top: 1px solid var(--c-border-subtle);
+            padding-top: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-date {
+            font-size: 12px;
+            color: var(--c-ink-light);
+            font-weight: 500;
+        }
+
+        .btn-view {
+            background: transparent;
+            color: var(--c-ripon-red);
+            border: 1.5px solid var(--c-ripon-red);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-view:hover {
+            background: var(--c-ripon-red);
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="nav-header">
+        <a href="/" class="brand">
+            <div class="brand-dot"></div>
+            <div class="brand-text">chennairents.in</div>
+        </a>
+        <div style="display: flex; gap: 16px; align-items: center;">
+            <a href="index.html" class="back-link">🗺️ Map View</a>
+            <a href="/" class="back-link">&larr; Back to Home</a>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- Sidebar Filters -->
+        <aside class="sidebar">
+            
+            <div class="cta-box">
+                <h3>List Your Flat</h3>
+                <p>Find direct tenants without broker fees. Listings are verified and matched with active seekers instantly.</p>
+                <a href="list-property.html" class="btn-list-flat">List Property for Free</a>
+            </div>
+
+            <div class="filter-panel">
+                <div class="filter-header">
+                    <span>Filters</span>
+                    <button class="clear-btn">Clear All</button>
+                </div>
+                
+                <div class="field-group">
+                    <label class="field-label">Location</label>
+                    <select class="form-select">
+                        <option value="">All Chennai</option>
+                        <option value="OMR">OMR</option>
+                        <option value="Anna Nagar">Anna Nagar</option>
+                        <option value="Velachery">Velachery</option>
+                        <option value="Adyar">Adyar</option>
+                    </select>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">BHK Size</label>
+                    <div class="chips-row">
+                        <div class="option-chip">1 BHK</div>
+                        <div class="option-chip active">2 BHK</div>
+                        <div class="option-chip">3 BHK</div>
+                        <div class="option-chip">4+ BHK</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Rent Range (₹)</label>
+                    <div style="display:flex; gap:8px;">
+                        <input type="number" class="form-input" placeholder="Min" />
+                        <input type="number" class="form-input" placeholder="Max" />
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Furnishing</label>
+                    <div class="chips-row">
+                        <div class="option-chip">Fully</div>
+                        <div class="option-chip">Semi</div>
+                        <div class="option-chip">Unfurnished</div>
+                    </div>
+                </div>
+                
+                <div class="field-group" style="margin-bottom: 0;">
+                    <label class="field-label">Community</label>
+                    <div class="chips-row">
+                        <div class="option-chip">Gated</div>
+                        <div class="option-chip">Standalone</div>
+                    </div>
+                </div>
+            </div>
+            
+        </aside>
+
+        <!-- Main Feed -->
+        <main class="feed-content">
+            <div class="feed-header">
+                <h1 class="feed-title">Available Flats in Chennai</h1>
+                <p class="feed-subtitle">Showing direct owner listings. No broker fees.</p>
+            </div>
+
+            <div class="listings-grid">
+                
+                <!-- Card 1 -->
+                <div class="listing-card">
+                    <div class="card-img-placeholder">
+                        <span class="status-badge">Available ASAP</span>
+                        <span class="gated-badge">Gated</span>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-rent">₹28,000<span>/mo</span></div>
+                        <div class="card-title">2 BHK in Appaswamy Cerus, Saligramam</div>
+                        <div class="card-meta">
+                            <div class="card-meta-item">🛏️ 2 Bed</div>
+                            <div class="card-meta-item">🛋️ Semi</div>
+                            <div class="card-meta-item">🚗 1 Park</div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-date">Listed 2 days ago</span>
+                            <button class="btn-view">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="listing-card">
+                    <div class="card-img-placeholder">
+                        <span class="status-badge" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border-color: rgba(245, 158, 11, 0.3);">Next Month</span>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-rent">₹42,000<span>/mo</span></div>
+                        <div class="card-title">3 BHK Independent House in Anna Nagar West</div>
+                        <div class="card-meta">
+                            <div class="card-meta-item">🛏️ 3 Bed</div>
+                            <div class="card-meta-item">📦 Unfurnished</div>
+                            <div class="card-meta-item">🚗 2 Park</div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-date">Listed 5 days ago</span>
+                            <button class="btn-view">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="listing-card">
+                    <div class="card-img-placeholder">
+                        <span class="status-badge">Available ASAP</span>
+                        <span class="gated-badge">Gated</span>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-rent">₹18,500<span>/mo</span></div>
+                        <div class="card-title">1 BHK in DLF Commander's Court, Egmore</div>
+                        <div class="card-meta">
+                            <div class="card-meta-item">🛏️ 1 Bed</div>
+                            <div class="card-meta-item">🛋️ Fully</div>
+                            <div class="card-meta-item">🏍️ Bike Only</div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-date">Listed today</span>
+                            <button class="btn-view">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="listing-card">
+                    <div class="card-img-placeholder">
+                        <span class="status-badge">Available ASAP</span>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-rent">₹14,000<span>/mo</span></div>
+                        <div class="card-title">Flatmate (Private Room) in 3BHK, Velachery</div>
+                        <div class="card-meta">
+                            <div class="card-meta-item">🛏️ Room</div>
+                            <div class="card-meta-item">🧑 Male Only</div>
+                            <div class="card-meta-item">🚭 Non-smoker</div>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-date">Listed 1 week ago</span>
+                            <button class="btn-view">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+        
+    </div>
+
+</body>
+</html>

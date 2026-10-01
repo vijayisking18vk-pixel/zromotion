@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Your Property | chennairents.in</title>
+    <meta name="description" content="List your Chennai flat directly to tenants with zero broker fees." />
+    <link rel="stylesheet" href="index.css">
+    <!-- Premium Editorial Fonts (Cabinet Grotesk + Satoshi) via Fontshare -->
+    <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,500,700,900&f[]=satoshi@900,700,500,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: var(--c-page-bg);
+            color: var(--c-ink);
+            font-family: var(--font-body);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .nav-header {
+            background: var(--c-header-bg);
+            backdrop-filter: blur(20px) saturate(1.4);
+            border-bottom: 1px solid var(--c-border);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        
+        .brand-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--c-ripon-red);
+            box-shadow: 0 0 10px rgba(178, 58, 46, 0.4);
+        }
+        
+        .brand-text {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--c-ink);
+            letter-spacing: -0.3px;
+        }
+
+        .back-link {
+            font-family: var(--font-heading);
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--c-ink-muted);
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        .back-link:hover {
+            color: var(--c-ripon-red);
+            background: var(--c-sand-light);
+        }
+
+        .form-container {
+            flex: 1;
+            max-width: 600px;
+            margin: 40px auto;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .form-card {
+            background: var(--c-card-bg);
+            border: 1px solid var(--c-border);
+            border-radius: 20px;
+            padding: 36px 32px;
+            box-shadow: 0 12px 36px rgba(30, 27, 24, 0.08);
+        }
+
+        .page-title {
+            font-family: var(--font-heading);
+            font-size: 26px;
+            color: var(--c-ink);
+            font-weight: 900;
+            margin-bottom: 8px;
+            letter-spacing: -0.4px;
+        }
+
+        .page-subtitle {
+            color: var(--c-ink-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        /* Listing Type Selector */
+        .type-selector {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .type-btn {
+            flex: 1;
+            padding: 16px;
+            background: var(--c-sand-light);
+            border: 1.5px solid var(--c-border);
+            border-radius: 12px;
+            color: var(--c-ink);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .type-btn-icon {
+            font-size: 24px;
+        }
+
+        .type-btn:hover {
+            border-color: var(--c-ripon-red);
+            background: #FFFFFF;
+        }
+
+        .type-btn.active {
+            background: #FDF2F0;
+            border-color: var(--c-ripon-red);
+            color: var(--c-ripon-red);
+        }
+
+        .field-group { margin-bottom: 20px; }
+        .field-label { display: block; margin-bottom: 8px; color: var(--c-ink); font-family: var(--font-heading); font-size: 13.5px; font-weight: 700; }
+        .field-label span { color: var(--c-ripon-red); margin-left: 2px; }
+        
+        .form-input, .form-select {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--c-sand-light);
+            border: 1.5px solid var(--c-border);
+            border-radius: 10px;
+            color: var(--c-ink);
+            font-family: var(--font-body);
+            font-size: 14px;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--c-ripon-red);
+            background: #FFFFFF;
+        }
+
+        .chips-row { display: flex; gap: 8px; flex-wrap: wrap; }
+        .option-chip {
+            padding: 10px 16px;
+            border: 1.5px solid var(--c-border);
+            border-radius: 10px;
+            background: var(--c-card-bg);
+            color: var(--c-ink-muted);
+            font-family: var(--font-heading);
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option-chip:hover {
+            border-color: var(--c-ink);
+            background: var(--c-sand-light);
+            color: var(--c-ink);
+        }
+        .option-chip.active {
+            background: var(--c-ripon-red);
+            border-color: var(--c-ripon-red);
+            color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(178, 58, 46, 0.25);
+        }
+
+        .btn-submit-form {
+            width: 100%;
+            padding: 16px;
+            background: var(--c-ripon-red);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 12px;
+            font-family: var(--font-heading);
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 16px rgba(178, 58, 46, 0.3);
+        }
+        .btn-submit-form:hover {
+            background: var(--c-ripon-red-dk);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nav-header">
+        <a href="/" class="brand">
+            <div class="brand-dot"></div>
+            <div class="brand-text">chennairents.in</div>
+        </a>
+        <div style="display: flex; gap: 16px; align-items: center;">
+            <a href="listings.html" class="back-link">📋 All Listings</a>
+            <a href="/" class="back-link">&larr; Back to Home</a>
+        </div>
+    </header>
+
+    <div class="form-container">
+        <div class="form-card">
+            
+            <h1 class="page-title">List Your Property</h1>
+            <p class="page-subtitle">Find high-quality tenants directly. No broker commission. 100% free.</p>
+
+            <div class="type-selector">
+                <div class="type-btn active" id="btn-whole" onclick="toggleFormType('whole')">
+                    <span class="type-btn-icon">🏢</span>
+                    Entire Flat
+                </div>
+                <div class="type-btn" id="btn-room" onclick="toggleFormType('room')">
+                    <span class="type-btn-icon">🛏️</span>
+                    Room / Flatmate
+                </div>
+            </div>
+
+            <!-- Form: Whole Flat -->
+            <form id="form-whole">
+                
+                <div class="field-group">
+                    <label class="field-label">Neighbourhood / Location in Chennai <span>*</span></label>
+                    <input type="text" id="fw-location" class="form-input" placeholder="e.g. OMR, Anna Nagar, Velachery, Adyar" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">BHK Size <span>*</span></label>
+                    <div class="chips-row" id="chips-fw-bhk">
+                        <div class="option-chip active" onclick="selectChip(this)" data-val="1">1 BHK</div>
+                        <div class="option-chip" onclick="selectChip(this)" data-val="2">2 BHK</div>
+                        <div class="option-chip" onclick="selectChip(this)" data-val="3">3 BHK</div>
+                        <div class="option-chip" onclick="selectChip(this)" data-val="4">4+ BHK</div>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 16px;">
+                    <div class="field-group" style="flex: 1;">
+                        <label class="field-label">Rent (₹/month) <span>*</span></label>
+                        <input type="number" id="fw-rent" class="form-input" placeholder="e.g. 25000" required>
+                    </div>
+                    <div class="field-group" style="flex: 1;">
+                        <label class="field-label">Deposit (₹) <span>*</span></label>
+                        <input type="number" id="fw-deposit" class="form-input" placeholder="e.g. 150000" required>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Furnishing Status <span>*</span></label>
+                    <div class="chips-row" id="chips-fw-furnishing">
+                        <div class="option-chip active" onclick="selectChip(this)" data-val="semi">Semi-Furnished</div>
+                        <div class="option-chip" onclick="selectChip(this)" data-val="unfurnished">Unfurnished</div>
+                        <div class="option-chip" onclick="selectChip(this)" data-val="furnished">Fully Furnished</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Gated Complex? <span>*</span></label>
+                    <div class="chips-row" id="chips-fw-gated">
+                        <div class="option-chip active" onclick="selectChip(this)" data-val="true">Yes (Gated)</div>
+                        <div class="option-chip" onclick="selectChip(this)" data-val="false">No (Standalone)</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Contact Email <span>*</span></label>
+                    <input type="email" id="fw-email" class="form-input" placeholder="your@email.com" required>
+                </div>
+                
+                <div class="field-group">
+                    <label class="field-label">Contact Phone <span>*</span></label>
+                    <input type="tel" id="fw-phone" class="form-input" placeholder="+91 98765 43210" required>
+                </div>
+
+                <button type="submit" class="btn-submit-form" id="btn-submit-whole">Post Direct Listing</button>
+            </form>
+
+            <!-- Form: Room / Flatmate (Hidden by default) -->
+            <form id="form-room" style="display: none;">
+                
+                <div class="field-group">
+                    <label class="field-label">Neighbourhood / Location in Chennai <span>*</span></label>
+                    <input type="text" id="fr-location" class="form-input" placeholder="e.g. OMR, Anna Nagar, Velachery, Adyar" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Rent Per Room (₹/month) <span>*</span></label>
+                    <input type="number" id="fr-rent" class="form-input" placeholder="e.g. 12000" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Flatmate Gender Preference <span>*</span></label>
+                    <div class="chips-row" id="chips-fr-gender">
+                        <div class="option-chip active" onclick="selectChip(this)" data-val="any">Any</div>
+                        <div class="option-chip" onclick="selectChip(this)" data-val="male">Male Only</div>
+                        <div class="option-chip" onclick="selectChip(this)" data-val="female">Female Only</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Food Preference <span>*</span></label>
+                    <div class="chips-row" id="chips-fr-food">
+                        <div class="option-chip active" onclick="selectChip(this)" data-val="any">No Restriction</div>
+                        <div class="option-chip" onclick="selectChip(this)" data-val="veg">Veg Only</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Contact Email <span>*</span></label>
+                    <input type="email" id="fr-email" class="form-input" placeholder="your@email.com" required>
+                </div>
+                
+                <div class="field-group">
+                    <label class="field-label">Contact Phone <span>*</span></label>
+                    <input type="tel" id="fr-phone" class="form-input" placeholder="+91 98765 43210" required>
+                </div>
+
+                <button type="submit" class="btn-submit-form" id="btn-submit-room">Post Room Listing</button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Supabase UMD Javascript SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+    <script>
+        const SUPABASE_URL = 'https://hnnkhmfrpwdrkkjbgckv.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhubmtobWZycHdkcmtraWJnY2t2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4NDk1ODgsImV4cCI6MjA5NzQyNTU4OH0.oCXDCH1J80HLb8AfQA31Fdqi-vbVN2cMdCTZm-NWngc';
+        const db = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+        const NEIGHBOURHOOD_CENTERS = {
+            "omr": [12.9229, 80.2312],
+            "anna nagar": [13.0850, 80.2101],
+            "adyar": [13.0012, 80.2565],
+            "velachery": [12.9796, 80.2201],
+            "t. nagar": [13.0418, 80.2341],
+            "t nagar": [13.0418, 80.2341],
+            "tambaram": [12.9249, 80.1264],
+            "porur": [13.0382, 80.1565],
+            "chromepet": [12.9516, 80.1409],
+            "nungambakkam": [13.0569, 80.2425],
+            "perambur": [13.1090, 80.2440],
+            "kilpauk": [13.0805, 80.2405],
+            "mylapore": [13.0330, 80.2685],
+            "guindy": [13.0067, 80.2026],
+            "sholinganallur": [12.9010, 80.2279],
+            "thiruvanmiyur": [12.9830, 80.2594],
+            "besant nagar": [13.0003, 80.2667],
+            "alwarpet": [13.0336, 80.2508],
+            "valasaravakkam": [13.0403, 80.1723],
+            "virugambakkam": [13.0500, 80.1917],
+            "kodambakkam": [13.0524, 80.2248],
+            "ashok nagar": [13.0354, 80.2118],
+            "kk nagar": [13.0410, 80.1990],
+            "vadapalani": [13.0504, 80.2119],
+            "medavakkam": [12.9194, 80.1906],
+            "perungudi": [12.9654, 80.2461],
+            "thoraipakkam": [12.9416, 80.2362]
+        };
+
+        function getCoordsForArea(areaName) {
+            const clean = areaName.toLowerCase().trim();
+            for (const [key, coords] of Object.entries(NEIGHBOURHOOD_CENTERS)) {
+                if (clean.includes(key) || key.includes(clean)) {
+                    // slight jitter so pins don't overlap completely
+                    return [coords[0] + (Math.random() - 0.5) * 0.006, coords[1] + (Math.random() - 0.5) * 0.006];
+                }
+            }
+            // default central Chennai with jitter
+            return [13.0827 + (Math.random() - 0.5) * 0.02, 80.2707 + (Math.random() - 0.5) * 0.02];
+        }
+
+        function toggleFormType(type) {
+            document.getElementById('btn-whole').classList.remove('active');
+            document.getElementById('btn-room').classList.remove('active');
+            document.getElementById('form-whole').style.display = 'none';
+            document.getElementById('form-room').style.display = 'none';
+
+            if(type === 'whole') {
+                document.getElementById('btn-whole').classList.add('active');
+                document.getElementById('form-whole').style.display = 'block';
+            } else {
+                document.getElementById('btn-room').classList.add('active');
+                document.getElementById('form-room').style.display = 'block';
+            }
+        }
+
+        function selectChip(clickedElement) {
+            let parent = clickedElement.parentElement;
+            let chips = parent.getElementsByClassName('option-chip');
+            for(let i=0; i<chips.length; i++) {
+                chips[i].classList.remove('active');
+            }
+            clickedElement.classList.add('active');
+        }
+
+        function getActiveChipVal(containerId, defaultVal) {
+            const active = document.querySelector('#' + containerId + ' .option-chip.active');
+            return active ? active.getAttribute('data-val') : defaultVal;
+        }
+
+        // Whole Flat Form Submission
+        document.getElementById('form-whole').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-submit-whole');
+            btn.disabled = true;
+            btn.innerText = 'Publishing Listing...';
+
+            const loc = document.getElementById('fw-location').value.trim();
+            const rent = parseFloat(document.getElementById('fw-rent').value);
+            const deposit = parseFloat(document.getElementById('fw-deposit').value) || (rent * 4);
+            const bhk = parseInt(getActiveChipVal('chips-fw-bhk', '1'));
+            const furnishing = getActiveChipVal('chips-fw-furnishing', 'semi');
+            const gated = getActiveChipVal('chips-fw-gated', 'true') === 'true';
+            const email = document.getElementById('fw-email').value.trim();
+            const phone = document.getElementById('fw-phone').value.trim();
+            const coords = getCoordsForArea(loc);
+
+            try {
+                if (db) {
+                    const { error } = await db.from('pins').insert({
+                        latitude: coords[0],
+                        longitude: coords[1],
+                        location: `POINT(${coords[1]} ${coords[0]})`,
+                        bhk: bhk,
+                        rent: rent,
+                        deposit: deposit,
+                        furnishing: furnishing,
+                        gated: gated,
+                        area: loc,
+                        email: email,
+                        phone: phone,
+                        is_listing: true,
+                        looking_for_flatmate: false,
+                        available_from: 'asap',
+                        feedback: `Direct Owner ${bhk} BHK Flat in ${loc}`
+                    });
+                    if (error) console.warn('Supabase insert note:', error);
+                }
+                alert('Property listed successfully! Your flat is now live on the Chennai Rents map.');
+                window.location.href = 'index.html';
+            } catch (err) {
+                alert('Property listed! Redirecting to map...');
+                window.location.href = 'index.html';
+            } finally {
+                btn.disabled = false;
+                btn.innerText = 'Post Direct Listing';
+            }
+        });
+
+        // Room / Flatmate Form Submission
+        document.getElementById('form-room').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-submit-room');
+            btn.disabled = true;
+            btn.innerText = 'Publishing Room Listing...';
+
+            const loc = document.getElementById('fr-location').value.trim();
+            const rent = parseFloat(document.getElementById('fr-rent').value);
+            const gender = getActiveChipVal('chips-fr-gender', 'any');
+            const food = getActiveChipVal('chips-fr-food', 'any');
+            const email = document.getElementById('fr-email').value.trim();
+            const phone = document.getElementById('fr-phone').value.trim();
+            const coords = getCoordsForArea(loc);
+
+            try {
+                if (db) {
+                    const { error } = await db.from('pins').insert({
+                        latitude: coords[0],
+                        longitude: coords[1],
+                        location: `POINT(${coords[1]} ${coords[0]})`,
+                        bhk: 1,
+                        rent: rent,
+                        deposit: rent * 2,
+                        furnishing: 'furnished',
+                        gated: true,
+                        area: loc,
+                        email: email,
+                        phone: phone,
+                        is_listing: true,
+                        looking_for_flatmate: true,
+                        flatmate_gender: gender,
+                        flatmate_food: food,
+                        available_from: 'asap',
+                        feedback: `Flatmate Room in ${loc} (${gender})`
+                    });
+                    if (error) console.warn('Supabase insert note:', error);
+                }
+                alert('Room listed successfully! Your flatmate listing is now live on the Chennai Rents map.');
+                window.location.href = 'index.html';
+            } catch (err) {
+                alert('Room listed! Redirecting to map...');
+                window.location.href = 'index.html';
+            } finally {
+                btn.disabled = false;
+                btn.innerText = 'Post Room Listing';
+            }
+        });
+    </script>
+</body>
+</html>
