@@ -59,16 +59,18 @@ export default function Footer() {
           <div>
             {/* Image Logo + Tamil Brand Line */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', marginBottom: '1.25rem' }}>
-              <img 
-                src="/chennai-rents-logo-new.jpg" 
-                alt="Chennai Rents" 
-                style={{ 
-                  height: '42px',
-                  width: 'auto',
-                  borderRadius: '4px',
-                  objectFit: 'contain'
-                }} 
-              />
+              <div style={{ background: '#FAF7F2', padding: '5px 10px', borderRadius: '8px', display: 'flex', alignItems: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.12)' }}>
+                <img 
+                  src="/chennai-rents-icon-transparent.png" 
+                  alt="Chennai Rents" 
+                  style={{ 
+                    height: '30px',
+                    width: 'auto',
+                    objectFit: 'contain',
+                    display: 'block'
+                  }} 
+                />
+              </div>
               <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid rgba(255,255,255,0.2)', paddingLeft: '0.85rem' }}>
                 <span
                   style={{

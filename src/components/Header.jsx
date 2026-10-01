@@ -73,17 +73,17 @@ export default function Header() {
           aria-label="நம்ம ஊரு Rents — Chennai Rents home"
         >
           <img 
-            src="/chennai-rents-logo-new.jpg" 
+            src="/chennai-rents-icon-transparent.png" 
             alt="Chennai Rents" 
             style={{ 
-              height: isScrolled ? '42px' : '56px',
+              height: isScrolled ? '38px' : '46px',
               width: 'auto',
               transition: 'height 0.25s ease',
-              mixBlendMode: 'multiply',
-              objectFit: 'contain'
+              objectFit: 'contain',
+              display: 'block'
             }} 
           />
-          <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '2px solid var(--c-border)', paddingLeft: '1rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '2px solid var(--c-border)', paddingLeft: '0.85rem' }}>
             <span
               style={{
                 fontFamily: 'var(--font-heading)',
