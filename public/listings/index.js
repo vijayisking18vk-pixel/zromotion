@@ -999,6 +999,25 @@ document.getElementById("owner-whole-form").addEventListener("submit", async (e)
             p_email: document.getElementById("ow-email").value,
             p_phone: document.getElementById("ow-phone").value
         });
+        const ownerEmail = document.getElementById("ow-email").value;
+        if (ownerEmail) {
+            fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    to: ownerEmail,
+                    subject: `[Chennai Rents] Your ${payloadPin.p_bhk} BHK Flat Listing is Live!`,
+                    html: `
+                        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FDFBF7; color: #1E1B18; border: 1.5px solid #E8DFC8; border-radius: 12px;">
+                            <h2 style="color: #2F7D4F; margin-top: 0;">Chennai Rents — Property Listed</h2>
+                            <p>Your ${payloadPin.p_bhk} BHK flat (₹${Number(payloadPin.p_rent).toLocaleString('en-IN')}/mo) has been pinned on the Chennai Rents map with 0% brokerage.</p>
+                            <p style="font-size: 14px; color: #4A433B;">Seekers matching within 2.5km will receive alerts and contact you directly via phone or WhatsApp.</p>
+                        </div>
+                    `,
+                    type: 'owner_listing'
+                })
+            }).catch(e => console.warn('Email dispatch notice:', e));
+        }
 
         alert("Whole Flat listed successfully! Seekers matching within 2.5km will receive alerts.");
         closeModal("owner-whole-modal");
@@ -1072,6 +1091,26 @@ document.getElementById("owner-room-form").addEventListener("submit", async (e) 
             p_email: document.getElementById("or-email").value,
             p_phone: document.getElementById("or-phone").value
         });
+
+        const roomOwnerEmail = document.getElementById("or-email").value;
+        if (roomOwnerEmail) {
+            fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    to: roomOwnerEmail,
+                    subject: `[Chennai Rents] Your Room/Flatmate Listing is Live!`,
+                    html: `
+                        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FDFBF7; color: #1E1B18; border: 1.5px solid #E8DFC8; border-radius: 12px;">
+                            <h2 style="color: #2F7D4F; margin-top: 0;">Chennai Rents — Room Listed</h2>
+                            <p>Your room/flatmate listing (₹${Number(rent).toLocaleString('en-IN')}/mo) is now published on the Chennai Rents map with 0% brokerage.</p>
+                            <p style="font-size: 14px; color: #4A433B;">Flat-seekers will reach out directly via phone or WhatsApp.</p>
+                        </div>
+                    `,
+                    type: 'owner_room'
+                })
+            }).catch(e => console.warn('Email dispatch notice:', e));
+        }
 
         alert("Room listed successfully! Seekers matching within 2.5km will receive alerts.");
         closeModal("owner-room-modal");
@@ -1165,6 +1204,31 @@ async function submitSeekerPin(email, phone) {
     try {
         const { data, error } = await db.rpc('create_seeker_pin', payload);
         if (error) throw error;
+
+        // Dispatch confirmation email to seeker via Resend (/api/send-email)
+        if (email) {
+            fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    to: email,
+                    subject: `[Chennai Rents] Your Rental Alert is Active!`,
+                    html: `
+                        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FDFBF7; color: #1E1B18; border: 1.5px solid #E8DFC8; border-radius: 12px;">
+                            <h2 style="color: #B23A2E; margin-top: 0;">Chennai Rents — Alert Activated</h2>
+                            <p>Your search alert for a rental home in Chennai has been registered successfully on the crowdsourced map.</p>
+                            <div style="background: #FFFFFF; border: 1px solid #E8DFC8; border-radius: 8px; padding: 16px; margin: 16px 0;">
+                                <p style="margin: 4px 0;"><strong>Maximum Budget:</strong> ₹${Number(payload.p_budget).toLocaleString('en-IN')}/mo</p>
+                                <p style="margin: 4px 0;"><strong>Minimum BHK:</strong> ${payload.p_min_bhk} BHK</p>
+                                <p style="margin: 4px 0;"><strong>Type:</strong> ${payload.p_looking_for.replace('_', ' ').toUpperCase()}</p>
+                            </div>
+                            <p style="font-size: 14px; color: #4A433B;">We will notify you immediately by email when a direct owner posts a matching flat within 2.5km.</p>
+                        </div>
+                    `,
+                    type: 'seeker_alert'
+                })
+            }).catch(e => console.warn('Email dispatch notice:', e));
+        }
 
         alert("Rent Alert activated successfully! Check your email daily for direct matching owners.");
         closeModal("seeker-add-modal");
