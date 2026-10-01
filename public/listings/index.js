@@ -159,9 +159,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!localStorage.getItem('chennai_rent_onboarded')) {
         openModal('welcome-modal');
     }
-
-    // Default pin placement mode to 'on'
-    enterPinPlacementMode('pin');
 });
 
 // Device ID setup

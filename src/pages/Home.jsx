@@ -92,7 +92,7 @@ export default function Home() {
             </div>
           </motion.div>
           
-          <div className="home-numeral-col" style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div className="home-numeral-col" style={{ position: 'relative', flexDirection: 'column', alignItems: 'center' }}>
             <motion.div 
               initial={reduce ? false : { scale: 0.8, opacity: 0, rotate: -5 }} 
               animate={{ scale: 1, opacity: 1, rotate: 0 }} 

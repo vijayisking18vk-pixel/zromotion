@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Instagram, Menu, X } from 'lucide-react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../config';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const prefersReduced = useReducedMotion();
+  const { scrollY } = useScroll();
 
-  // Read scroll position to toggle compact mode — no animation state, just a boolean
-  useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    const shouldBeScrolled = latest > 40;
+    if (shouldBeScrolled !== isScrolled) {
+      setIsScrolled(shouldBeScrolled);
+    }
+  });
 
   const navLinkStyle = ({ isActive }) => ({
     fontFamily: 'var(--font-body)',
@@ -223,9 +224,14 @@ export default function Header() {
                 backgroundColor: 'var(--c-ripon-red)',
                 color: '#FFFFFF',
                 textDecoration: 'none',
-                padding: '0.6rem 1rem',
+                padding: '0.75rem 1rem',
+                minHeight: '48px',
                 borderRadius: '8px',
                 textAlign: 'center',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 4px 12px rgba(178, 58, 46, 0.25)',
               }}
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -238,6 +244,11 @@ export default function Header() {
                 fontWeight: 700,
                 color: 'var(--c-ink)',
                 textDecoration: 'none',
+                minHeight: '44px',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '0.4rem 0.5rem',
+                borderBottom: '1px solid var(--c-border-subtle)',
               }}
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -250,6 +261,11 @@ export default function Header() {
                 fontWeight: 700,
                 color: 'var(--c-ink)',
                 textDecoration: 'none',
+                minHeight: '44px',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '0.4rem 0.5rem',
+                borderBottom: '1px solid var(--c-border-subtle)',
               }}
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -263,9 +279,14 @@ export default function Header() {
                 fontWeight: 600,
                 color: 'var(--c-ink)',
                 textDecoration: 'none',
+                minHeight: '44px',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '0.4rem 0.5rem',
+                borderBottom: '1px solid var(--c-border-subtle)',
               }}
             >
-              Localities
+              📍 Localities & Rents
             </Link>
             <Link
               to="/#guides"
@@ -275,9 +296,14 @@ export default function Header() {
                 fontWeight: 600,
                 color: 'var(--c-ink)',
                 textDecoration: 'none',
+                minHeight: '44px',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '0.4rem 0.5rem',
+                borderBottom: '1px solid var(--c-border-subtle)',
               }}
             >
-              Guides
+              📖 Tenant Guides
             </Link>
             <Link
               to="/about"
@@ -287,16 +313,20 @@ export default function Header() {
                 fontWeight: 600,
                 color: 'var(--c-ink)',
                 textDecoration: 'none',
+                minHeight: '44px',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '0.4rem 0.5rem',
               }}
             >
-              About
+              ℹ️ About Chennai Rents
             </Link>
             <a
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-dark"
-              style={{ justifyContent: 'center' }}
+              style={{ justifyContent: 'center', minHeight: '48px', marginTop: '0.5rem' }}
               onClick={() => setMobileMenuOpen(false)}
             >
               <Instagram size={18} />

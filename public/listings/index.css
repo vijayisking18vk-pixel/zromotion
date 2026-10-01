@@ -1957,3 +1957,67 @@ h1, h2, h3, h4, .modal-title, .feed-title, .page-title, .brand-text, .detail-amo
     background: #FDF2F0 !important;
 }
 
+
+
+/* ==========================================================================
+   MOBILE & WEB RESPONSIVE ALIGNMENT & ERGONOMICS
+   ========================================================================== */
+.chicklet-bar {
+    top: 70px !important;
+    padding: 0 16px !important;
+    gap: 8px !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior-x: contain !important;
+}
+
+.chicklet {
+    min-height: 40px !important;
+    padding: 8px 14px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    border-radius: 20px !important;
+    box-shadow: 0 2px 8px rgba(30, 27, 24, 0.08) !important;
+    user-select: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Prevent iOS Safari auto-zoom on input focus */
+@media (max-width: 768px) {
+    .search-input,
+    .form-input,
+    .form-select,
+    .comment-input {
+        font-size: 16px !important;
+    }
+}
+
+/* Property Detail Modal & Sheet on Mobile */
+@media (max-width: 640px) {
+    #pin-detail-modal .modal-card,
+    .modal-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        border-radius: 24px 24px 0 0 !important;
+        padding: 20px 18px calc(24px + env(safe-area-inset-bottom, 0px)) !important;
+        max-height: 88vh !important;
+    }
+
+    .search-wrap {
+        top: 10px !important;
+        width: calc(100% - 20px) !important;
+        padding: 6px 10px !important;
+    }
+
+    .chicklet-bar {
+        top: 68px !important;
+    }
+}
+
+/* Ensure smooth touch scrolling across all modal bodies */
+.modal-card,
+.modal-body,
+#faq-list-container,
+#stats-list-container {
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+}

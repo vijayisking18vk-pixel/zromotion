@@ -39,26 +39,36 @@ export default function App() {
   const location = useLocation();
 
   useEffect(() => {
+    // On touch devices (phones/tablets), native inertial touch momentum scroll is faster & smoother.
+    // Run Lenis smooth-wheel physics only on desktop/pointer-fine devices.
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    if (isTouch || mediaQuery.matches) {
+      return;
+    }
+
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      touchMultiplier: 2,
+      syncTouch: false,
+      touchMultiplier: 1,
     });
 
+    let animationFrameId;
     function raf(time) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      animationFrameId = requestAnimationFrame(raf);
     }
+    animationFrameId = requestAnimationFrame(raf);
 
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (!mediaQuery.matches) {
-      requestAnimationFrame(raf);
-    }
-
-    return () => { lenis.destroy(); };
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      lenis.destroy();
+    };
   }, []);
 
   const handleToggleLang = () => {
@@ -120,21 +130,6 @@ export default function App() {
 
       <Footer lang={lang} />
       <StickyMobileBar />
-
-      {/* Desktop Instagram FAB */}
-      <a
-        href="https://www.instagram.com/chennai_rents"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="desktop-insta-fab instagram-pulse"
-        aria-label="Follow Chennai Rents on Instagram"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-        </svg>
-      </a>
     </div>
   );
 }
