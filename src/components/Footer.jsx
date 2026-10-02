@@ -149,10 +149,11 @@ export default function Footer() {
               style={{
                 color: 'var(--c-auto-yellow)',
                 marginBottom: '1rem',
-                fontSize: '1rem',
+                fontSize: '0.95rem',
                 fontFamily: 'var(--font-heading)',
                 textTransform: 'uppercase',
-                letterSpacing: '0.05em',
+                letterSpacing: '0.06em',
+                fontWeight: 800,
               }}
             >
               Popular Localities
@@ -162,18 +163,20 @@ export default function Footer() {
                 listStyle: 'none',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '0.5rem',
+                gap: '0.6rem',
                 fontSize: '0.92rem',
               }}
             >
               {[
-                { to: '/rent-in-valasaravakkam', label: 'Rent in Valasaravakkam' },
-                { to: '/rent-in-velachery', label: 'Rent in Velachery' },
-                { to: '/rent-in-adyar', label: 'Rent in Adyar' },
-                { to: '/rent-in-omr', label: 'Rent in OMR IT Corridor' },
+                { to: '/chennai/velachery', label: 'Velachery (South IT)' },
+                { to: '/chennai/valasaravakkam', label: 'Valasaravakkam (West)' },
+                { to: '/chennai/adyar', label: 'Adyar (Coastal)' },
+                { to: '/chennai/sholinganallur', label: 'Sholinganallur (OMR)' },
+                { to: '/chennai/porur', label: 'Porur (DLF IT Park)' },
+                { to: '/chennai/rentals', label: 'Browse All Localities →' },
               ].map(({ to, label }) => (
                 <li key={to}>
-                  <Link to={to} style={{ color: '#FDFBF7', textDecoration: 'none' }}>
+                  <Link to={to} style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
                     → {label}
                   </Link>
                 </li>
@@ -181,41 +184,52 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 3: Renting Guides */}
+          {/* Col 3: Renting Guides & Map */}
           <div>
             <h4
               style={{
                 color: 'var(--c-auto-yellow)',
                 marginBottom: '1rem',
-                fontSize: '1rem',
+                fontSize: '0.95rem',
                 fontFamily: 'var(--font-heading)',
                 textTransform: 'uppercase',
-                letterSpacing: '0.05em',
+                letterSpacing: '0.06em',
+                fontWeight: 800,
               }}
             >
-              Renting Guides
+              Transparency & Guides
             </h4>
             <ul
               style={{
                 listStyle: 'none',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '0.5rem',
+                gap: '0.6rem',
                 fontSize: '0.92rem',
               }}
             >
               <li>
-                <Link to="/advance-deposit-chennai" style={{ color: '#FDFBF7', textDecoration: 'none' }}>
+                <a href="/listings/index.html" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
+                  → Chennai Crowdsourced Rent Map
+                </a>
+              </li>
+              <li>
+                <a href="/listings/listings.html" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
+                  → Available Flats Feed (0% Broker)
+                </a>
+              </li>
+              <li>
+                <Link to="/guide/advance-deposit-chennai" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
                   → Advance Deposit: 10 Months vs Reality
                 </Link>
               </li>
               <li>
-                <Link to="/tenant-rules-chennai" style={{ color: '#FDFBF7', textDecoration: 'none' }}>
-                  → Rental Agreements and Tenant Rights
+                <Link to="/guide/tenant-rules-chennai" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
+                  → Rental Agreements & Tenant Rights
                 </Link>
               </li>
               <li>
-                <Link to="/about" style={{ color: '#FDFBF7', textDecoration: 'none' }}>
+                <Link to="/about" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
                   → About Chennai Rents
                 </Link>
               </li>
@@ -224,7 +238,7 @@ export default function Footer() {
                   href={INSTAGRAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: 'var(--c-auto-yellow)', fontWeight: 700 }}
+                  style={{ color: 'var(--c-auto-yellow)', fontWeight: 800 }}
                 >
                   → Follow {INSTAGRAM_HANDLE} on Instagram
                 </a>
