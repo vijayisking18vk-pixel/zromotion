@@ -1,4 +1,22 @@
+# https://chennairents.in robots.txt
+# Technical SEO & Crawl Budget Management for Hyperlocal Real Estate
+
 User-agent: *
 Allow: /
 
+# Block crawl budget waste on internal filter params, search states, and raw APIs
+Disallow: /*?*
+Disallow: /api/
+Disallow: /admin/
+Disallow: /*.json$
+
+# Explicit crawl allowances for interactive listing app & web assets
+Allow: /listings/*.html
+Allow: /listings/*.css
+Allow: /listings/*.js
+Allow: /assets/
+Allow: /data/
+
+# Sitemap index & aggregate sitemap
+Sitemap: https://chennairents.in/sitemap-index.xml
 Sitemap: https://chennairents.in/sitemap.xml

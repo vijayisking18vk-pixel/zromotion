@@ -115,7 +115,7 @@ export default function Header() {
           className="cr-desktop-nav"
         >
           <a href="/listings/index.html" style={{ ...navLinkStyle({ isActive: false }), color: 'var(--c-ink)' }}>
-            🗺️ Rent Map
+            🗺️ Chennai Map (Rent & Buy)
           </a>
           <a href="/listings/listings.html" style={{ ...navLinkStyle({ isActive: false }), color: 'var(--c-ink)' }}>
             📋 Listings
@@ -149,7 +149,7 @@ export default function Header() {
               transition: 'transform 0.15s ease',
             }}
           >
-            <span>+ List Flat</span>
+            <span>+ List (Rent / Sell)</span>
           </a>
 
           {/* Instagram Button — motion.a with pulsing glow */}
@@ -235,7 +235,7 @@ export default function Header() {
               }}
               onClick={() => setMobileMenuOpen(false)}
             >
-              💼 + List My Flat (0% Brokerage)
+              💼 + List Property (Rent or Sell)
             </a>
             <a
               href="/listings/index.html"
@@ -252,7 +252,7 @@ export default function Header() {
               }}
               onClick={() => setMobileMenuOpen(false)}
             >
-              🗺️ Interactive Rent Map
+              🗺️ Chennai Map (Rent & Buy)
             </a>
             <a
               href="/listings/listings.html"

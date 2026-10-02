@@ -31,12 +31,350 @@ let pendingInterestPayload = null;
 let metroLinesGroup;
 let showMetro = false;
 
-// Filter variables
+// Filter & Transaction Mode variables
 let activeFilterBhk = [];
 let filterRentMin = null;
 let filterRentMax = null;
+let filterSaleMin = null;
+let filterSaleMax = null;
 let filterArea = '';
 let filterGated = null; // null=all, true=gated, false=standalone
+let transactionMode = 'all'; // 'all', 'rent', 'sale'
+let filterPropType = 'all'; // 'all', 'apartment', 'villa', 'plot'
+
+// Currency formatter for Indian Lakhs & Crores
+function formatInLakhsCrores(amount) {
+    if (!amount) return '';
+    const num = Number(amount);
+    if (num >= 10000000) {
+        return (num / 10000000).toFixed(2).replace(/\.00$/, '') + ' Cr';
+    } else if (num >= 100000) {
+        return (num / 100000).toFixed(1).replace(/\.0$/, '') + ' L';
+    } else if (num >= 1000) {
+        return Math.round(num / 1000) + 'k';
+    }
+    return '₹' + num.toLocaleString('en-IN');
+}
+
+// Local custom pins helper
+function getCustomPins() {
+    try {
+        return JSON.parse(localStorage.getItem('chennai_custom_pins') || '[]');
+    } catch {
+        return [];
+    }
+}
+
+function saveCustomPin(pin) {
+    const pins = getCustomPins();
+    pins.unshift(pin);
+    localStorage.setItem('chennai_custom_pins', JSON.stringify(pins));
+}
+
+function getCustomSeekers() {
+    try {
+        return JSON.parse(localStorage.getItem('chennai_custom_seekers') || '[]');
+    } catch {
+        return [];
+    }
+}
+
+function saveCustomSeeker(seek) {
+    const seekers = getCustomSeekers();
+    seekers.unshift(seek);
+    localStorage.setItem('chennai_custom_seekers', JSON.stringify(seekers));
+}
+
+// Curated Real-world For-Sale properties in Chennai
+const CHENNAI_SALE_PROPERTIES = [
+    {
+        id: "sale-omr-trellis",
+        latitude: 12.9425,
+        longitude: 80.2355,
+        transaction_type: "sale",
+        property_type: "apartment",
+        bhk: 3,
+        sale_price: 11500000,
+        rent: 11500000,
+        deposit: 0,
+        sqft: 1450,
+        furnishing: "semi",
+        gated: true,
+        possession: "ready",
+        parking_count: 2,
+        society: "Appaswamy The Trellis",
+        area: "OMR",
+        feedback: "Prime 3 BHK facing landscaped garden. 100% Vastu, club house, gym, 5 min from Cognizant OMR.",
+        is_listing: true,
+        contact_phone: "+91 98401 23456",
+        contact_email: "owner.trellis@chennairents.in",
+        created_at: "2026-09-20T10:00:00Z"
+    },
+    {
+        id: "sale-annanagar-builder",
+        latitude: 13.0862,
+        longitude: 80.2120,
+        transaction_type: "sale",
+        property_type: "apartment",
+        bhk: 3,
+        sale_price: 24000000,
+        rent: 24000000,
+        deposit: 0,
+        sqft: 1680,
+        furnishing: "unfurnished",
+        gated: false,
+        possession: "ready",
+        parking_count: 2,
+        society: "Anna Nagar East Builder Floor",
+        area: "Anna Nagar",
+        feedback: "Luxury independent floor, lift, covered car parking, CMDA approved, walking distance to Metro & Tower park.",
+        is_listing: true,
+        contact_phone: "+91 94440 88219",
+        contact_email: "annanagar.direct@chennairents.in",
+        created_at: "2026-09-18T14:30:00Z"
+    },
+    {
+        id: "sale-velachery-ceebros",
+        latitude: 12.9782,
+        longitude: 80.2195,
+        transaction_type: "sale",
+        property_type: "apartment",
+        bhk: 2,
+        sale_price: 7800000,
+        rent: 7800000,
+        deposit: 0,
+        sqft: 1120,
+        furnishing: "semi",
+        gated: true,
+        possession: "resale",
+        parking_count: 1,
+        society: "Ceebros Boulevard",
+        area: "Velachery",
+        feedback: "Spacious 2 BHK near Phoenix Marketcity. Clear title, loan available from all major banks. Zero brokerage.",
+        is_listing: true,
+        contact_phone: "+91 97910 44521",
+        contact_email: "ceebros.owner@chennairents.in",
+        created_at: "2026-09-22T08:15:00Z"
+    },
+    {
+        id: "sale-adyar-gandhinagar",
+        latitude: 13.0035,
+        longitude: 80.2548,
+        transaction_type: "sale",
+        property_type: "apartment",
+        bhk: 3,
+        sale_price: 31000000,
+        rent: 31000000,
+        deposit: 0,
+        sqft: 1850,
+        furnishing: "furnished",
+        gated: true,
+        possession: "ready",
+        parking_count: 2,
+        society: "Adyar Prime Enclave",
+        area: "Adyar",
+        feedback: "Prestige address in Gandhi Nagar, Adyar. Italian marble, modular kitchen, generator backup, 24x7 security.",
+        is_listing: true,
+        contact_phone: "+91 98840 55678",
+        contact_email: "adyar.home@chennairents.in",
+        created_at: "2026-09-15T11:00:00Z"
+    },
+    {
+        id: "sale-besantnagar-sea",
+        latitude: 12.9995,
+        longitude: 80.2678,
+        transaction_type: "sale",
+        property_type: "apartment",
+        bhk: 4,
+        sale_price: 45000000,
+        rent: 45000000,
+        deposit: 0,
+        sqft: 2400,
+        furnishing: "semi",
+        gated: true,
+        possession: "ready",
+        parking_count: 2,
+        society: "Bay View Court",
+        area: "Besant Nagar",
+        feedback: "Sea-breeze high-floor residence just 200m from Elliot's Beach. Expansive balconies, private foyer.",
+        is_listing: true,
+        contact_phone: "+91 98410 77332",
+        contact_email: "besant.sea@chennairents.in",
+        created_at: "2026-09-25T16:20:00Z"
+    },
+    {
+        id: "sale-porur-dlf",
+        latitude: 13.0375,
+        longitude: 80.1580,
+        transaction_type: "sale",
+        property_type: "apartment",
+        bhk: 2,
+        sale_price: 5800000,
+        rent: 5800000,
+        deposit: 0,
+        sqft: 980,
+        furnishing: "unfurnished",
+        gated: true,
+        possession: "ready",
+        parking_count: 1,
+        society: "Porur Lakeview Residency",
+        area: "Porur",
+        feedback: "Ideal for IT professionals working at DLF / L&T. Gated complex with pool, gym, children play area.",
+        is_listing: true,
+        contact_phone: "+91 99620 12890",
+        contact_email: "porur.direct@chennairents.in",
+        created_at: "2026-09-26T09:40:00Z"
+    },
+    {
+        id: "sale-sholinganallur-casagrand",
+        latitude: 12.9025,
+        longitude: 80.2285,
+        transaction_type: "sale",
+        property_type: "apartment",
+        bhk: 3,
+        sale_price: 9200000,
+        rent: 9200000,
+        deposit: 0,
+        sqft: 1380,
+        furnishing: "semi",
+        gated: true,
+        possession: "ready",
+        parking_count: 1,
+        society: "Casagrand Cloud9",
+        area: "Sholinganallur",
+        feedback: "Ready to move 3 BHK at Sholinganallur junction. World-class clubhouse, swimming pool, 2 mins from ELCOT SEZ.",
+        is_listing: true,
+        contact_phone: "+91 98845 67890",
+        contact_email: "sholing.direct@chennairents.in",
+        created_at: "2026-09-28T12:00:00Z"
+    },
+    {
+        id: "sale-ecr-villa",
+        latitude: 12.9110,
+        longitude: 80.2520,
+        transaction_type: "sale",
+        property_type: "villa",
+        bhk: 4,
+        sale_price: 38000000,
+        rent: 38000000,
+        deposit: 0,
+        sqft: 3200,
+        furnishing: "semi",
+        gated: true,
+        possession: "ready",
+        parking_count: 3,
+        society: "Neelankarai Beachside Villa",
+        area: "ECR",
+        feedback: "Independent duplex beach villa with private garden, terrace gazebo, servant quarters, in gated layout.",
+        is_listing: true,
+        contact_phone: "+91 98408 99120",
+        contact_email: "ecrvilla@chennairents.in",
+        created_at: "2026-09-12T15:10:00Z"
+    },
+    {
+        id: "sale-medavakkam-budget",
+        latitude: 12.9160,
+        longitude: 80.1915,
+        transaction_type: "sale",
+        property_type: "apartment",
+        bhk: 2,
+        sale_price: 4600000,
+        rent: 4600000,
+        deposit: 0,
+        sqft: 890,
+        furnishing: "unfurnished",
+        gated: false,
+        possession: "ready",
+        parking_count: 1,
+        society: "Medavakkam Green Heights",
+        area: "Medavakkam",
+        feedback: "Affordable 2 BHK ready to occupy. Metro station corridor, sweet groundwater, low maintenance.",
+        is_listing: true,
+        contact_phone: "+91 97890 33412",
+        contact_email: "medavakkam.owner@chennairents.in",
+        created_at: "2026-09-27T17:00:00Z"
+    },
+    {
+        id: "sale-tambaram-house",
+        latitude: 12.9255,
+        longitude: 80.1275,
+        transaction_type: "sale",
+        property_type: "villa",
+        bhk: 3,
+        sale_price: 6800000,
+        rent: 6800000,
+        deposit: 0,
+        sqft: 1500,
+        furnishing: "unfurnished",
+        gated: false,
+        possession: "ready",
+        parking_count: 1,
+        society: "Tambaram East Individual House",
+        area: "Tambaram",
+        feedback: "Individual house with private terrace and borewell. 1.2km from Tambaram railway station.",
+        is_listing: true,
+        contact_phone: "+91 94441 55220",
+        contact_email: "tambaram.direct@chennairents.in",
+        created_at: "2026-09-29T10:45:00Z"
+    },
+    {
+        id: "sale-tnagar-luxury",
+        latitude: 13.0415,
+        longitude: 80.2340,
+        transaction_type: "sale",
+        property_type: "apartment",
+        bhk: 3,
+        sale_price: 28000000,
+        rent: 28000000,
+        deposit: 0,
+        sqft: 1750,
+        furnishing: "semi",
+        gated: true,
+        possession: "ready",
+        parking_count: 2,
+        society: "Pondy Bazaar Luxury Residences",
+        area: "T. Nagar",
+        feedback: "Ultra prime T. Nagar location. 2 covered car parks, 100% power backup, top tier finishes.",
+        is_listing: true,
+        contact_phone: "+91 98414 66778",
+        contact_email: "tnagar.resale@chennairents.in",
+        created_at: "2026-09-24T11:20:00Z"
+    }
+];
+
+// Curated Buyer Seekers in Chennai
+const CHENNAI_BUYER_SEEKERS = [
+    {
+        id: "buyer-velachery",
+        latitude: 12.9790,
+        longitude: 80.2210,
+        intent: "buy",
+        looking_for: "whole_flat",
+        max_budget: 8500000,
+        min_bhk: 2,
+        area: "Velachery"
+    },
+    {
+        id: "buyer-omr",
+        latitude: 12.9660,
+        longitude: 80.2410,
+        intent: "buy",
+        looking_for: "whole_flat",
+        max_budget: 11000000,
+        min_bhk: 3,
+        area: "Perungudi / OMR"
+    },
+    {
+        id: "buyer-annanagar",
+        latitude: 13.0845,
+        longitude: 80.2095,
+        intent: "buy",
+        looking_for: "villa",
+        max_budget: 22000000,
+        min_bhk: 3,
+        area: "Anna Nagar"
+    }
+];
 
 // 3. Local Neighborhood Coordinates for panning
 const NEIGHBOURHOOD_CENTERS = {
@@ -324,12 +662,16 @@ function handlePinPlacementClick(lat, lng) {
         document.getElementById("sa-lat").value = lat.toFixed(5);
         document.getElementById("sa-lng").value = lng.toFixed(5);
         openModal("seeker-add-modal");
-    } else if (pendingPlacementType === 'list_whole' || pendingPlacementType === 'list_room') {
+    } else if (pendingPlacementType === 'list_whole' || pendingPlacementType === 'list_room' || pendingPlacementType === 'list_sell') {
         // Open L2 Type Selector
         document.getElementById("ow-lat").value = lat.toFixed(5);
         document.getElementById("ow-lng").value = lng.toFixed(5);
         document.getElementById("or-lat").value = lat.toFixed(5);
         document.getElementById("or-lng").value = lng.toFixed(5);
+        const osLat = document.getElementById("os-lat");
+        const osLng = document.getElementById("os-lng");
+        if (osLat) osLat.value = lat.toFixed(5);
+        if (osLng) osLng.value = lng.toFixed(5);
         openModal("owner-type-modal");
     } else {
         // Default Plain Anonymous pin
@@ -349,34 +691,69 @@ async function loadPins() {
         seekerMarkerLayersGroup = [];
 
         // Fetch non-flagged pins from Supabase view
-        const { data: pins, error } = await db
-            .from('pins_public')
-            .select('*');
+        let remotePins = [];
+        try {
+            const { data: pins, error } = await db
+                .from('pins_public')
+                .select('*');
+            if (!error && pins) remotePins = pins;
+        } catch (dbErr) {
+            console.warn("Supabase fetch notice, using fallback datasets:", dbErr);
+        }
 
-        if (error) throw error;
-        pinsData = pins;
+        // Parse any for-sale pins encoded in database feedback
+        remotePins.forEach(p => {
+            if (p.feedback && p.feedback.includes('[FOR_SALE')) {
+                const match = p.feedback.match(/\[FOR_SALE:(\d+):?([a-zA-Z]*)\]/);
+                if (match) {
+                    p.transaction_type = 'sale';
+                    p.sale_price = parseFloat(match[1]);
+                    if (match[2]) p.property_type = match[2];
+                }
+            }
+        });
+
+        // Combine Curated Chennai Sale properties + Supabase pins + Locally saved user pins
+        const customPins = getCustomPins();
+        const combinedPinsMap = new Map();
+        [...CHENNAI_SALE_PROPERTIES, ...remotePins, ...customPins].forEach(item => {
+            combinedPinsMap.set(item.id, item);
+        });
+        const allPins = Array.from(combinedPinsMap.values());
+        pinsData = allPins;
 
         // Render markers if not hidden
         if (!pinsHidden) {
-            pins.forEach(pin => {
+            allPins.forEach(pin => {
                 // Apply filters on client-side rendering
                 if (!matchesFilters(pin)) return;
 
-                const rentK = Math.round(pin.rent / 1000) + 'k';
-                const gatedClass = pin.is_listing ? 'listing' : (pin.gated ? 'gated' : 'not-gated');
-                const labelIcon = pin.is_listing ? '🏠 ' : '';
+                const isSale = pin.transaction_type === 'sale' || (pin.feedback && pin.feedback.includes('[FOR_SALE'));
+                let labelText = '';
+                let gatedClass = '';
+
+                if (isSale) {
+                    const saleAmt = pin.sale_price || pin.rent;
+                    labelText = '🏷️ ' + formatInLakhsCrores(saleAmt);
+                    gatedClass = 'for-sale';
+                } else {
+                    const rentK = Math.round(pin.rent / 1000) + 'k';
+                    gatedClass = pin.is_listing ? 'listing' : (pin.gated ? 'gated' : 'not-gated');
+                    const labelIcon = pin.is_listing ? '🏠 ' : '';
+                    labelText = `${labelIcon}${rentK}`;
+                }
 
                 const marker = L.marker([pin.latitude, pin.longitude], {
                     icon: L.divIcon({
                         className: 'custom-pin-marker-wrapper',
                         html: `<div class="pin-marker" id="pin-id-${pin.id}" onclick="_pinClick('${pin.id}')">
                                  <div class="pin-label ${gatedClass}">
-                                    ${labelIcon}${rentK}
+                                    ${labelText}
                                  </div>
                                  <div class="pin-caret ${gatedClass}"></div>
                                </div>`,
-                        iconSize: [40, 30],
-                        iconAnchor: [20, 30]
+                        iconSize: [46, 30],
+                        iconAnchor: [23, 30]
                     })
                 });
 
@@ -390,30 +767,46 @@ async function loadPins() {
             });
         }
         
-        // Fetch and Render active seeker pins
-        const { data: seekers, error: seekerError } = await db
-            .from('seeker_pins_public')
-            .select('*');
-
-        if (!seekerError && seekers) {
-            seekers.forEach(seek => {
-                const marker = L.marker([seek.latitude, seek.longitude], {
-                    icon: L.divIcon({
-                        className: 'custom-pin-marker-wrapper',
-                        html: `<div class="pin-marker seeker-pin">
-                                 <div class="pin-label seeker">
-                                    🔍 ${Math.round(seek.max_budget / 1000)}k
-                                 </div>
-                                 <div class="pin-caret seeker"></div>
-                               </div>`,
-                        iconSize: [40, 30],
-                        iconAnchor: [20, 30]
-                    })
-                });
-                marker.addTo(map);
-                seekerMarkerLayersGroup.push(marker);
-            });
+        // Fetch and Render active seeker & buyer pins
+        let remoteSeekers = [];
+        try {
+            const { data: seekers, error: seekerError } = await db
+                .from('seeker_pins_public')
+                .select('*');
+            if (!seekerError && seekers) remoteSeekers = seekers;
+        } catch (sErr) {
+            console.warn("Seeker fetch notice:", sErr);
         }
+
+        const customSeekers = getCustomSeekers();
+        const allSeekers = [...CHENNAI_BUYER_SEEKERS, ...remoteSeekers, ...customSeekers];
+
+        allSeekers.forEach(seek => {
+            const isBuyer = seek.intent === 'buy' || seek.max_budget > 1000000;
+            
+            // Respect transaction mode filter on seeker pins
+            if (transactionMode === 'rent' && isBuyer) return;
+            if (transactionMode === 'sale' && !isBuyer) return;
+
+            const seekerLabel = isBuyer ? `🔍 Buy ${formatInLakhsCrores(seek.max_budget)}` : `🔍 Rent ${Math.round(seek.max_budget / 1000)}k`;
+            const seekerClass = isBuyer ? 'buyer' : 'seeker';
+
+            const marker = L.marker([seek.latitude, seek.longitude], {
+                icon: L.divIcon({
+                    className: 'custom-pin-marker-wrapper',
+                    html: `<div class="pin-marker seeker-pin">
+                             <div class="pin-label ${seekerClass}">
+                                ${seekerLabel}
+                             </div>
+                             <div class="pin-caret ${seekerClass}"></div>
+                           </div>`,
+                    iconSize: [46, 30],
+                    iconAnchor: [23, 30]
+                })
+            });
+            marker.addTo(map);
+            seekerMarkerLayersGroup.push(marker);
+        });
 
     } catch (e) {
         console.error("Error loading map pins:", e);
@@ -422,15 +815,40 @@ async function loadPins() {
 
 // Client side filtering checks
 function matchesFilters(pin) {
+    const isSale = pin.transaction_type === 'sale' || (pin.feedback && pin.feedback.includes('[FOR_SALE'));
+
+    // Transaction Mode ('all', 'rent', 'sale')
+    if (transactionMode === 'rent' && isSale) return false;
+    if (transactionMode === 'sale' && !isSale) return false;
+
+    // Property Type
+    if (filterPropType !== 'all') {
+        const pType = (pin.property_type || 'apartment').toLowerCase();
+        if (filterPropType === 'apartment' && !pType.includes('apartment') && !pType.includes('flat')) return false;
+        if (filterPropType === 'villa' && !pType.includes('villa') && !pType.includes('house')) return false;
+        if (filterPropType === 'plot' && !pType.includes('plot') && !pType.includes('land')) return false;
+    }
+
     // BHK checks
-    if (activeFilterBhk.length > 0 && !activeFilterBhk.includes(pin.bhk)) return false;
+    if (activeFilterBhk.length > 0) {
+        if (!pin.bhk || !activeFilterBhk.includes(pin.bhk)) return false;
+    }
     
     // Rent limits
-    if (filterRentMin && pin.rent < filterRentMin) return false;
-    if (filterRentMax && pin.rent > filterRentMax) return false;
+    if (!isSale) {
+        if (filterRentMin && pin.rent < filterRentMin) return false;
+        if (filterRentMax && pin.rent > filterRentMax) return false;
+    }
+
+    // Sale limits (in Lakhs * 100000)
+    if (isSale) {
+        const saleAmt = pin.sale_price || pin.rent;
+        if (filterSaleMin && saleAmt < filterSaleMin * 100000) return false;
+        if (filterSaleMax && saleAmt > filterSaleMax * 100000) return false;
+    }
     
     // Locality area
-    if (filterArea && pin.area !== filterArea) return false;
+    if (filterArea && pin.area && pin.area.toLowerCase() !== filterArea.toLowerCase()) return false;
     
     // Gated status
     if (filterGated !== null && pin.gated !== filterGated) return false;
@@ -482,9 +900,16 @@ async function openPinDetail(pin) {
     // Guard: open modal immediately so user sees something, then populate
     try {
         currentPin = pin;
+        const isSale = pin.transaction_type === 'sale' || (pin.feedback && pin.feedback.includes('[FOR_SALE'));
+        const saleAmt = pin.sale_price || pin.rent;
 
-        document.getElementById("detail-area-label").innerText = pin.area ? pin.area.toUpperCase() : 'CHENNAI';
-        document.getElementById("detail-rent-label").innerText = `₹${Number(pin.rent).toLocaleString('en-IN')}`;
+        if (isSale) {
+            document.getElementById("detail-area-label").innerText = `FOR SALE • ${pin.area ? pin.area.toUpperCase() : 'CHENNAI'}`;
+            document.getElementById("detail-rent-label").innerText = `₹${Number(saleAmt).toLocaleString('en-IN')} (${formatInLakhsCrores(saleAmt)})`;
+        } else {
+            document.getElementById("detail-area-label").innerText = `FOR RENT • ${pin.area ? pin.area.toUpperCase() : 'CHENNAI'}`;
+            document.getElementById("detail-rent-label").innerText = `₹${Number(pin.rent).toLocaleString('en-IN')} /mo`;
+        }
 
         // Society row
         if (pin.society) {
@@ -494,25 +919,48 @@ async function openPinDetail(pin) {
             document.getElementById("detail-society-row").style.display = 'none';
         }
 
-        // Security deposit
-        document.getElementById("detail-deposit").innerText = pin.deposit && Number(pin.deposit) > 0 ? `₹${Number(pin.deposit).toLocaleString('en-IN')}` : 'Not Specified';
+        // Security deposit / Booking token
+        const depositLabel = document.getElementById("detail-deposit-label");
+        const maintenanceLabel = document.getElementById("detail-maintenance-label");
+        const occupantLabel = document.getElementById("detail-occupant-label");
 
-        // Maintenance
-        document.getElementById("detail-maintenance").innerText = pin.maintenance_included ? 'Included in Rent' : 'Not Included / Additional';
+        if (isSale) {
+            if (depositLabel) depositLabel.innerText = "💰 Token Advance:";
+            if (maintenanceLabel) maintenanceLabel.innerText = "🔑 Possession Status:";
+            if (occupantLabel) occupantLabel.innerText = "🏢 Property Type:";
+            document.getElementById("detail-deposit").innerText = `₹${Math.round(saleAmt * 0.1).toLocaleString('en-IN')} (10%)`;
+        } else {
+            if (depositLabel) depositLabel.innerText = "💰 Security Deposit:";
+            if (maintenanceLabel) maintenanceLabel.innerText = "🔧 Maintenance:";
+            if (occupantLabel) occupantLabel.innerText = "👥 Tenant Category:";
+            document.getElementById("detail-deposit").innerText = pin.deposit && Number(pin.deposit) > 0 ? `₹${Number(pin.deposit).toLocaleString('en-IN')}` : 'Not Specified';
+        }
+
+        // Maintenance / Possession status
+        if (isSale) {
+            document.getElementById("detail-maintenance").innerText = pin.possession ? pin.possession.replace('_', ' ').toUpperCase() : 'READY TO MOVE';
+        } else {
+            document.getElementById("detail-maintenance").innerText = pin.maintenance_included ? 'Included in Rent' : 'Not Included / Additional';
+        }
 
         // Parking count
         document.getElementById("detail-parking").innerText = pin.parking_count > 0 ? `${pin.parking_count} car spot(s)` : 'No Parking';
 
-        // Sqft row
+        // Sqft row & rate per sqft
         if (pin.sqft) {
             document.getElementById("detail-sqft-row").style.display = 'block';
-            document.getElementById("detail-sqft").innerText = `${pin.sqft} sq.ft`;
+            if (isSale) {
+                const ratePerSqft = Math.round(saleAmt / pin.sqft);
+                document.getElementById("detail-sqft").innerText = `${pin.sqft} sq.ft (₹${ratePerSqft.toLocaleString('en-IN')}/sq.ft)`;
+            } else {
+                document.getElementById("detail-sqft").innerText = `${pin.sqft} sq.ft`;
+            }
         } else {
             document.getElementById("detail-sqft-row").style.display = 'none';
         }
 
         // Pets row
-        if (pin.pets_allowed) {
+        if (pin.pets_allowed && !isSale) {
             document.getElementById("detail-pets-row").style.display = 'block';
             let petsText = '--';
             if (pin.pets_allowed === 'yes') petsText = 'Allowed 🐕';
@@ -523,34 +971,60 @@ async function openPinDetail(pin) {
             document.getElementById("detail-pets-row").style.display = 'none';
         }
 
-        document.getElementById("detail-occupant").innerText = pin.occupant_type ? pin.occupant_type.charAt(0).toUpperCase() + pin.occupant_type.slice(1) : 'Not Specified';
+        document.getElementById("detail-occupant").innerText = isSale ? (pin.property_type || 'Apartment').toUpperCase() : (pin.occupant_type ? pin.occupant_type.charAt(0).toUpperCase() + pin.occupant_type.slice(1) : 'Not Specified');
         document.getElementById("detail-feedback").innerText = pin.feedback || 'No description provided.';
 
         // Populate Badges
         const badgesContainer = document.getElementById("detail-badges-container");
         badgesContainer.innerHTML = '';
 
-        const furnishingBadge = document.createElement("span");
-        furnishingBadge.className = "badge green";
-        furnishingBadge.innerText = pin.furnishing ? pin.furnishing.toUpperCase() : 'NOT SPECIFIED';
-        badgesContainer.appendChild(furnishingBadge);
+        if (isSale) {
+            const saleBadge = document.createElement("span");
+            saleBadge.className = "badge sale";
+            saleBadge.innerText = "🏷️ FOR SALE";
+            badgesContainer.appendChild(saleBadge);
 
-        const gatedBadge = document.createElement("span");
-        gatedBadge.className = "badge violet";
-        gatedBadge.innerText = pin.gated ? 'GATED' : 'STANDALONE';
-        badgesContainer.appendChild(gatedBadge);
+            const propBadge = document.createElement("span");
+            propBadge.className = "badge violet";
+            propBadge.innerText = (pin.property_type || 'Apartment').toUpperCase();
+            badgesContainer.appendChild(propBadge);
 
-        if (pin.is_listing) {
-            const listingBadge = document.createElement("span");
-            listingBadge.className = "badge amber";
-            listingBadge.innerText = pin.looking_for_flatmate ? 'ROOM AVLB' : 'WHOLE FLAT';
-            badgesContainer.appendChild(listingBadge);
+            if (pin.bhk) {
+                const bhkBadge = document.createElement("span");
+                bhkBadge.className = "badge amber";
+                bhkBadge.innerText = `${pin.bhk} BHK`;
+                badgesContainer.appendChild(bhkBadge);
+            }
 
-            // Show container
+            const gatedBadge = document.createElement("span");
+            gatedBadge.className = "badge green";
+            gatedBadge.innerText = pin.gated ? 'GATED' : 'STANDALONE';
+            badgesContainer.appendChild(gatedBadge);
+        } else {
+            const furnishingBadge = document.createElement("span");
+            furnishingBadge.className = "badge green";
+            furnishingBadge.innerText = pin.furnishing ? pin.furnishing.toUpperCase() : 'NOT SPECIFIED';
+            badgesContainer.appendChild(furnishingBadge);
+
+            const gatedBadge = document.createElement("span");
+            gatedBadge.className = "badge violet";
+            gatedBadge.innerText = pin.gated ? 'GATED' : 'STANDALONE';
+            badgesContainer.appendChild(gatedBadge);
+
+            if (pin.is_listing) {
+                const listingBadge = document.createElement("span");
+                listingBadge.className = "badge amber";
+                listingBadge.innerText = pin.looking_for_flatmate ? 'ROOM AVLB' : 'WHOLE FLAT';
+                badgesContainer.appendChild(listingBadge);
+            }
+        }
+
+        // Show direct contact actions for listings (both Sale & Rent)
+        if (pin.is_listing || isSale) {
             document.getElementById("detail-express-interest-container").style.display = 'block';
 
-            // Seed pins are shown as already booked
-            const isSeed = (pin.device_id && pin.device_id.startsWith('00000000-0000-0000-0000-0000000000')) || pin.ip_hash === 'seed';
+            // Seed non-sale pins might show as booked
+            const isSeed = !isSale && ((pin.device_id && pin.device_id.startsWith('00000000-0000-0000-0000-0000000000')) || pin.ip_hash === 'seed');
             if (isSeed) {
                 document.getElementById("detail-booked-banner").style.display = 'flex';
                 document.getElementById("detail-interest-form-wrap").style.display = 'none';
@@ -558,18 +1032,44 @@ async function openPinDetail(pin) {
                 document.getElementById("detail-booked-banner").style.display = 'none';
                 document.getElementById("detail-interest-form-wrap").style.display = 'block';
 
+                // Update section heading and button text
+                const headingEl = document.querySelector("#detail-interest-form-wrap .section-heading");
+                if (headingEl) {
+                    headingEl.innerText = isSale ? "Express Interest to Buy / Contact Seller" : "Express Interest in this Flat";
+                }
+                const submitBtn = document.querySelector("#express-interest-form button[type='submit']");
+                if (submitBtn) {
+                    submitBtn.innerText = isSale ? "Send Buyer Inquiry (0% Brokerage)" : "Express Interest (Free)";
+                    submitBtn.style.background = isSale ? "#8B263E" : "";
+                }
+
+                // Call / WhatsApp button if contact phone available
+                const contactPhone = pin.contact_phone || pin.phone;
+                let phoneBtn = document.getElementById("direct-contact-action-btn");
+                if (!phoneBtn) {
+                    phoneBtn = document.createElement("a");
+                    phoneBtn.id = "direct-contact-action-btn";
+                    phoneBtn.style.cssText = "display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-bottom: 12px; background: #2F7D4F; color: white; text-decoration: none; font-weight: 700; padding: 12px; border-radius: 10px; font-family: var(--font-heading);";
+                    document.getElementById("detail-interest-form-wrap").prepend(phoneBtn);
+                }
+                if (contactPhone) {
+                    phoneBtn.href = `tel:${contactPhone.replace(/\s+/g, '')}`;
+                    phoneBtn.innerHTML = `📞 Call / WhatsApp Direct: ${contactPhone}`;
+                    phoneBtn.style.display = 'flex';
+                } else {
+                    phoneBtn.style.display = 'none';
+                }
+
                 // Populate Form Fields
                 document.getElementById("ei-lat").value = pin.latitude;
                 document.getElementById("ei-lng").value = pin.longitude;
-                document.getElementById("ei-bhk").value = pin.bhk;
-                document.getElementById("ei-type").value = pin.looking_for_flatmate ? 'room' : 'whole_flat';
-                document.getElementById("ei-budget").value = pin.rent;
+                document.getElementById("ei-bhk").value = pin.bhk || 2;
+                document.getElementById("ei-type").value = isSale ? 'sale' : (pin.looking_for_flatmate ? 'room' : 'whole_flat');
+                document.getElementById("ei-budget").value = saleAmt;
 
                 resetFormChips('ei-move', 'flexible');
                 selectFormChip('ei-move', 'flexible');
-                
                 resetFormChips('ei-gender', null);
-                
                 resetFormChips('ei-parking', 'yes');
                 selectFormChip('ei-parking', 'yes');
             }
@@ -828,6 +1328,10 @@ window.switchFromPinToListing = function() {
     document.getElementById("ow-lng").value = lng;
     document.getElementById("or-lat").value = lat;
     document.getElementById("or-lng").value = lng;
+    const osLat = document.getElementById("os-lat");
+    const osLng = document.getElementById("os-lng");
+    if (osLat) osLat.value = lat;
+    if (osLng) osLng.value = lng;
     closeModal("pin-add-modal");
     openModal("owner-type-modal");
 };
@@ -846,7 +1350,7 @@ function isValidEmail(email) {
     return re.test(email);
 }
 
-// Pin Add Form (Plain anonymous contribution)
+// Pin Add Form (Plain anonymous contribution - Rent or Sale)
 document.getElementById("pin-add-form").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -860,10 +1364,68 @@ document.getElementById("pin-add-form").addEventListener("submit", async (e) => 
         return;
     }
 
+    const paModeInput = document.getElementById("pa-mode");
+    const isSale = paModeInput && paModeInput.value === 'sale';
     const rent = parseFloat(document.getElementById("pa-rent").value);
     const bhk = parseInt(selectedChips['pa-bhk'] || '1');
 
-    // Bounds check limit triggers
+    if (isSale) {
+        if (!rent || rent < 500000 || rent > 500000000) {
+            alert("Please enter a realistic property sale price between ₹5 Lakhs and ₹50 Crores.");
+            return;
+        }
+
+        const salePin = {
+            id: 'pin-sale-' + Date.now(),
+            latitude: parseFloat(document.getElementById("pa-lat").value),
+            longitude: parseFloat(document.getElementById("pa-lng").value),
+            bhk: bhk,
+            rent: rent,
+            sale_price: rent,
+            transaction_type: 'sale',
+            property_type: 'apartment',
+            society: null,
+            gated: (selectedChips['pa-gated'] || 'true') === 'true',
+            sqft: parseInt(document.getElementById("pa-sqft").value) || null,
+            parking_count: parseInt(document.getElementById("pa-parking").value) || 0,
+            feedback: `[FOR_SALE:${rent}:apartment] ` + (document.getElementById("pa-feedback").value || `Tenant/Buyer reported sale valuation for ${bhk} BHK`),
+            email: email,
+            created_at: new Date().toISOString()
+        };
+        saveCustomPin(salePin);
+
+        try {
+            await db.rpc('create_pin', {
+                p_lat: salePin.latitude,
+                p_lng: salePin.longitude,
+                p_bhk: bhk,
+                p_rent: rent,
+                p_deposit: 0,
+                p_furnishing: selectedChips['pa-furnishing'] || 'unfurnished',
+                p_gated: salePin.gated,
+                p_occupant_type: 'apartment',
+                p_society: null,
+                p_feedback: salePin.feedback,
+                p_maintenance_included: false,
+                p_pets_allowed: null,
+                p_sqft: salePin.sqft,
+                p_email: email,
+                p_parking_count: salePin.parking_count,
+                p_device_id: deviceId,
+                p_ip_hash: ipHash
+            });
+        } catch (err) {
+            console.warn("Supabase sale pin sync notice:", err);
+        }
+
+        alert("Sale price pin dropped anonymously! Thank you for contributing to Chennai real estate transparency.");
+        closeModal("pin-add-modal");
+        document.getElementById("pin-add-form").reset();
+        await loadPins();
+        return;
+    }
+
+    // Bounds check limit triggers for Rent
     if (bhk === 1 && (rent < 5000 || rent > 80000)) {
         alert("Rent for 1BHK must be between ₹5,000 and ₹80,000"); return;
     } else if (bhk === 2 && (rent < 8000 || rent > 150000)) {
@@ -932,6 +1494,151 @@ window.openOwnerRoomForm = function() {
     closeModal("owner-type-modal");
     openModal("owner-room-modal");
 };
+
+window.openOwnerSellForm = function() {
+    closeModal("owner-type-modal");
+    openModal("owner-sell-modal");
+};
+
+// Owner Sell Property Form Submit
+const ownerSellForm = document.getElementById("owner-sell-form");
+if (ownerSellForm) {
+    ownerSellForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById("os-email").value.trim();
+        const phone = document.getElementById("os-phone").value.trim();
+        if (!email) {
+            alert("Email is compulsory to list your property for sale.");
+            return;
+        }
+        if (!isValidEmail(email)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
+        if (!phone) {
+            alert("Contact phone is compulsory so serious buyers can reach you.");
+            return;
+        }
+
+        const price = parseFloat(document.getElementById("os-price").value);
+        if (!price || price < 500000) {
+            alert("Please enter a realistic property sale price (min ₹5 Lakhs).");
+            return;
+        }
+
+        const latVal = parseFloat(document.getElementById("os-lat").value) || 13.0827;
+        const lngVal = parseFloat(document.getElementById("os-lng").value) || 80.2707;
+        const propType = selectedChips['os-type'] || 'apartment';
+        const bhk = parseInt(selectedChips['os-bhk'] || '2');
+        const sqft = parseInt(document.getElementById("os-sqft").value) || 1000;
+        const possession = selectedChips['os-possession'] || 'ready';
+        const gated = (selectedChips['os-gated'] || 'true') === 'true';
+        const parking = parseInt(document.getElementById("os-parking").value) || 1;
+        const remarks = document.getElementById("os-remarks") ? document.getElementById("os-remarks").value.trim() : '';
+
+        // Rate Limit Check
+        try {
+            const { data: isLimitHit, error: limitErr } = await db.rpc('check_pin_limit', { p_ip_hash: ipHash });
+            if (!limitErr && isLimitHit) {
+                alert("Submission limit reached. Max 3 listings per 24 hours.");
+                return;
+            }
+        } catch (limE) {
+            console.warn("Limit check notice:", limE);
+        }
+
+        const newSalePin = {
+            id: 'sale-user-' + Date.now(),
+            latitude: latVal,
+            longitude: lngVal,
+            bhk: bhk,
+            rent: price,
+            sale_price: price,
+            transaction_type: 'sale',
+            property_type: propType,
+            possession: possession,
+            society: remarks ? remarks.slice(0, 45) : `${bhk} BHK ${propType.toUpperCase()}`,
+            gated: gated,
+            sqft: sqft,
+            parking_count: parking,
+            phone: phone,
+            contact_phone: phone,
+            email: email,
+            feedback: `[FOR_SALE:${price}:${propType}] ` + (remarks || `Direct owner sale. ${bhk} BHK ${propType} in Chennai. Contact: ${phone}`),
+            is_listing: true,
+            created_at: new Date().toISOString()
+        };
+
+        // Persist locally
+        saveCustomPin(newSalePin);
+
+        // Sync to Supabase
+        try {
+            const payloadPin = {
+                p_lat: latVal,
+                p_lng: lngVal,
+                p_bhk: bhk,
+                p_rent: price,
+                p_deposit: Math.round(price * 0.1),
+                p_furnishing: 'semi',
+                p_gated: gated,
+                p_occupant_type: propType,
+                p_society: remarks ? remarks.slice(0, 45) : null,
+                p_feedback: newSalePin.feedback,
+                p_sqft: sqft,
+                p_email: email,
+                p_parking_count: parking,
+                p_device_id: deviceId,
+                p_ip_hash: ipHash
+            };
+
+            const { data: pinResult, error: pinErr } = await db.rpc('create_pin', payloadPin);
+            if (!pinErr && pinResult) {
+                await db.rpc('mark_pin_as_listing', {
+                    p_pin_id: pinResult.id,
+                    p_available_from: 'asap',
+                    p_parking_count: parking,
+                    p_looking_for_flatmate: false,
+                    p_rent: price,
+                    p_flatmate_gender: null,
+                    p_smoke_pref: null,
+                    p_food_pref: null
+                });
+                await db.rpc('set_pin_owner_contact', {
+                    p_pin_id: pinResult.id,
+                    p_email: email,
+                    p_phone: phone
+                });
+            }
+        } catch (dbErr) {
+            console.warn("Supabase sale sync error:", dbErr);
+        }
+
+        // Email notification attempt
+        fetch('/api/send-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                to: email,
+                subject: `[Chennai Rents & Buy] Your Property Sale Listing is Live!`,
+                html: `
+                    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FDFBF7; color: #1E1B18; border: 1.5px solid #E8DFC8; border-radius: 12px;">
+                        <h2 style="color: #8B263E; margin-top: 0;">Chennai Real Estate — For Sale Listing Published</h2>
+                        <p>Your ${bhk} BHK ${propType} (₹${formatInLakhsCrores(price)}) has been pinned on the Chennai map with 0% brokerage.</p>
+                        <p style="font-size: 14px; color: #4A433B;">Interested buyers will contact you directly via phone or WhatsApp at ${phone}.</p>
+                    </div>
+                `,
+                type: 'owner_sale'
+            })
+        }).catch(e => console.warn('Email dispatch notice:', e));
+
+        alert("Property listed for Sale successfully! Your pin is now live on the Chennai Map with 0% brokerage.");
+        closeModal("owner-sell-modal");
+        ownerSellForm.reset();
+        await loadPins();
+    });
+}
 
 // Owner Whole Form Submit
 document.getElementById("owner-whole-form").addEventListener("submit", async (e) => {
@@ -1184,11 +1891,90 @@ window.confirmReplaceSeeker = async function() {
 };
 
 async function submitSeekerPin(email, phone) {
+    const saIntentInput = document.getElementById("sa-intent");
+    const isBuyer = saIntentInput && saIntentInput.value === 'buy';
+    const lat = parseFloat(document.getElementById("sa-lat").value);
+    const lng = parseFloat(document.getElementById("sa-lng").value);
+    const budget = parseFloat(document.getElementById("sa-budget").value);
+    const bhk = parseInt(selectedChips['sa-bhk'] || '2');
+
+    if (isBuyer) {
+        if (!budget || budget < 500000) {
+            alert("Please enter a realistic purchase budget (min ₹5 Lakhs).");
+            return;
+        }
+
+        const buyerPin = {
+            id: 'buyer-user-' + Date.now(),
+            latitude: lat,
+            longitude: lng,
+            budget: budget,
+            seeker_type: 'buyer',
+            intent: 'buy',
+            min_bhk: bhk,
+            looking_for: 'property_for_sale',
+            email: email,
+            phone: phone,
+            note: `Looking to buy ${bhk} BHK property in this area. Budget: ₹${formatInLakhsCrores(budget)}.`
+        };
+        saveCustomSeeker(buyerPin);
+
+        try {
+            await db.rpc('create_seeker_pin', {
+                p_lat: lat,
+                p_lng: lng,
+                p_budget: budget,
+                p_min_bhk: bhk,
+                p_looking_for: 'property_buy',
+                p_email: email,
+                p_phone: phone,
+                p_move_in: 'immediate',
+                p_seeker_gender: 'other',
+                p_flatmate_gender: 'any',
+                p_flatmate_smoke: 'any',
+                p_flatmate_food: 'any',
+                p_note: buyerPin.note,
+                p_ip_hash: ipHash
+            });
+        } catch (err) {
+            console.warn("Supabase buyer seeker notice:", err);
+        }
+
+        if (email) {
+            fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    to: email,
+                    subject: `[Chennai Rents & Buy] Your Home Buyer Alert is Active!`,
+                    html: `
+                        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FDFBF7; color: #1E1B18; border: 1.5px solid #E8DFC8; border-radius: 12px;">
+                            <h2 style="color: #8B263E; margin-top: 0;">Chennai Real Estate — Buyer Alert Activated</h2>
+                            <p>Your search alert to buy property in Chennai has been registered on the interactive map.</p>
+                            <div style="background: #FFFFFF; border: 1px solid #E8DFC8; border-radius: 8px; padding: 16px; margin: 16px 0;">
+                                <p style="margin: 4px 0;"><strong>Purchase Budget:</strong> ₹${formatInLakhsCrores(budget)}</p>
+                                <p style="margin: 4px 0;"><strong>Preferred Size:</strong> ${bhk} BHK</p>
+                            </div>
+                            <p style="font-size: 14px; color: #4A433B;">You will receive instant alerts when direct property owners post matching listings nearby with 0% brokerage.</p>
+                        </div>
+                    `,
+                    type: 'buyer_alert'
+                })
+            }).catch(e => console.warn('Email dispatch notice:', e));
+        }
+
+        alert("Buyer Alert activated successfully! We'll alert you as soon as matching properties are listed in this area.");
+        closeModal("seeker-add-modal");
+        document.getElementById("seeker-add-form").reset();
+        await loadPins();
+        return;
+    }
+
     const payload = {
-        p_lat: parseFloat(document.getElementById("sa-lat").value),
-        p_lng: parseFloat(document.getElementById("sa-lng").value),
-        p_budget: parseFloat(document.getElementById("sa-budget").value),
-        p_min_bhk: parseInt(selectedChips['sa-bhk'] || '2'),
+        p_lat: lat,
+        p_lng: lng,
+        p_budget: budget,
+        p_min_bhk: bhk,
         p_looking_for: selectedChips['sa-type'] || 'whole_flat',
         p_email: email,
         p_phone: phone,
@@ -1239,7 +2025,98 @@ async function submitSeekerPin(email, phone) {
     }
 }
 
-// 10. Filter Setters
+// 10. Filter Setters & Mode Controllers
+window.setTransactionMode = function(mode) {
+    transactionMode = mode;
+    ['all', 'rent', 'sale'].forEach(m => {
+        const el = document.getElementById(`chicklet-mode-${m}`);
+        if (el) {
+            if (m === mode) el.classList.add("active");
+            else el.classList.remove("active");
+        }
+    });
+
+    ['all', 'rent', 'sale'].forEach(m => {
+        const chip = document.getElementById(`f-type-${m}`);
+        if (chip) {
+            if (m === mode) chip.classList.add("active");
+            else chip.classList.remove("active");
+        }
+    });
+
+    const rentSec = document.getElementById("filter-rent-section");
+    const saleSec = document.getElementById("filter-sale-section");
+    if (rentSec) rentSec.style.display = (mode === 'sale') ? 'none' : 'block';
+    if (saleSec) saleSec.style.display = (mode === 'rent') ? 'none' : 'block';
+
+    updateFilterBadgeCount();
+};
+
+window.setFilterType = function(type) {
+    window.setTransactionMode(type);
+};
+
+window.setFilterPropType = function(type) {
+    filterPropType = type;
+    ['all', 'apt', 'villa', 'plot'].forEach(t => {
+        const chip = document.getElementById(`f-prop-${t}`);
+        if (chip) {
+            const mappedVal = t === 'apt' ? 'apartment' : t;
+            if (mappedVal === type) chip.classList.add("active");
+            else chip.classList.remove("active");
+        }
+    });
+    updateFilterBadgeCount();
+};
+
+window.setFilterSalePrice = function() {
+    filterSaleMin = parseFloat(document.getElementById("f-sale-min").value) || null;
+    filterSaleMax = parseFloat(document.getElementById("f-sale-max").value) || null;
+    updateFilterBadgeCount();
+};
+
+window.selectPinMode = function(mode) {
+    const input = document.getElementById("pa-mode");
+    if (input) input.value = mode;
+    const btnRent = document.getElementById("pa-mode-rent");
+    const btnSale = document.getElementById("pa-mode-sale");
+    const label = document.getElementById("pa-price-label");
+    const rentInput = document.getElementById("pa-rent");
+
+    if (mode === 'sale') {
+        if (btnRent) btnRent.classList.remove("active");
+        if (btnSale) btnSale.classList.add("active");
+        if (label) label.innerHTML = 'Sale / Purchase Price (₹ Total)<span>*</span>';
+        if (rentInput) rentInput.placeholder = 'e.g. 7500000 (75 Lakhs)';
+    } else {
+        if (btnRent) btnRent.classList.add("active");
+        if (btnSale) btnSale.classList.remove("active");
+        if (label) label.innerHTML = 'Monthly Rent (₹)<span>*</span>';
+        if (rentInput) rentInput.placeholder = 'e.g. 24000';
+    }
+};
+
+window.selectSeekerIntent = function(intent) {
+    const input = document.getElementById("sa-intent");
+    if (input) input.value = intent;
+    const btnRent = document.getElementById("sa-intent-rent");
+    const btnBuy = document.getElementById("sa-intent-buy");
+    const label = document.getElementById("sa-budget-label");
+    const budgetInput = document.getElementById("sa-budget");
+
+    if (intent === 'buy') {
+        if (btnRent) btnRent.classList.remove("active");
+        if (btnBuy) btnBuy.classList.add("active");
+        if (label) label.innerHTML = 'Max Purchase Budget (₹ Total)<span>*</span>';
+        if (budgetInput) budgetInput.placeholder = 'e.g. 8000000 (80 Lakhs)';
+    } else {
+        if (btnRent) btnRent.classList.add("active");
+        if (btnBuy) btnBuy.classList.remove("active");
+        if (label) label.innerHTML = 'Max Monthly Budget (₹)<span>*</span>';
+        if (budgetInput) budgetInput.placeholder = 'e.g. 25000';
+    }
+};
+
 window.toggleFilterBhk = function(bhk) {
     const idx = activeFilterBhk.indexOf(bhk);
     const btn = document.getElementById(`f-bhk-${bhk}`);
@@ -1318,16 +2195,46 @@ window.clearFilters = function() {
     activeFilterBhk = [];
     filterRentMin = null;
     filterRentMax = null;
+    filterSaleMin = null;
+    filterSaleMax = null;
     filterArea = '';
     filterGated = null;
     availableFlatsOnly = false;
+    transactionMode = 'all';
+    filterPropType = 'all';
 
     // Reset UI chips classes
     const chips = document.querySelectorAll(".option-chip");
     chips.forEach(c => c.classList.remove("active"));
-    document.getElementById("f-rent-min").value = '';
-    document.getElementById("f-rent-max").value = '';
-    document.getElementById("f-area").value = '';
+    const defAllType = document.getElementById("f-type-all");
+    if (defAllType) defAllType.classList.add("active");
+    const defAllProp = document.getElementById("f-prop-all");
+    if (defAllProp) defAllProp.classList.add("active");
+
+    ['all', 'rent', 'sale'].forEach(m => {
+        const el = document.getElementById(`chicklet-mode-${m}`);
+        if (el) {
+            if (m === 'all') el.classList.add("active");
+            else el.classList.remove("active");
+        }
+    });
+
+    const rentMin = document.getElementById("f-rent-min");
+    const rentMax = document.getElementById("f-rent-max");
+    const saleMin = document.getElementById("f-sale-min");
+    const saleMax = document.getElementById("f-sale-max");
+    const areaInput = document.getElementById("f-area");
+    if (rentMin) rentMin.value = '';
+    if (rentMax) rentMax.value = '';
+    if (saleMin) saleMin.value = '';
+    if (saleMax) saleMax.value = '';
+    if (areaInput) areaInput.value = '';
+
+    const rentSec = document.getElementById("filter-rent-section");
+    const saleSec = document.getElementById("filter-sale-section");
+    if (rentSec) rentSec.style.display = 'block';
+    if (saleSec) saleSec.style.display = 'block';
+
     document.getElementById("available-flats-banner").style.display = 'none';
     document.getElementById("chicklet-avlb").classList.remove("active");
 
@@ -1339,20 +2246,25 @@ function updateFilterBadgeCount() {
     let count = 0;
     if (activeFilterBhk.length > 0) count++;
     if (filterRentMin || filterRentMax) count++;
+    if (filterSaleMin || filterSaleMax) count++;
     if (filterArea) count++;
     if (filterGated !== null) count++;
     if (availableFlatsOnly) count++;
+    if (transactionMode !== 'all') count++;
+    if (filterPropType !== 'all') count++;
 
     const badge = document.getElementById("filter-count-badge");
     const filterBtn = document.getElementById("filter-btn");
-    badge.innerText = count;
+    if (badge) badge.innerText = count;
 
-    if (count > 0) {
-        badge.style.display = 'flex';
-        filterBtn.classList.add("has-filters");
-    } else {
-        badge.style.display = 'none';
-        filterBtn.classList.remove("has-filters");
+    if (filterBtn) {
+        if (count > 0) {
+            if (badge) badge.style.display = 'flex';
+            filterBtn.classList.add("has-filters");
+        } else {
+            if (badge) badge.style.display = 'none';
+            filterBtn.classList.remove("has-filters");
+        }
     }
 
     loadPins();

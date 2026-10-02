@@ -27,6 +27,7 @@ jspm_packages/
 dist/
 dist-ssr/
 *.local
+scratch/
 
 # Environment variables
 .env

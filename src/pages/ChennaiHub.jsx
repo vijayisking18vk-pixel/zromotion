@@ -144,8 +144,8 @@ export default function ChennaiHub() {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Chennai Rents', item: 'https://chennaireents.com/' },
-      { '@type': 'ListItem', position: 2, name: 'Flats for Rent in Chennai', item: 'https://chennaireents.com/chennai/rentals' },
+      { '@type': 'ListItem', position: 1, name: 'Chennai Rents', item: 'https://chennairents.in/' },
+      { '@type': 'ListItem', position: 2, name: 'Flats for Rent in Chennai', item: 'https://chennairents.in/chennai/rentals' },
     ],
   };
 
@@ -155,7 +155,7 @@ export default function ChennaiHub() {
         title="Flats & Houses for Rent in Chennai | Chennai Rents"
         description="Find flats, houses, and PG for rent in Chennai. Explore locality-by-locality rent guides, real rent rates, water reports, and flood history. No brokerage."
         robots="index, follow"
-        canonical="https://chennaireents.com/chennai/rentals"
+        canonical="https://chennairents.in/chennai/rentals"
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 

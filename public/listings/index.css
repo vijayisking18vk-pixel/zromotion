@@ -248,6 +248,21 @@ body.map-page {
     color: #22d3ee;
 }
 
+.pin-label.for-sale {
+    background: #8B263E;
+    border: 1.5px solid rgba(244, 63, 94, 0.8);
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(139, 38, 62, 0.5);
+    font-weight: 800;
+}
+
+.pin-label.buyer {
+    background: rgba(139, 92, 246, 0.18);
+    border: 1.5px dashed #a855f7;
+    color: #c084fc;
+    font-weight: 700;
+}
+
 .pin-caret {
     width: 8px;
     height: 8px;
@@ -272,6 +287,16 @@ body.map-page {
     background: rgba(6, 182, 212, 0.15);
     border-right: 1.5px dashed #06b6d4;
     border-bottom: 1.5px dashed #06b6d4;
+}
+
+.pin-caret.for-sale {
+    background: #8B263E;
+}
+
+.pin-caret.buyer {
+    background: rgba(139, 92, 246, 0.18);
+    border-right: 1.5px dashed #a855f7;
+    border-bottom: 1.5px dashed #a855f7;
 }
 
 .pin-star {
@@ -1607,10 +1632,10 @@ html, body {
 /* ==========================================================================
    CHENNAI RENTS DEFINITIVE EDITORIAL LIGHT THEME OVERRIDES
    Exact 4-Color Palette:
-   • Yellow (#F5B800): Auto-rickshaws, temple marigolds
-   • Blue (#1F6FA8): Bay of Bengal / Marina beach coast
-   • Red (#B23A2E): Ripon Building architectural red
-   • Green (#2F7D4F): Roadside trees, temple doors, buses
+   ï¿½ Yellow (#F5B800): Auto-rickshaws, temple marigolds
+   ï¿½ Blue (#1F6FA8): Bay of Bengal / Marina beach coast
+   ï¿½ Red (#B23A2E): Ripon Building architectural red
+   ï¿½ Green (#2F7D4F): Roadside trees, temple doors, buses
    ========================================================================== */
 
 /* -- Typography & Global Defaults -- */
@@ -1794,6 +1819,45 @@ h1, h2, h3, h4, .modal-title, .feed-title, .page-title, .brand-text, .detail-amo
     background: #FDF2F0 !important;
     color: var(--c-ripon-red) !important;
     border: 1.5px solid rgba(178, 58, 46, 0.45) !important;
+}
+
+/* Deep Wine / Burgundy = For Sale */
+.badge.sale, .badge.wine {
+    background: #FDF2F4 !important;
+    color: #8B263E !important;
+    border: 1.5px solid rgba(139, 38, 62, 0.4) !important;
+    font-weight: 800 !important;
+}
+
+/* Purple = Buyer / Seeker Requirement */
+.badge.buyer, .badge.purple {
+    background: #F5F3FF !important;
+    color: #6D28D9 !important;
+    border: 1.5px solid rgba(109, 40, 217, 0.35) !important;
+    font-weight: 700 !important;
+}
+
+/* Transaction Mode Quick Switcher in chicklet bar */
+.chicklet-mode-group {
+    display: inline-flex;
+    background: rgba(30, 27, 24, 0.06);
+    padding: 3px;
+    border-radius: 24px;
+    gap: 2px;
+}
+
+.chicklet.chicklet-mode {
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.chicklet.chicklet-mode.active {
+    background: var(--c-ripon-red) !important;
+    color: #ffffff !important;
+    border-color: var(--c-ripon-red) !important;
+    box-shadow: 0 2px 8px rgba(178, 58, 46, 0.25);
 }
 
 /* -- Property Details Data Rows (Uniform Alignment & Legibility) -- */

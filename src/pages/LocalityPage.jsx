@@ -167,9 +167,9 @@ function LocalityStructuredData({ locality, meta }) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Chennai Rents', item: 'https://chennaireents.com/' },
-      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: 'https://chennaireents.com/chennai/rentals' },
-      { '@type': 'ListItem', position: 3, name: meta.h1, item: `https://chennaireents.com/chennai/${locality.slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Chennai Rents', item: 'https://chennairents.in/' },
+      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: 'https://chennairents.in/chennai/rentals' },
+      { '@type': 'ListItem', position: 3, name: meta.h1, item: `https://chennairents.in/chennai/${locality.slug}` },
     ],
   };
   const faqSchema = locality.faqs?.length ? {
@@ -214,7 +214,7 @@ export default function LocalityPage() {
         title={meta.title}
         description={meta.description}
         robots={indexDirective}
-        canonical={`https://chennaireents.com/chennai/${locality.slug}`}
+        canonical={`https://chennairents.in/chennai/${locality.slug}`}
       />
       <LocalityStructuredData locality={locality} meta={meta} />
 

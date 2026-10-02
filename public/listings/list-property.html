@@ -205,9 +205,18 @@
             transition: all 0.2s;
             box-shadow: 0 4px 16px rgba(178, 58, 46, 0.3);
         }
-        .btn-submit-form:hover {
-            background: var(--c-ripon-red-dk);
-            transform: translateY(-1px);
+        .type-btn#btn-sell.active {
+            background: #FBF0F3;
+            border-color: #8B263E;
+            color: #8B263E;
+        }
+
+        .btn-submit-form.btn-sell-action {
+            background: #8B263E;
+            box-shadow: 0 4px 16px rgba(139, 38, 62, 0.3);
+        }
+        .btn-submit-form.btn-sell-action:hover {
+            background: #731F33;
         }
     </style>
 </head>
@@ -228,12 +237,16 @@
         <div class="form-card">
             
             <h1 class="page-title">List Your Property</h1>
-            <p class="page-subtitle">Find high-quality tenants directly. No broker commission. 100% free.</p>
+            <p class="page-subtitle">Rent out or sell directly to verified tenants and buyers. 0% broker commission. 100% free.</p>
 
             <div class="type-selector">
                 <div class="type-btn active" id="btn-whole" onclick="toggleFormType('whole')">
                     <span class="type-btn-icon">🏢</span>
-                    Entire Flat
+                    Rent Flat / House
+                </div>
+                <div class="type-btn" id="btn-sell" onclick="toggleFormType('sell')">
+                    <span class="type-btn-icon">🏷️</span>
+                    Sell Property
                 </div>
                 <div class="type-btn" id="btn-room" onclick="toggleFormType('room')">
                     <span class="type-btn-icon">🛏️</span>
@@ -298,6 +311,87 @@
                 </div>
 
                 <button type="submit" class="btn-submit-form" id="btn-submit-whole">Post Direct Listing</button>
+            </form>
+
+            <!-- Form: Sell Property (Hidden by default) -->
+            <form id="form-sell" style="display: none;">
+                <div class="field-group">
+                    <label class="field-label">Neighbourhood / Location in Chennai <span>*</span></label>
+                    <input type="text" id="fs-location" class="form-input" placeholder="e.g. OMR, Anna Nagar, Velachery, Adyar, Besant Nagar" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Property Category <span>*</span></label>
+                    <div class="chips-row" id="chips-fs-type">
+                        <div class="option-chip active" onclick="selectChip(this)" data-val="apartment">🏢 Apartment / Flat</div>
+                        <div class="option-chip" onclick="selectChip(this)" data-val="villa">🏡 Villa / Independent House</div>
+                        <div class="option-chip" onclick="selectChip(this)" data-val="plot">📐 Plot / Land</div>
+                    </div>
+                </div>
+
+                <div class="field-group" id="fs-bhk-container">
+                    <label class="field-label">BHK Size <span>*</span></label>
+                    <div class="chips-row" id="chips-fs-bhk">
+                        <div class="option-chip" onclick="selectChip(this)" data-val="1">1 BHK</div>
+                        <div class="option-chip active" onclick="selectChip(this)" data-val="2">2 BHK</div>
+                        <div class="option-chip" onclick="selectChip(this)" data-val="3">3 BHK</div>
+                        <div class="option-chip" onclick="selectChip(this)" data-val="4">4 BHK</div>
+                        <div class="option-chip" onclick="selectChip(this)" data-val="5">5+ BHK</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Expected Sale Price (₹ Total) <span>*</span></label>
+                    <div style="position: relative; display: flex; align-items: center;">
+                        <span style="position: absolute; left: 14px; color: #9ca3af; font-size: 15px;">₹</span>
+                        <input type="number" id="fs-price" class="form-input" placeholder="e.g. 8500000 (85 Lakhs)" style="padding-left: 30px;" required>
+                    </div>
+                    <div id="fs-price-hint" style="font-size: 12px; color: #8B263E; margin-top: 4px; font-weight: 700;"></div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Built-up / Carpet Area (sq.ft) <span>*</span></label>
+                    <input type="number" id="fs-sqft" class="form-input" placeholder="e.g. 1250" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Possession Status <span>*</span></label>
+                    <div class="chips-row" id="chips-fs-possession">
+                        <div class="option-chip active" onclick="selectChip(this)" data-val="ready">Ready to Move</div>
+                        <div class="option-chip" onclick="selectChip(this)" data-val="under_construction">Under Construction</div>
+                        <div class="option-chip" onclick="selectChip(this)" data-val="resale">Resale (Immediate)</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Gated Community / Layout? <span>*</span></label>
+                    <div class="chips-row" id="chips-fs-gated">
+                        <div class="option-chip active" onclick="selectChip(this)" data-val="true">Yes (Gated)</div>
+                        <div class="option-chip" onclick="selectChip(this)" data-val="false">No (Standalone)</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Covered Car Parking Spots <span>*</span></label>
+                    <input type="number" id="fs-parking" class="form-input" value="1" min="0" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Contact Email <span>*</span></label>
+                    <input type="email" id="fs-email" class="form-input" placeholder="seller@email.com" required>
+                </div>
+                
+                <div class="field-group">
+                    <label class="field-label">Contact Phone / WhatsApp <span>*</span></label>
+                    <input type="tel" id="fs-phone" class="form-input" placeholder="+91 98765 43210" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Highlights / Remarks (optional)</label>
+                    <input type="text" id="fs-remarks" class="form-input" placeholder="e.g. CMDA approved, 500m to OMR IT corridor, North-facing">
+                </div>
+
+                <button type="submit" class="btn-submit-form btn-sell-action" id="btn-submit-sell">Publish Sale Listing (0% Brokerage)</button>
             </form>
 
             <!-- Form: Room / Flatmate (Hidden by default) -->
@@ -398,17 +492,47 @@
 
         function toggleFormType(type) {
             document.getElementById('btn-whole').classList.remove('active');
+            document.getElementById('btn-sell').classList.remove('active');
             document.getElementById('btn-room').classList.remove('active');
             document.getElementById('form-whole').style.display = 'none';
+            document.getElementById('form-sell').style.display = 'none';
             document.getElementById('form-room').style.display = 'none';
 
             if(type === 'whole') {
                 document.getElementById('btn-whole').classList.add('active');
                 document.getElementById('form-whole').style.display = 'block';
+            } else if(type === 'sell') {
+                document.getElementById('btn-sell').classList.add('active');
+                document.getElementById('form-sell').style.display = 'block';
             } else {
                 document.getElementById('btn-room').classList.add('active');
                 document.getElementById('form-room').style.display = 'block';
             }
+        }
+
+        function formatInLakhsCrores(amt) {
+            if (!amt) return '';
+            if (amt >= 10000000) {
+                const cr = amt / 10000000;
+                return cr % 1 === 0 ? cr.toFixed(0) + ' Cr' : cr.toFixed(2) + ' Cr';
+            } else if (amt >= 100000) {
+                const lk = amt / 100000;
+                return lk % 1 === 0 ? lk.toFixed(0) + ' Lakhs' : lk.toFixed(1) + ' Lakhs';
+            }
+            return '₹' + amt.toLocaleString('en-IN');
+        }
+
+        const fsPriceInput = document.getElementById("fs-price");
+        const fsPriceHint = document.getElementById("fs-price-hint");
+        if (fsPriceInput && fsPriceHint) {
+            fsPriceInput.addEventListener("input", () => {
+                const val = parseFloat(fsPriceInput.value);
+                if (val && val >= 100000) {
+                    fsPriceHint.innerText = `≈ ₹${formatInLakhsCrores(val)}`;
+                } else {
+                    fsPriceHint.innerText = '';
+                }
+            });
         }
 
         function selectChip(clickedElement) {
@@ -441,6 +565,30 @@
             const email = document.getElementById('fw-email').value.trim();
             const phone = document.getElementById('fw-phone').value.trim();
             const coords = getCoordsForArea(loc);
+
+            const customRentPin = {
+                id: 'custom-rent-' + Date.now(),
+                latitude: coords[0],
+                longitude: coords[1],
+                bhk: bhk,
+                rent: rent,
+                deposit: deposit,
+                furnishing: furnishing,
+                gated: gated,
+                area: loc,
+                email: email,
+                phone: phone,
+                contact_phone: phone,
+                is_listing: true,
+                looking_for_flatmate: false,
+                feedback: `Direct Owner ${bhk} BHK Flat in ${loc}`,
+                created_at: new Date().toISOString()
+            };
+            try {
+                const stored = JSON.parse(localStorage.getItem('chennai_custom_pins') || '[]');
+                stored.push(customRentPin);
+                localStorage.setItem('chennai_custom_pins', JSON.stringify(stored));
+            } catch (e) {}
 
             try {
                 if (db) {
@@ -501,6 +649,120 @@
             }
         });
 
+        // Sell Property Form Submission
+        const formSell = document.getElementById('form-sell');
+        if (formSell) {
+            formSell.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('btn-submit-sell');
+                btn.disabled = true;
+                btn.innerText = 'Publishing Sale Listing...';
+
+                const loc = document.getElementById('fs-location').value.trim();
+                const price = parseFloat(document.getElementById('fs-price').value);
+                const propType = getActiveChipVal('chips-fs-type', 'apartment');
+                const bhk = parseInt(getActiveChipVal('chips-fs-bhk', '2'));
+                const sqft = parseInt(document.getElementById('fs-sqft').value) || 1000;
+                const possession = getActiveChipVal('chips-fs-possession', 'ready');
+                const gated = getActiveChipVal('chips-fs-gated', 'true') === 'true';
+                const parking = parseInt(document.getElementById('fs-parking').value) || 1;
+                const email = document.getElementById('fs-email').value.trim();
+                const phone = document.getElementById('fs-phone').value.trim();
+                const remarks = document.getElementById('fs-remarks') ? document.getElementById('fs-remarks').value.trim() : '';
+                const coords = getCoordsForArea(loc);
+
+                const salePin = {
+                    id: 'sale-page-' + Date.now(),
+                    latitude: coords[0],
+                    longitude: coords[1],
+                    bhk: bhk,
+                    rent: price,
+                    sale_price: price,
+                    transaction_type: 'sale',
+                    property_type: propType,
+                    possession: possession,
+                    area: loc,
+                    society: remarks ? remarks.slice(0, 45) : `${bhk} BHK ${propType.toUpperCase()}`,
+                    gated: gated,
+                    sqft: sqft,
+                    parking_count: parking,
+                    phone: phone,
+                    contact_phone: phone,
+                    email: email,
+                    feedback: `[FOR_SALE:${price}:${propType}] ` + (remarks || `Direct owner sale. ${bhk} BHK ${propType} in ${loc}. Phone: ${phone}`),
+                    is_listing: true,
+                    created_at: new Date().toISOString()
+                };
+
+                // Dual Persistence: 1. LocalStorage
+                try {
+                    const customPins = JSON.parse(localStorage.getItem('chennai_custom_pins') || '[]');
+                    customPins.push(salePin);
+                    localStorage.setItem('chennai_custom_pins', JSON.stringify(customPins));
+                } catch (storageErr) {
+                    console.warn('Storage notice:', storageErr);
+                }
+
+                // Dual Persistence: 2. Supabase Database
+                try {
+                    if (db) {
+                        const { error } = await db.from('pins').insert({
+                            latitude: coords[0],
+                            longitude: coords[1],
+                            location: `POINT(${coords[1]} ${coords[0]})`,
+                            bhk: bhk,
+                            rent: price,
+                            deposit: Math.round(price * 0.1),
+                            furnishing: 'semi',
+                            gated: gated,
+                            area: loc,
+                            email: email,
+                            phone: phone,
+                            is_listing: true,
+                            looking_for_flatmate: false,
+                            available_from: 'asap',
+                            feedback: salePin.feedback
+                        });
+                        if (error) console.warn('Supabase sale insert note:', error);
+                    }
+
+                    if (email) {
+                        fetch('/api/send-email', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                to: email,
+                                subject: `[Chennai Rents & Buy] Your Property Sale Listing in ${loc} is Live!`,
+                                html: `
+                                    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FDFBF7; color: #1E1B18; border: 1.5px solid #E8DFC8; border-radius: 12px;">
+                                        <h2 style="color: #8B263E; margin-top: 0;">Chennai Real Estate — Property For Sale Live</h2>
+                                        <p>Your property is now listed on the Chennai map for sale with 0% brokerage.</p>
+                                        <div style="background: #FFFFFF; border: 1px solid #E8DFC8; border-radius: 8px; padding: 16px; margin: 16px 0;">
+                                            <p style="margin: 4px 0;"><strong>Location:</strong> ${loc}</p>
+                                            <p style="margin: 4px 0;"><strong>Property:</strong> ${bhk} BHK ${propType.toUpperCase()}</p>
+                                            <p style="margin: 4px 0;"><strong>Sale Price:</strong> ₹${formatInLakhsCrores(price)}</p>
+                                            <p style="margin: 4px 0;"><strong>Super Built-up:</strong> ${sqft} sq.ft</p>
+                                        </div>
+                                        <p style="font-size: 14px; color: #4A433B;">Interested buyers will reach out to you directly via phone or WhatsApp at ${phone}.</p>
+                                    </div>
+                                `,
+                                type: 'owner_sale'
+                            })
+                        }).catch(e => console.warn('Email dispatch notice:', e));
+                    }
+
+                    alert('Property listed for sale successfully! Your listing is live on the Chennai Map with 0% brokerage.');
+                    window.location.href = 'index.html';
+                } catch (err) {
+                    alert('Property listed! Redirecting to map...');
+                    window.location.href = 'index.html';
+                } finally {
+                    btn.disabled = false;
+                    btn.innerText = 'Publish Sale Listing (0% Brokerage)';
+                }
+            });
+        }
+
         // Room / Flatmate Form Submission
         document.getElementById('form-room').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -515,6 +777,32 @@
             const email = document.getElementById('fr-email').value.trim();
             const phone = document.getElementById('fr-phone').value.trim();
             const coords = getCoordsForArea(loc);
+
+            const customRoomPin = {
+                id: 'custom-room-' + Date.now(),
+                latitude: coords[0],
+                longitude: coords[1],
+                bhk: 1,
+                rent: rent,
+                deposit: rent * 2,
+                furnishing: 'furnished',
+                gated: true,
+                area: loc,
+                email: email,
+                phone: phone,
+                contact_phone: phone,
+                is_listing: true,
+                looking_for_flatmate: true,
+                flatmate_gender: gender,
+                flatmate_food: food,
+                feedback: `Flatmate Room in ${loc} (${gender})`,
+                created_at: new Date().toISOString()
+            };
+            try {
+                const stored = JSON.parse(localStorage.getItem('chennai_custom_pins') || '[]');
+                stored.push(customRoomPin);
+                localStorage.setItem('chennai_custom_pins', JSON.stringify(stored));
+            } catch (e) {}
 
             try {
                 if (db) {

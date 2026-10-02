@@ -136,15 +136,21 @@
 
     <!-- Chicklet Action Bar Shortcuts -->
     <div class="chicklet-bar" id="chicklet-bar">
-        <button class="chicklet" onclick="window.location.href='/'"><span class="chicklet-icon">🏠</span>Back to Home</button>
-        <button class="chicklet" id="chicklet-pin" onclick="startPinFlow()"><span class="chicklet-icon">📌</span>Pin My Rent</button>
-        <button class="chicklet" onclick="openTutorial()"><span class="chicklet-icon">🎓</span>How to use</button>
+        <button class="chicklet" onclick="window.location.href='/'"><span class="chicklet-icon">🏠</span>Home</button>
+        <!-- Mode switcher -->
+        <div class="chicklet-mode-group">
+            <button class="chicklet chicklet-mode active" id="mode-btn-all" onclick="setTransactionMode('all')">All</button>
+            <button class="chicklet chicklet-mode" id="mode-btn-rent" onclick="setTransactionMode('rent')">🏠 Rent</button>
+            <button class="chicklet chicklet-mode" id="mode-btn-sale" onclick="setTransactionMode('sale')">🏷️ Buy & Sell</button>
+        </div>
+        <button class="chicklet" id="chicklet-pin" onclick="startPinFlow()"><span class="chicklet-icon">📌</span>Pin Price</button>
+        <button class="chicklet" id="chicklet-list" onclick="startOwnerFlow()"><span class="chicklet-icon">💼</span>List Property</button>
+        <button class="chicklet" onclick="startSeekerFlow()"><span class="chicklet-icon">🔍</span>Find Home</button>
         <button class="chicklet" onclick="window.location.href='listings.html'"><span class="chicklet-icon">📋</span>Browse Listings</button>
+        <button class="chicklet" id="chicklet-avlb" onclick="toggleAvailableOnly()"><span class="chicklet-icon">✨</span>Available Only</button>
         <button class="chicklet" onclick="openLiveStats()"><span class="chicklet-icon">📊</span>Live Stats</button>
-        <button class="chicklet" onclick="openContentPortal()"><span class="chicklet-icon">📚</span>Guides & Stories</button>
-        <button class="chicklet" id="chicklet-avlb" onclick="toggleAvailableOnly()"><span class="chicklet-icon">🏠</span>Avlb Flats</button>
-        <button class="chicklet" onclick="startSeekerFlow()"><span class="chicklet-icon">🔍</span>Find a Flat</button>
-        <button class="chicklet" onclick="window.location.href='list-property.html'"><span class="chicklet-icon">💼</span>List My Flat</button>
+        <button class="chicklet" onclick="openContentPortal()"><span class="chicklet-icon">📚</span>Guides</button>
+        <button class="chicklet" onclick="openTutorial()"><span class="chicklet-icon">🎓</span>How to use</button>
         <button class="chicklet" onclick="openFaq()"><span class="chicklet-icon">❓</span>FAQ</button>
     </div>
 
@@ -186,9 +192,10 @@
     <!-- Map Legend -->
     <div class="legend">
         <div class="legend-pill">
-            <span class="leg-dot" style="background:#2563eb"></span> Gated
+            <span class="leg-dot" style="background:#2563eb"></span> Rent (Gated)
             <span class="leg-dot" style="background:#d97706"></span> Standalone
-            <span class="leg-dot" style="background:#22c55e"></span> Listed Flat
+            <span class="leg-dot" style="background:#22c55e"></span> Rent Listed
+            <span class="leg-dot" style="background:#8B263E"></span> For Sale
             <span class="leg-sep"></span>
             <button class="leg-btn" onclick="openFaq()">FAQ</button>
         </div>
@@ -207,28 +214,56 @@
             </div>
             
             <div class="field-group">
-                <label class="field-label">Available Flats Only</label>
+                <label class="field-label">Transaction Type</label>
                 <div class="chips-row">
-                    <div class="option-chip" id="filter-avail-only" onclick="toggleFilterAvailOnly()">Show listings only</div>
+                    <div class="option-chip active" id="f-type-all" onclick="setFilterType('all')">All Properties</div>
+                    <div class="option-chip" id="f-type-rent" onclick="setFilterType('rent')">🏠 For Rent</div>
+                    <div class="option-chip" id="f-type-sale" onclick="setFilterType('sale')">🏷️ For Sale (Buy)</div>
                 </div>
             </div>
 
             <div class="field-group">
+                <label class="field-label">Property Category</label>
+                <div class="chips-row">
+                    <div class="option-chip active" id="f-prop-all" onclick="setFilterPropType('all')">All Types</div>
+                    <div class="option-chip" id="f-prop-apt" onclick="setFilterPropType('apartment')">Apartment</div>
+                    <div class="option-chip" id="f-prop-villa" onclick="setFilterPropType('villa')">House / Villa</div>
+                    <div class="option-chip" id="f-prop-plot" onclick="setFilterPropType('plot')">Plot / Land</div>
+                </div>
+            </div>
+            
+            <div class="field-group">
+                <label class="field-label">Available Listings Only</label>
+                <div class="chips-row">
+                    <div class="option-chip" id="filter-avail-only" onclick="toggleFilterAvailOnly()">Show available properties only</div>
+                </div>
+            </div>
+
+            <div class="field-group" id="f-bhk-group">
                 <label class="field-label">BHK Size</label>
                 <div class="chips-row">
                     <div class="option-chip" id="f-bhk-1" onclick="toggleFilterBhk(1)">1 BHK</div>
                     <div class="option-chip" id="f-bhk-2" onclick="toggleFilterBhk(2)">2 BHK</div>
                     <div class="option-chip" id="f-bhk-3" onclick="toggleFilterBhk(3)">3 BHK</div>
-                    <div class="option-chip" id="f-bhk-4" onclick="toggleFilterBhk(4)">4 BHK</div>
+                    <div class="option-chip" id="f-bhk-4" onclick="toggleFilterBhk(4)">4+ BHK</div>
                 </div>
             </div>
 
-            <div class="field-group">
-                <label class="field-label">Rent Range (₹/month)</label>
+            <div class="field-group" id="f-rent-range-group">
+                <label class="field-label">Monthly Rent Range (₹/mo)</label>
                 <div style="display:flex; align-items:center; gap:8px;">
-                    <input type="number" id="f-rent-min" placeholder="Min" class="form-input" onchange="setFilterRent()" />
+                    <input type="number" id="f-rent-min" placeholder="Min ₹" class="form-input" onchange="setFilterRent()" />
                     <span style="color:var(--c-ink-muted); font-size:13px;">to</span>
-                    <input type="number" id="f-rent-max" placeholder="Max" class="form-input" onchange="setFilterRent()" />
+                    <input type="number" id="f-rent-max" placeholder="Max ₹" class="form-input" onchange="setFilterRent()" />
+                </div>
+            </div>
+
+            <div class="field-group" id="f-sale-range-group">
+                <label class="field-label">Sale Price Range (₹ in Lakhs)</label>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <input type="number" id="f-sale-min" placeholder="Min ₹ Lakhs (e.g. 40)" class="form-input" onchange="setFilterSalePrice()" />
+                    <span style="color:var(--c-ink-muted); font-size:13px;">to</span>
+                    <input type="number" id="f-sale-max" placeholder="Max ₹ Lakhs (e.g. 250)" class="form-input" onchange="setFilterSalePrice()" />
                 </div>
             </div>
 
@@ -483,8 +518,15 @@
             <div class="l2-card" onclick="openOwnerWholeForm()">
                 <span class="l2-card-icon">🏢</span>
                 <div>
-                    <div class="l2-card-title">Rent out whole flat</div>
+                    <div class="l2-card-title">Rent out flat or house</div>
                     <div class="l2-card-sub">List the entire apartment/house for direct leasing.</div>
+                </div>
+            </div>
+            <div class="l2-card" onclick="openOwnerSellForm()">
+                <span class="l2-card-icon">🏷️</span>
+                <div>
+                    <div class="l2-card-title">Sell property (Flat / Villa / Plot)</div>
+                    <div class="l2-card-sub">List your apartment, house, or land for direct sale with 0% brokerage.</div>
                 </div>
             </div>
             <div class="l2-card" onclick="openOwnerRoomForm()">
@@ -494,6 +536,94 @@
                     <div class="l2-card-sub">Rent out a single room inside a shared apartment.</div>
                 </div>
             </div>
+        </div>
+    </div>
+
+
+    <!-- ── MODAL: Owner Sell Property Form ── -->
+    <div class="modal-backdrop" id="owner-sell-modal" onclick="closeModal('owner-sell-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span class="modal-title">🏷️ Sell Property</span>
+                <button class="close-btn" onclick="closeModal('owner-sell-modal')">&times;</button>
+            </div>
+            <form id="owner-sell-form">
+                <input type="hidden" id="os-lat">
+                <input type="hidden" id="os-lng">
+                
+                <div class="field-group">
+                    <label class="field-label">Property Category<span>*</span></label>
+                    <div class="chips-row" id="os-type-chips">
+                        <div class="option-chip active" onclick="selectFormChip('os-type', 'apartment')">🏢 Apartment</div>
+                        <div class="option-chip" onclick="selectFormChip('os-type', 'villa')">🏡 Villa / House</div>
+                        <div class="option-chip" onclick="selectFormChip('os-type', 'plot')">📐 Plot / Land</div>
+                    </div>
+                </div>
+
+                <div class="field-group" id="os-bhk-group">
+                    <label class="field-label">Bedrooms (BHK)<span>*</span></label>
+                    <div class="chips-row" id="os-bhk-chips">
+                        <div class="option-chip" onclick="selectFormChip('os-bhk', '1')">1 BHK</div>
+                        <div class="option-chip active" onclick="selectFormChip('os-bhk', '2')">2 BHK</div>
+                        <div class="option-chip" onclick="selectFormChip('os-bhk', '3')">3 BHK</div>
+                        <div class="option-chip" onclick="selectFormChip('os-bhk', '4')">4 BHK</div>
+                        <div class="option-chip" onclick="selectFormChip('os-bhk', '5')">5+ BHK</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Expected Sale Price (₹ Total)<span>*</span></label>
+                    <div style="position: relative; display: flex; align-items: center;">
+                        <span style="position: absolute; left: 12px; color: #9ca3af; font-size: 14px;">₹</span>
+                        <input type="number" id="os-price" class="form-input" placeholder="e.g. 8500000 (85 Lakhs)" style="padding-left: 28px;" required>
+                    </div>
+                    <div id="os-price-hint" style="font-size: 11.5px; color: #8B263E; margin-top: 4px; font-weight: 600;"></div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Super Built-up / Carpet Area (sq.ft)<span>*</span></label>
+                    <input type="number" id="os-sqft" class="form-input" placeholder="e.g. 1250" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Possession Status<span>*</span></label>
+                    <div class="chips-row" id="os-possession-chips">
+                        <div class="option-chip active" onclick="selectFormChip('os-possession', 'ready')">Ready to Move</div>
+                        <div class="option-chip" onclick="selectFormChip('os-possession', 'under_construction')">Under Construction</div>
+                        <div class="option-chip" onclick="selectFormChip('os-possession', 'resale')">Resale (Immediate)</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Gated Community / Layout?<span>*</span></label>
+                    <div class="chips-row" id="os-gated-chips">
+                        <div class="option-chip active" onclick="selectFormChip('os-gated', 'true')">Yes</div>
+                        <div class="option-chip" onclick="selectFormChip('os-gated', 'false')">No (Standalone)</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Covered Car Parking Spots<span>*</span></label>
+                    <input type="number" id="os-parking" class="form-input" value="1" min="0" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Your Email Address<span>*</span></label>
+                    <input type="email" id="os-email" class="form-input" placeholder="seller@email.com" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Contact Phone / WhatsApp<span>*</span></label>
+                    <input type="tel" id="os-phone" class="form-input" placeholder="e.g. +91 98765 43210" required>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">Highlights / Remarks (optional)</label>
+                    <input type="text" id="os-remarks" class="form-input" placeholder="e.g. CMDA approved, 500m to OMR IT park, modular kitchen">
+                </div>
+
+                <button type="submit" class="btn btn-submit" style="width:100%; margin-top:8px; background: #8B263E;">Publish Sale Listing</button>
+            </form>
         </div>
     </div>
 
@@ -672,9 +802,19 @@
             <form id="pin-add-form">
                 <input type="hidden" id="pa-lat">
                 <input type="hidden" id="pa-lng">
+                <input type="hidden" id="pa-mode" value="rent">
+
+                <!-- Mode: Rent vs Purchase/Sale -->
+                <div class="field-group">
+                    <label class="field-label">What price are you pinning?<span>*</span></label>
+                    <div class="chips-row" id="pa-mode-chips">
+                        <div class="option-chip active" id="chip-pin-rent" onclick="selectPinMode('rent')">🏠 Rent Paid (Monthly)</div>
+                        <div class="option-chip" id="chip-pin-sale" onclick="selectPinMode('sale')">🏷️ Property Sale / Purchase Price</div>
+                    </div>
+                </div>
 
                 <!-- Bedrooms (BHK)* -->
-                <div class="field-group">
+                <div class="field-group" id="pa-bhk-group">
                     <label class="field-label">Bedrooms (BHK)<span>*</span></label>
                     <div class="chips-row" id="pa-bhk-chips">
                         <div class="option-chip active" onclick="selectFormChip('pa-bhk', '1')">1</div>
@@ -685,13 +825,14 @@
                     </div>
                 </div>
 
-                <!-- Monthly Rent (₹)* -->
+                <!-- Price amount (₹)* -->
                 <div class="field-group">
-                    <label class="field-label">Monthly Rent (₹)<span>*</span></label>
+                    <label class="field-label" id="pa-amount-label">Monthly Rent (₹)<span>*</span></label>
                     <div style="position: relative; display: flex; align-items: center;">
                         <span style="position: absolute; left: 12px; color: #9ca3af; font-size: 14px;">₹</span>
-                        <input type="number" id="pa-rent" class="form-input" placeholder="Rent amount" style="padding-left: 28px;" required>
+                        <input type="number" id="pa-rent" class="form-input" placeholder="e.g. 22000" style="padding-left: 28px;" required>
                     </div>
+                    <div id="pa-price-hint" style="font-size: 11.5px; color: var(--c-ripon-red); margin-top: 4px; font-weight: 600;"></div>
                 </div>
 
                 <!-- Furnishing* -->
@@ -805,24 +946,35 @@
     <div class="modal-backdrop" id="seeker-add-modal" onclick="closeModal('seeker-add-modal')">
         <div class="modal-card" onclick="event.stopPropagation()">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                <span class="modal-title">🔍 Setup Seeker alerts</span>
+                <span class="modal-title">🔍 Setup Property Alerts</span>
                 <button class="close-btn" onclick="closeModal('seeker-add-modal')">&times;</button>
             </div>
             <form id="seeker-add-form">
                 <input type="hidden" id="sa-lat">
                 <input type="hidden" id="sa-lng">
+                <input type="hidden" id="sa-intent" value="rent">
 
                 <div class="field-group">
-                    <label class="field-label">I am looking for<span>*</span></label>
-                    <div class="chips-row" id="sa-type-chips">
-                        <div class="option-chip active" onclick="selectFormChip('sa-type', 'whole_flat')">Whole Flat</div>
-                        <div class="option-chip" onclick="selectFormChip('sa-type', 'room')">Room in shared flat</div>
+                    <label class="field-label">My Requirement<span>*</span></label>
+                    <div class="chips-row" id="sa-intent-chips">
+                        <div class="option-chip active" id="chip-seeker-rent" onclick="selectSeekerIntent('rent')">🏠 Looking to Rent</div>
+                        <div class="option-chip" id="chip-seeker-buy" onclick="selectSeekerIntent('buy')">🏷️ Looking to Buy</div>
                     </div>
                 </div>
 
                 <div class="field-group">
-                    <label class="field-label">Max Budget (₹/month)<span>*</span></label>
+                    <label class="field-label">Property Preference<span>*</span></label>
+                    <div class="chips-row" id="sa-type-chips">
+                        <div class="option-chip active" onclick="selectFormChip('sa-type', 'whole_flat')">Whole Flat / Apt</div>
+                        <div class="option-chip" onclick="selectFormChip('sa-type', 'villa')">House / Villa</div>
+                        <div class="option-chip" id="sa-chip-room" onclick="selectFormChip('sa-type', 'room')">Room (Flatmate)</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label" id="sa-budget-label">Max Monthly Budget (₹/month)<span>*</span></label>
                     <input type="number" id="sa-budget" class="form-input" placeholder="e.g. 20000" required>
+                    <div id="sa-budget-hint" style="font-size: 11.5px; color: var(--c-temple-green-dk); margin-top: 4px; font-weight: 600;"></div>
                 </div>
 
                 <div class="field-group">
@@ -901,11 +1053,11 @@
                     <span class="meta-val" id="detail-society">society name</span>
                 </div>
                 <div class="detail-meta-item">
-                    <span class="meta-label">💰 Security Deposit:</span>
+                    <span class="meta-label" id="detail-deposit-label">💰 Security Deposit:</span>
                     <span class="meta-val" id="detail-deposit">₹--</span>
                 </div>
                 <div class="detail-meta-item" id="detail-maintenance-row">
-                    <span class="meta-label">🔧 Maintenance:</span>
+                    <span class="meta-label" id="detail-maintenance-label">🔧 Maintenance:</span>
                     <span class="meta-val" id="detail-maintenance">--</span>
                 </div>
                 <div class="detail-meta-item">
@@ -921,7 +1073,7 @@
                     <span class="meta-val" id="detail-pets">--</span>
                 </div>
                 <div class="detail-meta-item">
-                    <span class="meta-label">👥 Tenant Category:</span>
+                    <span class="meta-label" id="detail-occupant-label">👥 Tenant Category:</span>
                     <span class="meta-val" id="detail-occupant">Family</span>
                 </div>
                 <div class="detail-meta-item">
