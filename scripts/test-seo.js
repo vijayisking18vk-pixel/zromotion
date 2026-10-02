@@ -1,0 +1,176 @@
+/**
+ * Chennai Rents — Automated Technical SEO Test Suite
+ *
+ * Verifies:
+ * 1. Pre-rendered HTML exists for all critical pages
+ * 2. Exact metadata presence (<title>, <meta description>, canonical, robots)
+ * 3. Exact JSON-LD structured data presence & valid JSON syntax
+ * 4. Full pre-rendered DOM tree inside <div id="root"> (no empty shells!)
+ * 5. Sitemaps & robots.txt integrity
+ * 6. Vercel 301 permanent redirect rules
+ */
+
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const ROOT_DIR = path.resolve(__dirname, '..');
+const DIST_DIR = path.join(ROOT_DIR, 'dist');
+const PUBLIC_DIR = path.join(ROOT_DIR, 'public');
+
+let totalTests = 0;
+let passedTests = 0;
+let failedTests = 0;
+
+function assert(condition, message) {
+  totalTests++;
+  if (condition) {
+    passedTests++;
+    console.log(`  ✓ ${message}`);
+  } else {
+    failedTests++;
+    console.error(`  ✗ FAIL: ${message}`);
+  }
+}
+
+function runTests() {
+  console.log('====================================================');
+  console.log('🧪 Running Chennai Rents SEO Test Suite');
+  console.log('====================================================\n');
+
+  // Test 1: Check dist directory
+  console.log('📁 Test Group 1: Pre-rendered Build Artifacts');
+  assert(fs.existsSync(DIST_DIR), 'dist directory exists');
+
+  const testPages = [
+    { name: 'Homepage', file: path.join(DIST_DIR, 'index.html'), expectedTitle: 'Chennai Rents', expectedCanonical: 'https://chennairents.in/' },
+    { name: 'About Page', file: path.join(DIST_DIR, 'about', 'index.html'), expectedTitle: 'About Chennai Rents', expectedCanonical: 'https://chennairents.in/about' },
+    { name: 'Houses for Rent Pillar Hub', file: path.join(DIST_DIR, 'house-for-rent-in-chennai', 'index.html'), expectedTitle: 'Houses for Rent in Chennai', expectedCanonical: 'https://chennairents.in/house-for-rent-in-chennai', expectedBacklink: 'https://www.vijayrajkumar.in' },
+    { name: 'Author Page (R Vijayrajkumar)', file: path.join(DIST_DIR, 'author', 'vijayrajkumar', 'index.html'), expectedTitle: 'R Vijayrajkumar', expectedCanonical: 'https://chennairents.in/author/vijayrajkumar', expectedBacklink: 'https://www.vijayrajkumar.in' },
+    { name: '1 BHK Houses Guide', file: path.join(DIST_DIR, '1-bhk-house-for-rent-in-chennai', 'index.html'), expectedTitle: '1 BHK Houses for Rent in Chennai', expectedCanonical: 'https://chennairents.in/1-bhk-house-for-rent-in-chennai' },
+    { name: 'Chennai Hub', file: path.join(DIST_DIR, 'chennai', 'rentals', 'index.html'), expectedTitle: 'Flats & Houses for Rent in Chennai', expectedCanonical: 'https://chennairents.in/chennai/rentals' },
+    { name: 'Adyar Locality (/flats-for-rent-in-adyar-chennai)', file: path.join(DIST_DIR, 'flats-for-rent-in-adyar-chennai', 'index.html'), expectedTitle: 'Adyar', expectedCanonical: 'https://chennairents.in/flats-for-rent-in-adyar-chennai', expectedBacklink: 'https://www.vijayrajkumar.in' },
+    { name: 'Velachery Locality', file: path.join(DIST_DIR, 'chennai', 'velachery', 'index.html'), expectedTitle: 'Velachery', expectedCanonical: 'https://chennairents.in/flats-for-rent-in-velachery-chennai' },
+    { name: 'Velachery 1-BHK', file: path.join(DIST_DIR, 'chennai', 'velachery', '1-bhk-for-rent', 'index.html'), expectedTitle: '1 BHK', expectedCanonical: 'https://chennairents.in/chennai/velachery/1-bhk-for-rent' },
+    { name: 'Advance Deposit Guide', file: path.join(DIST_DIR, 'guide', 'advance-deposit-chennai', 'index.html'), expectedTitle: 'Advance Deposit', expectedCanonical: 'https://chennairents.in/guide/advance-deposit-chennai' },
+    { name: '404 Page', file: path.join(DIST_DIR, '404.html'), expectedTitle: '404: Page Not Found', expectedRobots: 'noindex, nofollow' },
+  ];
+
+  testPages.forEach((page) => {
+    console.log(`\n📄 Verifying Page: ${page.name}`);
+    assert(fs.existsSync(page.file), `File exists: ${path.relative(ROOT_DIR, page.file)}`);
+
+    if (fs.existsSync(page.file)) {
+      const content = fs.readFileSync(page.file, 'utf8');
+
+      // Title
+      const titleMatch = content.match(/<title>(.*?)<\/title>/i);
+      assert(titleMatch && titleMatch[1].length > 0, `<title> tag exists and is non-empty (${titleMatch ? titleMatch[1] : 'NONE'})`);
+      if (page.expectedTitle) {
+        const decodedTitle = titleMatch ? titleMatch[1].replace(/&amp;/g, '&') : '';
+        assert(decodedTitle.includes(page.expectedTitle), `Title contains "${page.expectedTitle}"`);
+      }
+
+      // Backlink check
+      if (page.expectedBacklink) {
+        assert(content.includes(page.expectedBacklink), `Page contains verified author backlink to ${page.expectedBacklink}`);
+      }
+
+      // Meta Description
+      const descMatch = content.match(/<meta\s+name="description"\s+content="(.*?)"\s*\/?>/i);
+      assert(descMatch && descMatch[1].length > 20, `<meta description> exists and has meaningful length (${descMatch ? descMatch[1].length : 0} chars)`);
+
+      // Canonical
+      if (page.expectedCanonical) {
+        const canonicalMatch = content.match(/<link\s+rel="canonical"\s+href="(.*?)"\s*\/?>/i);
+        assert(canonicalMatch && canonicalMatch[1] === page.expectedCanonical, `Canonical URL is exact: ${page.expectedCanonical}`);
+      }
+
+      // Robots
+      const robotsMatch = content.match(/<meta\s+name="robots"\s+content="(.*?)"\s*\/?>/i);
+      assert(robotsMatch && robotsMatch[1].length > 0, `<meta name="robots"> exists (${robotsMatch ? robotsMatch[1] : 'NONE'})`);
+      if (page.expectedRobots) {
+        assert(robotsMatch && robotsMatch[1] === page.expectedRobots, `Robots directive is "${page.expectedRobots}"`);
+      }
+
+      // Pre-rendered DOM Check
+      const rootMatch = content.match(/<div id="root">([\s\S]*?)<\/div>/i);
+      assert(rootMatch && rootMatch[1].trim().length > 500, `DOM pre-rendered into <div id="root"> (${rootMatch ? rootMatch[1].length : 0} bytes of pre-rendered HTML)`);
+      assert(content.includes('<header') && content.includes('<footer'), 'Semantic <header> and <footer> rendered inside page');
+
+      // Structured Data
+      if (page.name !== '404 Page') {
+        const schemaMatches = content.match(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi);
+        assert(schemaMatches && schemaMatches.length > 0, `Schema.org JSON-LD found (${schemaMatches ? schemaMatches.length : 0} block(s))`);
+        if (schemaMatches) {
+          schemaMatches.forEach((tag, idx) => {
+            const rawJson = tag.replace(/<script[^>]*>/i, '').replace(/<\/script>/i, '').trim();
+            try {
+              JSON.parse(rawJson);
+              assert(true, `JSON-LD block ${idx + 1} parses as valid JSON`);
+            } catch (jsonErr) {
+              assert(false, `JSON-LD block ${idx + 1} failed to parse: ${jsonErr.message}`);
+            }
+          });
+        }
+      }
+    }
+  });
+
+  // Test Group 2: Sitemaps & robots.txt
+  console.log('\n🗺️ Test Group 2: Sitemaps and Crawl Control');
+  const sitemaps = [
+    'sitemap-index.xml',
+    'sitemap-pages.xml',
+    'sitemap-localities.xml',
+    'sitemap-facets.xml',
+    'sitemap-guides.xml',
+    'sitemap.xml',
+  ];
+
+  sitemaps.forEach((sm) => {
+    const smPath = path.join(PUBLIC_DIR, sm);
+    assert(fs.existsSync(smPath), `${sm} exists in public/`);
+    if (fs.existsSync(smPath)) {
+      const xml = fs.readFileSync(smPath, 'utf8');
+      assert(xml.includes('<?xml version="1.0" encoding="UTF-8"?>'), `${sm} has valid XML declaration`);
+      assert(xml.includes('https://chennairents.in/'), `${sm} references canonical domain`);
+    }
+  });
+
+  const robotsPath = path.join(PUBLIC_DIR, 'robots.txt');
+  assert(fs.existsSync(robotsPath), 'robots.txt exists');
+  if (fs.existsSync(robotsPath)) {
+    const robotsTxt = fs.readFileSync(robotsPath, 'utf8');
+    assert(robotsTxt.includes('Sitemap: https://chennairents.in/sitemap-index.xml'), 'robots.txt points to sitemap index');
+    assert(robotsTxt.includes('User-agent: *'), 'robots.txt has wildcard user-agent rule');
+  }
+
+  // Test Group 3: Vercel configuration
+  console.log('\n⚙️ Test Group 3: Vercel Production Configuration');
+  const vercelPath = path.join(ROOT_DIR, 'vercel.json');
+  assert(fs.existsSync(vercelPath), 'vercel.json exists');
+  if (fs.existsSync(vercelPath)) {
+    const vercelConfig = JSON.parse(fs.readFileSync(vercelPath, 'utf8'));
+    assert(vercelConfig.cleanUrls === true, 'vercel.json has cleanUrls enabled');
+    assert(vercelConfig.trailingSlash === false, 'vercel.json has trailingSlash: false (canonical consistency)');
+    assert(Array.isArray(vercelConfig.redirects) && vercelConfig.redirects.length >= 7, `vercel.json defines ${vercelConfig.redirects?.length || 0} permanent 301 redirects`);
+    assert(vercelConfig.redirects.every((r) => r.permanent === true), 'All redirects are HTTP 301 permanent');
+    assert(Array.isArray(vercelConfig.headers) && vercelConfig.headers.length >= 2, 'vercel.json defines Cache-Control and security headers');
+  }
+
+  // Final Summary
+  console.log('\n====================================================');
+  console.log(`📊 Test Results: ${passedTests}/${totalTests} Passed (${Math.round((passedTests / totalTests) * 100)}%)`);
+  if (failedTests > 0) {
+    console.error(`❌ ${failedTests} Tests Failed`);
+    process.exit(1);
+  } else {
+    console.log('🎉 ALL TECHNICAL SEO TESTS PASSED WITH 100% SUCCESS!');
+    console.log('====================================================');
+  }
+}
+
+runTests();

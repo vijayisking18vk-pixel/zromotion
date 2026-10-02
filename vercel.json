@@ -1,4 +1,33 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/rent-in-velachery", "destination": "/chennai/velachery", "permanent": true },
+    { "source": "/rent-in-adyar", "destination": "/chennai/adyar", "permanent": true },
+    { "source": "/rent-in-valasaravakkam", "destination": "/chennai/valasaravakkam", "permanent": true },
+    { "source": "/rent-in-omr", "destination": "/chennai/perungudi", "permanent": true },
+    { "source": "/rent-in-porur", "destination": "/chennai/porur", "permanent": true },
+    { "source": "/rent-in-sholinganallur", "destination": "/chennai/sholinganallur", "permanent": true },
+    { "source": "/rent-in-taramani", "destination": "/chennai/taramani", "permanent": true },
+    { "source": "/advance-deposit-chennai", "destination": "/guide/advance-deposit-chennai", "permanent": true },
+    { "source": "/tenant-rules-chennai", "destination": "/guide/tenant-rules-chennai", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/(.*)",

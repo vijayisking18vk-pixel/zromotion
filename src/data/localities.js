@@ -472,12 +472,30 @@ const FURNISHING_LABELS = {
 };
 const BUDGET_LABELS = { 10000: '₹10,000', 15000: '₹15,000', 20000: '₹20,000', 25000: '₹25,000', 30000: '₹30,000' };
 
-export function generateSEOMeta({ locality, bhk, propertyType, furnishing, budgetMax, city = 'Chennai' }) {
+export function parseIntent(intent) {
+  if (!intent) return {};
+  if (intent === '1-bhk-for-rent') return { bhk: '1', key: '1bhk' };
+  if (intent === '2-bhk-for-rent') return { bhk: '2', key: '2bhk' };
+  if (intent === '3-bhk-for-rent') return { bhk: '3', key: '3bhk' };
+  if (intent === 'pg') return { propertyType: 'pg', key: 'pg' };
+  if (intent === 'fully-furnished-flats-for-rent') return { furnishing: 'fully-furnished', key: 'furnished' };
+  if (intent === 'flats-for-rent-under-20000') return { budgetMax: 20000, key: 'budget' };
+  if (intent === 'flats-for-rent') return { key: 'flats' };
+  return { key: intent };
+}
+
+export function generateSEOMeta({ locality, intent, bhk, propertyType, furnishing, budgetMax, city = 'Chennai' }) {
+  const parsed = parseIntent(intent);
+  const activeBhk = bhk || parsed.bhk;
+  const activeProp = propertyType || parsed.propertyType;
+  const activeFurn = furnishing || parsed.furnishing;
+  const activeBudget = budgetMax || parsed.budgetMax;
+
   const localityName = locality?.name || city;
-  const bhkStr = bhk ? `${BHK_LABELS[bhk] || bhk} ` : '';
-  const propStr = propertyType === 'pg' ? 'PG' : 'Flats';
-  const furnStr = furnishing ? `${FURNISHING_LABELS[furnishing] || ''} ` : '';
-  const budgetStr = budgetMax ? ` Under ${BUDGET_LABELS[budgetMax] || `₹${budgetMax}`}` : '';
+  const bhkStr = activeBhk ? `${BHK_LABELS[activeBhk] || activeBhk} ` : '';
+  const propStr = activeProp === 'pg' ? 'PG' : 'Flats';
+  const furnStr = activeFurn ? `${FURNISHING_LABELS[activeFurn] || ''} ` : '';
+  const budgetStr = activeBudget ? ` Under ${BUDGET_LABELS[activeBudget] || `₹${activeBudget}`}` : '';
   const locationStr = locality ? `${localityName}, ${city}` : city;
   const h1 = `${bhkStr}${furnStr}${propStr} for Rent in ${locationStr}${budgetStr}`;
   return {

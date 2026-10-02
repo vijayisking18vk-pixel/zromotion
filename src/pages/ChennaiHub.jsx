@@ -134,10 +134,25 @@ function BHKHubs() {
 }
 
 // ─── Main ChennaiHub Component ────────────────────────────────────────────────
-export default function ChennaiHub() {
+export default function ChennaiHub({ bhk, pg }) {
   const reduce = useReducedMotion();
-  const meta = generateSEOMeta({ city: 'Chennai' });
   const activezones = ZONES.filter(z => getLocalitiesByZone(z.id).length > 0);
+
+  const pageTitle = bhk
+    ? `${bhk} BHK Flats for Rent in Chennai | Chennai Rents`
+    : pg
+    ? `PG & Hostel for Rent in Chennai | Chennai Rents`
+    : `Flats & Houses for Rent in Chennai | Chennai Rents`;
+  const pageDescription = bhk
+    ? `Browse ${bhk} BHK flats and apartments for rent in Chennai. Honest rent rates across all localities, water supply ratings, and direct owner listings.`
+    : pg
+    ? `Find PG accommodations and paying guest rooms in Chennai. Locality-by-locality rent ranges, food, amenities, and connectivity.`
+    : `Find flats, houses, and PG for rent in Chennai. Explore locality-by-locality rent guides, real rent rates, water reports, and flood history. Verified direct listings.`;
+  const canonicalUrl = bhk
+    ? `https://chennairents.in/chennai/${bhk}-bhk-for-rent`
+    : pg
+    ? `https://chennairents.in/chennai/pg`
+    : `https://chennairents.in/chennai/rentals`;
 
   // JSON-LD breadcrumb
   const breadcrumb = {
@@ -145,17 +160,17 @@ export default function ChennaiHub() {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Chennai Rents', item: 'https://chennairents.in/' },
-      { '@type': 'ListItem', position: 2, name: 'Flats for Rent in Chennai', item: 'https://chennairents.in/chennai/rentals' },
+      { '@type': 'ListItem', position: 2, name: bhk ? `${bhk} BHK in Chennai` : pg ? 'PG in Chennai' : 'Flats for Rent in Chennai', item: canonicalUrl },
     ],
   };
 
   return (
     <>
       <SEOHead
-        title="Flats & Houses for Rent in Chennai | Chennai Rents"
-        description="Find flats, houses, and PG for rent in Chennai. Explore locality-by-locality rent guides, real rent rates, water reports, and flood history. Verified direct listings."
+        title={pageTitle}
+        description={pageDescription}
         robots="index, follow"
-        canonical="https://chennairents.in/chennai/rentals"
+        canonical={canonicalUrl}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 

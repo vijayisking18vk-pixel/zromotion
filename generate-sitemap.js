@@ -6,9 +6,10 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Import locality data and posts
+// Import locality data, posts, and rental content data
 import { LOCALITIES } from './src/data/localities.js';
 import { POSTS } from './src/data/posts.js';
+import { SUPPORTING_RENTAL_PAGES } from './src/data/rentalGuideData.js';
 
 const DOMAIN = 'https://chennairents.in';
 
@@ -90,10 +91,16 @@ function generateSitemaps() {
     `${DOMAIN}/chennai/2-bhk-for-rent`,
     `${DOMAIN}/chennai/3-bhk-for-rent`,
     `${DOMAIN}/chennai/pg`,
+    `${DOMAIN}/house-for-rent-in-chennai`,
+    `${DOMAIN}/author/vijayrajkumar`,
+    ...SUPPORTING_RENTAL_PAGES.map((p) => `${DOMAIN}/${p.slug}`),
   ];
 
-  // 2. Locality hub pages (/chennai/:locality)
-  const localityUrls = LOCALITIES.map((loc) => `${DOMAIN}/chennai/${loc.slug}`);
+  // 2. Locality hub pages (Single Canonical URL: /flats-for-rent-in-:locality-chennai)
+  const localityUrls = [];
+  LOCALITIES.forEach((loc) => {
+    localityUrls.push(`${DOMAIN}/flats-for-rent-in-${loc.slug}-chennai`);
+  });
 
   // 3. Programmatic facet pages (/chennai/:locality/:facet)
   const facetUrls = [];

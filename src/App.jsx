@@ -10,7 +10,10 @@ import About from './pages/About';
 import PostTemplate from './pages/PostTemplate';
 import ChennaiHub from './pages/ChennaiHub';
 import LocalityPage from './pages/LocalityPage';
-import { LEGACY_REDIRECTS } from './data/localities';
+import NotFound from './pages/NotFound';
+import HouseRentChennaiHub from './pages/HouseRentChennaiHub';
+import AuthorPage from './pages/AuthorPage';
+import { LEGACY_REDIRECTS, LOCALITIES } from './data/localities';
 
 // ─── Legacy Redirect Handler ──────────────────────────────────────────────────
 // Handles old URLs like /rent-in-velachery → /chennai/velachery
@@ -98,10 +101,36 @@ export default function App() {
             <Route path="/chennai/2-bhk-for-rent" element={<ChennaiHub bhk="2" />} />
             <Route path="/chennai/3-bhk-for-rent" element={<ChennaiHub bhk="3" />} />
             <Route path="/chennai/pg" element={<ChennaiHub pg />} />
-            {/* Locality hub */}
+            {/* ── CHENNAI HOUSING PILLAR HUB & SUPPORTING GUIDES ── */}
+            <Route path="/house-for-rent-in-chennai" element={<HouseRentChennaiHub />} />
+            <Route path="/1-bhk-house-for-rent-in-chennai" element={<HouseRentChennaiHub customSlug="1-bhk-house-for-rent-in-chennai" />} />
+            <Route path="/2-bhk-house-for-rent-in-chennai" element={<HouseRentChennaiHub customSlug="2-bhk-house-for-rent-in-chennai" />} />
+            <Route path="/independent-house-for-rent-in-chennai" element={<HouseRentChennaiHub customSlug="independent-house-for-rent-in-chennai" />} />
+            <Route path="/house-for-rent-in-chennai-under-10000" element={<HouseRentChennaiHub customSlug="house-for-rent-in-chennai-under-10000" />} />
+            <Route path="/house-for-rent-in-chennai-under-7000" element={<HouseRentChennaiHub customSlug="house-for-rent-in-chennai-under-7000" />} />
+            <Route path="/house-for-rent-in-chennai-under-5000" element={<HouseRentChennaiHub customSlug="house-for-rent-in-chennai-under-5000" />} />
+            <Route path="/individual-house-for-rent-in-chennai-under-8000" element={<HouseRentChennaiHub customSlug="individual-house-for-rent-in-chennai-under-8000" />} />
+            <Route path="/house-for-rent-in-chennai-without-brokers" element={<HouseRentChennaiHub customSlug="house-for-rent-in-chennai-without-brokers" />} />
+            <Route path="/house-for-rent-in-anna-nagar-chennai" element={<HouseRentChennaiHub customSlug="house-for-rent-in-anna-nagar-chennai" />} />
+            <Route path="/house-for-rent-in-porur-chennai" element={<HouseRentChennaiHub customSlug="house-for-rent-in-porur-chennai" />} />
+            <Route path="/house-for-rent-in-t-nagar-chennai" element={<HouseRentChennaiHub customSlug="house-for-rent-in-t-nagar-chennai" />} />
+            <Route path="/bachelor-rentals-in-chennai" element={<HouseRentChennaiHub customSlug="bachelor-rentals-in-chennai" />} />
+            <Route path="/family-houses-for-rent-in-chennai" element={<HouseRentChennaiHub customSlug="family-houses-for-rent-in-chennai" />} />
+            <Route path="/co-living-in-chennai" element={<HouseRentChennaiHub customSlug="co-living-in-chennai" />} />
+
+            {/* ── AUTHOR & EDITORIAL PROFILE ── */}
+            <Route path="/author/vijayrajkumar" element={<AuthorPage />} />
+            <Route path="/author/r-vijayrajkumar" element={<AuthorPage />} />
+
+            {/* ── LOCALITY ROUTES (Both /chennai/:locality and /flats-for-rent-in-:locality-chennai) ── */}
             <Route path="/chennai/:locality" element={<LocalityPage />} />
-            {/* Locality + intent combos (BHK, PG, furnished, budget) */}
             <Route path="/chennai/:locality/:intent" element={<LocalityPage />} />
+            {LOCALITIES.map((loc) => (
+              <React.Fragment key={loc.slug}>
+                <Route path={`/flats-for-rent-in-${loc.slug}-chennai`} element={<LocalityPage localitySlug={loc.slug} />} />
+                <Route path={`/flats-for-rent-in-${loc.slug}-chennai/:intent`} element={<LocalityPage localitySlug={loc.slug} />} />
+              </React.Fragment>
+            ))}
 
             {/* ── GUIDE ROUTES (new canonical) ── */}
             <Route path="/guide/:slug" element={<PostTemplate lang={lang} />} />
@@ -122,8 +151,9 @@ export default function App() {
             <Route path="/rent/:slug" element={<LegacyRedirect />} />
             {/* Old bare :slug paths for posts */}
             <Route path="/:slug" element={<PostTemplate lang={lang} />} />
-            {/* Catch-all */}
-            <Route path="*" element={<Home lang={lang} />} />
+            {/* 404 and Catch-all */}
+            <Route path="/404" element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>
       </div>
