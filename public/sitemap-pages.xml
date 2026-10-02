@@ -2,46 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://chennairents.in/</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-02</lastmod>
   </url>
   <url>
-    <loc>https://chennairents.in/about/</loc>
-    <lastmod>2026-10-01</lastmod>
-  </url>
-  <url>
-    <loc>https://chennairents.in/chennai/rentals/</loc>
-    <lastmod>2026-10-01</lastmod>
-  </url>
-  <url>
-    <loc>https://chennairents.in/chennai/1-bhk-for-rent/</loc>
-    <lastmod>2026-10-01</lastmod>
-  </url>
-  <url>
-    <loc>https://chennairents.in/chennai/2-bhk-for-rent/</loc>
-    <lastmod>2026-10-01</lastmod>
-  </url>
-  <url>
-    <loc>https://chennairents.in/chennai/3-bhk-for-rent/</loc>
-    <lastmod>2026-10-01</lastmod>
-  </url>
-  <url>
-    <loc>https://chennairents.in/chennai/pg/</loc>
-    <lastmod>2026-10-01</lastmod>
-  </url>
-  <url>
-    <loc>https://chennairents.in/data/chennai-rent-report-2026/</loc>
-    <lastmod>2026-10-01</lastmod>
+    <loc>https://chennairents.in/about</loc>
+    <lastmod>2026-10-02</lastmod>
   </url>
   <url>
     <loc>https://chennairents.in/listings/index.html</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-02</lastmod>
   </url>
   <url>
     <loc>https://chennairents.in/listings/listings.html</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-02</lastmod>
   </url>
   <url>
     <loc>https://chennairents.in/listings/list-property.html</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-02</lastmod>
+  </url>
+  <url>
+    <loc>https://chennairents.in/chennai/rentals</loc>
+    <lastmod>2026-10-02</lastmod>
+  </url>
+  <url>
+    <loc>https://chennairents.in/chennai/1-bhk-for-rent</loc>
+    <lastmod>2026-10-02</lastmod>
+  </url>
+  <url>
+    <loc>https://chennairents.in/chennai/2-bhk-for-rent</loc>
+    <lastmod>2026-10-02</lastmod>
+  </url>
+  <url>
+    <loc>https://chennairents.in/chennai/3-bhk-for-rent</loc>
+    <lastmod>2026-10-02</lastmod>
+  </url>
+  <url>
+    <loc>https://chennairents.in/chennai/pg</loc>
+    <lastmod>2026-10-02</lastmod>
   </url>
 </urlset>

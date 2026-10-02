@@ -10,8 +10,6 @@ import About from './pages/About';
 import PostTemplate from './pages/PostTemplate';
 import ChennaiHub from './pages/ChennaiHub';
 import LocalityPage from './pages/LocalityPage';
-import RentReport2026 from './pages/RentReport2026';
-import PgVsCoLivingGuide from './pages/PgVsCoLivingGuide';
 import { LEGACY_REDIRECTS } from './data/localities';
 
 // ─── Legacy Redirect Handler ──────────────────────────────────────────────────
@@ -104,14 +102,6 @@ export default function App() {
             <Route path="/chennai/:locality" element={<LocalityPage />} />
             {/* Locality + intent combos (BHK, PG, furnished, budget) */}
             <Route path="/chennai/:locality/:intent" element={<LocalityPage />} />
-
-            {/* ── HIGH-AUTHORITY DATA & GUIDE ASSETS ── */}
-            <Route path="/data/chennai-rent-report-2026" element={<RentReport2026 />} />
-            <Route path="/data/chennai-rent-report-2026/" element={<RentReport2026 />} />
-            <Route path="/guides/pg-vs-co-living-vs-1bhk-chennai" element={<PgVsCoLivingGuide />} />
-            <Route path="/guides/pg-vs-co-living-vs-1bhk-chennai/" element={<PgVsCoLivingGuide />} />
-            <Route path="/guide/pg-vs-co-living-vs-1bhk-chennai" element={<PgVsCoLivingGuide />} />
-            <Route path="/guide/pg-vs-co-living-vs-1bhk-chennai/" element={<PgVsCoLivingGuide />} />
 
             {/* ── GUIDE ROUTES (new canonical) ── */}
             <Route path="/guide/:slug" element={<PostTemplate lang={lang} />} />
