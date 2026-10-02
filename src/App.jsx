@@ -13,6 +13,12 @@ import LocalityPage from './pages/LocalityPage';
 import NotFound from './pages/NotFound';
 import HouseRentChennaiHub from './pages/HouseRentChennaiHub';
 import AuthorPage from './pages/AuthorPage';
+import Methodology from './pages/Methodology';
+import Verification from './pages/Verification';
+import Corrections from './pages/Corrections';
+import Contact from './pages/Contact';
+import Privacy from './pages/Privacy';
+import DataDeletion from './pages/DataDeletion';
 import { LEGACY_REDIRECTS, LOCALITIES } from './data/localities';
 
 // ─── Legacy Redirect Handler ──────────────────────────────────────────────────
@@ -88,6 +94,13 @@ export default function App() {
             {/* ── PRIMARY ROUTES ── */}
             <Route path="/" element={<Home lang={lang} />} />
             <Route path="/about" element={<About lang={lang} />} />
+            <Route path="/methodology" element={<Methodology />} />
+            <Route path="/verification" element={<Verification />} />
+            <Route path="/corrections" element={<Corrections />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/data-deletion" element={<DataDeletion />} />
+
             {/* ── LISTINGS & MAP (Direct to Chennai Rents Map app) ── */}
             <Route path="/listings" element={<ListingsRedirect />} />
             <Route path="/listings/*" element={<ListingsRedirect />} />
@@ -101,6 +114,7 @@ export default function App() {
             <Route path="/chennai/2-bhk-for-rent" element={<ChennaiHub bhk="2" />} />
             <Route path="/chennai/3-bhk-for-rent" element={<ChennaiHub bhk="3" />} />
             <Route path="/chennai/pg" element={<ChennaiHub pg />} />
+
             {/* ── CHENNAI HOUSING PILLAR HUB & SUPPORTING GUIDES ── */}
             <Route path="/house-for-rent-in-chennai" element={<HouseRentChennaiHub />} />
             <Route path="/1-bhk-house-for-rent-in-chennai" element={<HouseRentChennaiHub customSlug="1-bhk-house-for-rent-in-chennai" />} />
@@ -122,36 +136,50 @@ export default function App() {
             <Route path="/author/vijayrajkumar" element={<AuthorPage />} />
             <Route path="/author/r-vijayrajkumar" element={<AuthorPage />} />
 
-            {/* ── LOCALITY ROUTES (Both /chennai/:locality and /flats-for-rent-in-:locality-chennai) ── */}
+            {/* ── CANONICAL LOCALITY ROUTES (/chennai/:locality) ── */}
             <Route path="/chennai/:locality" element={<LocalityPage />} />
             <Route path="/chennai/:locality/:intent" element={<LocalityPage />} />
+
+            {/* ── REDIRECTS FOR /flats-for-rent-in-*-chennai TO /chennai/:locality/ ── */}
             {LOCALITIES.map((loc) => (
               <React.Fragment key={loc.slug}>
-                <Route path={`/flats-for-rent-in-${loc.slug}-chennai`} element={<LocalityPage localitySlug={loc.slug} />} />
-                <Route path={`/flats-for-rent-in-${loc.slug}-chennai/:intent`} element={<LocalityPage localitySlug={loc.slug} />} />
+                <Route path={`/flats-for-rent-in-${loc.slug}-chennai`} element={<Navigate to={`/chennai/${loc.slug}/`} replace />} />
+                <Route path={`/flats-for-rent-in-${loc.slug}-chennai/:intent`} element={<Navigate to={`/chennai/${loc.slug}/:intent/`} replace />} />
               </React.Fragment>
             ))}
 
-            {/* ── GUIDE ROUTES (new canonical) ── */}
-            <Route path="/guide/:slug" element={<PostTemplate lang={lang} />} />
+            {/* ── GUIDE ROUTES (Canonical: /guides/:slug) ── */}
+            <Route path="/guides/:slug" element={<PostTemplate lang={lang} />} />
+            <Route path="/guide/:slug" element={<Navigate to={`/guides/:slug`} replace />} />
 
-            {/* ── LEGACY REDIRECTS ── */}
+            {/* ── CONFIRMED 404 REDIRECTS ── */}
+            <Route path="/flats-for-rent-in-adambakkam-chennai" element={<Navigate to="/chennai/velachery/" replace />} />
+            <Route path="/flats-for-rent-in-besant-nagar-chennai" element={<Navigate to="/chennai/adyar/" replace />} />
+            <Route path="/flats-for-rent-in-egmore-chennai" element={<Navigate to="/chennai/rentals/" replace />} />
+            <Route path="/flats-for-rent-in-kodambakkam-chennai" element={<Navigate to="/chennai/t-nagar/" replace />} />
+            <Route path="/flats-for-rent-in-mogappair-chennai" element={<Navigate to="/chennai/anna-nagar/" replace />} />
+            <Route path="/flats-for-rent-in-mylapore-chennai" element={<Navigate to="/chennai/adyar/" replace />} />
+            <Route path="/flats-for-rent-in-pallikaranai-chennai" element={<Navigate to="/chennai/medavakkam/" replace />} />
+            <Route path="/flats-for-rent-in-vadapalani-chennai" element={<Navigate to="/chennai/valasaravakkam/" replace />} />
+            <Route path="/flats-for-rent-in-virugambakkam-chennai" element={<Navigate to="/chennai/valasaravakkam/" replace />} />
+            <Route path="/rent/rent-in-valasaravakkam" element={<Navigate to="/chennai/valasaravakkam/" replace />} />
+            <Route path="/rent/rent-in-velachery" element={<Navigate to="/chennai/velachery/" replace />} />
+            <Route path="/contact.html" element={<Navigate to="/contact/" replace />} />
+            <Route path="/privacy.html" element={<Navigate to="/privacy/" replace />} />
+
             {/* Old locality slugs */}
-            <Route path="/rent-in-velachery" element={<Navigate to="/chennai/velachery" replace />} />
-            <Route path="/rent-in-adyar" element={<Navigate to="/chennai/adyar" replace />} />
-            <Route path="/rent-in-valasaravakkam" element={<Navigate to="/chennai/valasaravakkam" replace />} />
-            <Route path="/rent-in-omr" element={<Navigate to="/chennai/perungudi" replace />} />
-            <Route path="/rent-in-porur" element={<Navigate to="/chennai/porur" replace />} />
-            <Route path="/rent-in-sholinganallur" element={<Navigate to="/chennai/sholinganallur" replace />} />
-            <Route path="/rent-in-taramani" element={<Navigate to="/chennai/taramani" replace />} />
-            {/* Old guide slugs */}
-            <Route path="/advance-deposit-chennai" element={<Navigate to="/guide/advance-deposit-chennai" replace />} />
-            <Route path="/tenant-rules-chennai" element={<Navigate to="/guide/tenant-rules-chennai" replace />} />
-            {/* Old /rent/:slug paths */}
+            <Route path="/rent-in-velachery" element={<Navigate to="/chennai/velachery/" replace />} />
+            <Route path="/rent-in-adyar" element={<Navigate to="/chennai/adyar/" replace />} />
+            <Route path="/rent-in-valasaravakkam" element={<Navigate to="/chennai/valasaravakkam/" replace />} />
+            <Route path="/rent-in-omr" element={<Navigate to="/chennai/perungudi/" replace />} />
+            <Route path="/rent-in-porur" element={<Navigate to="/chennai/porur/" replace />} />
+            <Route path="/rent-in-sholinganallur" element={<Navigate to="/chennai/sholinganallur/" replace />} />
+            <Route path="/rent-in-taramani" element={<Navigate to="/chennai/taramani/" replace />} />
+            <Route path="/rent-in-anna-nagar" element={<Navigate to="/chennai/anna-nagar/" replace />} />
+            <Route path="/advance-deposit-chennai" element={<Navigate to="/guides/advance-deposit-chennai/" replace />} />
+            <Route path="/tenant-rules-chennai" element={<Navigate to="/guides/tenant-rules-chennai/" replace />} />
             <Route path="/rent/:slug" element={<LegacyRedirect />} />
-            {/* Old bare :slug paths for posts */}
             <Route path="/:slug" element={<PostTemplate lang={lang} />} />
-            {/* 404 and Catch-all */}
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -45,16 +45,23 @@ function runTests() {
   assert(fs.existsSync(DIST_DIR), 'dist directory exists');
 
   const testPages = [
-    { name: 'Homepage', file: path.join(DIST_DIR, 'index.html'), expectedTitle: 'Chennai Rents', expectedCanonical: 'https://chennairents.in/' },
-    { name: 'About Page', file: path.join(DIST_DIR, 'about', 'index.html'), expectedTitle: 'About Chennai Rents', expectedCanonical: 'https://chennairents.in/about' },
-    { name: 'Houses for Rent Pillar Hub', file: path.join(DIST_DIR, 'house-for-rent-in-chennai', 'index.html'), expectedTitle: 'Houses for Rent in Chennai', expectedCanonical: 'https://chennairents.in/house-for-rent-in-chennai', expectedBacklink: 'https://www.vijayrajkumar.in' },
-    { name: 'Author Page (R Vijayrajkumar)', file: path.join(DIST_DIR, 'author', 'vijayrajkumar', 'index.html'), expectedTitle: 'R Vijayrajkumar', expectedCanonical: 'https://chennairents.in/author/vijayrajkumar', expectedBacklink: 'https://www.vijayrajkumar.in' },
-    { name: '1 BHK Houses Guide', file: path.join(DIST_DIR, '1-bhk-house-for-rent-in-chennai', 'index.html'), expectedTitle: '1 BHK Houses for Rent in Chennai', expectedCanonical: 'https://chennairents.in/1-bhk-house-for-rent-in-chennai' },
-    { name: 'Chennai Hub', file: path.join(DIST_DIR, 'chennai', 'rentals', 'index.html'), expectedTitle: 'Flats & Houses for Rent in Chennai', expectedCanonical: 'https://chennairents.in/chennai/rentals' },
-    { name: 'Adyar Locality (/flats-for-rent-in-adyar-chennai)', file: path.join(DIST_DIR, 'flats-for-rent-in-adyar-chennai', 'index.html'), expectedTitle: 'Adyar', expectedCanonical: 'https://chennairents.in/flats-for-rent-in-adyar-chennai', expectedBacklink: 'https://www.vijayrajkumar.in' },
-    { name: 'Velachery Locality', file: path.join(DIST_DIR, 'chennai', 'velachery', 'index.html'), expectedTitle: 'Velachery', expectedCanonical: 'https://chennairents.in/flats-for-rent-in-velachery-chennai' },
-    { name: 'Velachery 1-BHK', file: path.join(DIST_DIR, 'chennai', 'velachery', '1-bhk-for-rent', 'index.html'), expectedTitle: '1 BHK', expectedCanonical: 'https://chennairents.in/chennai/velachery/1-bhk-for-rent' },
-    { name: 'Advance Deposit Guide', file: path.join(DIST_DIR, 'guide', 'advance-deposit-chennai', 'index.html'), expectedTitle: 'Advance Deposit', expectedCanonical: 'https://chennairents.in/guide/advance-deposit-chennai' },
+    { name: 'Homepage', file: path.join(DIST_DIR, 'index.html'), expectedTitle: 'Chennai Rents', expectedCanonical: 'https://www.chennairents.in/' },
+    { name: 'About Page', file: path.join(DIST_DIR, 'about', 'index.html'), expectedTitle: 'About Chennai Rents', expectedCanonical: 'https://www.chennairents.in/about/' },
+    { name: 'Methodology Page', file: path.join(DIST_DIR, 'methodology', 'index.html'), expectedTitle: 'Research Methodology', expectedCanonical: 'https://www.chennairents.in/methodology/' },
+    { name: 'Verification Policy', file: path.join(DIST_DIR, 'verification', 'index.html'), expectedTitle: 'Listing Verification', expectedCanonical: 'https://www.chennairents.in/verification/' },
+    { name: 'Corrections Policy', file: path.join(DIST_DIR, 'corrections', 'index.html'), expectedTitle: 'Editorial Corrections', expectedCanonical: 'https://www.chennairents.in/corrections/' },
+    { name: 'Contact Page', file: path.join(DIST_DIR, 'contact', 'index.html'), expectedTitle: 'Contact Editorial', expectedCanonical: 'https://www.chennairents.in/contact/' },
+    { name: 'Privacy Policy', file: path.join(DIST_DIR, 'privacy', 'index.html'), expectedTitle: 'Privacy Policy', expectedCanonical: 'https://www.chennairents.in/privacy/' },
+    { name: 'Data Deletion Request', file: path.join(DIST_DIR, 'data-deletion', 'index.html'), expectedTitle: 'Data Deletion', expectedCanonical: 'https://www.chennairents.in/data-deletion/' },
+    { name: 'Houses for Rent Pillar Hub', file: path.join(DIST_DIR, 'house-for-rent-in-chennai', 'index.html'), expectedTitle: 'Houses for Rent in Chennai', expectedCanonical: 'https://www.chennairents.in/house-for-rent-in-chennai/', expectedBacklink: 'https://www.vijayrajkumar.in' },
+    { name: 'Author Page (R Vijayrajkumar)', file: path.join(DIST_DIR, 'author', 'vijayrajkumar', 'index.html'), expectedTitle: 'R Vijayrajkumar', expectedCanonical: 'https://www.chennairents.in/author/vijayrajkumar/', expectedBacklink: 'https://www.vijayrajkumar.in' },
+    { name: '1 BHK Houses Guide', file: path.join(DIST_DIR, '1-bhk-house-for-rent-in-chennai', 'index.html'), expectedTitle: '1 BHK Houses for Rent in Chennai', expectedCanonical: 'https://www.chennairents.in/1-bhk-house-for-rent-in-chennai/' },
+    { name: 'Chennai Hub', file: path.join(DIST_DIR, 'chennai', 'rentals', 'index.html'), expectedTitle: 'Flats & Houses for Rent in Chennai', expectedCanonical: 'https://www.chennairents.in/chennai/rentals/' },
+    { name: 'Adyar Locality (/chennai/adyar)', file: path.join(DIST_DIR, 'chennai', 'adyar', 'index.html'), expectedTitle: 'Adyar', expectedCanonical: 'https://www.chennairents.in/chennai/adyar/', expectedBacklink: 'https://www.vijayrajkumar.in' },
+    { name: 'Velachery Locality (/chennai/velachery)', file: path.join(DIST_DIR, 'chennai', 'velachery', 'index.html'), expectedTitle: 'Velachery', expectedCanonical: 'https://www.chennairents.in/chennai/velachery/' },
+    { name: 'Anna Nagar Locality (/chennai/anna-nagar)', file: path.join(DIST_DIR, 'chennai', 'anna-nagar', 'index.html'), expectedTitle: 'Anna Nagar', expectedCanonical: 'https://www.chennairents.in/chennai/anna-nagar/' },
+    { name: 'Velachery 1-BHK', file: path.join(DIST_DIR, 'chennai', 'velachery', '1-bhk-for-rent', 'index.html'), expectedTitle: '1 BHK', expectedCanonical: 'https://www.chennairents.in/chennai/velachery/1-bhk-for-rent/' },
+    { name: 'Advance Deposit Guide', file: path.join(DIST_DIR, 'guides', 'advance-deposit-chennai', 'index.html'), expectedTitle: 'Advance Deposit', expectedCanonical: 'https://www.chennairents.in/guides/advance-deposit-chennai/' },
     { name: '404 Page', file: path.join(DIST_DIR, '404.html'), expectedTitle: '404: Page Not Found', expectedRobots: 'noindex, nofollow' },
   ];
 
@@ -136,7 +143,7 @@ function runTests() {
     if (fs.existsSync(smPath)) {
       const xml = fs.readFileSync(smPath, 'utf8');
       assert(xml.includes('<?xml version="1.0" encoding="UTF-8"?>'), `${sm} has valid XML declaration`);
-      assert(xml.includes('https://chennairents.in/'), `${sm} references canonical domain`);
+      assert(xml.includes('https://www.chennairents.in/'), `${sm} references canonical domain`);
     }
   });
 
@@ -144,7 +151,7 @@ function runTests() {
   assert(fs.existsSync(robotsPath), 'robots.txt exists');
   if (fs.existsSync(robotsPath)) {
     const robotsTxt = fs.readFileSync(robotsPath, 'utf8');
-    assert(robotsTxt.includes('Sitemap: https://chennairents.in/sitemap-index.xml'), 'robots.txt points to sitemap index');
+    assert(robotsTxt.includes('Sitemap: https://www.chennairents.in/sitemap-index.xml'), 'robots.txt points to sitemap index');
     assert(robotsTxt.includes('User-agent: *'), 'robots.txt has wildcard user-agent rule');
   }
 
@@ -156,7 +163,7 @@ function runTests() {
     const vercelConfig = JSON.parse(fs.readFileSync(vercelPath, 'utf8'));
     assert(vercelConfig.cleanUrls === true, 'vercel.json has cleanUrls enabled');
     assert(vercelConfig.trailingSlash === false, 'vercel.json has trailingSlash: false (canonical consistency)');
-    assert(Array.isArray(vercelConfig.redirects) && vercelConfig.redirects.length >= 7, `vercel.json defines ${vercelConfig.redirects?.length || 0} permanent 301 redirects`);
+    assert(Array.isArray(vercelConfig.redirects) && vercelConfig.redirects.length >= 11, `vercel.json defines ${vercelConfig.redirects?.length || 0} permanent 301 redirects`);
     assert(vercelConfig.redirects.every((r) => r.permanent === true), 'All redirects are HTTP 301 permanent');
     assert(Array.isArray(vercelConfig.headers) && vercelConfig.headers.length >= 2, 'vercel.json defines Cache-Control and security headers');
   }

@@ -47,9 +47,8 @@ export const LOCALITIES = [
     nearbyLocalities: [
       { slug: 'taramani', name: 'Taramani', note: '5 mins, IT park hub' },
       { slug: 'perungudi', name: 'Perungudi', note: '10 mins, OMR corridor' },
-      { slug: 'adambakkam', name: 'Adambakkam', note: '10 mins, family residential' },
-      { slug: 'pallikaranai', name: 'Pallikaranai', note: '12 mins, affordable south' },
       { slug: 'adyar', name: 'Adyar', note: '15 mins, premium coastal' },
+      { slug: 'medavakkam', name: 'Medavakkam', note: '12 mins, affordable south' },
     ],
     nearbyMetro: [
       { name: 'Velachery MRTS', line: 'MRTS', distanceKm: 0.5 },
@@ -238,9 +237,9 @@ export const LOCALITIES = [
     nearbyItParks: ['Tidel Park (20 mins)', 'Guindy Industrial Estate (15 mins)'],
     listingCount: { total: 0, '1bhk': 0, '2bhk': 0, '3bhk': 0, pg: 0, furnished: 0 },
     nearbyLocalities: [
-      { slug: 'besant-nagar', name: 'Besant Nagar', note: '5 mins, beachside' },
       { slug: 'velachery', name: 'Velachery', note: '15 mins, IT hub' },
-      { slug: 'mylapore', name: 'Mylapore', note: '10 mins, heritage' },
+      { slug: 'taramani', name: 'Taramani', note: '12 mins, IT park hub' },
+      { slug: 't-nagar', name: 'T. Nagar', note: '15 mins, central' },
     ],
     nearbyMetro: [{ name: 'Adyar Metro (Phase 2)', line: 'Metro Phase 2', distanceKm: 1.5 }],
     faqs: [
@@ -279,9 +278,9 @@ export const LOCALITIES = [
     listingCount: { total: 0, '1bhk': 0, '2bhk': 0, '3bhk': 0, pg: 0, furnished: 0 },
     nearbyLocalities: [
       { slug: 'nungambakkam', name: 'Nungambakkam', note: '10 mins, premium' },
-      { slug: 'kodambakkam', name: 'Kodambakkam', note: '8 mins, cinema belt' },
-      { slug: 'mylapore', name: 'Mylapore', note: '10 mins, heritage' },
       { slug: 'anna-nagar', name: 'Anna Nagar', note: '15 mins, planned avenues' },
+      { slug: 'valasaravakkam', name: 'Valasaravakkam', note: '15 mins, west Chennai' },
+      { slug: 'adyar', name: 'Adyar', note: '15 mins, coastal' },
     ],
     nearbyMetro: [
       { name: 'Mambalam Metro', line: 'Green Line', distanceKm: 0.5 },
@@ -321,9 +320,9 @@ export const LOCALITIES = [
     nearbyItParks: ['DLF Cybercity Guindy (20 mins)'],
     listingCount: { total: 0, '1bhk': 0, '2bhk': 0, '3bhk': 0, pg: 0, furnished: 0 },
     nearbyLocalities: [
-      { slug: 'egmore', name: 'Egmore', note: '10 mins' },
       { slug: 't-nagar', name: 'T. Nagar', note: '10 mins, commercial' },
       { slug: 'anna-nagar', name: 'Anna Nagar', note: '12 mins, planned zone' },
+      { slug: 'valasaravakkam', name: 'Valasaravakkam', note: '20 mins, west' },
     ],
     nearbyMetro: [{ name: 'Nungambakkam Metro', line: 'Blue Line', distanceKm: 0.3 }],
     faqs: [
@@ -359,8 +358,8 @@ export const LOCALITIES = [
     listingCount: { total: 0, '1bhk': 0, '2bhk': 0, '3bhk': 0, pg: 0, furnished: 0 },
     nearbyLocalities: [
       { slug: 'porur', name: 'Porur', note: 'IT SEZ hub, 5 mins' },
-      { slug: 'vadapalani', name: 'Vadapalani', note: 'Metro interchange, 8 mins' },
-      { slug: 'virugambakkam', name: 'Virugambakkam', note: 'Quiet residential, 5 mins' },
+      { slug: 't-nagar', name: 'T. Nagar', note: 'Central shopping, 15 mins' },
+      { slug: 'nungambakkam', name: 'Nungambakkam', note: '20 mins, consulate belt' },
     ],
     nearbyMetro: [
       { name: 'Alwarthirunagar (Metro Line 4, upcoming)', line: 'Metro Line 4', distanceKm: 1 },
@@ -402,8 +401,8 @@ export const LOCALITIES = [
     listingCount: { total: 0, '1bhk': 0, '2bhk': 0, '3bhk': 0, pg: 0, furnished: 0 },
     nearbyLocalities: [
       { slug: 'valasaravakkam', name: 'Valasaravakkam', note: '5 mins east' },
-      { slug: 'vadapalani', name: 'Vadapalani', note: '10 mins east, Metro' },
-      { slug: 'mogappair', name: 'Mogappair', note: '10 mins north' },
+      { slug: 'anna-nagar', name: 'Anna Nagar', note: '15 mins north-east' },
+      { slug: 'medavakkam', name: 'Medavakkam', note: '20 mins south' },
     ],
     nearbyMetro: [
       { name: 'Porur Metro (Line 4, upcoming)', line: 'Metro Line 4', distanceKm: 1 },
@@ -441,7 +440,7 @@ export const LOCALITIES = [
     listingCount: { total: 0, '1bhk': 0, '2bhk': 0, '3bhk': 0, pg: 0, furnished: 0 },
     nearbyLocalities: [
       { slug: 'sholinganallur', name: 'Sholinganallur', note: '10 mins, OMR hub' },
-      { slug: 'pallikaranai', name: 'Pallikaranai', note: '7 mins' },
+      { slug: 'perungudi', name: 'Perungudi', note: '12 mins, OMR tech corridor' },
       { slug: 'velachery', name: 'Velachery', note: '15 mins, MRTS access' },
     ],
     nearbyMetro: [{ name: 'Sholinganallur Metro (Phase 2)', line: 'Metro Phase 2', distanceKm: 5 }],
@@ -453,6 +452,44 @@ export const LOCALITIES = [
       title: 'Flats for Rent in Medavakkam, Chennai | Chennai Rents',
       description: 'Find affordable 1, 2, 3 BHK flats for rent in Medavakkam, Chennai. Real rent rates, water reports, and no brokerage listings.',
       h1: 'Flats for Rent in Medavakkam, Chennai',
+    },
+  },
+  {
+    id: 'anna-nagar',
+    slug: 'anna-nagar',
+    name: 'Anna Nagar',
+    zone: 'central',
+    pincode: '600040',
+    latitude: 13.0850,
+    longitude: 80.2101,
+    tagline: 'Premier planned residential avenues with Tower Park and Metro access.',
+    description: `Anna Nagar is one of Chennai's premier master-planned residential neighbourhoods, famous for its wide tree-lined avenues, landmark Anna Nagar Tower Park, high-ranking schools, and vibrant food culture along 2nd Avenue. The neighbourhood features dedicated underground Metro stations on the Green Line (Anna Nagar East and Anna Nagar Tower) connecting directly to Chennai Central and the airport.`,
+    rentRanges: [
+      { bhk: '1 BHK', range: '₹12,000–₹18,000', note: 'Compact builder floors in Western sectors or Shanthi Colony cross streets.' },
+      { bhk: '2 BHK', range: '₹22,000–₹32,000', note: 'Standard residential apartments near 2nd Avenue and Shanthi Colony.' },
+      { bhk: '3 BHK', range: '₹40,000–₹65,000+', note: 'Premium gated societies and luxury builder floors near Tower Park.' },
+    ],
+    waterReality: { score: 8.0, status: 'Excellent Metro Water supply', detail: 'Anna Nagar has robust CMWSSB pipeline coverage and deep municipal water infrastructure with high pressure.' },
+    floodCheck: { risk: 'low', detail: 'Master-planned grid layout with well-maintained storm water drains. The elevated avenues drain rapidly after heavy monsoon showers.' },
+    commute: { metro: 'Anna Nagar East & Anna Nagar Tower Metro stations on Green Line.', bus: 'Anna Nagar Bus Depot — comprehensive MTC connectivity across Chennai.', road: 'Direct access to Inner Ring Road, Poonamallee High Road, and Koyambedu CMBT.' },
+    nearbyItParks: ['Ambattur Industrial Estate (10 mins)', 'DLF Cybercity Porur (20 mins)'],
+    listingCount: { total: 0, '1bhk': 0, '2bhk': 0, '3bhk': 0, pg: 0, furnished: 0 },
+    nearbyLocalities: [
+      { slug: 'nungambakkam', name: 'Nungambakkam', note: '12 mins, consulate hub' },
+      { slug: 't-nagar', name: 'T. Nagar', note: '15 mins, retail & commercial' },
+      { slug: 'valasaravakkam', name: 'Valasaravakkam', note: '15 mins, west Chennai' },
+      { slug: 'porur', name: 'Porur', note: '20 mins, IT corridor' },
+    ],
+    nearbyMetro: [{ name: 'Anna Nagar Tower Metro', line: 'Green Line', distanceKm: 0.4 }],
+    faqs: [
+      { q: 'What is the average rent for a 2 BHK in Anna Nagar?', a: 'Stand-alone 2 BHK apartments in Anna Nagar range from ₹22,000 to ₹32,000 per month depending on whether it is in East, West, or near Shanthi Colony.' },
+      { q: 'Is Anna Nagar safe from waterlogging during monsoons?', a: 'Yes. Anna Nagar has an engineered grid drainage system that reliably prevents prolonged water stagnation, making it one of the safest residential zones in North-Central Chennai.' },
+    ],
+    relatedGuides: [{ slug: 'advance-deposit-chennai', title: 'Advance Deposit Norms' }],
+    seo: {
+      title: 'Flats for Rent in Anna Nagar, Chennai | Chennai Rents',
+      description: 'Find flats and apartments for rent in Anna Nagar, Chennai. Real rent rates, water reports, flood history. 1, 2, 3 BHK listings. No brokerage.',
+      h1: 'Flats for Rent in Anna Nagar, Chennai',
     },
   },
 ];
@@ -514,24 +551,66 @@ export function getIndexingDirective(pageType, listingCount) {
   return shouldIndexPage(pageType, listingCount) ? 'index, follow' : 'noindex, follow';
 }
 
-// ─── Redirect Map (old URLs → new) ──────────────────────────────────────────
+// ─── Redirect Map (old URLs → new canonicals) ──────────────────────────────
 export const LEGACY_REDIRECTS = {
-  '/rent-in-velachery': '/chennai/velachery',
-  '/rent-in-adyar': '/chennai/adyar',
-  '/rent-in-valasaravakkam': '/chennai/valasaravakkam',
-  '/rent-in-omr': '/chennai/perungudi',
-  '/rent-in-porur': '/chennai/porur',
-  '/rent-in-sholinganallur': '/chennai/sholinganallur',
-  '/rent-in-taramani': '/chennai/taramani',
-  '/advance-deposit-chennai': '/guide/advance-deposit-chennai',
-  '/tenant-rules-chennai': '/guide/tenant-rules-chennai',
+  // Legacy /rent-in-* paths
+  '/rent-in-velachery': '/chennai/velachery/',
+  '/rent-in-adyar': '/chennai/adyar/',
+  '/rent-in-valasaravakkam': '/chennai/valasaravakkam/',
+  '/rent-in-omr': '/chennai/perungudi/',
+  '/rent-in-porur': '/chennai/porur/',
+  '/rent-in-sholinganallur': '/chennai/sholinganallur/',
+  '/rent-in-taramani': '/chennai/taramani/',
+  '/rent-in-medavakkam': '/chennai/medavakkam/',
+  '/rent-in-nungambakkam': '/chennai/nungambakkam/',
+  '/rent-in-t-nagar': '/chennai/t-nagar/',
+  '/rent-in-thoraipakkam': '/chennai/thoraipakkam/',
+  '/rent-in-perungudi': '/chennai/perungudi/',
+  '/rent-in-anna-nagar': '/chennai/anna-nagar/',
+
+  // Confirmed 404 links to be resolved
+  '/flats-for-rent-in-adambakkam-chennai': '/chennai/velachery/',
+  '/flats-for-rent-in-besant-nagar-chennai': '/chennai/adyar/',
+  '/flats-for-rent-in-egmore-chennai': '/chennai/rentals/',
+  '/flats-for-rent-in-kodambakkam-chennai': '/chennai/t-nagar/',
+  '/flats-for-rent-in-mogappair-chennai': '/chennai/anna-nagar/',
+  '/flats-for-rent-in-mylapore-chennai': '/chennai/adyar/',
+  '/flats-for-rent-in-pallikaranai-chennai': '/chennai/medavakkam/',
+  '/flats-for-rent-in-vadapalani-chennai': '/chennai/valasaravakkam/',
+  '/flats-for-rent-in-virugambakkam-chennai': '/chennai/valasaravakkam/',
+  '/rent/rent-in-valasaravakkam': '/chennai/valasaravakkam/',
+  '/rent/rent-in-velachery': '/chennai/velachery/',
+
+  // Locality canonical unification (/flats-for-rent-in-:locality-chennai -> /chennai/:locality/)
+  '/flats-for-rent-in-velachery-chennai': '/chennai/velachery/',
+  '/flats-for-rent-in-taramani-chennai': '/chennai/taramani/',
+  '/flats-for-rent-in-sholinganallur-chennai': '/chennai/sholinganallur/',
+  '/flats-for-rent-in-thoraipakkam-chennai': '/chennai/thoraipakkam/',
+  '/flats-for-rent-in-perungudi-chennai': '/chennai/perungudi/',
+  '/flats-for-rent-in-adyar-chennai': '/chennai/adyar/',
+  '/flats-for-rent-in-t-nagar-chennai': '/chennai/t-nagar/',
+  '/flats-for-rent-in-nungambakkam-chennai': '/chennai/nungambakkam/',
+  '/flats-for-rent-in-valasaravakkam-chennai': '/chennai/valasaravakkam/',
+  '/flats-for-rent-in-porur-chennai': '/chennai/porur/',
+  '/flats-for-rent-in-medavakkam-chennai': '/chennai/medavakkam/',
+  '/flats-for-rent-in-anna-nagar-chennai': '/chennai/anna-nagar/',
+
+  // Guides canonical unification (/guide/:slug -> /guides/:slug/)
+  '/guide/advance-deposit-chennai': '/guides/advance-deposit-chennai/',
+  '/guide/tenant-rules-chennai': '/guides/tenant-rules-chennai/',
+  '/advance-deposit-chennai': '/guides/advance-deposit-chennai/',
+  '/tenant-rules-chennai': '/guides/tenant-rules-chennai/',
+
+  // HTML extensions redirection
+  '/contact.html': '/contact/',
+  '/privacy.html': '/privacy/',
 };
 
 // ─── City Hub Config ─────────────────────────────────────────────────────────
 export const CITY_HUB = {
   city: 'Chennai',
   slug: 'chennai',
-  topLocalities: ['velachery','sholinganallur','adyar','valasaravakkam','taramani','perungudi','t-nagar','porur','thoraipakkam','medavakkam'],
+  topLocalities: ['velachery','sholinganallur','adyar','valasaravakkam','taramani','perungudi','t-nagar','porur','thoraipakkam','medavakkam','anna-nagar'],
   bhkHubs: [
     { bhk: '1', label: '1 BHK Flats for Rent in Chennai', slug: '1-bhk-for-rent' },
     { bhk: '2', label: '2 BHK Flats for Rent in Chennai', slug: '2-bhk-for-rent' },

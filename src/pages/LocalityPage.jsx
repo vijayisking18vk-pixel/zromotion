@@ -324,7 +324,7 @@ function NearbyLocalities({ localities }) {
         {localities.map(({ slug, name, note }) => (
           <Link
             key={slug}
-            to={`/flats-for-rent-in-${slug}-chennai`}
+            to={`/chennai/${slug}/`}
             style={{ textDecoration: 'none' }}
           >
             <div
@@ -386,16 +386,16 @@ export default function LocalityPage({ localitySlug: propSlug }) {
   
   // Consistent canonical URL
   const canonicalUrl = intent
-    ? `https://chennairents.in/flats-for-rent-in-${locality.slug}-chennai/${intent}`
-    : `https://chennairents.in/flats-for-rent-in-${locality.slug}-chennai`;
+    ? `https://www.chennairents.in/chennai/${locality.slug}/${intent}/`
+    : `https://www.chennairents.in/chennai/${locality.slug}/`;
 
   // Sidebar: other popular localities
   const sidebarLocalities = LOCALITIES.filter((l) => l.slug !== locality.slug).slice(0, 8);
 
   const breadcrumbs = [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://chennairents.in/' },
-    { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: 'https://chennairents.in/chennai/rentals' },
-    { '@type': 'ListItem', position: 3, name: locality.name, item: `https://chennairents.in/flats-for-rent-in-${locality.slug}-chennai` },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.chennairents.in/' },
+    { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: 'https://www.chennairents.in/chennai/rentals/' },
+    { '@type': 'ListItem', position: 3, name: locality.name, item: `https://www.chennairents.in/chennai/${locality.slug}/` },
   ];
   if (intent) {
     breadcrumbs.push({

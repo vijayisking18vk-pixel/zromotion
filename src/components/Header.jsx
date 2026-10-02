@@ -143,8 +143,8 @@ export default function Header() {
           style={{ display: 'none', alignItems: 'center', gap: '0.65rem', flexShrink: 0 }}
           className="cr-desktop-nav"
         >
-          <a
-            href="/listings/index.html"
+          <Link
+            to="/listings/"
             style={{
               ...navLinkStyle({ isActive: false }),
               color: 'var(--c-ink)',
@@ -152,10 +152,10 @@ export default function Header() {
           >
             <MapPin size={15} style={{ color: 'var(--c-ripon-red)' }} />
             <span>Map</span>
-          </a>
+          </Link>
 
-          <a
-            href="/listings/listings.html"
+          <Link
+            to="/listings/"
             style={{
               ...navLinkStyle({ isActive: false }),
               color: 'var(--c-ink)',
@@ -163,7 +163,7 @@ export default function Header() {
           >
             <Compass size={15} style={{ color: 'var(--c-marina-blue)' }} />
             <span>Listings</span>
-          </a>
+          </Link>
 
           <NavLink to="/#localities" style={navLinkStyle}>
             <span>Localities</span>
@@ -304,8 +304,8 @@ export default function Header() {
               <span>List Property (Rent or Sell)</span>
             </a>
 
-            <a
-              href="/listings/index.html"
+            <Link
+              to="/listings/"
               style={{
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 700,
@@ -323,10 +323,10 @@ export default function Header() {
             >
               <MapPin size={17} style={{ color: 'var(--c-ripon-red)' }} />
               <span>Chennai Rental & Buy Map</span>
-            </a>
+            </Link>
 
-            <a
-              href="/listings/listings.html"
+            <Link
+              to="/listings/"
               style={{
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 700,
@@ -344,7 +344,7 @@ export default function Header() {
             >
               <Compass size={17} style={{ color: 'var(--c-marina-blue)' }} />
               <span>Browse All Listings</span>
-            </a>
+            </Link>
 
             <Link
               to="/#localities"

@@ -343,8 +343,8 @@ const template = `<!DOCTYPE html>
 
             <footer style="border-top:1px solid rgba(255,255,255,0.08); padding: 24px; text-align:center; font-size:12px; color:#6b7280; background: rgba(8,8,18,0.2);">
                 <a href="/" style="color:#94a3b8; text-decoration:none; margin: 0 8px;">Map</a> · 
-                <a href="/contact.html" style="color:#94a3b8; text-decoration:none; margin: 0 8px;">Contact</a> · 
-                <a href="/privacy.html" style="color:#94a3b8; text-decoration:none; margin: 0 8px;">Privacy</a>
+                <a href="/contact/" style="color:#94a3b8; text-decoration:none; margin: 0 8px;">Contact</a> · 
+                <a href="/privacy/" style="color:#94a3b8; text-decoration:none; margin: 0 8px;">Privacy</a>
             </footer>
 
         </div>

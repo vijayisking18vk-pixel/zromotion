@@ -1,4 +1,4 @@
-# https://chennairents.in robots.txt
+# https://www.chennairents.in robots.txt
 # Technical SEO & Crawl Budget Management for Hyperlocal Real Estate
 
 User-agent: *
@@ -18,5 +18,5 @@ Allow: /assets/
 Allow: /data/
 
 # Sitemap index & aggregate sitemap
-Sitemap: https://chennairents.in/sitemap-index.xml
-Sitemap: https://chennairents.in/sitemap.xml
+Sitemap: https://www.chennairents.in/sitemap-index.xml
+Sitemap: https://www.chennairents.in/sitemap.xml

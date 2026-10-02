@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// Because we're using "type": "module" in package.json
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -11,7 +10,7 @@ import { LOCALITIES, shouldIndexPage, parseIntent } from './src/data/localities.
 import { POSTS } from './src/data/posts.js';
 import { SUPPORTING_RENTAL_PAGES } from './src/data/rentalGuideData.js';
 
-const DOMAIN = 'https://chennairents.in';
+const DOMAIN = 'https://www.chennairents.in';
 
 // Programmatic intent facets supported for each locality
 const LOCALITY_FACETS = [
@@ -38,7 +37,7 @@ function buildUrlsetXml(urls, lastmod) {
   if (!urls.length) {
     return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Dynamic facets are added as listings meet index threshold: https://chennairents.in/ -->
+  <!-- Dynamic facets are added as listings meet index threshold: https://www.chennairents.in/ -->
 </urlset>
 `;
   }
@@ -89,24 +88,28 @@ function generateSitemaps() {
   // 1. Core pages, city hubs & listings map application
   const pageUrls = [
     `${DOMAIN}/`,
-    `${DOMAIN}/about`,
-    `${DOMAIN}/listings/index.html`,
-    `${DOMAIN}/listings/listings.html`,
-    `${DOMAIN}/listings/list-property.html`,
-    `${DOMAIN}/chennai/rentals`,
-    `${DOMAIN}/chennai/1-bhk-for-rent`,
-    `${DOMAIN}/chennai/2-bhk-for-rent`,
-    `${DOMAIN}/chennai/3-bhk-for-rent`,
-    `${DOMAIN}/chennai/pg`,
-    `${DOMAIN}/house-for-rent-in-chennai`,
-    `${DOMAIN}/author/vijayrajkumar`,
-    ...SUPPORTING_RENTAL_PAGES.map((p) => `${DOMAIN}/${p.slug}`),
+    `${DOMAIN}/about/`,
+    `${DOMAIN}/methodology/`,
+    `${DOMAIN}/verification/`,
+    `${DOMAIN}/corrections/`,
+    `${DOMAIN}/contact/`,
+    `${DOMAIN}/privacy/`,
+    `${DOMAIN}/data-deletion/`,
+    `${DOMAIN}/listings/`,
+    `${DOMAIN}/chennai/rentals/`,
+    `${DOMAIN}/chennai/1-bhk-for-rent/`,
+    `${DOMAIN}/chennai/2-bhk-for-rent/`,
+    `${DOMAIN}/chennai/3-bhk-for-rent/`,
+    `${DOMAIN}/chennai/pg/`,
+    `${DOMAIN}/house-for-rent-in-chennai/`,
+    `${DOMAIN}/author/vijayrajkumar/`,
+    ...SUPPORTING_RENTAL_PAGES.map((p) => `${DOMAIN}/${p.slug}/`),
   ];
 
-  // 2. Locality hub pages (Single Canonical URL: /flats-for-rent-in-:locality-chennai)
+  // 2. Locality hub pages (Canonical URL: /chennai/:locality/)
   const localityUrls = [];
   LOCALITIES.forEach((loc) => {
-    localityUrls.push(`${DOMAIN}/flats-for-rent-in-${loc.slug}-chennai`);
+    localityUrls.push(`${DOMAIN}/chennai/${loc.slug}/`);
   });
 
   // 3. Programmatic facet pages (/chennai/:locality/:facet) - ONLY indexable URLs (>= threshold)
@@ -117,14 +120,14 @@ function generateSitemaps() {
       const pageType = parsed.key || 'locality';
       const count = loc.listingCount?.[pageType] ?? loc.listingCount?.total ?? 0;
       if (shouldIndexPage(pageType, count)) {
-        facetUrls.push(`${DOMAIN}/chennai/${loc.slug}/${facet}`);
+        facetUrls.push(`${DOMAIN}/chennai/${loc.slug}/${facet}/`);
       }
     });
   });
 
-  // 4. Authentic editorial guide posts (/guide/:slug)
+  // 4. Authentic editorial guide posts (/guides/:slug/)
   const guideUrls = POSTS.filter((post) => post.type === 'guide').map(
-    (post) => `${DOMAIN}/guide/${post.slug}`
+    (post) => `${DOMAIN}/guides/${post.slug}/`
   );
 
   // Write individual child sitemaps
