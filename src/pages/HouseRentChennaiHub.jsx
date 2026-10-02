@@ -74,12 +74,12 @@ export default function HouseRentChennaiHub({ customSlug }) {
   const title = isSupporting ? supportingPage.title : CHENNAI_RENT_HUB_DATA.title;
   const h1 = isSupporting ? supportingPage.h1 : CHENNAI_RENT_HUB_DATA.h1;
   const description = isSupporting ? supportingPage.description : CHENNAI_RENT_HUB_DATA.metaDescription;
-  const canonicalUrl = `https://chennairents.in/${activeSlug}`;
+  const canonicalUrl = `https://www.chennairents.in/${activeSlug}/`;
 
   // Structured data (BreadcrumbList + Article + FAQPage)
   const breadcrumbList = [
-    { name: 'Home', url: 'https://chennairents.in/' },
-    { name: 'Chennai Rentals', url: 'https://chennairents.in/chennai/rentals' },
+    { name: 'Home', url: 'https://www.chennairents.in/' },
+    { name: 'Chennai Rentals', url: 'https://www.chennairents.in/chennai/rentals/' },
     { name: h1, url: canonicalUrl },
   ];
 

@@ -102,10 +102,12 @@ export default function PostTemplate() {
         title={`${post.title} | ${isLocality ? 'Rent' : 'Guide'} | Chennai Rents`}
         description={post.summary}
         type="article"
+        canonical={`https://www.chennairents.in/guides/${slug}/`}
         faqs={post.faqs || []}
         breadcrumbs={[
-          { name: 'Home', url: 'https://chennairents.in/' },
-          { name: post.title, url: `https://chennairents.in/${slug}` }
+          { name: 'Home', url: 'https://www.chennairents.in/' },
+          { name: 'Guides', url: 'https://www.chennairents.in/#guides' },
+          { name: post.title, url: `https://www.chennairents.in/guides/${slug}/` }
         ]}
       />
 

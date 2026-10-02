@@ -60,8 +60,13 @@ function runTests() {
     { name: 'Adyar Locality (/chennai/adyar)', file: path.join(DIST_DIR, 'chennai', 'adyar', 'index.html'), expectedTitle: 'Adyar', expectedCanonical: 'https://www.chennairents.in/chennai/adyar/', expectedBacklink: 'https://www.vijayrajkumar.in' },
     { name: 'Velachery Locality (/chennai/velachery)', file: path.join(DIST_DIR, 'chennai', 'velachery', 'index.html'), expectedTitle: 'Velachery', expectedCanonical: 'https://www.chennairents.in/chennai/velachery/' },
     { name: 'Anna Nagar Locality (/chennai/anna-nagar)', file: path.join(DIST_DIR, 'chennai', 'anna-nagar', 'index.html'), expectedTitle: 'Anna Nagar', expectedCanonical: 'https://www.chennairents.in/chennai/anna-nagar/' },
+    { name: 'OMR Locality (/chennai/omr)', file: path.join(DIST_DIR, 'chennai', 'omr', 'index.html'), expectedTitle: 'OMR', expectedCanonical: 'https://www.chennairents.in/chennai/omr/' },
+    { name: 'Tambaram Locality (/chennai/tambaram)', file: path.join(DIST_DIR, 'chennai', 'tambaram', 'index.html'), expectedTitle: 'Tambaram', expectedCanonical: 'https://www.chennairents.in/chennai/tambaram/' },
     { name: 'Velachery 1-BHK', file: path.join(DIST_DIR, 'chennai', 'velachery', '1-bhk-for-rent', 'index.html'), expectedTitle: '1 BHK', expectedCanonical: 'https://www.chennairents.in/chennai/velachery/1-bhk-for-rent/' },
     { name: 'Advance Deposit Guide', file: path.join(DIST_DIR, 'guides', 'advance-deposit-chennai', 'index.html'), expectedTitle: 'Advance Deposit', expectedCanonical: 'https://www.chennairents.in/guides/advance-deposit-chennai/' },
+    { name: 'Rental Advance Checklist Guide', file: path.join(DIST_DIR, 'guides', 'checklist-rental-advance', 'index.html'), expectedTitle: 'Checklist', expectedCanonical: 'https://www.chennairents.in/guides/checklist-rental-advance/' },
+    { name: 'How to Write Rental Listing Guide', file: path.join(DIST_DIR, 'guides', 'how-to-write-rental-listing', 'index.html'), expectedTitle: 'Rental Listing', expectedCanonical: 'https://www.chennairents.in/guides/how-to-write-rental-listing/' },
+    { name: 'How to Negotiate Rent Guide', file: path.join(DIST_DIR, 'guides', 'how-to-negotiate-rent', 'index.html'), expectedTitle: 'Negotiate Rent', expectedCanonical: 'https://www.chennairents.in/guides/how-to-negotiate-rent/' },
     { name: '404 Page', file: path.join(DIST_DIR, '404.html'), expectedTitle: '404: Page Not Found', expectedRobots: 'noindex, nofollow' },
   ];
 

@@ -171,7 +171,7 @@ export default function App() {
             <Route path="/rent-in-velachery" element={<Navigate to="/chennai/velachery/" replace />} />
             <Route path="/rent-in-adyar" element={<Navigate to="/chennai/adyar/" replace />} />
             <Route path="/rent-in-valasaravakkam" element={<Navigate to="/chennai/valasaravakkam/" replace />} />
-            <Route path="/rent-in-omr" element={<Navigate to="/chennai/perungudi/" replace />} />
+            <Route path="/rent-in-omr" element={<Navigate to="/chennai/omr/" replace />} />
             <Route path="/rent-in-porur" element={<Navigate to="/chennai/porur/" replace />} />
             <Route path="/rent-in-sholinganallur" element={<Navigate to="/chennai/sholinganallur/" replace />} />
             <Route path="/rent-in-taramani" element={<Navigate to="/chennai/taramani/" replace />} />
