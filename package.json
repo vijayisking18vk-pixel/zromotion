@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "prebuild": "node generate-sitemap.js",
-    "build": "vite build",
+    "build": "vite build && node prerender.js",
+    "test:seo": "node scripts/test-seo.js",
     "preview": "vite preview"
   },
   "dependencies": {

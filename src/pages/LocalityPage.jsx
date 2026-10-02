@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { MapPin, Train, Bus, Building2, Droplets, AlertTriangle, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
+import { MapPin, Train, Bus, Building2, Droplets, AlertTriangle, ChevronDown, ChevronUp, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { getLocalityBySlug, generateSEOMeta, getIndexingDirective, LOCALITIES } from '../data/localities';
+import { getLocalityRentData, formatINR } from '../data/rentData';
 import { GUIDE_POSTS } from '../data/posts';
 import SEOHead from '../components/SEOHead';
 import MarinaDivider from '../components/MarinaDivider';
@@ -76,14 +77,51 @@ function FloodBadge({ risk }) {
   );
 }
 
-// ─── Rent Range Table ─────────────────────────────────────────────────────────
-function RentTable({ rentRanges }) {
+// ─── Authentic Rent Table ─────────────────────────────────────────────────────
+function RentTable({ locality, rentRanges }) {
+  const verifiedData = getLocalityRentData(locality.slug);
+
+  if (verifiedData && verifiedData.rents?.length > 0) {
+    return (
+      <div className="bhk-table-wrap">
+        <table className="bhk-table" aria-label={`Verified rent ranges for ${locality.name}`}>
+          <caption style={{ textAlign: 'left', padding: '0.5rem 0', fontSize: '0.85rem', color: 'var(--c-ink-muted)' }}>
+            Verified rental medians and realistic price bands in {locality.name}, Chennai
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Property Type</th>
+              <th scope="col">Typical / Median Rent</th>
+              <th scope="col">Realistic Range</th>
+              <th scope="col">Verified Reports & Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {verifiedData.rents.map((row, i) => (
+              <tr key={i}>
+                <td style={{ fontWeight: 700, color: 'var(--c-ink)', whiteSpace: 'nowrap' }}>{row.type}</td>
+                <td style={{ fontWeight: 800, color: 'var(--c-ripon-red)', whiteSpace: 'nowrap' }}>{formatINR(row.median)}/mo</td>
+                <td style={{ fontWeight: 600, color: 'var(--c-ink)', whiteSpace: 'nowrap' }}>{formatINR(row.min)} – {formatINR(row.max)}</td>
+                <td style={{ fontSize: '0.88rem', color: 'var(--c-ink-muted)' }}>
+                  <span style={{ fontWeight: 600, color: 'var(--c-temple-green)' }}>({row.reports} verified reports)</span> {row.note}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div style={{ marginTop: '0.75rem', fontSize: '0.82rem', color: 'var(--c-ink-light)', borderTop: '1px dashed var(--c-border)', paddingTop: '0.5rem' }}>
+          <strong>Data Basis:</strong> Updated {verifiedData.updated} based on {verifiedData.reports} verified local tenant reports in {locality.name}. Figures reflect actual rent paid, excluding maintenance charges.
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bhk-table-wrap">
-      <table className="bhk-table" aria-label="Rent ranges by BHK type">
+      <table className="bhk-table" aria-label={`Rent ranges in ${locality.name}`}>
         <thead>
           <tr>
-            <th scope="col">Type</th>
+            <th scope="col">Property Type</th>
             <th scope="col">Rent Range</th>
             <th scope="col">Notes</th>
           </tr>
@@ -103,22 +141,25 @@ function RentTable({ rentRanges }) {
 }
 
 // ─── Related Intent Links ─────────────────────────────────────────────────────
-function RelatedIntentLinks({ locality }) {
+function RelatedIntentLinks({ locality, activeIntent }) {
   const intents = [
-    { label: `1 BHK in ${locality.name}`, path: `/chennai/${locality.slug}/1-bhk-for-rent` },
-    { label: `2 BHK in ${locality.name}`, path: `/chennai/${locality.slug}/2-bhk-for-rent` },
-    { label: `3 BHK in ${locality.name}`, path: `/chennai/${locality.slug}/3-bhk-for-rent` },
-    { label: `PG in ${locality.name}`, path: `/chennai/${locality.slug}/pg` },
-    { label: `Furnished flats in ${locality.name}`, path: `/chennai/${locality.slug}/fully-furnished-flats-for-rent` },
-    { label: `Flats under ₹20,000 in ${locality.name}`, path: `/chennai/${locality.slug}/flats-for-rent-under-20000` },
+    { label: `All ${locality.name} Rents`, path: `/chennai/${locality.slug}/`, active: !activeIntent },
+    { label: `Bachelors in ${locality.name}`, path: `/chennai/${locality.slug}/bachelors/`, active: activeIntent === 'bachelors' },
+    { label: `Families in ${locality.name}`, path: `/chennai/${locality.slug}/families/`, active: activeIntent === 'families' },
+    { label: `PG & Co-living`, path: `/chennai/${locality.slug}/co-living-pg/`, active: activeIntent === 'co-living-pg' || activeIntent === 'pg' },
+    { label: `1 BHK Flats`, path: `/chennai/${locality.slug}/1-bhk-for-rent/`, active: activeIntent === '1-bhk-for-rent' },
+    { label: `2 BHK Flats`, path: `/chennai/${locality.slug}/2-bhk-for-rent/`, active: activeIntent === '2-bhk-for-rent' },
+    { label: `3 BHK Flats`, path: `/chennai/${locality.slug}/3-bhk-for-rent/`, active: activeIntent === '3-bhk-for-rent' },
+    { label: `Furnished Flats`, path: `/chennai/${locality.slug}/fully-furnished-flats-for-rent/`, active: activeIntent === 'fully-furnished-flats-for-rent' },
+    { label: `Under ₹20,000`, path: `/chennai/${locality.slug}/flats-for-rent-under-20000/`, active: activeIntent === 'flats-for-rent-under-20000' },
   ];
   return (
     <div className="quick-jump-box">
-      <h4>Search in {locality.name}</h4>
+      <h4>Search {locality.name} by Segment & Intent</h4>
       <ul className="quick-jump-links" role="list">
-        {intents.map(({ label, path }) => (
+        {intents.map(({ label, path, active }) => (
           <li key={path}>
-            <Link to={path}>{label}</Link>
+            <Link to={path} style={active ? { fontWeight: 800, color: 'var(--c-ripon-red)' } : {}}>{label}</Link>
           </li>
         ))}
       </ul>
@@ -138,7 +179,7 @@ function NearbyLocalities({ localities }) {
         {localities.map(({ slug, name, note }) => (
           <Link
             key={slug}
-            to={`/chennai/${slug}`}
+            to={`/chennai/${slug}/`}
             style={{ textDecoration: 'none' }}
           >
             <div style={{
@@ -162,16 +203,42 @@ function NearbyLocalities({ localities }) {
 }
 
 // ─── Structured Data (JSON-LD) ────────────────────────────────────────────────
-function LocalityStructuredData({ locality, meta }) {
+function LocalityStructuredData({ locality, meta, canonicalUrl, intent }) {
+  const itemList = [
+    { '@type': 'ListItem', position: 1, name: 'Chennai Rents', item: 'https://chennairents.in/' },
+    { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: 'https://chennairents.in/chennai/rentals/' },
+    { '@type': 'ListItem', position: 3, name: `Rent in ${locality.name}`, item: `https://chennairents.in/chennai/${locality.slug}/` },
+  ];
+
+  if (intent) {
+    itemList.push({
+      '@type': 'ListItem',
+      position: 4,
+      name: meta.h1,
+      item: canonicalUrl,
+    });
+  }
+
   const breadcrumb = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Chennai Rents', item: 'https://chennairents.in/' },
-      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: 'https://chennairents.in/chennai/rentals' },
-      { '@type': 'ListItem', position: 3, name: meta.h1, item: `https://chennairents.in/chennai/${locality.slug}` },
-    ],
+    itemListElement: itemList,
   };
+
+  const webPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: meta.title,
+    description: meta.description,
+    url: canonicalUrl,
+    inLanguage: 'en-IN',
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'Chennai Rents',
+      url: 'https://chennairents.in/',
+    },
+  };
+
   const faqSchema = locality.faqs?.length ? {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -185,6 +252,7 @@ function LocalityStructuredData({ locality, meta }) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }} />
       {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
     </>
   );
@@ -192,18 +260,21 @@ function LocalityStructuredData({ locality, meta }) {
 
 // ─── Main LocalityPage Component ──────────────────────────────────────────────
 export default function LocalityPage() {
-  const { locality: localitySlug } = useParams();
+  const { locality: localitySlug, intent } = useParams();
   const reduce = useReducedMotion();
 
   const locality = getLocalityBySlug(localitySlug);
 
   // 404 → redirect to Chennai hub
   if (!locality) {
-    return <Navigate to="/chennai/rentals" replace />;
+    return <Navigate to="/chennai/rentals/" replace />;
   }
 
-  const meta = generateSEOMeta({ locality });
-  const indexDirective = getIndexingDirective('locality', locality.listingCount?.total || 0);
+  const meta = generateSEOMeta({ locality, intent });
+  const indexDirective = getIndexingDirective(intent || 'locality', locality.listingCount?.total || 0);
+  const canonicalUrl = intent
+    ? `https://chennairents.in/chennai/${locality.slug}/${intent}/`
+    : `https://chennairents.in/chennai/${locality.slug}/`;
 
   // Sidebar: other popular localities
   const sidebarLocalities = LOCALITIES.filter(l => l.slug !== localitySlug).slice(0, 8);
@@ -214,9 +285,9 @@ export default function LocalityPage() {
         title={meta.title}
         description={meta.description}
         robots={indexDirective}
-        canonical={`https://chennairents.in/chennai/${locality.slug}`}
+        canonical={canonicalUrl}
       />
-      <LocalityStructuredData locality={locality} meta={meta} />
+      <LocalityStructuredData locality={locality} meta={meta} canonicalUrl={canonicalUrl} intent={intent} />
 
       <motion.div
         initial={{ opacity: 0, y: 10 }}
@@ -231,9 +302,17 @@ export default function LocalityPage() {
             <nav className="seo-breadcrumbs" aria-label="Breadcrumb">
               <Link to="/">Home</Link>
               <span aria-hidden="true">›</span>
-              <Link to="/chennai/rentals">Chennai</Link>
+              <Link to="/chennai/rentals/">Chennai</Link>
               <span aria-hidden="true">›</span>
-              <span aria-current="page">{locality.name}</span>
+              {intent ? (
+                <>
+                  <Link to={`/chennai/${locality.slug}/`}>{locality.name}</Link>
+                  <span aria-hidden="true">›</span>
+                  <span aria-current="page">{intent.replace(/-/g, ' ')}</span>
+                </>
+              ) : (
+                <span aria-current="page">{locality.name}</span>
+              )}
             </nav>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem', alignItems: 'start' }}>
@@ -242,10 +321,17 @@ export default function LocalityPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
-                <span className="tag-eyebrow">
-                  <span className="tag-bullet" />
-                  {locality.zone === 'south' ? 'South Chennai' : locality.zone === 'west' ? 'West Chennai' : locality.zone === 'central' ? 'Central Chennai' : 'Chennai'}
-                </span>
+                <div className="tag-eyebrow" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <span className="tag-bullet" />
+                    {locality.zone === 'south' ? 'South Chennai' : locality.zone === 'west' ? 'West Chennai' : locality.zone === 'central' ? 'Central Chennai' : 'Chennai'}
+                  </span>
+                  {locality.tamilHeading && (
+                    <span style={{ color: 'var(--c-ink-muted)', fontSize: '0.8rem', fontWeight: 600 }}>
+                      • {locality.tamilHeading}
+                    </span>
+                  )}
+                </div>
                 <h1 style={{ marginTop: '0.5rem' }}>{meta.h1}</h1>
                 <p style={{ fontSize: '1.1rem', color: 'var(--c-ripon-red)', fontWeight: 600, marginBottom: '0.75rem' }}>
                   {locality.tagline}
@@ -271,13 +357,40 @@ export default function LocalityPage() {
           <main className="post-main">
 
             {/* Quick Search Intent Links */}
-            <RelatedIntentLinks locality={locality} />
+            <RelatedIntentLinks locality={locality} activeIntent={intent} />
+
+            {/* Segment Guidance Banner if Child Page */}
+            {intent && (
+              <div style={{
+                background: 'var(--c-sand-light)',
+                border: '1px solid var(--c-border)',
+                borderLeft: '4px solid var(--c-ripon-red)',
+                borderRadius: '8px',
+                padding: '1rem 1.25rem',
+                marginBottom: '2rem'
+              }}>
+                <h3 style={{ margin: '0 0 0.4rem 0', fontSize: '1.05rem', color: 'var(--c-ink)' }}>
+                  {intent === 'bachelors' && `Bachelor & Single Professional Guide for ${locality.name}`}
+                  {intent === 'families' && `Family Rental Guide & Residential Welfare in ${locality.name}`}
+                  {(intent === 'co-living-pg' || intent === 'pg') && `Co-Living & PG Living Guide in ${locality.name}`}
+                  {intent.includes('bhk') && `${intent.toUpperCase().replace(/-/g, ' ')} Rental Market in ${locality.name}`}
+                  {!['bachelors', 'families', 'co-living-pg', 'pg'].includes(intent) && !intent.includes('bhk') && `Targeted Rental Filters for ${locality.name}`}
+                </h3>
+                <p style={{ margin: 0, fontSize: '0.92rem', color: 'var(--c-ink-muted)' }}>
+                  Looking for overall neighborhood statistics? View our full{' '}
+                  <Link to={`/chennai/${locality.slug}/`} style={{ color: 'var(--c-marina-blue)', fontWeight: 700 }}>
+                    {locality.name} Locality & Rent Rates Guide
+                  </Link>{' '}
+                  for water supply scores, flood analysis, and commute comparisons.
+                </p>
+              </div>
+            )}
 
             {/* Rent Ranges */}
             <section style={{ marginBottom: '2.5rem' }}>
               <h2>Rental Rates in {locality.name}</h2>
               <p style={{ marginBottom: '1rem' }}>{locality.description}</p>
-              <RentTable rentRanges={locality.rentRanges} />
+              <RentTable locality={locality} rentRanges={locality.rentRanges} />
             </section>
 
             {/* Water Reality */}
@@ -377,7 +490,7 @@ export default function LocalityPage() {
                   {locality.relatedGuides.map(({ slug, title }) => (
                     <Link
                       key={slug}
-                      to={`/guide/${slug}`}
+                      to={`/guide/${slug}/`}
                       style={{ textDecoration: 'none' }}
                     >
                       <div style={{
@@ -406,7 +519,7 @@ export default function LocalityPage() {
             <div className="rail-card">
               <h4>Popular Localities</h4>
               {sidebarLocalities.map(l => (
-                <Link key={l.slug} to={`/chennai/${l.slug}`} className="rail-link">
+                <Link key={l.slug} to={`/chennai/${l.slug}/`} className="rail-link">
                   {l.name}
                 </Link>
               ))}
@@ -414,18 +527,18 @@ export default function LocalityPage() {
             <div className="rail-card">
               <h4>Search by BHK</h4>
               {['1', '2', '3'].map(bhk => (
-                <Link key={bhk} to={`/chennai/${locality.slug}/${bhk}-bhk-for-rent`} className="rail-link">
+                <Link key={bhk} to={`/chennai/${locality.slug}/${bhk}-bhk-for-rent/`} className="rail-link">
                   {bhk} BHK in {locality.name}
                 </Link>
               ))}
-              <Link to={`/chennai/${locality.slug}/pg`} className="rail-link">
-                PG in {locality.name}
+              <Link to={`/chennai/${locality.slug}/co-living-pg/`} className="rail-link">
+                PG & Co-living in {locality.name}
               </Link>
             </div>
             <div className="rail-card">
               <h4>Renting Guides</h4>
               {GUIDE_POSTS.slice(0, 3).map(g => (
-                <Link key={g.slug} to={`/guide/${g.slug}`} className="rail-link">
+                <Link key={g.slug} to={`/guide/${g.slug}/`} className="rail-link">
                   {g.title.split(':')[0]}
                 </Link>
               ))}

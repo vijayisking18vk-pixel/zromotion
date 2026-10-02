@@ -340,22 +340,28 @@ export const LOCALITIES = [
     id: 'valasaravakkam',
     slug: 'valasaravakkam',
     name: 'Valasaravakkam',
+    tamilName: 'வலசரவாக்கம்',
+    tamilHeading: 'வலசரவாக்கம் வாடகை வீடுகள் (Houses for Rent in Valasaravakkam)',
     zone: 'west',
     pincode: '600087',
     latitude: 13.0509,
     longitude: 80.1833,
-    tagline: 'West Chennai residential sweet spot between Porur and Vadapalani.',
-    description: `Valasaravakkam is the sweet spot between Vadapalani's film-city buzz and Porur's IT corridor. Arcot Road runs through Kesavardhini, Alwarthirunagar, and Choudhary Nagar. Upcoming Metro Line 4 stations will transform connectivity significantly.`,
+    tagline: 'West Chennai residential sweet spot between DLF Porur IT corridor and Vadapalani.',
+    description: `Valasaravakkam is West Chennai’s premier residential corridor along Arcot Road, positioned strategically between the DLF Porur IT SEZ and Vadapalani’s entertainment & metro junction. Known for upscale residential avenues like Kesavardhini, Alwarthirunagar, and Chowdry Nagar, it offers rapid access to top hospitals, schools, and upcoming Chennai Metro Phase 2 Line 4 stations.`,
     rentRanges: [
-      { bhk: '1 BHK', range: '₹8,500–₹13,000', note: 'Single working pros. Mostly independent house portions.' },
-      { bhk: '2 BHK', range: '₹15,000–₹22,000', note: 'Standard residential apartments near Kesavardhini.' },
-      { bhk: '3 BHK', range: '₹24,000–₹35,000', note: 'Spacious builder floors with covered car parking.' },
-      { bhk: 'Bachelors', range: '₹5,000–₹8,000/person', note: 'Shared 2/3 BHK units.' },
+      { bhk: '1 BHK', range: '₹8,500–₹13,500', note: 'Independent house portions in Alwarthirunagar & Arcot Road cross streets.' },
+      { bhk: '2 BHK', range: '₹14,000–₹21,000', note: 'Builder floors in Venugopal Nagar & Chowdry Nagar.' },
+      { bhk: '3 BHK', range: '₹22,000–₹32,000', note: 'Spacious independent residences with covered car parking.' },
+      { bhk: 'PG / Co-living', range: '₹5,000–₹9,500', note: 'Shared accommodations for DLF techies & media professionals.' },
     ],
-    waterReality: { score: 6.5, status: 'Moderate — summer tanker reliance', detail: 'Main avenues have Metro Water. Interior streets rely on private tankers in peak summer (₹1,200–₹1,800 per load).' },
-    floodCheck: { risk: 'moderate', detail: 'During Cyclone Michaung (Dec 2023), water stagnation occurred around Alwarthirunagar 1st Main. Elevated plots near Kesavardhini stayed dry.' },
-    commute: { metro: 'Upcoming Metro Line 4 stations at Alwarthirunagar and Valasaravakkam Junction.', bus: 'Direct MTC buses to Anna Square, Broadway, T. Nagar.', road: '10-min drive to Porur DLF Cybercity via Mount-Poonamallee Road.' },
-    nearbyItParks: ['DLF Cybercity Porur (10 mins)', 'L&T Infotech (12 mins)'],
+    waterReality: { score: 6.8, status: 'Metro Water on main avenues; summer tanker supplementation', detail: 'Kesavardhini and main Arcot Road avenues receive regular Metro Water. Inner residential colonies supplement with private tankers in peak summer months (₹1,200–₹1,800/tanker).' },
+    floodCheck: { risk: 'moderate', detail: 'Elevated layouts near Kesavardhini and Arcot Road remain safe. Low-lying pockets around Alwarthirunagar 1st Main require checking street drainage plinth levels.' },
+    commute: {
+      metro: 'Upcoming Chennai Metro Line 4 stations at Alwarthirunagar and Valasaravakkam Junction. Vadapalani Metro interchange is 3 km away.',
+      bus: 'Direct MTC buses on Arcot Road (Route 25G to Anna Square, 37G to Broadway, 17D to Broadway).',
+      road: 'Direct Arcot Road artery; 10-minute drive to DLF Cybercity Porur via Mount–Poonamallee Road; 15 mins to Vadapalani.'
+    },
+    nearbyItParks: ['DLF Cybercity Porur (10 mins)', 'L&T Infotech (12 mins)', 'RMZ One Paramount (14 mins)'],
     listingCount: { total: 0, '1bhk': 0, '2bhk': 0, '3bhk': 0, pg: 0, furnished: 0 },
     nearbyLocalities: [
       { slug: 'porur', name: 'Porur', note: 'IT SEZ hub, 5 mins' },
@@ -367,17 +373,123 @@ export const LOCALITIES = [
       { name: 'Vadapalani Metro', line: 'Green Line', distanceKm: 3 },
     ],
     faqs: [
-      { q: 'How much advance deposit do landlords ask in Valasaravakkam?', a: 'Landlords traditionally ask 6–10 months. With employment proof and ECS payment offer, most deals close at 4–6 months.' },
-      { q: 'Are bachelors allowed to rent in Valasaravakkam?', a: 'Yes, especially near Porur link roads and Alwarthirunagar. Some traditional house owners on inner temple streets prefer families.' },
+      { q: 'What is the average rent for a 2 BHK in Valasaravakkam?', a: 'A typical 2 BHK builder floor in Valasaravakkam rents between ₹14,000 and ₹21,000 per month, with a verified median of ₹17,000. Rent varies based on Metro Water availability and distance from Arcot Road.' },
+      { q: 'How close is Valasaravakkam to DLF Cybercity Porur?', a: 'Valasaravakkam is approximately 3.5 km from DLF Cybercity Porur, taking just 10 to 12 minutes by two-wheeler or car via Mount-Poonamallee Road.' },
+      { q: 'What is the advance deposit norm in Valasaravakkam?', a: 'Standard owner asks range from 6 to 10 months, but most verified tenants successfully negotiate 4 to 6 months with salaried credentials.' },
+      { q: 'Will the upcoming Metro Line 4 affect Valasaravakkam rents?', a: 'Yes. With Metro Line 4 stations at Alwarthirunagar and Valasaravakkam connecting directly to Light House and Poonamallee, rental demand and rental yields are appreciating steadily.' },
     ],
     relatedGuides: [
       { slug: 'advance-deposit-chennai', title: 'Advance Deposit: 10 Months Myth' },
       { slug: 'tenant-rules-chennai', title: 'Rental Agreement & Tenant Rights' },
     ],
     seo: {
-      title: 'Flats for Rent in Valasaravakkam, Chennai | Chennai Rents',
-      description: 'Find flats for rent in Valasaravakkam, Chennai. 1, 2, 3 BHK listings near Porur IT corridor. Real rent rates, water reports, no brokerage.',
-      h1: 'Flats for Rent in Valasaravakkam, Chennai',
+      title: 'Rent in Valasaravakkam, Chennai — Rates, Deposits & Locality Guide',
+      description: 'Find flats & houses for rent in Valasaravakkam, Chennai. Verified 1, 2, 3 BHK rents (₹8.5k–₹32k), water scores, DLF commute & deposit guide. Zero brokerage.',
+      h1: 'Rent in Valasaravakkam, Chennai — Rates, Deposits & Locality Guide',
+    },
+  },
+  {
+    id: 'tambaram',
+    slug: 'tambaram',
+    name: 'Tambaram',
+    tamilName: 'தாம்பரம்',
+    tamilHeading: 'தாம்பரம் வாடகை வீடுகள் (Houses for Rent in Tambaram)',
+    zone: 'south',
+    pincode: '600045',
+    latitude: 12.9249,
+    longitude: 80.1000,
+    tagline: 'South Chennai major transport gateway, railway junction, and affordable residential anchor.',
+    description: `Tambaram is South Chennai’s premier transit gateway and residential nerve centre along the GST Road corridor. Divided into East Tambaram (residential, green, home to Madras Christian College) and West Tambaram (bustling commercial hub and transit terminus), it connects seamlessly to MEPZ, Perungalathur, and the OMR corridor via the Tambaram–Velachery Main Road. Renowned for spacious independent houses, family-friendly builder floors, and highly affordable rents compared to central Chennai.`,
+    rentRanges: [
+      { bhk: '1 BHK', range: '₹6,000–₹9,500', note: 'Independent portions in East Tambaram, Camp Road, and Selaiyur.' },
+      { bhk: '2 BHK', range: '₹9,500–₹15,000', note: 'Builder flats in Kadaperi, Sanatorium, and GST corridor.' },
+      { bhk: '3 BHK', range: '₹15,000–₹23,000', note: 'Gated apartments along Tambaram–Velachery Main Road.' },
+      { bhk: 'PG / Co-living', range: '₹4,000–₹8,000', note: 'Student & fresher accommodations near MCC College and Sanatorium.' },
+    ],
+    waterReality: { score: 7.0, status: 'Good groundwater; municipal supply active in established sectors', detail: 'East Tambaram and Camp Road enjoy stable sweet groundwater. Areas closer to GST road and West Tambaram have consistent municipal water distribution.' },
+    floodCheck: { risk: 'moderate', detail: 'Elevated sectors in East Tambaram and Camp Road stay dry. Caution advised on ground floors in Mudichur lowlands and lake-overflow zones.' },
+    commute: {
+      metro: 'Tambaram Railway Station connects via suburban train to Guindy, Central, and Beach every 5–10 mins. Airport Metro is 15 mins by suburban rail/cab.',
+      bus: 'Tambaram MTC Bus Terminus with direct, high-frequency services to Broadway, T. Nagar, CMBT, and OMR. Kilambakkam KCBT bus terminus is just 15 mins south.',
+      road: 'Direct access to GST Road (NH 32), Tambaram–Velachery Main Road, and Outer Ring Road (ORR).'
+    },
+    nearbyItParks: ['MEPZ (Madras Export Processing Zone - 5 mins)', 'Shriram The Gateway SEZ (Perungalathur - 8 mins)', 'Guindy Olympia Tech Park (22 mins via train)'],
+    listingCount: { total: 0, '1bhk': 0, '2bhk': 0, '3bhk': 0, pg: 0, furnished: 0 },
+    nearbyLocalities: [
+      { slug: 'chromepet', name: 'Chromepet', note: '5 mins north, GST corridor' },
+      { slug: 'medavakkam', name: 'Medavakkam', note: '12 mins east, connecting OMR' },
+      { slug: 'velachery', name: 'Velachery', note: '20 mins via Velachery Main Rd' },
+    ],
+    nearbyMetro: [
+      { name: 'Tambaram Suburban Railway Station', line: 'South Suburban Line', distanceKm: 0.2 },
+      { name: 'Airport Metro Station', line: 'Blue Line', distanceKm: 8 },
+    ],
+    faqs: [
+      { q: 'What is the average rent for a 2 BHK in Tambaram?', a: 'A typical 2 BHK flat in Tambaram rents between ₹9,500 and ₹15,000 per month, with a verified median of ₹12,000 based on verified tenant reports. East Tambaram and Selaiyur command slightly higher rents due to better groundwater and peaceful residential layouts.' },
+      { q: 'What is the typical advance deposit in Tambaram?', a: 'Landlords traditionally quote 6 to 10 months deposit, but with standard employment proof and direct bank transfer terms, most rental agreements close at 4 to 6 months advance.' },
+      { q: 'Is Tambaram suitable for IT professionals and daily commuters?', a: 'Yes. With suburban electric trains running every 5 to 10 minutes to Guindy and Beach, and MEPZ and Shriram The Gateway SEZ right next door, Tambaram is one of Chennai’s most time-efficient and affordable commuter hubs.' },
+      { q: 'Are bachelors and students welcome in Tambaram rentals?', a: 'Yes. Due to Madras Christian College (MCC) and the MEPZ IT corridor, East Tambaram, Sanatorium, and Camp Road have hundreds of bachelor-friendly shared apartments and dedicated PGs.' },
+    ],
+    relatedGuides: [
+      { slug: 'advance-deposit-chennai', title: 'Advance Deposit: 10 Months Myth' },
+      { slug: 'tenant-rules-chennai', title: 'Rental Agreement & Tenant Rights' },
+    ],
+    seo: {
+      title: 'Rent in Tambaram, Chennai — Rates, Deposits & Locality Guide',
+      description: 'Find flats & houses for rent in Tambaram, Chennai. Verified 1, 2, 3 BHK rents (₹6k–₹23k), water reports, flood safety, and deposit guide. Direct owner listings.',
+      h1: 'Rent in Tambaram, Chennai — Rates, Deposits & Locality Guide',
+    },
+  },
+  {
+    id: 'chromepet',
+    slug: 'chromepet',
+    name: 'Chromepet',
+    tamilName: 'குரோம்பேட்டை',
+    tamilHeading: 'குரோம்பேட்டை வாடகை வீடுகள் (Houses for Rent in Chromepet)',
+    zone: 'south',
+    pincode: '600044',
+    latitude: 12.9516,
+    longitude: 80.1462,
+    tagline: 'High-connectivity GST residential hub with suburban rail, retail streets, and MIT campus.',
+    description: `Chromepet is a bustling residential and commercial powerhouse in South Chennai along the GST Road corridor. Anchored by the MIT Anna University campus, Chromepet Railway Station, and vibrant shopping streets along Radha Nagar and CLC Works Road, it is a top preference for airport personnel, MEPZ tech workers, and families seeking great schools and medical infrastructure.`,
+    rentRanges: [
+      { bhk: '1 BHK', range: '₹6,500–₹10,000', note: 'Independent units in Radha Nagar and Station Road.' },
+      { bhk: '2 BHK', range: '₹10,500–₹16,500', note: 'Builder flats in Hasthinapuram and New Colony.' },
+      { bhk: '3 BHK', range: '₹16,000–₹25,000', note: 'Gated apartments along GST Road and Nemilichery.' },
+      { bhk: 'PG / Co-living', range: '₹4,500–₹8,500', note: 'Student & working women PGs near MIT campus.' },
+    ],
+    waterReality: { score: 7.2, status: 'Palar water distribution + good sweet borewell water', detail: 'Hasthinapuram and Radha Nagar have dependable municipal Palar water connections. Borewell yields remain reliable year-round.' },
+    floodCheck: { risk: 'low-moderate', detail: 'Elevated residential layouts in Hasthinapuram and high-ground sectors near GST road stay completely flood-free. Minimal stagnation on lower lake peripheral lanes.' },
+    commute: {
+      metro: 'Chromepet Suburban Railway Station is centrally located; Chennai Airport Metro station is just 4 km (10 mins) away.',
+      bus: 'Frequent MTC bus connectivity along GST road to Guindy, T. Nagar, CMBT, Central, and Tambaram.',
+      road: 'Direct access to GST Road (NH 32) and Hasthinapuram Main Road.'
+    },
+    nearbyItParks: ['MEPZ (5 mins)', 'Shriram The Gateway SEZ (10 mins)', 'Guindy Tech Zone (15 mins via suburban train)'],
+    listingCount: { total: 0, '1bhk': 0, '2bhk': 0, '3bhk': 0, pg: 0, furnished: 0 },
+    nearbyLocalities: [
+      { slug: 'tambaram', name: 'Tambaram', note: '5 mins south, major transit junction' },
+      { slug: 'pallavaram', name: 'Pallavaram', note: '3 mins north, airport proximity' },
+      { slug: 'medavakkam', name: 'Medavakkam', note: '15 mins east, OMR connector' },
+    ],
+    nearbyMetro: [
+      { name: 'Chromepet Suburban Railway Station', line: 'South Suburban Line', distanceKm: 0.3 },
+      { name: 'Chennai International Airport Metro', line: 'Blue Line', distanceKm: 4 },
+    ],
+    faqs: [
+      { q: 'What is the average rent for a 2 BHK in Chromepet?', a: 'A standard 2 BHK flat in Chromepet rents between ₹10,500 and ₹16,500 per month, with a verified median of ₹13,000. Properties in Hasthinapuram and Radha Nagar are most popular among families.' },
+      { q: 'How is the commute from Chromepet to central Chennai?', a: 'Suburban trains run every 5 to 10 minutes from Chromepet station, reaching Guindy in 16 minutes and Chennai Beach in 38 minutes, completely bypassing GST road rush hour traffic.' },
+      { q: 'Is Chromepet safe from flooding during Chennai monsoons?', a: 'Hasthinapuram, New Colony, and elevated sectors near GST road have high natural elevation and drain efficiently. Avoid basement and low-lying storm canal boundaries.' },
+      { q: 'What are the advance deposit practices in Chromepet?', a: 'Owners typically request 6 to 10 months deposit, but 4 to 6 months advance is readily accepted for tenants with verified corporate or institutional credentials.' },
+    ],
+    relatedGuides: [
+      { slug: 'advance-deposit-chennai', title: 'Advance Deposit: 10 Months Myth' },
+      { slug: 'tenant-rules-chennai', title: 'Rental Agreement & Tenant Rights' },
+    ],
+    seo: {
+      title: 'Rent in Chromepet, Chennai — Rates, Deposits & Locality Guide',
+      description: 'Find flats & houses for rent in Chromepet, Chennai. Verified 1, 2, 3 BHK rents (₹6.5k–₹25k), Palar water status, train commute & deposit guide. Zero brokerage.',
+      h1: 'Rent in Chromepet, Chennai — Rates, Deposits & Locality Guide',
     },
   },
   {
@@ -472,14 +584,99 @@ const FURNISHING_LABELS = {
 };
 const BUDGET_LABELS = { 10000: '₹10,000', 15000: '₹15,000', 20000: '₹20,000', 25000: '₹25,000', 30000: '₹30,000' };
 
-export function generateSEOMeta({ locality, bhk, propertyType, furnishing, budgetMax, city = 'Chennai' }) {
+export function generateSEOMeta({ locality, intent, bhk, propertyType, furnishing, budgetMax, city = 'Chennai' }) {
   const localityName = locality?.name || city;
+  const locationStr = locality ? `${localityName}, ${city}` : city;
+
+  // Specific high-intent child page templates
+  if (intent === 'bachelors') {
+    const h1 = `Bachelor Houses & Flats for Rent in ${locationStr}`;
+    return {
+      h1,
+      title: `${h1} | Chennai Rents`,
+      description: `Find bachelor-friendly flats, single room portions, and shared houses for rent in ${locationStr}. Verified rents, relaxed advance deposit norms, and zero brokerage.`
+    };
+  }
+
+  if (intent === 'families') {
+    const h1 = `Family Houses & Flats for Rent in ${locationStr}`;
+    return {
+      h1,
+      title: `${h1} | Chennai Rents`,
+      description: `Explore family houses, builder floors, and 2/3 BHK apartments for rent in ${locationStr}. Verified sweet water availability, flood safety check, top school access & direct owner contact.`
+    };
+  }
+
+  if (intent === 'co-living-pg' || intent === 'pg') {
+    const h1 = `PG & Co-Living Spaces in ${locationStr}`;
+    return {
+      h1,
+      title: `${h1} | Chennai Rents`,
+      description: `Find top-rated PGs and co-living spaces for rent in ${locationStr} for men, women, and working professionals. South Indian food, high-speed WiFi, AC, and 1-month deposit.`
+    };
+  }
+
+  if (intent === '1-bhk-for-rent' || bhk === '1') {
+    const h1 = `1 BHK Flats & Houses for Rent in ${locationStr}`;
+    return {
+      h1,
+      title: `${h1} | Chennai Rents`,
+      description: `Browse verified 1 BHK flats, studio apartments, and independent portions for rent in ${locationStr}. Real rent rates, low deposit options, direct landlord listings.`
+    };
+  }
+
+  if (intent === '2-bhk-for-rent' || bhk === '2') {
+    const h1 = `2 BHK Flats & Houses for Rent in ${locationStr}`;
+    return {
+      h1,
+      title: `${h1} | Chennai Rents`,
+      description: `Find 2 BHK apartments and builder floors for rent in ${locationStr}. Verified rental medians, Metro Water reports, commute guides, no brokerage.`
+    };
+  }
+
+  if (intent === '3-bhk-for-rent' || bhk === '3') {
+    const h1 = `3 BHK Flats & Houses for Rent in ${locationStr}`;
+    return {
+      h1,
+      title: `${h1} | Chennai Rents`,
+      description: `Spacious 3 BHK apartments and gated community houses for rent in ${locationStr}. Covered car parking, verified rates, genuine owner contacts.`
+    };
+  }
+
+  if (intent === 'fully-furnished-flats-for-rent') {
+    const h1 = `Fully Furnished Flats for Rent in ${locationStr}`;
+    return {
+      h1,
+      title: `${h1} | Chennai Rents`,
+      description: `Move-in ready fully furnished flats for rent in ${locationStr}. Equipped with AC, fridge, washing machine, and beds. Verified direct owner listings.`
+    };
+  }
+
+  if (intent === 'flats-for-rent-under-20000') {
+    const h1 = `Flats for Rent Under ₹20,000 in ${locationStr}`;
+    return {
+      h1,
+      title: `${h1} | Chennai Rents`,
+      description: `Budget-friendly flats and houses for rent under ₹20,000 in ${locationStr}. Verified rental agreements, zero brokerage, transparent tenant reports.`
+    };
+  }
+
+  // Locality root hub page default: exactly ONE canonical H1 format
+  if (locality && !bhk && !propertyType && !furnishing && !budgetMax) {
+    const h1 = `Rent in ${localityName}, Chennai — Rates, Deposits & Locality Guide`;
+    return {
+      h1,
+      title: `Rent in ${localityName}, Chennai — Rates, Deposits & Locality Guide`,
+      description: `Find flats & houses for rent in ${localityName}, Chennai. Verified 1, 2, 3 BHK rents, Palar/Metro water reports, train & metro commute, and deposit guide. Direct owner listings.`,
+    };
+  }
+
   const bhkStr = bhk ? `${BHK_LABELS[bhk] || bhk} ` : '';
   const propStr = propertyType === 'pg' ? 'PG' : 'Flats';
   const furnStr = furnishing ? `${FURNISHING_LABELS[furnishing] || ''} ` : '';
   const budgetStr = budgetMax ? ` Under ${BUDGET_LABELS[budgetMax] || `₹${budgetMax}`}` : '';
-  const locationStr = locality ? `${localityName}, ${city}` : city;
   const h1 = `${bhkStr}${furnStr}${propStr} for Rent in ${locationStr}${budgetStr}`;
+
   return {
     h1,
     title: `${h1} | Chennai Rents`,
@@ -498,22 +695,24 @@ export function getIndexingDirective(pageType, listingCount) {
 
 // ─── Redirect Map (old URLs → new) ──────────────────────────────────────────
 export const LEGACY_REDIRECTS = {
-  '/rent-in-velachery': '/chennai/velachery',
-  '/rent-in-adyar': '/chennai/adyar',
-  '/rent-in-valasaravakkam': '/chennai/valasaravakkam',
-  '/rent-in-omr': '/chennai/perungudi',
-  '/rent-in-porur': '/chennai/porur',
-  '/rent-in-sholinganallur': '/chennai/sholinganallur',
-  '/rent-in-taramani': '/chennai/taramani',
-  '/advance-deposit-chennai': '/guide/advance-deposit-chennai',
-  '/tenant-rules-chennai': '/guide/tenant-rules-chennai',
+  '/rent-in-velachery': '/chennai/velachery/',
+  '/rent-in-adyar': '/chennai/adyar/',
+  '/rent-in-valasaravakkam': '/chennai/valasaravakkam/',
+  '/rent-in-tambaram': '/chennai/tambaram/',
+  '/rent-in-chromepet': '/chennai/chromepet/',
+  '/rent-in-omr': '/chennai/perungudi/',
+  '/rent-in-porur': '/chennai/porur/',
+  '/rent-in-sholinganallur': '/chennai/sholinganallur/',
+  '/rent-in-taramani': '/chennai/taramani/',
+  '/advance-deposit-chennai': '/guide/advance-deposit-chennai/',
+  '/tenant-rules-chennai': '/guide/tenant-rules-chennai/',
 };
 
 // ─── City Hub Config ─────────────────────────────────────────────────────────
 export const CITY_HUB = {
   city: 'Chennai',
   slug: 'chennai',
-  topLocalities: ['velachery','sholinganallur','adyar','valasaravakkam','taramani','perungudi','t-nagar','porur','thoraipakkam','medavakkam'],
+  topLocalities: ['tambaram', 'chromepet', 'valasaravakkam', 'velachery', 'sholinganallur', 'adyar', 'taramani', 'perungudi', 't-nagar', 'porur', 'thoraipakkam', 'medavakkam'],
   bhkHubs: [
     { bhk: '1', label: '1 BHK Flats for Rent in Chennai', slug: '1-bhk-for-rent' },
     { bhk: '2', label: '2 BHK Flats for Rent in Chennai', slug: '2-bhk-for-rent' },
