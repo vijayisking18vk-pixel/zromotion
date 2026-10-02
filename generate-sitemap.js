@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Import locality data, posts, and rental content data
-import { LOCALITIES } from './src/data/localities.js';
+import { LOCALITIES, shouldIndexPage, parseIntent } from './src/data/localities.js';
 import { POSTS } from './src/data/posts.js';
 import { SUPPORTING_RENTAL_PAGES } from './src/data/rentalGuideData.js';
 
@@ -35,6 +35,13 @@ function getTodayDate() {
  * Builds an XML urlset block without deprecated priority/changefreq tags
  */
 function buildUrlsetXml(urls, lastmod) {
+  if (!urls.length) {
+    return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Dynamic facets are added as listings meet index threshold: https://chennairents.in/ -->
+</urlset>
+`;
+  }
   const urlEntries = urls
     .map(
       (url) => `  <url>
@@ -102,11 +109,16 @@ function generateSitemaps() {
     localityUrls.push(`${DOMAIN}/flats-for-rent-in-${loc.slug}-chennai`);
   });
 
-  // 3. Programmatic facet pages (/chennai/:locality/:facet)
+  // 3. Programmatic facet pages (/chennai/:locality/:facet) - ONLY indexable URLs (>= threshold)
   const facetUrls = [];
   LOCALITIES.forEach((loc) => {
     LOCALITY_FACETS.forEach((facet) => {
-      facetUrls.push(`${DOMAIN}/chennai/${loc.slug}/${facet}`);
+      const parsed = parseIntent(facet);
+      const pageType = parsed.key || 'locality';
+      const count = loc.listingCount?.[pageType] ?? loc.listingCount?.total ?? 0;
+      if (shouldIndexPage(pageType, count)) {
+        facetUrls.push(`${DOMAIN}/chennai/${loc.slug}/${facet}`);
+      }
     });
   });
 
@@ -141,7 +153,7 @@ function generateSitemaps() {
   const childSitemaps = [
     `${DOMAIN}/sitemap-pages.xml`,
     `${DOMAIN}/sitemap-localities.xml`,
-    `${DOMAIN}/sitemap-facets.xml`,
+    ...(facetUrls.length > 0 ? [`${DOMAIN}/sitemap-facets.xml`] : []),
     `${DOMAIN}/sitemap-guides.xml`,
   ];
   fs.writeFileSync(
@@ -150,7 +162,7 @@ function generateSitemaps() {
     'utf8'
   );
 
-  // 6. Write Full Aggregate Sitemap (sitemap.xml) for 100% backward compatibility
+  // 6. Write Full Aggregate Sitemap (sitemap.xml) with ONLY 100% indexable URLs
   const allUrls = [...pageUrls, ...localityUrls, ...facetUrls, ...guideUrls];
   fs.writeFileSync(
     path.join(publicDir, 'sitemap.xml'),
