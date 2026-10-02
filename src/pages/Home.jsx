@@ -28,7 +28,7 @@ export default function Home() {
     >
       <SEOHead
         title="Chennai Rents: The Locality-First Rental & Home Guide for Chennai"
-        description="Real rent rates, water reality, flood history, crowdsourced map, and verified direct owner listings in Chennai. Neighborhood by neighborhood, zero brokerage."
+        description="Real rent rates, water reality, flood history, crowdsourced map, and verified direct owner listings in Chennai. Neighborhood by neighborhood."
       />
 
       {/* ── HERO SECTION ── */}
@@ -204,7 +204,7 @@ export default function Home() {
                       border: '1px solid rgba(0,0,0,0.1)',
                     }}
                   >
-                    Zero Brokerage
+                    Direct Owner
                   </span>
                 </div>
 

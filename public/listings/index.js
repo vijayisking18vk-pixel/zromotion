@@ -748,7 +748,7 @@ async function openPinDetail(pin) {
                 }
                 const submitBtn = document.querySelector("#express-interest-form button[type='submit']");
                 if (submitBtn) {
-                    submitBtn.innerText = isSale ? "Send Buyer Inquiry (0% Brokerage)" : "Express Interest (Free)";
+                    submitBtn.innerText = isSale ? "Send Buyer Inquiry" : "Express Interest (Free)";
                     submitBtn.style.background = isSale ? "#8B263E" : "";
                 }
 
@@ -1334,7 +1334,7 @@ if (ownerSellForm) {
                 html: `
                     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FDFBF7; color: #1E1B18; border: 1.5px solid #E8DFC8; border-radius: 12px;">
                         <h2 style="color: #8B263E; margin-top: 0;">Chennai Real Estate — For Sale Listing Published</h2>
-                        <p>Your ${bhk} BHK ${propType} (₹${formatInLakhsCrores(price)}) has been pinned on the Chennai map with 0% brokerage.</p>
+                        <p>Your ${bhk} BHK ${propType} (₹${formatInLakhsCrores(price)}) has been pinned on the Chennai map.</p>
                         <p style="font-size: 14px; color: #4A433B;">Interested buyers will contact you directly via phone or WhatsApp at ${phone}.</p>
                     </div>
                 `,
@@ -1342,7 +1342,7 @@ if (ownerSellForm) {
             })
         }).catch(e => console.warn('Email dispatch notice:', e));
 
-        alert("Property listed for Sale successfully! Your pin is now live on the Chennai Map with 0% brokerage.");
+        alert("Property listed for Sale successfully! Your pin is now live on the Chennai Map.");
         closeModal("owner-sell-modal");
         ownerSellForm.reset();
         await loadPins();
@@ -1426,7 +1426,7 @@ document.getElementById("owner-whole-form").addEventListener("submit", async (e)
                     html: `
                         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FDFBF7; color: #1E1B18; border: 1.5px solid #E8DFC8; border-radius: 12px;">
                             <h2 style="color: #2F7D4F; margin-top: 0;">Chennai Rents — Property Listed</h2>
-                            <p>Your ${payloadPin.p_bhk} BHK flat (₹${Number(payloadPin.p_rent).toLocaleString('en-IN')}/mo) has been pinned on the Chennai Rents map with 0% brokerage.</p>
+                            <p>Your ${payloadPin.p_bhk} BHK flat (₹${Number(payloadPin.p_rent).toLocaleString('en-IN')}/mo) has been pinned on the Chennai Rents map.</p>
                             <p style="font-size: 14px; color: #4A433B;">Seekers matching within 2.5km will receive alerts and contact you directly via phone or WhatsApp.</p>
                         </div>
                     `,
@@ -1519,7 +1519,7 @@ document.getElementById("owner-room-form").addEventListener("submit", async (e) 
                     html: `
                         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FDFBF7; color: #1E1B18; border: 1.5px solid #E8DFC8; border-radius: 12px;">
                             <h2 style="color: #2F7D4F; margin-top: 0;">Chennai Rents — Room Listed</h2>
-                            <p>Your room/flatmate listing (₹${Number(rent).toLocaleString('en-IN')}/mo) is now published on the Chennai Rents map with 0% brokerage.</p>
+                            <p>Your room/flatmate listing (₹${Number(rent).toLocaleString('en-IN')}/mo) is now published on the Chennai Rents map.</p>
                             <p style="font-size: 14px; color: #4A433B;">Flat-seekers will reach out directly via phone or WhatsApp.</p>
                         </div>
                     `,
@@ -1664,7 +1664,7 @@ async function submitSeekerPin(email, phone) {
                                 <p style="margin: 4px 0;"><strong>Purchase Budget:</strong> ₹${formatInLakhsCrores(budget)}</p>
                                 <p style="margin: 4px 0;"><strong>Preferred Size:</strong> ${bhk} BHK</p>
                             </div>
-                            <p style="font-size: 14px; color: #4A433B;">You will receive instant alerts when direct property owners post matching listings nearby with 0% brokerage.</p>
+                            <p style="font-size: 14px; color: #4A433B;">You will receive instant alerts when direct property owners post matching listings nearby.</p>
                         </div>
                     `,
                     type: 'buyer_alert'

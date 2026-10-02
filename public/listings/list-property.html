@@ -396,7 +396,7 @@
                     <input type="text" id="fs-remarks" class="form-input" placeholder="e.g. CMDA approved, 500m to OMR IT corridor, North-facing">
                 </div>
 
-                <button type="submit" class="btn-submit-form btn-sell-action" id="btn-submit-sell">Publish Sale Listing (0% Brokerage)</button>
+                <button type="submit" class="btn-submit-form btn-sell-action" id="btn-submit-sell">Publish Sale Listing</button>
             </form>
 
             <!-- Form: Room / Flatmate (Hidden by default) -->
@@ -741,29 +741,29 @@
                                 html: `
                                     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FDFBF7; color: #1E1B18; border: 1.5px solid #E8DFC8; border-radius: 12px;">
                                         <h2 style="color: #8B263E; margin-top: 0;">Chennai Real Estate — Property For Sale Live</h2>
-                                        <p>Your property is now listed on the Chennai map for sale with 0% brokerage.</p>
+                                        <p>Your property is now listed on the Chennai map for sale.</p>
                                         <div style="background: #FFFFFF; border: 1px solid #E8DFC8; border-radius: 8px; padding: 16px; margin: 16px 0;">
                                             <p style="margin: 4px 0;"><strong>Location:</strong> ${loc}</p>
                                             <p style="margin: 4px 0;"><strong>Property:</strong> ${bhk} BHK ${propType.toUpperCase()}</p>
                                             <p style="margin: 4px 0;"><strong>Sale Price:</strong> ₹${formatInLakhsCrores(price)}</p>
                                             <p style="margin: 4px 0;"><strong>Super Built-up:</strong> ${sqft} sq.ft</p>
-                                        </div>
-                                        <p style="font-size: 14px; color: #4A433B;">Interested buyers will reach out to you directly via phone or WhatsApp at ${phone}.</p>
-                                    </div>
-                                `,
-                                type: 'owner_sale'
-                            })
-                        }).catch(e => console.warn('Email dispatch notice:', e));
-                    }
+                                         </div>
+                                         <p style="font-size: 14px; color: #4A433B;">Interested buyers will reach out to you directly via phone or WhatsApp at ${phone}.</p>
+                                     </div>
+                                 `,
+                                 type: 'owner_sale'
+                             })
+                         }).catch(e => console.warn('Email dispatch notice:', e));
+                     }
 
-                    alert('Property listed for sale successfully! Your listing is live on the Chennai Map with 0% brokerage.');
+                    alert('Property listed for sale successfully! Your listing is live on the Chennai Map.');
                     window.location.href = 'index.html';
                 } catch (err) {
                     alert('Property listed! Redirecting to map...');
                     window.location.href = 'index.html';
                 } finally {
                     btn.disabled = false;
-                    btn.innerText = 'Publish Sale Listing (0% Brokerage)';
+                    btn.innerText = 'Publish Sale Listing';
                 }
             });
         }
@@ -844,7 +844,7 @@
                             html: `
                                 <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FDFBF7; color: #1E1B18; border: 1.5px solid #E8DFC8; border-radius: 12px;">
                                     <h2 style="color: #2F7D4F; margin-top: 0;">Chennai Rents — Room Listing Live</h2>
-                                    <p>Your flatmate listing is now published on the Chennai Rents map with 0% brokerage.</p>
+                                    <p>Your flatmate listing is now published on the Chennai Rents map.</p>
                                     <div style="background: #FFFFFF; border: 1px solid #E8DFC8; border-radius: 8px; padding: 16px; margin: 16px 0;">
                                         <p style="margin: 4px 0;"><strong>Location:</strong> ${loc}</p>
                                         <p style="margin: 4px 0;"><strong>Monthly Rent:</strong> ₹${Number(rent).toLocaleString('en-IN')}</p>

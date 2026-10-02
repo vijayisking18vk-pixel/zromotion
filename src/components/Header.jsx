@@ -133,7 +133,7 @@ export default function Header() {
                 whiteSpace: 'nowrap',
               }}
             >
-              நம்ம ஊரு வாடகை • 0% Brokerage
+              நம்ம ஊரு வாடகை
             </span>
           </div>
         </Link>

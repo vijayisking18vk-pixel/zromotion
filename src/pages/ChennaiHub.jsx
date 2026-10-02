@@ -153,7 +153,7 @@ export default function ChennaiHub() {
     <>
       <SEOHead
         title="Flats & Houses for Rent in Chennai | Chennai Rents"
-        description="Find flats, houses, and PG for rent in Chennai. Explore locality-by-locality rent guides, real rent rates, water reports, and flood history. No brokerage."
+        description="Find flats, houses, and PG for rent in Chennai. Explore locality-by-locality rent guides, real rent rates, water reports, and flood history. Verified direct listings."
         robots="index, follow"
         canonical="https://chennairents.in/chennai/rentals"
       />
@@ -186,7 +186,7 @@ export default function ChennaiHub() {
                 Real rent rates. Honest water reports. Flood history. Locality by locality.
               </p>
               <p style={{ fontSize: '1rem', color: 'var(--c-ink-muted)', maxWidth: '520px' }}>
-                Chennai Rents covers {LOCALITIES.length}+ localities with genuine ground-truth data on rent ranges, Metro Water supply, flood risk, and commute times — no brokerage, no fake listings.
+                Chennai Rents covers {LOCALITIES.length}+ localities with genuine ground-truth data on rent ranges, Metro Water supply, flood risk, and commute times — transparent and verified listings.
               </p>
             </motion.div>
 
