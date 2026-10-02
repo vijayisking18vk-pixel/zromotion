@@ -11,7 +11,7 @@ export default function Header() {
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
-    const shouldBeScrolled = latest > 30;
+    const shouldBeScrolled = latest > 20;
     if (shouldBeScrolled !== isScrolled) {
       setIsScrolled(shouldBeScrolled);
     }
@@ -19,15 +19,16 @@ export default function Header() {
 
   const navLinkStyle = ({ isActive }) => ({
     fontFamily: 'var(--font-heading)',
-    fontSize: '0.92rem',
+    fontSize: '0.9rem',
     fontWeight: 700,
     color: isActive ? 'var(--c-ripon-red)' : 'var(--c-ink-muted)',
     textDecoration: 'none',
     padding: '0.4rem 0.65rem',
-    borderRadius: '6px',
+    borderRadius: '8px',
     display: 'inline-flex',
     alignItems: 'center',
     gap: '6px',
+    whiteSpace: 'nowrap',
     transition: 'color 0.15s ease, background-color 0.15s ease',
   });
 
@@ -50,64 +51,96 @@ export default function Header() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          paddingBlock: '0.65rem',
-          minHeight: '68px',
+          paddingBlock: '0.7rem',
+          minHeight: '70px',
+          gap: '1rem',
         }}
       >
-        {/* Logo & Brand Line */}
+        {/* Official Brand Logo & Identity */}
         <Link
           to="/"
-          style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.9rem' }}
-          aria-label="நம்ம ஊரு Rents — Chennai Rents home"
+          style={{
+            textDecoration: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.85rem',
+            flexShrink: 0,
+          }}
+          aria-label="Chennai Rents home"
         >
           <img
             src="/chennai-rents-icon-transparent.png"
-            alt="Chennai Rents Logo"
+            alt="Chennai Rents"
             style={{
               height: '42px',
               width: 'auto',
               objectFit: 'contain',
               display: 'block',
+              flexShrink: 0,
             }}
           />
           <div
             style={{
               display: 'flex',
               flexDirection: 'column',
-              borderLeft: '2px solid var(--c-border)',
+              justifyContent: 'center',
+              borderLeft: '1.5px solid var(--c-border)',
               paddingLeft: '0.85rem',
+              lineHeight: 1.15,
             }}
           >
-            <span
+            <div
               style={{
-                fontFamily: 'var(--font-heading)',
-                fontWeight: 900,
-                fontSize: '0.95rem',
-                color: 'var(--c-ink)',
-                lineHeight: 1.15,
-                letterSpacing: '-0.01em',
+                display: 'flex',
+                alignItems: 'baseline',
+                gap: '0.28rem',
               }}
             >
-              நம்ம ஊரு
-            </span>
+              <span
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontWeight: 800,
+                  fontSize: '1.25rem',
+                  color: 'var(--c-ink)',
+                  letterSpacing: '-0.025em',
+                  lineHeight: 1.1,
+                }}
+              >
+                Chennai
+              </span>
+              <span
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontWeight: 900,
+                  fontSize: '1.25rem',
+                  color: 'var(--c-auto-yellow-dk)',
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1.1,
+                }}
+              >
+                Rents
+              </span>
+            </div>
             <span
               style={{
-                fontFamily: 'var(--font-heading)',
-                fontWeight: 900,
-                fontSize: '1.18rem',
-                color: 'var(--c-auto-yellow-dk)',
-                lineHeight: 1,
-                letterSpacing: '-0.02em',
+                fontFamily: 'var(--font-body)',
+                fontWeight: 600,
+                fontSize: '0.68rem',
+                color: 'var(--c-ink-muted)',
+                letterSpacing: '0.04em',
+                lineHeight: 1.2,
+                marginTop: '2px',
+                whiteSpace: 'nowrap',
               }}
             >
-              Rents
+              நம்ம ஊரு வாடகை • 0% Brokerage
             </span>
           </div>
         </Link>
 
         {/* Desktop Navigation */}
         <nav
-          style={{ display: 'none', alignItems: 'center', gap: '0.85rem' }}
+          style={{ display: 'none', alignItems: 'center', gap: '0.65rem', flexShrink: 0 }}
           className="cr-desktop-nav"
         >
           <a
@@ -133,15 +166,15 @@ export default function Header() {
           </a>
 
           <NavLink to="/#localities" style={navLinkStyle}>
-            Localities
+            <span>Localities</span>
           </NavLink>
 
           <NavLink to="/#guides" style={navLinkStyle}>
-            Guides
+            <span>Guides</span>
           </NavLink>
 
           <NavLink to="/about" style={navLinkStyle}>
-            About
+            <span>About</span>
           </NavLink>
 
           {/* List Property CTA Button */}
@@ -153,6 +186,10 @@ export default function Header() {
               fontSize: '0.85rem',
               minHeight: '38px',
               borderRadius: '8px',
+              whiteSpace: 'nowrap',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
             }}
           >
             <Plus size={15} strokeWidth={2.5} />
@@ -170,6 +207,10 @@ export default function Header() {
               fontSize: '0.85rem',
               minHeight: '38px',
               borderRadius: '8px',
+              whiteSpace: 'nowrap',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
             }}
             whileHover={prefersReduced ? {} : { y: -1 }}
             whileTap={prefersReduced ? {} : { y: 0 }}
@@ -192,6 +233,7 @@ export default function Header() {
               fontSize: '0.82rem',
               minHeight: '36px',
               borderRadius: '6px',
+              whiteSpace: 'nowrap',
             }}
           >
             <Plus size={14} />
@@ -386,9 +428,13 @@ export default function Header() {
       </AnimatePresence>
 
       <style>{`
-        @media (min-width: 840px) {
+        @media (min-width: 992px) {
           .cr-desktop-nav { display: flex !important; }
           .cr-mobile-controls { display: none !important; }
+        }
+        @media (max-width: 991px) {
+          .cr-desktop-nav { display: none !important; }
+          .cr-mobile-controls { display: flex !important; }
         }
       `}</style>
     </header>

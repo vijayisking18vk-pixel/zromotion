@@ -72,27 +72,41 @@ export default function Footer() {
                 />
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid rgba(255,255,255,0.2)', paddingLeft: '0.85rem' }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', lineHeight: 1.1 }}>
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '1.15rem',
+                      fontWeight: 800,
+                      color: '#FDFBF7',
+                      letterSpacing: '-0.02em',
+                    }}
+                  >
+                    Chennai
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '1.15rem',
+                      fontWeight: 900,
+                      color: 'var(--c-auto-yellow)',
+                      letterSpacing: '-0.02em',
+                    }}
+                  >
+                    Rents
+                  </span>
+                </div>
                 <span
                   style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: '0.85rem',
-                    fontWeight: 900,
-                    color: '#FDFBF7',
-                    lineHeight: 1.2
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '0.72rem',
+                    fontWeight: 600,
+                    color: 'rgba(253,251,247,0.7)',
+                    letterSpacing: '0.04em',
+                    marginTop: '2px',
                   }}
                 >
-                  நம்ம ஊரு
-                </span>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontSize: '1rem',
-                    fontWeight: 900,
-                    color: 'var(--c-auto-yellow)',
-                    lineHeight: 1
-                  }}
-                >
-                  Rents
+                  நம்ம ஊரு வாடகை
                 </span>
               </div>
             </div>
