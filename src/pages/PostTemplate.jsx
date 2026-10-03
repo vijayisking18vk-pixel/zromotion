@@ -229,7 +229,7 @@ export default function PostTemplate() {
                   </h2>
                   
                   <div className="box-water">
-                    <h3 style={{ color: 'var(--c-marina-blue-dk)', fontSize: '1.1rem' }}>💧 Summer Water Reality ({post.waterReality.score}/10)</h3>
+                    <h3 style={{ color: 'var(--c-marina-blue-dk)', fontSize: '1.1rem' }}> Summer Water Reality ({post.waterReality.score}/10)</h3>
                     <p style={{ color: 'var(--c-ink)', marginBottom: 0, marginTop: '0.5rem' }}>{post.waterReality.detail}</p>
                   </div>
                   
@@ -378,7 +378,7 @@ export default function PostTemplate() {
                   const areaPost = LOCALITY_POSTS.find(p => p.slug === area.slug);
                   return (
                     <Link key={i} to={`/rent/${area.slug}`} className="rail-link">
-                      {area.name} {areaPost?.waterReality?.score && <span style={{ color: 'var(--c-marina-blue)', fontSize: '0.75rem', fontWeight: 500, marginLeft: '0.4rem' }}>💧 {areaPost.waterReality.score}/10</span>}
+                      {area.name} {areaPost?.waterReality?.score && <span style={{ color: 'var(--c-marina-blue)', fontSize: '0.75rem', fontWeight: 500, marginLeft: '0.4rem' }}>Water: {areaPost.waterReality.score}/10</span>}
                     </Link>
                   );
                 })}
@@ -439,7 +439,7 @@ export default function PostTemplate() {
                 fontSize: '0.92rem',
               }}
             >
-              📍 {area.name}
+               {area.name}
             </Link>
           ))}
           {post.relatedGuides?.map((guide, i) => (
@@ -461,7 +461,7 @@ export default function PostTemplate() {
                 fontSize: '0.92rem',
               }}
             >
-              📘 {guide.title}
+               {guide.title}
             </Link>
           ))}
         </div>

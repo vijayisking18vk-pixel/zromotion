@@ -346,7 +346,7 @@ export default function Home() {
                         </span>
                         {post.waterReality?.score && (
                           <span className="stamp-badge stamp-blue" style={{ fontSize: '0.65rem' }}>
-                            💧 {post.waterReality.score}/10
+                            Water: {post.waterReality.score}/10
                           </span>
                         )}
                       </div>

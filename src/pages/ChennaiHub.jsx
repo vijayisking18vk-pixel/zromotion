@@ -86,7 +86,7 @@ function LocalityCard({ locality, index, filterBhk, isPg }) {
             </span>
             {locality.waterReality?.score && (
               <span className="stamp-badge stamp-blue" style={{ fontSize: '0.65rem' }}>
-                💧 {locality.waterReality.score}/10
+                 {locality.waterReality.score}/10
               </span>
             )}
           </div>

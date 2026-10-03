@@ -84,7 +84,7 @@ function WaterScoreBadge({ score }) {
         borderRadius: '4px',
       }}
     >
-      💧 {score}/10
+       {score}/10
     </span>
   );
 }
@@ -617,7 +617,7 @@ export default function LocalityPage({ localitySlug: propSlug }) {
                           color: 'var(--c-ink)',
                         }}
                       >
-                        💼 {park}
+                         {park}
                       </span>
                     ))}
                   </div>
