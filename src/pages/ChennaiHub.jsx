@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { MapPin, ArrowRight, Building2, Train, ChevronDown, ChevronUp, CheckCircle, ShieldCheck } from 'lucide-react';
@@ -288,10 +288,10 @@ export default function ChennaiHub({ bhk, pg }) {
     : `Find flats, houses, and PG for rent in Chennai. Explore locality-by-locality rent guides, real rent rates, water reports, and flood history. Verified direct listings.`;
 
   const canonicalUrl = bhk
-    ? `https://www.chennairents.in/chennai/${bhk}-bhk-for-rent/`
+    ? `https://www.chennairents.in/chennai/${bhk}-bhk-for-rent`
     : isPg
-    ? `https://www.chennairents.in/chennai/pg/`
-    : `https://www.chennairents.in/chennai/rentals/`;
+    ? `https://www.chennairents.in/chennai/pg`
+    : `https://www.chennairents.in/chennai/rentals`;
 
   const intelKey = bhk || (isPg ? 'pg' : null);
   const intelligence = intelKey ? CATEGORY_INTELLIGENCE[intelKey] : null;

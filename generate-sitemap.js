@@ -88,28 +88,28 @@ function generateSitemaps() {
   // 1. Core pages, city hubs & listings map application
   const pageUrls = [
     `${DOMAIN}/`,
-    `${DOMAIN}/about/`,
-    `${DOMAIN}/methodology/`,
-    `${DOMAIN}/verification/`,
-    `${DOMAIN}/corrections/`,
-    `${DOMAIN}/contact/`,
-    `${DOMAIN}/privacy/`,
-    `${DOMAIN}/data-deletion/`,
-    `${DOMAIN}/listings/`,
-    `${DOMAIN}/chennai/rentals/`,
-    `${DOMAIN}/chennai/1-bhk-for-rent/`,
-    `${DOMAIN}/chennai/2-bhk-for-rent/`,
-    `${DOMAIN}/chennai/3-bhk-for-rent/`,
-    `${DOMAIN}/chennai/pg/`,
-    `${DOMAIN}/house-for-rent-in-chennai/`,
-    `${DOMAIN}/author/vijayrajkumar/`,
-    ...SUPPORTING_RENTAL_PAGES.map((p) => `${DOMAIN}/${p.slug}/`),
+    `${DOMAIN}/about`,
+    `${DOMAIN}/methodology`,
+    `${DOMAIN}/verification`,
+    `${DOMAIN}/corrections`,
+    `${DOMAIN}/contact`,
+    `${DOMAIN}/privacy`,
+    `${DOMAIN}/data-deletion`,
+    `${DOMAIN}/listings`,
+    `${DOMAIN}/chennai/rentals`,
+    `${DOMAIN}/chennai/1-bhk-for-rent`,
+    `${DOMAIN}/chennai/2-bhk-for-rent`,
+    `${DOMAIN}/chennai/3-bhk-for-rent`,
+    `${DOMAIN}/chennai/pg`,
+    `${DOMAIN}/house-for-rent-in-chennai`,
+    `${DOMAIN}/author/vijayrajkumar`,
+    ...SUPPORTING_RENTAL_PAGES.map((p) => `${DOMAIN}/${p.slug}`),
   ];
 
-  // 2. Locality hub pages (Canonical URL: /chennai/:locality/)
+  // 2. Locality hub pages (Canonical URL: /chennai/:locality)
   const localityUrls = [];
   LOCALITIES.forEach((loc) => {
-    localityUrls.push(`${DOMAIN}/chennai/${loc.slug}/`);
+    localityUrls.push(`${DOMAIN}/chennai/${loc.slug}`);
   });
 
   // 3. Programmatic facet pages (/chennai/:locality/:facet) - ONLY indexable URLs (>= threshold)
@@ -120,15 +120,20 @@ function generateSitemaps() {
       const pageType = parsed.key || 'locality';
       const count = loc.listingCount?.[pageType] ?? loc.listingCount?.total ?? 0;
       if (shouldIndexPage(pageType, count)) {
-        facetUrls.push(`${DOMAIN}/chennai/${loc.slug}/${facet}/`);
+        facetUrls.push(`${DOMAIN}/chennai/${loc.slug}/${facet}`);
       }
     });
   });
 
-  // 4. Authentic editorial guide posts (/guides/:slug/)
-  const guideUrls = POSTS.filter((post) => post.type === 'guide').map(
-    (post) => `${DOMAIN}/guides/${post.slug}/`
-  );
+  // 4. Authentic editorial guide posts (/guides/:slug) and data stories (/stories/:slug)
+  const guideUrls = [
+    ...POSTS.filter((post) => post.type === 'guide').map(
+      (post) => `${DOMAIN}/guides/${post.slug}`
+    ),
+    ...POSTS.filter((post) => post.type === 'story').map(
+      (post) => `${DOMAIN}/stories/${post.slug}`
+    ),
+  ];
 
   // Write individual child sitemaps
   fs.writeFileSync(

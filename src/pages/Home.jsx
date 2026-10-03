@@ -29,6 +29,7 @@ export default function Home() {
       <SEOHead
         title="Chennai Rents: The Locality-First Rental & Home Guide for Chennai"
         description="Real rent rates, water reality, flood history, crowdsourced map, and verified direct owner listings in Chennai. Neighborhood by neighborhood."
+        canonical="https://www.chennairents.in/"
       />
 
       {/* ── HERO SECTION ── */}

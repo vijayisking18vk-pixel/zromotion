@@ -74,12 +74,12 @@ export default function HouseRentChennaiHub({ customSlug }) {
   const title = isSupporting ? supportingPage.title : CHENNAI_RENT_HUB_DATA.title;
   const h1 = isSupporting ? supportingPage.h1 : CHENNAI_RENT_HUB_DATA.h1;
   const description = isSupporting ? supportingPage.description : CHENNAI_RENT_HUB_DATA.metaDescription;
-  const canonicalUrl = `https://www.chennairents.in/${activeSlug}/`;
+  const canonicalUrl = `https://www.chennairents.in/${activeSlug}`;
 
   // Structured data (BreadcrumbList + Article + FAQPage)
   const breadcrumbList = [
     { name: 'Home', url: 'https://www.chennairents.in/' },
-    { name: 'Chennai Rentals', url: 'https://www.chennairents.in/chennai/rentals/' },
+    { name: 'Chennai Rentals', url: 'https://www.chennairents.in/chennai/rentals' },
     { name: h1, url: canonicalUrl },
   ];
 
@@ -504,7 +504,7 @@ export default function HouseRentChennaiHub({ customSlug }) {
             <div className="rail-card">
               <h4>Rental Legal Guides</h4>
               {GUIDE_POSTS.map((g) => (
-                <Link key={g.slug} to={`/guide/${g.slug}`} className="rail-link">
+                <Link key={g.slug} to={`/guides/${g.slug}`} className="rail-link">
                   {g.title.split(':')[0]}
                 </Link>
               ))}

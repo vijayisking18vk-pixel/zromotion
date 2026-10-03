@@ -5,7 +5,7 @@ import SEOHead from '../components/SEOHead';
 import { CheckCircle2, History, Send, Mail } from 'lucide-react';
 
 export default function Corrections() {
-  const canonicalUrl = 'https://www.chennairents.in/corrections/';
+  const canonicalUrl = 'https://www.chennairents.in/corrections';
 
   return (
     <main style={{ paddingBottom: '4rem' }}>

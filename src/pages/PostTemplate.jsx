@@ -90,7 +90,13 @@ export default function PostTemplate() {
   }
 
   const isLocality = post.type === 'locality';
+  const isStory = post.type === 'story';
   const mainTitle = post.title.split(',')[0];
+  const canonicalUrl = isStory
+    ? `https://www.chennairents.in/stories/${slug}`
+    : isLocality
+    ? `https://www.chennairents.in/chennai/${slug.replace('rent-in-', '')}`
+    : `https://www.chennairents.in/guides/${slug}`;
 
   return (
     <motion.article 
@@ -99,15 +105,15 @@ export default function PostTemplate() {
       exit={{ opacity: 0 }}
     >
       <SEOHead 
-        title={`${post.title} | ${isLocality ? 'Rent' : 'Guide'} | Chennai Rents`}
+        title={`${post.title} | ${isStory ? 'Data Story' : isLocality ? 'Rent' : 'Guide'} | Chennai Rents`}
         description={post.summary}
         type="article"
-        canonical={`https://www.chennairents.in/guides/${slug}/`}
+        canonical={canonicalUrl}
         faqs={post.faqs || []}
         breadcrumbs={[
           { name: 'Home', url: 'https://www.chennairents.in/' },
-          { name: 'Guides', url: 'https://www.chennairents.in/#guides' },
-          { name: post.title, url: `https://www.chennairents.in/guides/${slug}/` }
+          { name: isStory ? 'Data Stories' : isLocality ? 'Localities' : 'Guides', url: isStory ? 'https://www.chennairents.in/listings' : isLocality ? 'https://www.chennairents.in/chennai/rentals' : 'https://www.chennairents.in/#guides' },
+          { name: post.title, url: canonicalUrl }
         ]}
       />
 
@@ -121,7 +127,7 @@ export default function PostTemplate() {
           >
             <div className="seo-breadcrumbs">
               <Link to="/">Home</Link> / 
-              <span style={{ color: 'var(--c-ink)' }}>{isLocality ? 'Localities' : 'Guides'}</span> / 
+              <span style={{ color: 'var(--c-ink)' }}>{isStory ? 'Data Stories' : isLocality ? 'Localities' : 'Guides'}</span> / 
               <span style={{ color: 'var(--c-ink)', fontWeight: 600 }}>{mainTitle}</span>
             </div>
             
@@ -364,6 +370,11 @@ export default function PostTemplate() {
             </AnimatedSection>
           )}
 
+          {/* ── EDITORIAL & LEGAL DISCLAIMER ── */}
+          <div style={{ marginTop: '2.5rem', padding: '1.25rem', backgroundColor: '#FAF7F2', borderRadius: '8px', borderLeft: '4px solid var(--c-auto-yellow)', fontSize: '0.85rem', color: 'var(--c-ink-muted)', lineHeight: 1.6 }}>
+            <strong>Editorial & Consumer Advisory:</strong> Rental benchmarks, water observations, and tenancy norms published on Chennai Rents are compiled for transparency from local contributors and public records. They do not constitute formal legal counsel. For specific lease disputes or contract registration, refer to the Tamil Nadu Regulation of Rights and Responsibilities of Landlords and Tenants Act (TNRRRL Act) or consult a qualified legal advocate.
+          </div>
+
         </main>
 
         {/* ── DESKTOP SIDE RAIL ── */}
@@ -377,7 +388,7 @@ export default function PostTemplate() {
                 {post.nearbyAreas.map((area, i) => {
                   const areaPost = LOCALITY_POSTS.find(p => p.slug === area.slug);
                   return (
-                    <Link key={i} to={`/rent/${area.slug}`} className="rail-link">
+                    <Link key={i} to={`/chennai/${area.slug.replace('rent-in-', '')}`} className="rail-link">
                       {area.name} {areaPost?.waterReality?.score && <span style={{ color: 'var(--c-marina-blue)', fontSize: '0.75rem', fontWeight: 500, marginLeft: '0.4rem' }}>Water: {areaPost.waterReality.score}/10</span>}
                     </Link>
                   );
@@ -391,7 +402,7 @@ export default function PostTemplate() {
               <h4>Related Guides</h4>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 {post.relatedGuides.map((guide, i) => (
-                  <Link key={i} to={`/guide/${guide.slug}`} className="rail-link">
+                  <Link key={i} to={`/guides/${guide.slug}`} className="rail-link">
                     {guide.title}
                   </Link>
                 ))}
@@ -404,7 +415,7 @@ export default function PostTemplate() {
             <h4 style={{ borderColor: 'var(--c-auto-yellow-dk)', color: 'var(--c-ink)' }}>Must Read</h4>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {GUIDE_POSTS.slice(0, 3).map((guide, i) => (
-                <Link key={i} to={`/guide/${guide.slug}`} className="rail-link" style={{ borderColor: 'var(--c-border)' }}>
+                <Link key={i} to={`/guides/${guide.slug}`} className="rail-link" style={{ borderColor: 'var(--c-border)' }}>
                   {guide.title}
                 </Link>
               ))}

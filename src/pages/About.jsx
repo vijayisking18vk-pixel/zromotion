@@ -14,11 +14,11 @@ export default function About() {
       <SEOHead
         title="About Chennai Rents: Why We Built an Honest Rental Guide"
         description="Learn why Chennai Rents was founded: to replace spammy listing portals with honest locality rental intelligence and Instagram Reels in Chennai."
-        canonicalUrl="https://chennairents.in/about"
+        canonicalUrl="https://www.chennairents.in/about"
         type="article"
         breadcrumbs={[
-          { name: 'Home', url: 'https://chennairents.in/' },
-          { name: 'About', url: 'https://chennairents.in/about' }
+          { name: 'Home', url: 'https://www.chennairents.in/' },
+          { name: 'About', url: 'https://www.chennairents.in/about' }
         ]}
       />
 

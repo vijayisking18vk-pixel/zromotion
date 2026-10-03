@@ -33,12 +33,12 @@ export default function AuthorPage() {
       <SEOHead
         title={`${AUTHOR_INFO.name}: Founder & Lead Editor | Chennai Rents`}
         description={`Author profile of ${AUTHOR_INFO.name}, Founder and Lead Editorial Reviewer of Chennai Rents. Learn about our crowdsourced methodology and rental transparency standards.`}
-        canonicalUrl={`https://chennairents.in/author/${AUTHOR_INFO.slug}`}
+        canonicalUrl={`https://www.chennairents.in/author/${AUTHOR_INFO.slug}`}
         type="article"
         breadcrumbs={[
-          { name: 'Home', url: 'https://chennairents.in/' },
-          { name: 'Editorial Team', url: 'https://chennairents.in/about' },
-          { name: AUTHOR_INFO.name, url: `https://chennairents.in/author/${AUTHOR_INFO.slug}` },
+          { name: 'Home', url: 'https://www.chennairents.in/' },
+          { name: 'Editorial Team', url: 'https://www.chennairents.in/about' },
+          { name: AUTHOR_INFO.name, url: `https://www.chennairents.in/author/${AUTHOR_INFO.slug}` },
         ]}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(authorSchema) }} />

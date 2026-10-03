@@ -108,14 +108,14 @@ async function runPrerender() {
     path: '/about',
     title: 'About Chennai Rents: Why We Built an Honest Rental Guide',
     description: 'Learn why Chennai Rents was founded: to replace spammy listing portals with honest locality rental intelligence and verified listings in Chennai.',
-    canonical: `${DOMAIN}/about/`,
+    canonical: `${DOMAIN}/about`,
     robots: 'index, follow',
     schema: [
       {
         '@context': 'https://schema.org',
         '@type': 'AboutPage',
         name: 'About Chennai Rents',
-        url: `${DOMAIN}/about/`,
+        url: `${DOMAIN}/about`,
         description: 'Why Chennai Rents was founded to create rental transparency for Chennai.',
       },
     ],
@@ -126,14 +126,14 @@ async function runPrerender() {
     path: '/methodology',
     title: 'Research Methodology & Data Verification | Chennai Rents',
     description: 'How Chennai Rents collects empirical rental rates, evaluates ground-level water resilience, and verifies direct owner listings in Chennai.',
-    canonical: `${DOMAIN}/methodology/`,
+    canonical: `${DOMAIN}/methodology`,
     robots: 'index, follow',
     schema: [
       {
         '@context': 'https://schema.org',
         '@type': 'AboutPage',
         name: 'Chennai Rents Research Methodology',
-        url: `${DOMAIN}/methodology/`,
+        url: `${DOMAIN}/methodology`,
         description: 'Empirical data collection, ground-truth water scoring, and flood elevation modeling methodology.',
       },
     ],
@@ -143,14 +143,14 @@ async function runPrerender() {
     path: '/verification',
     title: 'Listing Verification Policy & Anti-Fraud Standards | Chennai Rents',
     description: 'Chennai Rents 4-step verification framework: owner property tax and EB bill matching, zero fake listings, and reporting mechanisms.',
-    canonical: `${DOMAIN}/verification/`,
+    canonical: `${DOMAIN}/verification`,
     robots: 'index, follow',
     schema: [
       {
         '@context': 'https://schema.org',
         '@type': 'AboutPage',
         name: 'Chennai Rents Listing Verification Framework',
-        url: `${DOMAIN}/verification/`,
+        url: `${DOMAIN}/verification`,
         description: 'Comprehensive 4-step physical and digital verification framework for direct owner listings.',
       },
     ],
@@ -160,14 +160,14 @@ async function runPrerender() {
     path: '/corrections',
     title: 'Editorial Corrections & Fact-Checking Policy | Chennai Rents',
     description: 'Chennai Rents policy for editorial corrections, empirical data updates, and 48-hour revision turnarounds.',
-    canonical: `${DOMAIN}/corrections/`,
+    canonical: `${DOMAIN}/corrections`,
     robots: 'index, follow',
     schema: [
       {
         '@context': 'https://schema.org',
         '@type': 'AboutPage',
         name: 'Chennai Rents Corrections and Fact-Checking Policy',
-        url: `${DOMAIN}/corrections/`,
+        url: `${DOMAIN}/corrections`,
         description: 'Public protocol for data corrections, community reporting, and editorial transparency.',
       },
     ],
@@ -177,14 +177,14 @@ async function runPrerender() {
     path: '/contact',
     title: 'Contact Editorial & Trust Desk | Chennai Rents',
     description: 'Reach the Chennai Rents editorial desk, submit locality research corrections, or report listing fraud directly.',
-    canonical: `${DOMAIN}/contact/`,
+    canonical: `${DOMAIN}/contact`,
     robots: 'index, follow',
     schema: [
       {
         '@context': 'https://schema.org',
         '@type': 'ContactPage',
         name: 'Contact Chennai Rents Editorial Desk',
-        url: `${DOMAIN}/contact/`,
+        url: `${DOMAIN}/contact`,
         description: 'Direct communication channels for editorial inquiries, data corrections, and listing support.',
       },
     ],
@@ -194,14 +194,14 @@ async function runPrerender() {
     path: '/privacy',
     title: 'Privacy Policy | Chennai Rents',
     description: 'Privacy policy and data governance practices of Chennai Rents under the Digital Personal Data Protection Act 2023.',
-    canonical: `${DOMAIN}/privacy/`,
+    canonical: `${DOMAIN}/privacy`,
     robots: 'index, follow',
     schema: [
       {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
         name: 'Privacy Policy',
-        url: `${DOMAIN}/privacy/`,
+        url: `${DOMAIN}/privacy`,
       },
     ],
   });
@@ -210,14 +210,14 @@ async function runPrerender() {
     path: '/data-deletion',
     title: 'Data Deletion & Listing Removal Request | Chennai Rents',
     description: 'Submit a request to delete your personal data or remove a verified property listing from Chennai Rents.',
-    canonical: `${DOMAIN}/data-deletion/`,
+    canonical: `${DOMAIN}/data-deletion`,
     robots: 'index, follow',
     schema: [
       {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
         name: 'Data Deletion Request',
-        url: `${DOMAIN}/data-deletion/`,
+        url: `${DOMAIN}/data-deletion`,
       },
     ],
   });
@@ -226,7 +226,7 @@ async function runPrerender() {
     path: '/chennai/rentals',
     title: 'Flats & Houses for Rent in Chennai | Chennai Rents',
     description: 'Find flats, houses, and PG for rent in Chennai. Explore locality-by-locality rent guides, real rent rates, water reports, and flood history. Verified direct listings.',
-    canonical: `${DOMAIN}/chennai/rentals/`,
+    canonical: `${DOMAIN}/chennai/rentals`,
     robots: 'index, follow',
     schema: [
       {
@@ -234,7 +234,7 @@ async function runPrerender() {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Chennai Rents', item: `${DOMAIN}/` },
-          { '@type': 'ListItem', position: 2, name: 'Flats for Rent in Chennai', item: `${DOMAIN}/chennai/rentals/` },
+          { '@type': 'ListItem', position: 2, name: 'Flats for Rent in Chennai', item: `${DOMAIN}/chennai/rentals` },
         ],
       },
     ],
@@ -244,7 +244,7 @@ async function runPrerender() {
     path: '/chennai/1-bhk-for-rent',
     title: '1 BHK Flats for Rent in Chennai | Chennai Rents',
     description: 'Browse 1 BHK flats and apartments for rent in Chennai. Honest rent rates across all localities, water supply ratings, and direct owner listings.',
-    canonical: `${DOMAIN}/chennai/1-bhk-for-rent/`,
+    canonical: `${DOMAIN}/chennai/1-bhk-for-rent`,
     robots: 'index, follow',
     schema: [
       {
@@ -252,7 +252,7 @@ async function runPrerender() {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Chennai Rents', item: `${DOMAIN}/` },
-          { '@type': 'ListItem', position: 2, name: '1 BHK in Chennai', item: `${DOMAIN}/chennai/1-bhk-for-rent/` },
+          { '@type': 'ListItem', position: 2, name: '1 BHK in Chennai', item: `${DOMAIN}/chennai/1-bhk-for-rent` },
         ],
       },
     ],
@@ -262,7 +262,7 @@ async function runPrerender() {
     path: '/chennai/2-bhk-for-rent',
     title: '2 BHK Flats for Rent in Chennai | Chennai Rents',
     description: 'Browse 2 BHK flats and apartments for rent in Chennai. Honest rent rates across all localities, water supply ratings, and direct owner listings.',
-    canonical: `${DOMAIN}/chennai/2-bhk-for-rent/`,
+    canonical: `${DOMAIN}/chennai/2-bhk-for-rent`,
     robots: 'index, follow',
     schema: [
       {
@@ -270,7 +270,7 @@ async function runPrerender() {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Chennai Rents', item: `${DOMAIN}/` },
-          { '@type': 'ListItem', position: 2, name: '2 BHK in Chennai', item: `${DOMAIN}/chennai/2-bhk-for-rent/` },
+          { '@type': 'ListItem', position: 2, name: '2 BHK in Chennai', item: `${DOMAIN}/chennai/2-bhk-for-rent` },
         ],
       },
     ],
@@ -280,7 +280,7 @@ async function runPrerender() {
     path: '/chennai/3-bhk-for-rent',
     title: '3 BHK Flats for Rent in Chennai | Chennai Rents',
     description: 'Browse 3 BHK flats and apartments for rent in Chennai. Honest rent rates across all localities, water supply ratings, and direct owner listings.',
-    canonical: `${DOMAIN}/chennai/3-bhk-for-rent/`,
+    canonical: `${DOMAIN}/chennai/3-bhk-for-rent`,
     robots: 'index, follow',
     schema: [
       {
@@ -288,7 +288,7 @@ async function runPrerender() {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Chennai Rents', item: `${DOMAIN}/` },
-          { '@type': 'ListItem', position: 2, name: '3 BHK in Chennai', item: `${DOMAIN}/chennai/3-bhk-for-rent/` },
+          { '@type': 'ListItem', position: 2, name: '3 BHK in Chennai', item: `${DOMAIN}/chennai/3-bhk-for-rent` },
         ],
       },
     ],
@@ -298,7 +298,7 @@ async function runPrerender() {
     path: '/chennai/pg',
     title: 'PG & Hostel for Rent in Chennai | Chennai Rents',
     description: 'Find PG accommodations and paying guest rooms in Chennai. Locality-by-locality rent ranges, food, amenities, and connectivity.',
-    canonical: `${DOMAIN}/chennai/pg/`,
+    canonical: `${DOMAIN}/chennai/pg`,
     robots: 'index, follow',
     schema: [
       {
@@ -306,7 +306,7 @@ async function runPrerender() {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Chennai Rents', item: `${DOMAIN}/` },
-          { '@type': 'ListItem', position: 2, name: 'PG in Chennai', item: `${DOMAIN}/chennai/pg/` },
+          { '@type': 'ListItem', position: 2, name: 'PG in Chennai', item: `${DOMAIN}/chennai/pg` },
         ],
       },
     ],
@@ -316,7 +316,7 @@ async function runPrerender() {
     path: '/house-for-rent-in-chennai',
     title: CHENNAI_RENT_HUB_DATA.title,
     description: CHENNAI_RENT_HUB_DATA.metaDescription,
-    canonical: `${DOMAIN}/house-for-rent-in-chennai/`,
+    canonical: `${DOMAIN}/house-for-rent-in-chennai`,
     robots: 'index, follow',
     schema: [
       {
@@ -343,8 +343,8 @@ async function runPrerender() {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
-          { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals/` },
-          { '@type': 'ListItem', position: 3, name: CHENNAI_RENT_HUB_DATA.h1, item: `${DOMAIN}/house-for-rent-in-chennai/` },
+          { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
+          { '@type': 'ListItem', position: 3, name: CHENNAI_RENT_HUB_DATA.h1, item: `${DOMAIN}/house-for-rent-in-chennai` },
         ],
       },
       {
@@ -365,7 +365,7 @@ async function runPrerender() {
       path: `/${sp.slug}`,
       title: sp.title,
       description: sp.description,
-      canonical: `${DOMAIN}/${sp.slug}/`,
+      canonical: `${DOMAIN}/${sp.slug}`,
       robots: 'index, follow',
       schema: [
         {
@@ -384,8 +384,8 @@ async function runPrerender() {
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
-            { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/house-for-rent-in-chennai/` },
-            { '@type': 'ListItem', position: 3, name: sp.h1, item: `${DOMAIN}/${sp.slug}/` },
+            { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/house-for-rent-in-chennai` },
+            { '@type': 'ListItem', position: 3, name: sp.h1, item: `${DOMAIN}/${sp.slug}` },
           ],
         },
       ],
@@ -397,7 +397,7 @@ async function runPrerender() {
     path: '/author/vijayrajkumar',
     title: `${AUTHOR_INFO.name}: Founder & Lead Editor | Chennai Rents`,
     description: `Author profile of ${AUTHOR_INFO.name}, Founder and Lead Editorial Reviewer of Chennai Rents.`,
-    canonical: `${DOMAIN}/author/vijayrajkumar/`,
+    canonical: `${DOMAIN}/author/vijayrajkumar`,
     robots: 'index, follow',
     schema: [
       {
@@ -414,11 +414,11 @@ async function runPrerender() {
   // 2. Locality hub pages (/chennai/:locality and /flats-for-rent-in-:locality-chennai)
   LOCALITIES.forEach((locality) => {
     const meta = generateSEOMeta({ locality });
-    const canonical = `${DOMAIN}/chennai/${locality.slug}/`;
+    const canonical = `${DOMAIN}/chennai/${locality.slug}`;
 
     const breadcrumbs = [
       { '@type': 'ListItem', position: 1, name: 'Chennai Rents', item: `${DOMAIN}/` },
-      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals/` },
+      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
       { '@type': 'ListItem', position: 3, name: meta.h1, item: canonical },
     ];
 
@@ -452,7 +452,7 @@ async function runPrerender() {
       schema: schemas,
     });
 
-    // Legacy pattern: /flats-for-rent-in-:locality-chennai (prerendered with canonical pointing to /chennai/:locality/)
+    // Legacy pattern: /flats-for-rent-in-:locality-chennai (prerendered with canonical pointing to /chennai/:locality)
     routes.push({
       path: `/flats-for-rent-in-${locality.slug}-chennai`,
       title: meta.title,
@@ -469,11 +469,11 @@ async function runPrerender() {
       const pageType = parsed.key || 'locality';
       const count = locality.listingCount?.[pageType] ?? locality.listingCount?.total ?? 0;
       const indexDirective = getIndexingDirective(pageType, count);
-      const facetCanonical = `${DOMAIN}/chennai/${locality.slug}/${facet}/`;
+      const facetCanonical = `${DOMAIN}/chennai/${locality.slug}/${facet}`;
 
       const facetBreadcrumbs = [
         { '@type': 'ListItem', position: 1, name: 'Chennai Rents', item: `${DOMAIN}/` },
-        { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals/` },
+        { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
         { '@type': 'ListItem', position: 3, name: locality.name, item: canonical },
         { '@type': 'ListItem', position: 4, name: facetMeta.h1, item: facetCanonical },
       ];
@@ -497,7 +497,7 @@ async function runPrerender() {
 
   // 4. Guide posts (/guides/:slug and /guide/:slug)
   POSTS.filter((p) => p.type === 'guide').forEach((post) => {
-    const canonical = `${DOMAIN}/guides/${post.slug}/`;
+    const canonical = `${DOMAIN}/guides/${post.slug}`;
     const postDesc = post.description || post.summary || post.tagline;
     const schemas = [
       {
@@ -560,12 +560,68 @@ async function runPrerender() {
     });
   });
 
-  // 5. 404 page
+  // 5. Data stories (/stories/:slug)
+  POSTS.filter((p) => p.type === 'story').forEach((story) => {
+    const canonical = `${DOMAIN}/stories/${story.slug}`;
+    const storyDesc = story.description || story.summary || story.tagline;
+    const schemas = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: story.title,
+        description: storyDesc,
+        publisher: {
+          '@type': 'Organization',
+          name: 'Chennai Rents',
+          url: DOMAIN,
+          logo: `${DOMAIN}/chennai-rents-official-logo.jpg`,
+        },
+        author: {
+          '@type': 'Organization',
+          name: 'Chennai Rents Editorial Team',
+        },
+        datePublished: '2026-06-01',
+        dateModified: '2026-10-01',
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+          { '@type': 'ListItem', position: 2, name: 'Stories', item: `${DOMAIN}/listings` },
+          { '@type': 'ListItem', position: 3, name: story.title, item: canonical },
+        ],
+      },
+    ];
+
+    if (story.faqs?.length) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: story.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      });
+    }
+
+    routes.push({
+      path: `/stories/${story.slug}`,
+      title: `${story.title} | Chennai Rents`,
+      description: storyDesc,
+      canonical,
+      robots: 'index, follow',
+      schema: schemas,
+    });
+  });
+
+  // 6. 404 page
   routes.push({
     path: '/404',
     title: '404: Page Not Found | Chennai Rents',
     description: 'The requested page could not be found.',
-    canonical: `${DOMAIN}/404/`,
+    canonical: `${DOMAIN}/404`,
     robots: 'noindex, nofollow',
     schema: [],
   });

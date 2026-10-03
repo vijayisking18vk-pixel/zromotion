@@ -5,7 +5,7 @@ import SEOHead from '../components/SEOHead';
 import { Shield, Lock, Eye, Trash2 } from 'lucide-react';
 
 export default function Privacy() {
-  const canonicalUrl = 'https://www.chennairents.in/privacy/';
+  const canonicalUrl = 'https://www.chennairents.in/privacy';
 
   return (
     <main style={{ paddingBottom: '4rem' }}>
@@ -85,7 +85,7 @@ export default function Privacy() {
               Under Indian DPDP Act provisions, you have the absolute right to withdraw consent and request immediate deletion of your phone number, name, and property listing from our servers at any time.
             </p>
             <p>
-              To execute your right to erasure, visit our dedicated <Link to="/data-deletion/" style={{ color: 'var(--c-ripon-red)', fontWeight: 600 }}>Data Deletion Request Page</Link> or email <a href="mailto:privacy@chennairents.in" style={{ color: 'var(--c-ripon-red)' }}>privacy@chennairents.in</a>. All requests are processed within 24 to 48 hours.
+              To execute your right to erasure, visit our dedicated <Link to="/data-deletion" style={{ color: 'var(--c-ripon-red)', fontWeight: 600 }}>Data Deletion Request Page</Link> or email <a href="mailto:privacy@chennairents.in" style={{ color: 'var(--c-ripon-red)' }}>privacy@chennairents.in</a>. All requests are processed within 24 to 48 hours.
             </p>
           </section>
 

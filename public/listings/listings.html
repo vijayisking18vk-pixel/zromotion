@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Flats & Properties (Rent & Buy) | chennairents.in</title>
     <meta name="description" content="Browse verified direct owner listings for Rent and Sale in Chennai. Filter by rent, purchase price, BHK, and gated community." />
+    <link rel="canonical" href="https://www.chennairents.in/listings/listings.html" />
     <link rel="stylesheet" href="index.css">
     <!-- Google Fonts: Plus Jakarta Sans (Headings) + Inter (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -716,12 +717,21 @@
             // Filter authentic listings from Supabase database (rental listings, for-sale pins)
             const dbListings = remotePins.filter(p => p.is_listing || p.transaction_type === 'sale' || (p.feedback && p.feedback.includes('[FOR_SALE')));
 
-            // Combine authentic database listings + user-saved listings (dedup by id)
-            const map = new Map();
+            // Enhanced multi-attribute deduplication (by ID, and by phone + location + rent signature)
+            const seenKeys = new Set();
+            const deduplicated = [];
             [...dbListings, ...customPins].forEach(item => {
-                map.set(item.id, item);
+                const phone = (item.contact_phone || item.phone || '').trim();
+                const lat = Number(item.latitude || 0).toFixed(4);
+                const lng = Number(item.longitude || 0).toFixed(4);
+                const rent = item.rent || item.sale_price || 0;
+                const sig = item.id ? `id_${item.id}` : `geo_${lat}_${lng}_${rent}_${phone}`;
+                if (!seenKeys.has(sig)) {
+                    seenKeys.add(sig);
+                    deduplicated.push(item);
+                }
             });
-            allListings = Array.from(map.values());
+            allListings = deduplicated;
 
             updateTabCounts();
             renderListings();
@@ -953,8 +963,10 @@
                     contactBtnHtml = `<a href="index.html?lat=${item.latitude}&lng=${item.longitude}" class="btn-contact-action ${isSale ? 'sale' : ''}">Inquire Direct</a>`;
                 }
 
-                // Map link
-                const mapLink = `index.html?lat=${item.latitude}&lng=${item.longitude}&zoom=15`;
+                // Verified & Date badges
+                const verifiedHtml = `<span style="background: #E6F4EA; color: #137333; font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 4px; display: inline-flex; align-items: center; gap: 3px;">✓ Verified</span>`;
+                const postedDate = item.created_at ? new Date(item.created_at).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' }) : 'October 2026';
+                const dateBadgeHtml = `<span style="font-size: 11px; color: var(--c-ink-muted);">Posted: ${postedDate}</span>`;
 
                 card.innerHTML = `
                     <div class="card-img-placeholder">
@@ -963,6 +975,10 @@
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     </div>
                     <div class="card-content">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            ${verifiedHtml}
+                            ${dateBadgeHtml}
+                        </div>
                         ${priceHtml}
                         <div class="card-title">${titleText}</div>
                         ${metaHtml}

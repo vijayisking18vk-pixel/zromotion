@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Chennai Rents — Rental Guide & Content Engine Data
  * Single source of truth for Chennai Rental Hub, Supporting Guides, and Editorial Attribution.
  */
@@ -24,7 +24,7 @@ export const CHENNAI_RENT_HUB_DATA = {
   targetKeyword: 'house for rents in Chennai',
   naturalKeywords: ['houses for rent in Chennai', 'house for rent in Chennai', 'rental homes in Chennai'],
   metaDescription: 'Find houses for rent in Chennai. Practical guide covering 1-3 BHK flats, independent houses, budgets from ₹5,000 to ₹30,000+, water checks, and no-broker owner listings.',
-  canonicalUrl: 'https://chennairents.in/house-for-rent-in-chennai',
+  canonicalUrl: 'https://www.chennairents.in/house-for-rent-in-chennai',
   lastReviewed: 'October 2026',
   editor: AUTHOR_INFO,
   directAnswer: 'Chennai offers rental homes across diverse budgets and preferences, ranging from compact 1 BHK portions and modern 2 BHK apartments to independent houses, PGs, and co-living spaces. Monthly rents typically range from ₹7,000 for suburban portions to ₹45,000+ for premium city apartments. Start by choosing your preferred locality and commute corridor, verify summer water arrangements, and connect directly with property owners.',
@@ -184,6 +184,15 @@ export const SUPPORTING_RENTAL_PAGES = [
     description: 'Find 2 BHK apartments and independent houses for rent in Chennai. Neighborhood price comparisons, parking norms, and verified direct owner listings.',
     priceRange: '₹16,000 – ₹32,000 / month',
     recommendedLocalities: ['velachery', 'adyar', 'valasaravakkam', 'porur', 'sholinganallur', 'perungudi'],
+  },
+  {
+    slug: '3-bhk-house-for-rent-in-chennai',
+    title: '3 BHK Houses for Rent in Chennai: Luxury, Gated & Family Flats | Chennai Rents',
+    h1: '3 BHK Houses for Rent in Chennai',
+    bhk: '3',
+    description: 'Find 3 BHK flats and spacious houses for rent in Chennai. Gated community amenities, parking spaces, and verified direct owner listings across top localities.',
+    priceRange: '₹30,000 – ₹70,000+ / month',
+    recommendedLocalities: ['adyar', 'anna-nagar', 't-nagar', 'sholinganallur', 'velachery'],
   },
   {
     slug: 'independent-house-for-rent-in-chennai',

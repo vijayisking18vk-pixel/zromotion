@@ -6,7 +6,7 @@ import { ShieldCheck, Droplets, AlertTriangle, Database, Calendar, Award } from 
 import { AUTHOR_INFO } from '../data/rentalGuideData';
 
 export default function Methodology() {
-  const canonicalUrl = 'https://www.chennairents.in/methodology/';
+  const canonicalUrl = 'https://www.chennairents.in/methodology';
 
   return (
     <main style={{ paddingBottom: '4rem' }}>
@@ -37,7 +37,7 @@ export default function Methodology() {
             Every rent range, water rating, and flood advisory on Chennai Rents is grounded in empirical local surveys, tenant feedback, and municipal benchmarks.
           </p>
           <div style={{ marginTop: '1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1.25rem', fontSize: '0.88rem', color: 'var(--c-ink-muted)' }}>
-            <span>Lead Researcher: <a href="/author/vijayrajkumar/" style={{ color: 'var(--c-ripon-red)', fontWeight: 600, textDecoration: 'none' }}>{AUTHOR_INFO.name}</a></span>
+            <span>Lead Researcher: <Link to="/author/vijayrajkumar" style={{ color: 'var(--c-ripon-red)', fontWeight: 600, textDecoration: 'none' }}>{AUTHOR_INFO.name}</Link></span>
             <span>•</span>
             <span>Last Updated: October 2026</span>
           </div>
@@ -124,7 +124,7 @@ export default function Methodology() {
               All locality profiles, rental ranges, and transit maps are audited on a quarterly basis. When new infrastructure opens, such as Chennai Metro Phase 2 corridors or new stormwater drain channels, neighbourhood guides are immediately updated.
             </p>
             <p>
-              To suggest a correction or submit recent rent transaction data for your street, visit our <Link to="/corrections/" style={{ color: 'var(--c-ripon-red)', fontWeight: 600 }}>Corrections & Editorial Policy</Link> page or email <a href="mailto:editor@chennairents.in" style={{ color: 'var(--c-ripon-red)' }}>editor@chennairents.in</a>.
+              To suggest a correction or submit recent rent transaction data for your street, visit our <Link to="/corrections" style={{ color: 'var(--c-ripon-red)', fontWeight: 600 }}>Corrections & Editorial Policy</Link> page or email <a href="mailto:editor@chennairents.in" style={{ color: 'var(--c-ripon-red)' }}>editor@chennairents.in</a>.
             </p>
           </section>
 

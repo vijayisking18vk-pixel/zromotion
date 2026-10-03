@@ -182,13 +182,13 @@ export default function Footer() {
               }}
             >
               {[
-                { to: '/chennai/velachery/', label: 'Velachery (South IT)' },
-                { to: '/chennai/valasaravakkam/', label: 'Valasaravakkam (West)' },
-                { to: '/chennai/adyar/', label: 'Adyar (Coastal)' },
-                { to: '/chennai/sholinganallur/', label: 'Sholinganallur (OMR)' },
-                { to: '/chennai/porur/', label: 'Porur (DLF IT Park)' },
-                { to: '/chennai/anna-nagar/', label: 'Anna Nagar (North-Central)' },
-                { to: '/chennai/rentals/', label: 'Browse All Localities →' },
+                { to: '/chennai/velachery', label: 'Velachery (South IT)' },
+                { to: '/chennai/valasaravakkam', label: 'Valasaravakkam (West)' },
+                { to: '/chennai/adyar', label: 'Adyar (Coastal)' },
+                { to: '/chennai/sholinganallur', label: 'Sholinganallur (OMR)' },
+                { to: '/chennai/porur', label: 'Porur (DLF IT Park)' },
+                { to: '/chennai/anna-nagar', label: 'Anna Nagar (North-Central)' },
+                { to: '/chennai/rentals', label: 'Browse All Localities →' },
               ].map(({ to, label }) => (
                 <li key={to}>
                   <Link to={to} style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
@@ -224,52 +224,52 @@ export default function Footer() {
               }}
             >
               <li>
-                <Link to="/listings/" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
+                <Link to="/listings" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
                   → Chennai Rent Map & Live Listings
                 </Link>
               </li>
               <li>
-                <Link to="/guides/advance-deposit-chennai/" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
+                <Link to="/guides/advance-deposit-chennai" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
                   → Advance Deposit: 10 Months vs Reality
                 </Link>
               </li>
               <li>
-                <Link to="/guides/tenant-rules-chennai/" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
+                <Link to="/guides/tenant-rules-chennai" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
                   → Rental Agreements & Tenant Rights
                 </Link>
               </li>
               <li>
-                <Link to="/methodology/" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
+                <Link to="/methodology" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
                   → Research & Data Methodology
                 </Link>
               </li>
               <li>
-                <Link to="/verification/" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
+                <Link to="/verification" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
                   → Listing Verification Standards
                 </Link>
               </li>
               <li>
-                <Link to="/corrections/" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
+                <Link to="/corrections" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
                   → Corrections & Editorial Policy
                 </Link>
               </li>
               <li>
-                <Link to="/author/vijayrajkumar/" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
+                <Link to="/author/vijayrajkumar" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
                   → Editorial Team & Reviewer Bio
                 </Link>
               </li>
               <li>
-                <Link to="/about/" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
+                <Link to="/about" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
                   → About Chennai Rents
                 </Link>
               </li>
               <li>
-                <Link to="/contact/" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
+                <Link to="/contact" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
                   → Contact Us
                 </Link>
               </li>
               <li>
-                <Link to="/privacy/" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
+                <Link to="/privacy" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
                   → Privacy & Data Deletion
                 </Link>
               </li>

@@ -5,7 +5,7 @@ import SEOHead from '../components/SEOHead';
 import { ShieldCheck, UserCheck, FileCheck, PhoneCall, AlertOctagon, CheckCircle2 } from 'lucide-react';
 
 export default function Verification() {
-  const canonicalUrl = 'https://www.chennairents.in/verification/';
+  const canonicalUrl = 'https://www.chennairents.in/verification';
 
   return (
     <main style={{ paddingBottom: '4rem' }}>

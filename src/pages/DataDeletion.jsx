@@ -4,7 +4,7 @@ import SEOHead from '../components/SEOHead';
 import { Trash2, CheckCircle2, ShieldAlert, Mail } from 'lucide-react';
 
 export default function DataDeletion() {
-  const canonicalUrl = 'https://www.chennairents.in/data-deletion/';
+  const canonicalUrl = 'https://www.chennairents.in/data-deletion';
   const [submitted, setSubmitted] = useState(false);
   const [identifier, setIdentifier] = useState('');
   const [reason, setReason] = useState('Rented out');

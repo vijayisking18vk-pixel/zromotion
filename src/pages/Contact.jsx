@@ -4,7 +4,7 @@ import SEOHead from '../components/SEOHead';
 import { Mail, MapPin, Clock, MessageSquare, Shield } from 'lucide-react';
 
 export default function Contact() {
-  const canonicalUrl = 'https://www.chennairents.in/contact/';
+  const canonicalUrl = 'https://www.chennairents.in/contact';
 
   return (
     <main style={{ paddingBottom: '4rem' }}>

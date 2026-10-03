@@ -152,7 +152,7 @@ export default function Header() {
           className="cr-desktop-nav"
         >
           <Link
-            to="/listings/"
+            to="/listings"
             style={{
               ...navLinkStyle({ isActive: false }),
               color: 'var(--c-ink)',
@@ -163,7 +163,7 @@ export default function Header() {
           </Link>
 
           <Link
-            to="/listings/"
+            to="/listings"
             style={{
               ...navLinkStyle({ isActive: false }),
               color: 'var(--c-ink)',
@@ -315,7 +315,7 @@ export default function Header() {
             </a>
 
             <Link
-              to="/listings/"
+              to="/listings"
               style={{
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 700,
@@ -336,7 +336,7 @@ export default function Header() {
             </Link>
 
             <Link
-              to="/listings/"
+              to="/listings"
               style={{
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 700,

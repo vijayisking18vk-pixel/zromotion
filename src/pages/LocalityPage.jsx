@@ -324,7 +324,7 @@ function NearbyLocalities({ localities }) {
         {localities.map(({ slug, name, note }) => (
           <Link
             key={slug}
-            to={`/chennai/${slug}/`}
+            to={`/chennai/${slug}`}
             style={{ textDecoration: 'none' }}
           >
             <div
@@ -386,16 +386,16 @@ export default function LocalityPage({ localitySlug: propSlug }) {
   
   // Consistent canonical URL
   const canonicalUrl = intent
-    ? `https://www.chennairents.in/chennai/${locality.slug}/${intent}/`
-    : `https://www.chennairents.in/chennai/${locality.slug}/`;
+    ? `https://www.chennairents.in/chennai/${locality.slug}/${intent}`
+    : `https://www.chennairents.in/chennai/${locality.slug}`;
 
   // Sidebar: other popular localities
   const sidebarLocalities = LOCALITIES.filter((l) => l.slug !== locality.slug).slice(0, 8);
 
   const breadcrumbs = [
     { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.chennairents.in/' },
-    { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: 'https://www.chennairents.in/chennai/rentals/' },
-    { '@type': 'ListItem', position: 3, name: locality.name, item: `https://www.chennairents.in/chennai/${locality.slug}/` },
+    { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: 'https://www.chennairents.in/chennai/rentals' },
+    { '@type': 'ListItem', position: 3, name: locality.name, item: `https://www.chennairents.in/chennai/${locality.slug}` },
   ];
   if (intent) {
     breadcrumbs.push({
@@ -700,7 +700,7 @@ export default function LocalityPage({ localitySlug: propSlug }) {
               <div className="rail-card">
                 <h4>Rental Legal Guides</h4>
                 {GUIDE_POSTS.map((g) => (
-                  <Link key={g.slug} to={`/guide/${g.slug}`} className="rail-link">
+                  <Link key={g.slug} to={`/guides/${g.slug}`} className="rail-link">
                     {g.title.split(':')[0]}
                   </Link>
                 ))}
