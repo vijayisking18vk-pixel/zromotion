@@ -79,7 +79,9 @@ export default function Header() {
               objectFit: 'contain',
               display: 'block',
               flexShrink: 0,
+              background: 'transparent',
               mixBlendMode: 'multiply',
+              borderRadius: '4px',
             }}
           />
           <div

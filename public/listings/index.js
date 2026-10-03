@@ -1,4 +1,4 @@
-﻿// chennai.rent - Main Client JavaScript (Exactly like bengaluru.rent)
+// chennai.rent - Main Client JavaScript (Exactly like bengaluru.rent)
 
 // 1. Supabase client setup
 const { createClient } = supabase;
@@ -195,12 +195,15 @@ const METRO_LINES = {
 // 4. Initialize Application
 document.addEventListener("DOMContentLoaded", async () => {
     initDeviceId();
-    await fetchIpAndHash();
+    // Don't await IP hash — it's only needed for pin submission, not map render
+    fetchIpAndHash();
     initMap();
     initSearch();
     await loadPins();
     await loadStats();
     loadFaqs();
+    // Final size check after all async ops — ensures map fills container
+    if (map) map.invalidateSize();
     
     // Check if new user -> Show onboarding modal
     if (!localStorage.getItem('chennai_rent_onboarded')) {
@@ -247,11 +250,35 @@ function initMap() {
         attributionControl: true
     }).setView([13.0827, 80.2707], 12);
 
-    // OpenStreetMap Standard Bright Style
-    baseTileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    let tileErrorCount = 0;
+
+    // Primary: CartoDB Voyager — free, no API key, reliable CDN
+    baseTileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        subdomains: 'abcd',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    });
+
+    // Fallback: OpenStreetMap tiles if CartoDB is blocked
+    const osmFallback = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+    });
+
+    // If 3+ CartoDB tiles fail, switch to OSM fallback
+    baseTileLayer.on('tileerror', function() {
+        tileErrorCount++;
+        if (tileErrorCount === 3) {
+            map.removeLayer(baseTileLayer);
+            osmFallback.addTo(map);
+            baseTileLayer = osmFallback;
+        }
+    });
+
+    baseTileLayer.addTo(map);
+
+    // Force Leaflet to recalculate map size after DOM is fully painted
+    setTimeout(() => { map.invalidateSize(); }, 100);
 
     // Satellite Imagery Layer (Standard Esri Satellite tiles)
     satelliteTileLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {

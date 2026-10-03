@@ -35,6 +35,22 @@
     padding: 0;
 }
 
+/* Leaflet internal elements must NOT be affected by the global reset */
+.leaflet-container img,
+.leaflet-tile,
+.leaflet-zoom-animated,
+.leaflet-pane,
+.leaflet-pane > svg,
+.leaflet-pane > canvas,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+    margin: initial;
+    padding: initial;
+    max-width: none !important;
+    max-height: none !important;
+}
+
 h1, h2, h3, .logo {
     font-family: var(--font-heading);
     letter-spacing: -0.02em;
@@ -55,8 +71,9 @@ body {
     font-weight: 600;
 }
 
-/* Standalone pages (guides, stories, contact, privacy) scroll naturally */
+/* Ensure html is full height so dvh units work correctly across all browsers */
 html {
+    height: 100%;
     overflow-y: auto;
 }
 body {
