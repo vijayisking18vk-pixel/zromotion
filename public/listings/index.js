@@ -1,10 +1,23 @@
 // chennai.rent - Main Client JavaScript (Exactly like bengaluru.rent)
 
-// 1. Supabase client setup
-const { createClient } = supabase;
-const SUPABASE_URL = 'https://hnnkhmfrpwdrkkjbgckv.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhubmtobWZycHdkcmtramJnY2t2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4NDk1ODgsImV4cCI6MjA5NzQyNTU4OH0.oCXDCH1J80HLb8AfQA31Fdqi-vbVN2cMdCTZm-NWngc';
-const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// 1. Supabase client setup (Safely guarded against adblockers or storage blocks)
+let db = null;
+try {
+    const createClientFn = (typeof supabase !== 'undefined' && supabase && supabase.createClient) ? supabase.createClient : null;
+    if (createClientFn) {
+        const SUPABASE_URL = 'https://hnnkhmfrpwdrkkjbgckv.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhubmtobWZycHdkcmtramJnY2t2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4NDk1ODgsImV4cCI6MjA5NzQyNTU4OH0.oCXDCH1J80HLb8AfQA31Fdqi-vbVN2cMdCTZm-NWngc';
+        db = createClientFn(SUPABASE_URL, SUPABASE_ANON_KEY, {
+            auth: {
+                persistSession: false,
+                autoRefreshToken: false,
+                detectSessionInUrl: false
+            }
+        });
+    }
+} catch (supabaseInitErr) {
+    console.warn("Supabase client init notice (offline/fallback mode active):", supabaseInitErr);
+}
 
 // 2. Global State Variables
 let map;
@@ -250,29 +263,11 @@ function initMap() {
         attributionControl: true
     }).setView([13.0827, 80.2707], 12);
 
-    let tileErrorCount = 0;
-
-    // Primary: CartoDB Voyager — free, no API key, reliable CDN
-    baseTileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    // Primary: OpenStreetMap — reliable, no API key watermark, full Chennai street & landmark coverage
+    baseTileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        subdomains: 'abcd',
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-    });
-
-    // Fallback: OpenStreetMap tiles if CartoDB is blocked
-    const osmFallback = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
+        subdomains: ['a', 'b', 'c'],
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    });
-
-    // If 3+ CartoDB tiles fail, switch to OSM fallback
-    baseTileLayer.on('tileerror', function() {
-        tileErrorCount++;
-        if (tileErrorCount === 3) {
-            map.removeLayer(baseTileLayer);
-            osmFallback.addTo(map);
-            baseTileLayer = osmFallback;
-        }
     });
 
     baseTileLayer.addTo(map);
@@ -428,13 +423,15 @@ async function loadPins() {
 
         // Fetch non-flagged pins from Supabase view
         let remotePins = [];
-        try {
-            const { data: pins, error } = await db
-                .from('pins_public')
-                .select('*');
-            if (!error && pins) remotePins = pins;
-        } catch (dbErr) {
-            console.warn("Supabase fetch notice, using fallback datasets:", dbErr);
+        if (db) {
+            try {
+                const { data: pins, error } = await db
+                    .from('pins_public')
+                    .select('*');
+                if (!error && pins) remotePins = pins;
+            } catch (dbErr) {
+                console.warn("Supabase fetch notice, using fallback datasets:", dbErr);
+            }
         }
 
         // Parse any for-sale pins encoded in database feedback
@@ -597,30 +594,53 @@ function matchesFilters(pin) {
 
 // Load and render stats views
 async function loadStats() {
-    try {
-        const { data: cityStats, error } = await db
-            .from('city_stats')
-            .select('*')
-            .order('bhk', { ascending: true });
-
-        if (error) throw error;
-
-        const container = document.getElementById("stats-list-container");
-        container.innerHTML = '';
-
-        cityStats.forEach(row => {
-            const div = document.createElement("div");
-            div.className = "stats-row";
-            div.innerHTML = `
-                <span class="stats-row-label">${row.bhk} BHK City Average</span>
-                <span class="stats-row-value">₹${Math.round(row.avg_rent).toLocaleString('en-IN')} / month</span>
-            `;
-            container.appendChild(div);
-        });
-
-    } catch (e) {
-        console.error("Error loading stats views:", e);
+    let stats = [];
+    if (db) {
+        try {
+            const { data: cityStats, error } = await db
+                .from('city_stats')
+                .select('*')
+                .order('bhk', { ascending: true });
+            if (!error && Array.isArray(cityStats) && cityStats.length > 0) {
+                stats = cityStats;
+            }
+        } catch (e) {
+            // Silently fallback to aggregation from loaded pins
+        }
     }
+
+    // Fallback: Compute dynamic city averages from pinsData
+    if (stats.length === 0 && Array.isArray(pinsData) && pinsData.length > 0) {
+        const bhkGroups = {};
+        pinsData.forEach(p => {
+            const b = parseInt(p.bhk);
+            const rent = Number(p.rent);
+            if (b >= 1 && b <= 4 && rent > 3000 && rent < 500000 && (!p.transaction_type || p.transaction_type === 'rent')) {
+                if (!bhkGroups[b]) bhkGroups[b] = [];
+                bhkGroups[b].push(rent);
+            }
+        });
+        [1, 2, 3, 4].forEach(b => {
+            if (bhkGroups[b] && bhkGroups[b].length > 0) {
+                const avg = bhkGroups[b].reduce((sum, r) => sum + r, 0) / bhkGroups[b].length;
+                stats.push({ bhk: b, avg_rent: avg });
+            }
+        });
+    }
+
+    const container = document.getElementById("stats-list-container");
+    if (!container) return;
+    container.innerHTML = '';
+
+    stats.forEach(row => {
+        const div = document.createElement("div");
+        div.className = "stats-row";
+        div.innerHTML = `
+            <span class="stats-row-label">${row.bhk} BHK City Average</span>
+            <span class="stats-row-value">₹${Math.round(row.avg_rent).toLocaleString('en-IN')} / month</span>
+        `;
+        container.appendChild(div);
+    });
 }
 
 // 8. Pin Details, Ratings & Comments Actions
@@ -701,7 +721,7 @@ async function openPinDetail(pin) {
             let petsText = '--';
             if (pin.pets_allowed === 'yes') petsText = 'Allowed 🐕';
             else if (pin.pets_allowed === 'no') petsText = 'Not Allowed 🚫';
-            else if (pin.pets_allowed === 'not_sure') petsText = 'Not sure
+            else if (pin.pets_allowed === 'not_sure') petsText = 'Not sure';
             document.getElementById("detail-pets").innerText = petsText;
         } else {
             document.getElementById("detail-pets-row").style.display = 'none';
