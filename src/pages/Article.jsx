@@ -119,7 +119,7 @@ export default function Article() {
               <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-h2)', color: 'var(--cr-ink)', margin: '2rem 0 1rem', fontWeight: 400 }}>The Role of Architecture</h2>
               <p>
                 Modern living in Chennai is an exercise in balancing heritage with contemporary minimalism. We see a resurgence of 
-                traditional elements—courtyards, Athangudi tiles, and cross-ventilation—married seamlessly with high-end modern amenities. 
+                traditional elements (courtyards, Athangudi tiles, and cross-ventilation) married seamlessly with high-end modern amenities. 
                 When inspecting a luxury property, pay close attention to how natural light moves through the space. The best homes in Chennai 
                 are designed to remain cool, maximizing the sea breeze while providing a sanctuary from the city.
               </p>

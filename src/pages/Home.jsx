@@ -92,7 +92,7 @@ export default function Home() {
               Direct Connection Between Tenants & Property Owners
             </h2>
             <p style={{ color: 'var(--c-ink-muted)', fontSize: '1.05rem', maxWidth: '620px', margin: '0 auto', lineHeight: 1.6 }}>
-              Whether you are hunting for an honest rental or listing a vacant flat in Chennai — connect directly with complete transparency and zero middleman fees.
+              Whether you are hunting for an honest rental or listing a vacant flat in Chennai, connect directly with complete transparency and zero middleman fees.
             </p>
           </div>
 

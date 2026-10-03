@@ -75,7 +75,7 @@ export default function Contact() {
             <p style={{ fontSize: '0.95rem', color: 'var(--c-ink-muted)', lineHeight: 1.6, margin: 0 }}>
               Chennai Rents Editorial Team<br />
               Velachery / OMR Tech Corridor<br />
-              Chennai, Tamil Nadu — 600042
+              Chennai, Tamil Nadu 600042
             </p>
           </div>
 

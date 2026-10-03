@@ -38,7 +38,7 @@ export const ARTICLES = [
   {
     id: 2,
     tag: 'LIFESTYLE',
-    title: "ECR — Chennai's Most Desired Address",
+    title: "ECR: Chennai's Most Desired Address",
     excerpt: 'Private beaches, buzzing cafes, and serene greenery.',
     img: 'https://images.unsplash.com/photo-1542665952-14513db15293?w=800&q=80&auto=format&fit=crop',
     col: 'span 4',
@@ -57,7 +57,7 @@ export const ARTICLES = [
     id: 4,
     tag: 'INTERIORS',
     title: 'Furnishing a Rental: The Minimalist Way',
-    excerpt: 'Natural textures, warm light, and negative space — elevating a blank canvas.',
+    excerpt: 'Natural textures, warm light, and negative space, elevating a blank canvas.',
     img: 'https://images.unsplash.com/photo-1618220179428-22790b46a0eb?w=1200&q=80&auto=format&fit=crop',
     col: 'span 6',
     aspect: '16/9'

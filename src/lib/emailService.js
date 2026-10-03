@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Client Email Dispatch Helper for Chennai Rents
  * Communicates with /api/send-email (powered by Resend)
  */
@@ -34,7 +34,7 @@ export async function sendSeekerAlertConfirmation({ email, area, budget, minBhk 
   const html = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FDFBF7; color: #1E1B18; border: 1.5px solid #E8DFC8; border-radius: 12px;">
       <div style="border-bottom: 3px solid #F5B800; padding-bottom: 12px; margin-bottom: 20px;">
-        <h2 style="margin: 0; color: #B23A2E; font-size: 22px;">Chennai Rents — Alert Activated</h2>
+        <h2 style="margin: 0; color: #B23A2E; font-size: 22px;">Chennai Rents: Alert Activated</h2>
       </div>
       <p style="font-size: 16px; line-height: 1.6;">Hello,</p>
       <p style="font-size: 15px; line-height: 1.6;">Your anonymous rent seeker alert has been recorded on the Chennai Crowdsourced Map.</p>
@@ -61,7 +61,7 @@ export async function sendOwnerListingConfirmation({ email, area, bhk, rent, dep
   const html = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FDFBF7; color: #1E1B18; border: 1.5px solid #E8DFC8; border-radius: 12px;">
       <div style="border-bottom: 3px solid #2F7D4F; padding-bottom: 12px; margin-bottom: 20px;">
-        <h2 style="margin: 0; color: #2F7D4F; font-size: 22px;">Chennai Rents — Property Live</h2>
+        <h2 style="margin: 0; color: #2F7D4F; font-size: 22px;">Chennai Rents: Property Live</h2>
       </div>
       <p style="font-size: 16px; line-height: 1.6;">Hello,</p>
       <p style="font-size: 15px; line-height: 1.6;">Your property listing is now visible to thousands of active flat-hunters on the Chennai Rents interactive map and listings directory.</p>

@@ -1,4 +1,4 @@
-const fs = require('fs');
+﻿const fs = require('fs');
 const path = require('path');
 
 const LOCALITIES = {
@@ -663,7 +663,7 @@ for (const [key, info] of Object.entries(LOCALITIES)) {
         },
         {
           "@type": "RealEstateAgent",
-          "name": "chennairents.in — ${info.name} Rent Index",
+          "name": "chennairents.in - ${info.name} Rent Index",
           "description": "${info.meta_desc}",
           "url": "https://www.chennairents.in/neighbourhood/${key}.html",
           "address": {

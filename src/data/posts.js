@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Chennai Rents : Locality and Rental Guide Content Data
  *
  * Grounded in authentic Chennai neighborhood realities:
@@ -444,7 +444,7 @@ Local Chennai Tip:
         content: `Never use generic headlines like "Nice 2 BHK flat for rent". Use this high-intent formula:
 [BHK] + [Property Type] + [Locality / Micro-Avenue] + [Top Feature] + [Rent & Deposit]
 
-Example: "Semi-Furnished 2 BHK in Dhandeeswaram, Velachery — 24/7 Metro Water, Covered Car Park, 5 Mins to MRTS. ₹22,000/mo."
+Example: "Semi-Furnished 2 BHK in Dhandeeswaram, Velachery, 24/7 Metro Water, Covered Car Park, 5 Mins to MRTS. ₹22,000/mo."
 This headline pre-qualifies tenants before they even dial your number.`
       },
       {
@@ -752,7 +752,7 @@ Landlord B earns ₹30,000 MORE in year one while avoiding carrying maintenance 
     readTime: '8 min read',
     updatedDate: 'October 2026',
     coverImage: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1200&q=80',
-    summary: 'Chennai is not a single rental market — it is an archipelago of distinctive residential micro-climates. Choosing the wrong locality can mean two hours in traffic on GST Road or paying ₹2,000 monthly for private water tankers. Here is where you should live based on your life stage.',
+    summary: 'Chennai is not a single rental market: it is an archipelago of distinctive residential micro-climates. Choosing the wrong locality can mean two hours in traffic on GST Road or paying ₹2,000 monthly for private water tankers. Here is where you should live based on your life stage.',
     guideSections: [
       {
         heading: '1. For IT & Tech Professionals (Tidel Park, OMR, Guindy, DLF Porur)',

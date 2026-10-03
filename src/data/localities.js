@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Chennai Rents — Locality Data & SEO Engine
  * Single source of truth for all geo-SEO pages.
  *
@@ -41,7 +41,7 @@ export const LOCALITIES = [
     ],
     waterReality: { score: 7, status: 'Decent Metro Water in central pockets', detail: 'Dhandeeswaram Nagar and Gandhi Salai have dependable Metro Water. Low-lying interior roads face salty groundwater in summer.' },
     floodCheck: { risk: 'high-caution', detail: 'Avoid ground floors in Baby Nagar, AGS Colony, Ram Nagar South. Safer: Dhandeeswaram Nagar, elevated Bypass Road sectors.' },
-    commute: { metro: 'Velachery MRTS (Beach–Chengalpattu line). Phase 2 extension upcoming.', bus: 'Vijayanagar Bus Terminus — direct to OMR, T. Nagar, Central, Tambaram.', road: '5-min drive to Taramani Tidel Park via Taramani Link Road.' },
+    commute: { metro: 'Velachery MRTS (Beach–Chengalpattu line). Phase 2 extension upcoming.', bus: 'Vijayanagar Bus Terminus, direct to OMR, T. Nagar, Central, Tambaram.', road: '5-min drive to Taramani Tidel Park via Taramani Link Road.' },
     nearbyItParks: ['Tidel Park', 'Ascendas ITPK', 'Ramanujan IT City', 'SP Infocity'],
     listingCount: { total: 0, '1bhk': 0, '2bhk': 0, '3bhk': 0, pg: 0, furnished: 0 },
     nearbyLocalities: [
@@ -120,7 +120,7 @@ export const LOCALITIES = [
       { bhk: '2 BHK', range: '₹20,000–₹30,000', note: 'Gated community apartments.' },
       { bhk: '3 BHK', range: '₹32,000–₹50,000', note: 'Large township units with club facilities.' },
     ],
-    waterReality: { score: 7, status: 'Mixed — gated communities have borewells, independent streets rely on tankers', detail: 'Large gated townships maintain independent water supply. Independent pockets on side streets face summer tanker dependency.' },
+    waterReality: { score: 7, status: 'Mixed: gated communities have borewells, independent streets rely on tankers', detail: 'Large gated townships maintain independent water supply. Independent pockets on side streets face summer tanker dependency.' },
     floodCheck: { risk: 'moderate', detail: 'Low-lying areas near Sholinganallur lake can waterlog. Elevated gated communities stay dry.' },
     commute: { metro: 'Sholinganallur Metro (Phase 2, upcoming).', bus: 'Frequent MTC on OMR; direct routes to T. Nagar, Tambaram, Central.', road: 'Direct OMR access. 20 mins to Perungudi, 25 mins to Guindy.' },
     nearbyItParks: ['RMZ Millenia', 'Tidel Park Phase 2', 'DLF IT Park', 'SP Infocity'],
@@ -156,7 +156,7 @@ export const LOCALITIES = [
       { bhk: '2 BHK', range: '₹16,000–₹24,000', note: 'Builder apartments near 100 Feet Bypass.' },
       { bhk: '3 BHK', range: '₹26,000–₹38,000', note: 'Gated community units with parking.' },
     ],
-    waterReality: { score: 6.5, status: 'Moderate — main streets OK, inner streets tanker-dependent', detail: 'OMR-facing main road apartments have Metro Water. Interior residential streets rely on tankers in summer.' },
+    waterReality: { score: 6.5, status: 'Moderate: main streets OK, inner streets tanker-dependent', detail: 'OMR-facing main road apartments have Metro Water. Interior residential streets rely on tankers in summer.' },
     floodCheck: { risk: 'low-moderate', detail: 'Generally drains well. Some low-lying pockets near old canal face temporary flooding.' },
     commute: { metro: 'Perungudi Metro (Phase 2) 3 km north; Sholinganallur 4 km south.', bus: 'OMR MTC routes frequent. Thoraipakkam junction is a key stop.', road: 'Direct OMR. 15 mins to Perungudi, 10 mins to Sholinganallur.' },
     nearbyItParks: ['Perungudi IT SEZ', 'Sholinganallur tech parks', 'RMZ Millenia'],
@@ -265,7 +265,7 @@ export const LOCALITIES = [
     latitude: 13.0390,
     longitude: 80.2352,
     tagline: 'Commercial heart of Chennai with Metro access and vibrant street culture.',
-    description: `T. Nagar (Thyagaraya Nagar) is Chennai's retail and commercial heartland, famous for Ranganathan Street and Pondy Bazaar. Its residential pockets — Burkit Road, North Usman Road, Venkatnarayana Road — offer strong Metro connectivity and city-center convenience.`,
+    description: `T. Nagar (Thyagaraya Nagar) is Chennai's retail and commercial heartland, famous for Ranganathan Street and Pondy Bazaar. Its residential pockets, including Burkit Road, North Usman Road, Venkatnarayana Road, offer strong Metro connectivity and city-center convenience.`,
     rentRanges: [
       { bhk: '1 BHK', range: '₹12,000–₹18,000', note: 'Independent units on residential cross streets.' },
       { bhk: '2 BHK', range: '₹22,000–₹35,000', note: 'Apartments near Mambalam Station.' },
@@ -273,7 +273,7 @@ export const LOCALITIES = [
     ],
     waterReality: { score: 8, status: 'Good Metro Water with established infrastructure', detail: 'T. Nagar has well-established Metro Water connections across most residential streets.' },
     floodCheck: { risk: 'low', detail: 'Central T. Nagar generally drains well. Low-lying pockets near Mambalam canal require caution.' },
-    commute: { metro: 'Mambalam Metro Station on Green Line.', bus: 'T. Nagar Bus Terminus — largest in South India.', road: 'Central location — all city access within 20 mins.' },
+    commute: { metro: 'Mambalam Metro Station on Green Line.', bus: 'T. Nagar Bus Terminus, the largest in South India.', road: 'Central location, with all city access within 20 mins.' },
     nearbyItParks: ['Guindy Industrial Estate (15 mins)', 'Tidel Park (20 mins)'],
     listingCount: { total: 0, '1bhk': 0, '2bhk': 0, '3bhk': 0, pg: 0, furnished: 0 },
     nearbyLocalities: [
@@ -287,7 +287,7 @@ export const LOCALITIES = [
       { name: 'T. Nagar Metro', line: 'Green Line', distanceKm: 1 },
     ],
     faqs: [
-      { q: 'Is T. Nagar good for residential rental living?', a: 'Yes, the residential pockets behind the commercial strips — particularly Burkit Road and Venkatnarayana Road — are well-established and peaceful. Metro access is excellent.' },
+      { q: 'Is T. Nagar good for residential rental living?', a: 'Yes, the residential pockets behind the commercial strips, particularly Burkit Road and Venkatnarayana Road, are well-established and peaceful. Metro access is excellent.' },
     ],
     relatedGuides: [
       { slug: 'advance-deposit-chennai', title: 'Advance Deposit Norms' },
@@ -314,9 +314,9 @@ export const LOCALITIES = [
       { bhk: '2 BHK', range: '₹30,000–₹50,000', note: 'Premium apartments near Nungambakkam High Road.' },
       { bhk: '3 BHK', range: '₹55,000–₹90,000+', note: 'Heritage bungalow floors and luxury apartments.' },
     ],
-    waterReality: { score: 8.5, status: 'Excellent — established Metro Water infrastructure', detail: 'Nungambakkam has excellent Metro Water supply, one of the best in the city.' },
+    waterReality: { score: 8.5, status: 'Excellent: established Metro Water infrastructure', detail: 'Nungambakkam has excellent Metro Water supply, one of the best in the city.' },
     floodCheck: { risk: 'low', detail: 'Elevated central location. Drains quickly. No significant flood history.' },
-    commute: { metro: 'Nungambakkam Metro on Blue Line.', bus: 'Direct MTC buses on Nungambakkam High Road.', road: 'Central — 10 mins to Central Chennai, 20 mins to OMR.' },
+    commute: { metro: 'Nungambakkam Metro on Blue Line.', bus: 'Direct MTC buses on Nungambakkam High Road.', road: 'Central, 10 mins to Central Chennai, 20 mins to OMR.' },
     nearbyItParks: ['DLF Cybercity Guindy (20 mins)'],
     listingCount: { total: 0, '1bhk': 0, '2bhk': 0, '3bhk': 0, pg: 0, furnished: 0 },
     nearbyLocalities: [
@@ -351,7 +351,7 @@ export const LOCALITIES = [
       { bhk: '3 BHK', range: '₹24,000–₹35,000', note: 'Spacious builder floors with covered car parking.' },
       { bhk: 'Bachelors', range: '₹5,000–₹8,000/person', note: 'Shared 2/3 BHK units.' },
     ],
-    waterReality: { score: 6.5, status: 'Moderate — summer tanker reliance', detail: 'Main avenues have Metro Water. Interior streets rely on private tankers in peak summer (₹1,200–₹1,800 per load).' },
+    waterReality: { score: 6.5, status: 'Moderate: summer tanker reliance', detail: 'Main avenues have Metro Water. Interior streets rely on private tankers in peak summer (₹1,200–₹1,800 per load).' },
     floodCheck: { risk: 'moderate', detail: 'During Cyclone Michaung (Dec 2023), water stagnation occurred around Alwarthirunagar 1st Main. Elevated plots near Kesavardhini stayed dry.' },
     commute: { metro: 'Upcoming Metro Line 4 stations at Alwarthirunagar and Valasaravakkam Junction.', bus: 'Direct MTC buses to Anna Square, Broadway, T. Nagar.', road: '10-min drive to Porur DLF Cybercity via Mount-Poonamallee Road.' },
     nearbyItParks: ['DLF Cybercity Porur (10 mins)', 'L&T Infotech (12 mins)'],
@@ -394,7 +394,7 @@ export const LOCALITIES = [
       { bhk: '2 BHK', range: '₹16,000–₹25,000', note: 'Builder apartments on Arcot Road cross streets.' },
       { bhk: '3 BHK', range: '₹26,000–₹38,000', note: 'Large apartments near DLF Cybercity.' },
     ],
-    waterReality: { score: 6.5, status: 'Moderate — borewell essential in summer', detail: 'Main roads have Metro Water. Interior residential streets supplement with private tankers in summer.' },
+    waterReality: { score: 6.5, status: 'Moderate: borewell essential in summer', detail: 'Main roads have Metro Water. Interior residential streets supplement with private tankers in summer.' },
     floodCheck: { risk: 'moderate', detail: 'Porur lake overflow affects adjacent low-lying streets during heavy rains. Elevated apartments above 1st floor are generally safe.' },
     commute: { metro: 'Upcoming Metro Line 4 (Poonamallee–Lighthouse) stations.', bus: 'Frequent MTC on Arcot Road and Mount-Poonamallee Road.', road: '5-min drive to DLF Cybercity, 10 mins to Vadapalani.' },
     nearbyItParks: ['DLF Cybercity', 'L&T Technology Services', 'Mars Telecom'],
@@ -433,7 +433,7 @@ export const LOCALITIES = [
       { bhk: '2 BHK', range: '₹13,000–₹20,000', note: 'Standard apartments in Medavakkam Colony.' },
       { bhk: '3 BHK', range: '₹20,000–₹30,000', note: 'Builder-floor units with parking.' },
     ],
-    waterReality: { score: 6, status: 'Moderate — Metro Water alternate days, tanker supplemented', detail: 'Medavakkam faces water scarcity in peak summer. Ask specifically about daily Metro Water connection.' },
+    waterReality: { score: 6, status: 'Moderate: Metro Water alternate days, tanker supplemented', detail: 'Medavakkam faces water scarcity in peak summer. Ask specifically about daily Metro Water connection.' },
     floodCheck: { risk: 'moderate-high', detail: 'Low-lying areas near Medavakkam lake and Perumbakkam face waterlogging. Prefer 1st floor or above in lake-adjacent streets.' },
     commute: { metro: 'Nearest Metro Phase 2 stations planned at Sholinganallur and Pallikaranai.', bus: 'Direct MTC routes to Velachery, OMR, and Tambaram.', road: '15 mins to Sholinganallur OMR, 10 mins to Velachery Bypass.' },
     nearbyItParks: ['OMR IT Parks (via Sholinganallur, 15 mins)'],
@@ -471,7 +471,7 @@ export const LOCALITIES = [
     ],
     waterReality: { score: 8.0, status: 'Excellent Metro Water supply', detail: 'Anna Nagar has robust CMWSSB pipeline coverage and deep municipal water infrastructure with high pressure.' },
     floodCheck: { risk: 'low', detail: 'Master-planned grid layout with well-maintained storm water drains. The elevated avenues drain rapidly after heavy monsoon showers.' },
-    commute: { metro: 'Anna Nagar East & Anna Nagar Tower Metro stations on Green Line.', bus: 'Anna Nagar Bus Depot — comprehensive MTC connectivity across Chennai.', road: 'Direct access to Inner Ring Road, Poonamallee High Road, and Koyambedu CMBT.' },
+    commute: { metro: 'Anna Nagar East & Anna Nagar Tower Metro stations on Green Line.', bus: 'Anna Nagar Bus Depot with comprehensive MTC connectivity across Chennai.', road: 'Direct access to Inner Ring Road, Poonamallee High Road, and Koyambedu CMBT.' },
     nearbyItParks: ['Ambattur Industrial Estate (10 mins)', 'DLF Cybercity Porur (20 mins)'],
     listingCount: { total: 0, '1bhk': 0, '2bhk': 0, '3bhk': 0, pg: 0, furnished: 0 },
     nearbyLocalities: [

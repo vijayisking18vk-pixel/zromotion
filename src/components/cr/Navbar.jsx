@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 
 export default function Navbar() {
@@ -69,7 +69,7 @@ export default function Navbar() {
             letterSpacing: '0.01em',
             color: 'var(--cr-ink)',
             textTransform: 'uppercase'
-          }} aria-label="ChennaiRents — Home">
+          }} aria-label="ChennaiRents Home">
             ChennaiRents
           </Link>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { MapPin, ArrowRight, Building2, Train, ChevronDown, ChevronUp, CheckCircle, ShieldCheck } from 'lucide-react';
@@ -363,7 +363,7 @@ export default function ChennaiHub({ bhk, pg }) {
               <p style={{ fontSize: '1rem', color: 'var(--c-ink-muted)', maxWidth: '520px' }}>
                 {intelligence
                   ? intelligence.summary
-                  : `Chennai Rents covers ${LOCALITIES.length}+ localities with genuine ground-truth data on rent ranges, Metro Water supply, flood risk, and commute times — transparent and verified listings.`}
+                  : `Chennai Rents covers ${LOCALITIES.length}+ localities with genuine ground-truth data on rent ranges, Metro Water supply, flood risk, and commute times , transparent and verified listings.`}
               </p>
             </motion.div>
 

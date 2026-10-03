@@ -1,4 +1,4 @@
-// chennai.rent - Main Client JavaScript (Exactly like bengaluru.rent)
+﻿// chennai.rent - Main Client JavaScript (Exactly like bengaluru.rent)
 
 // 1. Supabase client setup
 const { createClient } = supabase;
@@ -256,7 +256,7 @@ function initMap() {
     // Satellite Imagery Layer (Standard Esri Satellite tiles)
     satelliteTileLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         maxZoom: 18,
-        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        attribution: 'Tiles &copy; Esri - Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
     });
 
     // Map Click Listener for placing pins
@@ -1333,7 +1333,7 @@ if (ownerSellForm) {
                 subject: `[Chennai Rents & Buy] Your Property Sale Listing is Live!`,
                 html: `
                     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FDFBF7; color: #1E1B18; border: 1.5px solid #E8DFC8; border-radius: 12px;">
-                        <h2 style="color: #8B263E; margin-top: 0;">Chennai Real Estate — For Sale Listing Published</h2>
+                        <h2 style="color: #8B263E; margin-top: 0;">Chennai Real Estate - For Sale Listing Published</h2>
                         <p>Your ${bhk} BHK ${propType} (₹${formatInLakhsCrores(price)}) has been pinned on the Chennai map.</p>
                         <p style="font-size: 14px; color: #4A433B;">Interested buyers will contact you directly via phone or WhatsApp at ${phone}.</p>
                     </div>
@@ -1425,7 +1425,7 @@ document.getElementById("owner-whole-form").addEventListener("submit", async (e)
                     subject: `[Chennai Rents] Your ${payloadPin.p_bhk} BHK Flat Listing is Live!`,
                     html: `
                         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FDFBF7; color: #1E1B18; border: 1.5px solid #E8DFC8; border-radius: 12px;">
-                            <h2 style="color: #2F7D4F; margin-top: 0;">Chennai Rents — Property Listed</h2>
+                            <h2 style="color: #2F7D4F; margin-top: 0;">Chennai Rents - Property Listed</h2>
                             <p>Your ${payloadPin.p_bhk} BHK flat (₹${Number(payloadPin.p_rent).toLocaleString('en-IN')}/mo) has been pinned on the Chennai Rents map.</p>
                             <p style="font-size: 14px; color: #4A433B;">Seekers matching within 2.5km will receive alerts and contact you directly via phone or WhatsApp.</p>
                         </div>
@@ -1518,7 +1518,7 @@ document.getElementById("owner-room-form").addEventListener("submit", async (e) 
                     subject: `[Chennai Rents] Your Room/Flatmate Listing is Live!`,
                     html: `
                         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FDFBF7; color: #1E1B18; border: 1.5px solid #E8DFC8; border-radius: 12px;">
-                            <h2 style="color: #2F7D4F; margin-top: 0;">Chennai Rents — Room Listed</h2>
+                            <h2 style="color: #2F7D4F; margin-top: 0;">Chennai Rents - Room Listed</h2>
                             <p>Your room/flatmate listing (₹${Number(rent).toLocaleString('en-IN')}/mo) is now published on the Chennai Rents map.</p>
                             <p style="font-size: 14px; color: #4A433B;">Flat-seekers will reach out directly via phone or WhatsApp.</p>
                         </div>
@@ -1658,7 +1658,7 @@ async function submitSeekerPin(email, phone) {
                     subject: `[Chennai Rents & Buy] Your Home Buyer Alert is Active!`,
                     html: `
                         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FDFBF7; color: #1E1B18; border: 1.5px solid #E8DFC8; border-radius: 12px;">
-                            <h2 style="color: #8B263E; margin-top: 0;">Chennai Real Estate — Buyer Alert Activated</h2>
+                            <h2 style="color: #8B263E; margin-top: 0;">Chennai Real Estate - Buyer Alert Activated</h2>
                             <p>Your search alert to buy property in Chennai has been registered on the interactive map.</p>
                             <div style="background: #FFFFFF; border: 1px solid #E8DFC8; border-radius: 8px; padding: 16px; margin: 16px 0;">
                                 <p style="margin: 4px 0;"><strong>Purchase Budget:</strong> ₹${formatInLakhsCrores(budget)}</p>
@@ -1710,7 +1710,7 @@ async function submitSeekerPin(email, phone) {
                     subject: `[Chennai Rents] Your Rental Alert is Active!`,
                     html: `
                         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #FDFBF7; color: #1E1B18; border: 1.5px solid #E8DFC8; border-radius: 12px;">
-                            <h2 style="color: #B23A2E; margin-top: 0;">Chennai Rents — Alert Activated</h2>
+                            <h2 style="color: #B23A2E; margin-top: 0;">Chennai Rents - Alert Activated</h2>
                             <p>Your search alert for a rental home in Chennai has been registered successfully on the crowdsourced map.</p>
                             <div style="background: #FFFFFF; border: 1px solid #E8DFC8; border-radius: 8px; padding: 16px; margin: 16px 0;">
                                 <p style="margin: 4px 0;"><strong>Maximum Budget:</strong> ₹${Number(payload.p_budget).toLocaleString('en-IN')}/mo</p>
@@ -2053,7 +2053,7 @@ window.locateUser = function() {
 
 // 13. FAQ Accordion & Local Listings
 const faqs = [
-    { q: "How does chennairents.in work?", a: "Tap anywhere on the map and drop your rent anonymously. Other renters see real prices in their area. If you're flat-hunting, drop a seeker pin with your budget — we email you when matching listings appear within 2.5km." },
+    { q: "How does chennairents.in work?", a: "Tap anywhere on the map and drop your rent anonymously. Other renters see real prices in their area. If you're flat-hunting, drop a seeker pin with your budget - we email you when matching listings appear within 2.5km." },
     { q: "Is chennairents.in free? Do I need to sign up?", a: "Yes, free for everyone. No signup, no login, no app required. We don't charge tenants or owners and have no plans to. Rents are crowdsourced for local transparency." },
     { q: "How is chennairents.in different from broker sites?", a: "Standard sites show broker-quoted listings, which are often inflated. chennairents.in shows real rents shared by actual current and past tenants, letting you see historical averages to guide negotiation." },
     { q: "Is my data anonymous? Will my landlord know?", a: "Yes, anonymous. Your IP address is never displayed. The pin shows only the rent amount, BHK, and approximate location (rounded to ~100m for privacy). Your landlord cannot trace it back to you." },
@@ -2398,7 +2398,7 @@ window.openExpressInterest = function() {
     const flatType = currentPin.looking_for_flatmate ? 'room in shared flat' : 'whole flat';
     const locationName = currentPin.society || currentPin.area || 'this location';
     
-    document.getElementById("ei-sub-text").innerHTML = `You're expressing interest in a <strong>${currentPin.bhk}BHK ${flatType}</strong> at <strong>${locationName}</strong> · <strong>₹${rentFormatted}/month</strong>. Just tell us how to reach you and a few preferences — we've pre-filled the rest.`;
+    document.getElementById("ei-sub-text").innerHTML = `You're expressing interest in a <strong>${currentPin.bhk}BHK ${flatType}</strong> at <strong>${locationName}</strong> · <strong>₹${rentFormatted}/month</strong>. Just tell us how to reach you and a few preferences - we've pre-filled the rest.`;
     
     document.getElementById("ei-budget").value = currentPin.rent;
 

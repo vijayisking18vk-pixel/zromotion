@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node generate-sitemap.js",
+    "lint:emdash": "node scripts/check-emdash.js",
+    "prebuild": "node generate-sitemap.js && node scripts/check-emdash.js",
     "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node prerender.js",
     "preview": "vite preview",
     "test:seo": "node scripts/test-seo.js"

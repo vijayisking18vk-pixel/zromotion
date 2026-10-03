@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Chennai Rents — Rental Guide & Content Engine Data
  * Single source of truth for Chennai Rental Hub, Supporting Guides, and Editorial Attribution.
  */
@@ -124,7 +124,7 @@ export const CHENNAI_RENT_HUB_DATA = {
     heading: 'Chennai Rents vs Marketplace Searches: What to Verify',
     summary: 'Many house hunters search classified platforms like OLX or general property portals for Chennai rentals. While classified sites list many properties, users frequently encounter duplicate posts, outdated listings, or unauthorized brokers posing as owners.',
     safetyGuidelines: [
-      'Beware of fake owner listings asking for token advances via UPI to "courier keys" or hold the flat — legitimate owners will always meet you at the property.',
+      'Beware of fake owner listings asking for token advances via UPI to "courier keys" or hold the flat, since legitimate owners will always meet you at the property.',
       'Verify water supply (Chennai Metro Water vs private tanker) directly with neighboring tenants, as classified descriptions often exaggerate water quality.',
       'Check whether the monthly rent includes building maintenance or if common water tanker bills are shared separately.',
       'Cross-check the locality pin on our Chennai Rents interactive map to see real crowdsourced street conditions and flood history.',

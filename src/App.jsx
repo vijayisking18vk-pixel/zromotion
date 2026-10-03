@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { Routes, Route, useLocation, useParams, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
 import Header from './components/Header';
@@ -29,6 +29,12 @@ function LegacyRedirect() {
   if (target) return <Navigate to={target} replace />;
   // Fallback: /rent/:slug → /guide/:slug for guide posts
   return <PostTemplate />;
+}
+
+// ─── Guide Redirect: /guide/:slug → /guides/:slug ────────────────────────────
+function GuideRedirect() {
+  const { slug } = useParams();
+  return <Navigate to={`/guides/${slug}`} replace />;
 }
 
 // Hard-redirect helper to cleanly transition from React SPA router to static listings app
@@ -150,7 +156,7 @@ export default function App() {
 
             {/* ── GUIDE ROUTES (Canonical: /guides/:slug) ── */}
             <Route path="/guides/:slug" element={<PostTemplate lang={lang} />} />
-            <Route path="/guide/:slug" element={<Navigate to={`/guides/:slug`} replace />} />
+            <Route path="/guide/:slug" element={<GuideRedirect />} />
 
             {/* ── CONFIRMED 404 REDIRECTS ── */}
             <Route path="/flats-for-rent-in-adambakkam-chennai" element={<Navigate to="/chennai/velachery/" replace />} />

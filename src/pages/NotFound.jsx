@@ -43,8 +43,27 @@ export default function NotFound() {
               <Compass size={16} />
               <span>Explore Chennai Localities</span>
             </Link>
-            <a href="/listings/index.html" className="btn-dark" style={{ textDecoration: 'none', background: '#fff', color: 'var(--c-ink)', border: '1px solid var(--c-border)' }}>
-              <MapPin size={16} style={{ color: 'var(--c-ripon-red)' }} />
+            <a
+              href="/listings/index.html"
+              style={{
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                background: 'var(--c-header-bg)',
+                color: 'var(--c-ink)',
+                border: '1.5px solid var(--c-border)',
+                borderRadius: 'var(--radius-md, 8px)',
+                padding: '0.65rem 1.35rem',
+                minHeight: '44px',
+                fontFamily: 'var(--font-heading)',
+                fontSize: '0.92rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                transition: 'border-color 0.15s ease, background-color 0.15s ease',
+              }}
+            >
+              <MapPin size={16} style={{ color: 'var(--c-ripon-red)', flexShrink: 0 }} />
               <span>Explore Rent Map</span>
             </a>
           </div>
