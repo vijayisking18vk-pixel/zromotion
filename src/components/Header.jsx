@@ -71,14 +71,15 @@ export default function Header() {
           aria-label="Chennai Rents home"
         >
           <img
-            src="/chennai-rents-logo-transparent.png"
-            alt="Chennai Rents"
+            src="/chennai-rents-logo-new.jpg"
+            alt="Chennai Rents Logo"
             style={{
-              height: '38px',
+              height: '42px',
               width: 'auto',
               objectFit: 'contain',
               display: 'block',
               flexShrink: 0,
+              mixBlendMode: 'multiply',
             }}
           />
           <div

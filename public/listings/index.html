@@ -1018,14 +1018,14 @@
 
 
     <!-- ── MODAL: Pin Detail View ── -->
-    <div class="modal-backdrop" id="pin-detail-modal" onclick="closeModal('pin-detail-modal')">
+    <div class="modal-backdrop" id="pin-detail-modal" role="dialog" aria-modal="true" aria-labelledby="detail-rent-label" onclick="closeModal('pin-detail-modal')">
         <div class="modal-card" onclick="event.stopPropagation()">
             <div class="detail-header">
                 <div>
-                    <div class="detail-eyebrow" id="detail-area-label">LOCALITY</div>
+                    <div class="detail-eyebrow" id="detail-area-label" style="text-transform: uppercase; letter-spacing: 0.06em; color: var(--c-ink-muted); font-family: var(--font-body); font-weight: 600;">FOR RENT • MADHAVARAM</div>
                     <div class="detail-amount" id="detail-rent-label">₹--,--</div>
                 </div>
-                <button class="close-btn" onclick="closeModal('pin-detail-modal')" aria-label="Close modal">&times;</button>
+                <button class="close-btn" onclick="closeModal('pin-detail-modal')" aria-label="Close listing details" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; border-radius:50%;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
             </div>
 
             <!-- Share Options (Blended with Chennai Theme: Temple Green & Ripon Red) -->
@@ -1051,36 +1051,8 @@
             <!-- Clean, Structured, Highly Legible Meta Table -->
             <div class="detail-meta-table">
                 <div class="detail-meta-item" id="detail-society-row">
-                    <span class="meta-label">🏡 Society:</span>
-                    <span class="meta-val" id="detail-society">society name</span>
-                </div>
-                <div class="detail-meta-item">
-                    <span class="meta-label" id="detail-deposit-label">💰 Security Deposit:</span>
-                    <span class="meta-val" id="detail-deposit">₹--</span>
-                </div>
-                <div class="detail-meta-item" id="detail-maintenance-row">
-                    <span class="meta-label" id="detail-maintenance-label">🔧 Maintenance:</span>
-                    <span class="meta-val" id="detail-maintenance">--</span>
-                </div>
-                <div class="detail-meta-item">
-                    <span class="meta-label">🚗 Parking:</span>
-                    <span class="meta-val" id="detail-parking">0 spots</span>
-                </div>
-                <div class="detail-meta-item" id="detail-sqft-row">
-                    <span class="meta-label">📐 Area Size:</span>
-                    <span class="meta-val" id="detail-sqft">-- sq.ft</span>
-                </div>
-                <div class="detail-meta-item" id="detail-pets-row">
-                    <span class="meta-label">🐕 Pets Allowed:</span>
-                    <span class="meta-val" id="detail-pets">--</span>
-                </div>
-                <div class="detail-meta-item">
-                    <span class="meta-label" id="detail-occupant-label">👥 Tenant Category:</span>
-                    <span class="meta-val" id="detail-occupant">Family</span>
-                </div>
-                <div class="detail-meta-item">
-                    <span class="meta-label">📝 Feedback:</span>
-                    <span class="meta-val" id="detail-feedback" style="font-style:italic;">No comments provided.</span>
+                    <span class="meta-label">Feedback</span>
+                    <span class="meta-val" id="detail-feedback">No comments provided.</span>
                 </div>
             </div>
 
@@ -1279,5 +1251,14 @@
 
     <!-- main app scripts -->
     <script src="/listings/index.js"></script>
+
+<script>
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const open = document.querySelector('.modal-backdrop.open');
+        if (open) { open.classList.remove('open'); }
+    }
+});
+</script>
 </body>
 </html>

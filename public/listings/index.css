@@ -1,10 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Poppins:wght@700&display=swap');
 
 /* chennai.rent Custom Dark Theme CSS */
 
 :root {
-    --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Colors */
+  --c-auto-yellow:    #F5B800;
+  --c-auto-yellow-dk: #DE9F00;
+  --c-marina-blue:    #1F6FA8;
+  --c-marina-blue-dk: #154D76;
+  --c-ripon-red:      #B23A2E;
+  --c-temple-green:   #2F7D4F;
+  --c-temple-green-dk:#205937;
+
+  /* Backgrounds */
+  --c-header-bg:       #FAF7F2;
+  --c-page-bg:         #FDFBF7;
+  --c-card-bg:         #FFFFFF;
+  --c-border:          #E8DFC8;
+  --c-border-subtle:   #F0EAE1;
+  --c-sand-light:      #F8F5EE;
+
+  /* Typography Colors */
+  --c-ink:            #1E1B18;
+  --c-ink-muted:      #4A433B;
+  --c-ink-light:      #7A7064;
+
+  --font-heading: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 * {
@@ -1831,4 +1853,496 @@ h1, h2, h3, h4, .modal-title, .feed-title, .page-title, .brand-text, .detail-amo
 #stats-list-container {
     -webkit-overflow-scrolling: touch !important;
     overscroll-behavior: contain !important;
+}
+
+
+/* ====================================================================
+   MODAL + FILTER PANEL OVERHAUL - matches main site design tokens
+   ==================================================================== */
+
+/* ----- Backdrop ----- */
+.modal-backdrop {
+    background: rgba(30, 27, 24, 0.50) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    z-index: 900 !important;
+}
+
+/* ----- Modal Card ----- */
+#pin-detail-modal .modal-card,
+.modal-card {
+    background: #FFFFFF !important;
+    color: var(--c-ink) !important;
+    border: 1px solid var(--c-border) !important;
+    box-shadow: 0 20px 64px rgba(30, 27, 24, 0.18) !important;
+    border-radius: 20px 20px 0 0 !important;
+    padding: 24px !important;
+    max-width: 520px !important;
+    max-height: 88vh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+}
+
+@media (min-width: 640px) {
+    #pin-detail-modal .modal-card,
+    .modal-card {
+        border-radius: 20px !important;
+        max-height: 80vh !important;
+    }
+}
+
+/* ----- Header ----- */
+.detail-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    margin-bottom: 16px !important;
+    gap: 12px !important;
+}
+
+.detail-eyebrow {
+    font-family: var(--font-body) !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    color: var(--c-ink-muted) !important;
+    margin-bottom: 4px !important;
+}
+
+/* ----- Price ----- */
+.detail-amount {
+    font-family: var(--font-heading) !important;
+    font-weight: 700 !important;
+    font-size: clamp(1.5rem, 5vw, 2rem) !important;
+    color: var(--c-ink) !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.1 !important;
+}
+
+/* ----- Close Button ----- */
+.close-btn {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    border-radius: 50% !important;
+    border: 1.5px solid var(--c-border) !important;
+    background: var(--c-sand-light) !important;
+    color: var(--c-ink-muted) !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.15s ease !important;
+    flex-shrink: 0 !important;
+    padding: 0 !important;
+    font-size: 0 !important; /* hide &times; if not replaced */
+}
+
+.close-btn:hover {
+    background: var(--c-border) !important;
+    color: var(--c-ink) !important;
+    border-color: var(--c-ink-muted) !important;
+}
+
+.close-btn:focus-visible {
+    outline: 3px solid var(--c-ripon-red) !important;
+    outline-offset: 2px !important;
+}
+
+/* ----- Share Bar buttons ----- */
+.share-btn {
+    background: var(--c-sand-light) !important;
+    border: 1.5px solid var(--c-border) !important;
+    color: var(--c-ink) !important;
+    font-family: var(--font-body) !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    padding: 10px 16px !important;
+    border-radius: 999px !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    transition: all 0.15s ease !important;
+    text-decoration: none !important;
+    opacity: 1 !important;
+}
+
+.share-btn:hover {
+    background: var(--c-border) !important;
+    border-color: var(--c-ink-muted) !important;
+    color: var(--c-ink) !important;
+}
+
+.share-wa {
+    background: #E9F9EF !important;
+    border-color: #2F7D4F !important;
+    color: #1a5c39 !important;
+}
+
+.share-wa:hover {
+    background: #d0f0dd !important;
+    color: #1a5c39 !important;
+}
+
+.share-ig {
+    background: var(--c-sand-light) !important;
+    border-color: var(--c-border) !important;
+    color: var(--c-ink) !important;
+}
+
+.modal-share-bar {
+    display: flex !important;
+    gap: 10px !important;
+    flex-wrap: wrap !important;
+    margin-bottom: 16px !important;
+}
+
+/* ----- Badges ----- */
+.badge {
+    font-family: var(--font-body) !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    padding: 4px 10px !important;
+    border-radius: 999px !important;
+    border: 1.5px solid transparent !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    opacity: 1 !important;
+    color: var(--c-ink) !important;
+    background: var(--c-sand-light) !important;
+    border-color: var(--c-border) !important;
+}
+
+.detail-badges {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    margin-bottom: 16px !important;
+}
+
+/* ----- Data grid ----- */
+.detail-meta-table {
+    display: flex !important;
+    flex-direction: column !important;
+    background: var(--c-sand-light) !important;
+    border: 1px solid var(--c-border) !important;
+    border-radius: 12px !important;
+    padding: 4px 16px !important;
+    margin-bottom: 16px !important;
+}
+
+.detail-meta-item {
+    display: grid !important;
+    grid-template-columns: 130px 1fr !important;
+    align-items: start !important;
+    gap: 8px !important;
+    padding: 10px 0 !important;
+    border-bottom: 1px solid var(--c-border-subtle) !important;
+    font-size: 13.5px !important;
+    min-height: 40px !important;
+    opacity: 1 !important;
+    color: var(--c-ink-muted) !important;
+}
+
+.detail-meta-item:last-child {
+    border-bottom: none !important;
+}
+
+.detail-meta-item .meta-label,
+.detail-meta-item strong {
+    font-family: var(--font-body) !important;
+    font-weight: 500 !important;
+    color: var(--c-ink-muted) !important;
+    font-size: 13px !important;
+    white-space: nowrap !important;
+}
+
+.detail-meta-item .meta-val,
+.detail-meta-item span[id^="detail-"] {
+    font-family: var(--font-body) !important;
+    font-weight: 600 !important;
+    color: var(--c-ink) !important;
+    font-size: 13.5px !important;
+    text-align: right !important;
+    word-break: break-word !important;
+    font-style: normal !important;
+}
+
+/* Feedback row: full-width layout */
+#detail-feedback {
+    grid-column: 1 / -1 !important;
+    text-align: left !important;
+    color: var(--c-ink-muted) !important;
+    font-style: normal !important;
+    margin-top: 2px !important;
+}
+
+/* ----- Primary & Secondary buttons inside modal ----- */
+.btn-submit,
+.btn-submit-form,
+#pin-mode-banner,
+.btn-list-flat,
+.btn-primary-action {
+    background: var(--c-ripon-red) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    font-family: var(--font-heading) !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    padding: 13px 20px !important;
+    border-radius: 999px !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    opacity: 1 !important;
+    letter-spacing: 0.01em !important;
+    transition: background 0.15s ease !important;
+}
+
+.btn-submit:hover,
+.btn-submit-form:hover,
+.btn-list-flat:hover {
+    background: #9a2b21 !important;
+}
+
+/* Direct contact (WhatsApp green) button inside modal */
+#direct-contact-action-btn {
+    opacity: 1 !important;
+    border-radius: 999px !important;
+    font-family: var(--font-heading) !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    padding: 13px 20px !important;
+}
+
+/* ----- Section headings inside modal ----- */
+.section-heading {
+    font-family: var(--font-heading) !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    color: var(--c-ink) !important;
+    display: block !important;
+    margin-bottom: 12px !important;
+}
+
+/* ----- Form inputs ----- */
+.form-input,
+.form-select,
+.comment-input {
+    font-family: var(--font-body) !important;
+    font-size: 14px !important;
+    background: #FFFFFF !important;
+    color: var(--c-ink) !important;
+    border: 1.5px solid var(--c-border) !important;
+    border-radius: 10px !important;
+    padding: 11px 14px !important;
+    outline: none !important;
+    opacity: 1 !important;
+    transition: border-color 0.15s ease !important;
+}
+
+.form-input:focus,
+.form-select:focus,
+.comment-input:focus {
+    border-color: var(--c-ripon-red) !important;
+}
+
+/* ----- Filter panel ----- */
+.filter-panel {
+    background: #FFFFFF !important;
+    color: var(--c-ink) !important;
+    border: 1px solid var(--c-border) !important;
+    font-family: var(--font-body) !important;
+}
+
+.filter-header {
+    font-family: var(--font-heading) !important;
+    font-weight: 700 !important;
+    color: var(--c-ink) !important;
+    font-size: 15px !important;
+}
+
+.field-label {
+    font-family: var(--font-body) !important;
+    font-weight: 600 !important;
+    color: var(--c-ink) !important;
+    font-size: 13px !important;
+}
+
+/* option chips (BHK filter, etc.) */
+.option-chip {
+    font-family: var(--font-body) !important;
+    font-weight: 500 !important;
+    background: var(--c-sand-light) !important;
+    border: 1.5px solid var(--c-border) !important;
+    color: var(--c-ink-muted) !important;
+    padding: 7px 14px !important;
+    border-radius: 999px !important;
+    font-size: 13px !important;
+    cursor: pointer !important;
+    transition: all 0.15s ease !important;
+}
+
+.option-chip:hover {
+    background: var(--c-border) !important;
+    color: var(--c-ink) !important;
+}
+
+.option-chip.active {
+    background: var(--c-ripon-red) !important;
+    border-color: var(--c-ripon-red) !important;
+    color: #FFFFFF !important;
+}
+
+/* Apply Filters button */
+#apply-filters-btn,
+.btn-apply-filter {
+    background: var(--c-ripon-red) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    font-family: var(--font-heading) !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    padding: 13px 20px !important;
+    border-radius: 999px !important;
+    width: 100% !important;
+    cursor: pointer !important;
+    transition: background 0.15s ease !important;
+}
+
+#apply-filters-btn:hover,
+.btn-apply-filter:hover {
+    background: #9a2b21 !important;
+}
+
+/* ----- Map pin labels ----- */
+.price-pin-label {
+    font-family: var(--font-heading) !important;
+    font-weight: 700 !important;
+}
+
+/* ----- Chicklet pill buttons (map top nav) ----- */
+.chicklet {
+    font-family: var(--font-body) !important;
+    font-weight: 600 !important;
+    color: var(--c-ink) !important;
+    background: #FFFFFF !important;
+    border: 1.5px solid var(--c-border) !important;
+    border-radius: 999px !important;
+    padding: 8px 16px !important;
+    font-size: 13px !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    transition: all 0.15s ease !important;
+    opacity: 1 !important;
+}
+
+.chicklet:hover,
+.chicklet.active {
+    background: var(--c-ripon-red) !important;
+    border-color: var(--c-ripon-red) !important;
+    color: #FFFFFF !important;
+}
+
+/* search bar */
+.search-wrap {
+    background: #FFFFFF !important;
+    border: 1.5px solid var(--c-border) !important;
+    box-shadow: 0 4px 16px rgba(30, 27, 24, 0.08) !important;
+    border-radius: 999px !important;
+}
+
+.search-input {
+    background: transparent !important;
+    color: var(--c-ink) !important;
+    font-family: var(--font-body) !important;
+    font-size: 14px !important;
+    border: none !important;
+}
+
+.search-input::placeholder {
+    color: var(--c-ink-light) !important;
+}
+
+.filter-btn {
+    background: var(--c-sand-light) !important;
+    color: var(--c-ink) !important;
+    border: 1.5px solid var(--c-border) !important;
+    border-radius: 999px !important;
+    font-family: var(--font-body) !important;
+    font-weight: 600 !important;
+}
+
+.filter-btn:hover {
+    background: var(--c-border) !important;
+}
+
+/* ----- Booked banner ----- */
+#detail-booked-banner {
+    opacity: 1 !important;
+}
+
+/* ----- Legend bar ----- */
+.legend-pill {
+    background: #FFFFFF !important;
+    color: var(--c-ink-muted) !important;
+    border: 1px solid var(--c-border) !important;
+    font-family: var(--font-body) !important;
+    font-size: 12px !important;
+    box-shadow: 0 4px 16px rgba(30, 27, 24, 0.10) !important;
+    z-index: 50 !important;
+}
+
+/* ----- Map control buttons ----- */
+.map-control-btn {
+    background: #FFFFFF !important;
+    border: 1.5px solid var(--c-border) !important;
+    color: var(--c-ink) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 12px rgba(30, 27, 24, 0.10) !important;
+    font-family: var(--font-body) !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+}
+
+.map-control-btn:hover {
+    background: var(--c-sand-light) !important;
+}
+
+/* ----- Ensure no opacity fade-in hangs on modal ----- */
+.modal-backdrop,
+.modal-card,
+.detail-meta-item,
+.badge,
+.share-btn,
+.chicklet {
+    animation: none !important;
+    opacity: 1 !important;
+}
+
+/* ----- Nav header ----- */
+.nav-header {
+    background: #FFFFFF !important;
+    border-bottom: 1px solid var(--c-border) !important;
+    font-family: var(--font-body) !important;
+}
+
+.brand-text {
+    font-family: var(--font-heading) !important;
+    font-weight: 700 !important;
+    color: var(--c-ink) !important;
+}
+
+/* ----- body and html overrides for map page ----- */
+html.map-page,
+body.map-page {
+    background-color: var(--c-page-bg) !important;
+    font-family: var(--font-body) !important;
+    color: var(--c-ink) !important;
 }

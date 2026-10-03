@@ -649,7 +649,7 @@ async function openPinDetail(pin) {
         if (isSale) {
             document.getElementById("detail-maintenance").innerText = pin.possession ? pin.possession.replace('_', ' ').toUpperCase() : 'READY TO MOVE';
         } else {
-            document.getElementById("detail-maintenance").innerText = pin.maintenance_included ? 'Included in Rent' : 'Not Included / Additional';
+            document.getElementById("detail-maintenance").innerText = pin.maintenance_included ? 'Included in Rent' : 'Not included';
         }
 
         // Parking count
@@ -674,7 +674,7 @@ async function openPinDetail(pin) {
             let petsText = '--';
             if (pin.pets_allowed === 'yes') petsText = 'Allowed 🐕';
             else if (pin.pets_allowed === 'no') petsText = 'Not Allowed 🚫';
-            else if (pin.pets_allowed === 'not_sure') petsText = 'Not Sure 🤷';
+            else if (pin.pets_allowed === 'not_sure') petsText = 'Not sure
             document.getElementById("detail-pets").innerText = petsText;
         } else {
             document.getElementById("detail-pets-row").style.display = 'none';
