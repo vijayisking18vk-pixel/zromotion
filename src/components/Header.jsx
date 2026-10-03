@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Instagram, Menu, X, MapPin, Compass, Plus, BookOpen, Info } from 'lucide-react';
+import { Instagram, Menu, X, MapPin, Compass, Plus, Info } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../config';
 
@@ -175,10 +175,6 @@ export default function Header() {
 
           <NavLink to="/#localities" style={navLinkStyle}>
             <span>Localities</span>
-          </NavLink>
-
-          <NavLink to="/#guides" style={navLinkStyle}>
-            <span>Guides</span>
           </NavLink>
 
           <NavLink to="/about" style={navLinkStyle}>
@@ -374,27 +370,6 @@ export default function Header() {
               }}
             >
               <span>Explore Localities</span>
-            </Link>
-
-            <Link
-              to="/#guides"
-              onClick={() => setMobileMenuOpen(false)}
-              style={{
-                fontFamily: 'var(--font-heading)',
-                fontWeight: 700,
-                color: 'var(--c-ink)',
-                textDecoration: 'none',
-                minHeight: '44px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '0.5rem 0.75rem',
-                borderRadius: '6px',
-                borderBottom: '1px solid var(--c-border-subtle)',
-              }}
-            >
-              <BookOpen size={16} style={{ color: 'var(--c-ink-muted)' }} />
-              <span>Tenant Legal Guides</span>
             </Link>
 
             <Link
