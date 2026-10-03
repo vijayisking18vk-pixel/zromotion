@@ -124,6 +124,15 @@
         <span class="tap-finger">👆</span>
     </div>
 
+    <!-- Top-Left Floating Brand Logo (Redirect to Home) -->
+    <a href="/" class="map-brand-logo" title="Back to Chennai Rents Home" aria-label="Chennai Rents Home">
+        <img src="/chennai-rents-logo-new.jpg" alt="Chennai Rents Logo" class="map-brand-img">
+        <div class="map-brand-text">
+            <span class="mbt-title">chennai<strong>rents</strong></span>
+            <span class="mbt-tag">← Home</span>
+        </div>
+    </a>
+
     <!-- Floating Search & Filter Wrapper -->
     <div class="search-wrap">
         <input id="search-input" class="search-input" type="text" placeholder="Search neighbourhood or area in Chennai..." />
@@ -1185,6 +1194,43 @@
             <div style="display:flex; flex-direction:column; gap:8px;">
                 <button class="btn btn-submit" onclick="confirmReplaceSeeker()">Replace & Add New</button>
                 <button class="btn btn-cancel" onclick="closeModal('seeker-dup-modal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── MODAL: Instagram Story Share ── -->
+    <div class="modal-backdrop" id="ig-story-modal" onclick="closeModal('ig-story-modal')">
+        <div class="modal-card ig-story-card" onclick="event.stopPropagation()">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:18px;">📸</span>
+                    <span class="modal-title">Share to Instagram Story</span>
+                </div>
+                <button class="close-btn" onclick="closeModal('ig-story-modal')">&times;</button>
+            </div>
+            
+            <p style="color:var(--c-ink-muted); font-size:13px; line-height:1.45; margin-bottom:12px;">
+                Share this verified rental report to your story. Expose broker inflation and build rental transparency across Chennai!
+            </p>
+
+            <!-- Story Preview Container -->
+            <div class="ig-story-preview-wrap">
+                <img id="ig-story-preview-img" alt="Instagram Story Card Preview" class="ig-story-preview-img" />
+            </div>
+
+            <div class="ig-story-actions">
+                <button class="btn btn-submit ig-action-primary" id="ig-open-app-btn" onclick="openInstagramDirectly()">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                    </svg>
+                    <span>Open Instagram</span>
+                </button>
+                <button class="btn btn-secondary ig-action-link" id="ig-copy-link-btn" onclick="copyStoryLink()">
+                    📋 Copy Story Link
+                </button>
+                <button class="btn btn-outline ig-action-download" id="ig-save-img-btn" onclick="saveGeneratedStoryImage()">
+                    💾 Save Card to Photos
+                </button>
             </div>
         </div>
     </div>

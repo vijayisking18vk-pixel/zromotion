@@ -55,11 +55,40 @@ function ListingsRedirect() {
   );
 }
 
+// ─── Scroll-To-Top on Route Change ─────────────────────────────────────────
+function ScrollToTop() {
+  const { pathname, search, hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const el = document.querySelector(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+    }
+
+    // Force instant scroll to page top header
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    if (window.__lenis) {
+      window.__lenis.scrollTo(0, { immediate: true });
+    }
+    if (document.documentElement) document.documentElement.scrollTop = 0;
+    if (document.body) document.body.scrollTop = 0;
+  }, [pathname, search, hash]);
+
+  return null;
+}
+
 export default function App() {
   const [lang, setLang] = useState('ta');
   const location = useLocation();
 
   useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
     // On touch devices (phones/tablets), native inertial touch momentum scroll is faster & smoother.
     // Run Lenis smooth-wheel physics only on desktop/pointer-fine devices.
     const isTouch = window.matchMedia('(pointer: coarse)').matches;
@@ -78,6 +107,7 @@ export default function App() {
       syncTouch: false,
       touchMultiplier: 1,
     });
+    window.__lenis = lenis;
 
     let animationFrameId;
     function raf(time) {
@@ -88,6 +118,7 @@ export default function App() {
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      window.__lenis = null;
       lenis.destroy();
     };
   }, []);
@@ -98,6 +129,7 @@ export default function App() {
 
   return (
     <div className="chennai-rents-app" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <ScrollToTop />
       <Header lang={lang} onToggleLang={handleToggleLang} />
 
       <div style={{ flex: 1 }}>

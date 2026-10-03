@@ -2317,10 +2317,62 @@ window.shareWhatsApp = function() {
     if (!currentPin) return;
     const rentFormatted = Number(currentPin.rent).toLocaleString('en-IN');
     const flatType = currentPin.is_listing ? (currentPin.looking_for_flatmate ? 'Room in shared flat' : 'Whole flat') : 'rent pin';
-    const msg = `Check out this rental on chennairents.in: ${currentPin.bhk} BHK ${flatType} in ${currentPin.area || 'Chennai'} for ₹${rentFormatted}/month. See full details on map: https://www.chennairents.in/neighbourhood/${(currentPin.area || '').toLowerCase().replace(/[^a-z0-9]+/g, '-')}.html`;
+    const msg = `Check out this rental on chennairents.in: ${currentPin.bhk} BHK ${flatType} in ${currentPin.area || 'Chennai'} for ₹${rentFormatted}/month. See full details on map: https://www.chennairents.in/listings`;
     const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank');
 };
+
+// Canvas Text Helpers to guarantee text NEVER gets cut off
+function drawFittedText(ctx, text, x, y, maxFont, minFont, maxWidth, fontFace, weight) {
+    if (!text) return minFont;
+    let fontSize = maxFont;
+    ctx.font = `${weight || 'normal'} ${fontSize}px ${fontFace || 'sans-serif'}`;
+    while (ctx.measureText(text).width > maxWidth && fontSize > minFont) {
+        fontSize -= 2;
+        ctx.font = `${weight || 'normal'} ${fontSize}px ${fontFace || 'sans-serif'}`;
+    }
+    ctx.fillText(text, x, y);
+    return fontSize;
+}
+
+function drawWrappedText(ctx, text, x, y, maxWidth, lineHeight, maxLines) {
+    if (!text) return y;
+    const words = text.split(' ');
+    let line = '';
+    let currentY = y;
+    let lineCount = 0;
+
+    for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const metrics = ctx.measureText(testLine);
+        if (metrics.width > maxWidth && n > 0) {
+            ctx.fillText(line.trim(), x, currentY);
+            line = words[n] + ' ';
+            currentY += lineHeight;
+            lineCount++;
+            if (maxLines && lineCount >= maxLines - 1) {
+                const remainingWords = words.slice(n).join(' ');
+                let lastLine = remainingWords;
+                while (ctx.measureText(lastLine + '...').width > maxWidth && lastLine.length > 0) {
+                    lastLine = lastLine.slice(0, -1).trim();
+                }
+                ctx.fillText((lastLine ? lastLine + '...' : '...'), x, currentY);
+                return currentY + lineHeight;
+            }
+        } else {
+            line = testLine;
+        }
+    }
+    if (line.trim()) {
+        ctx.fillText(line.trim(), x, currentY);
+        currentY += lineHeight;
+    }
+    return currentY;
+}
+
+window._currentStoryDataUrl = null;
+window._currentStoryBlob = null;
+window._currentStoryFilename = '';
 
 window.shareInstagramStory = function() {
     if (!currentPin) return;
@@ -2330,101 +2382,227 @@ window.shareInstagramStory = function() {
     canvas.height = 1920;
     const ctx = canvas.getContext("2d");
 
-    // Draw elegant broadsheet newspaper card
-    ctx.fillStyle = "#0d0d0d";
+    // 1. Background
+    ctx.fillStyle = "#0c0a09";
     ctx.fillRect(0, 0, 1080, 1920);
 
-    // Double thin border in neon-copper
+    const grad = ctx.createRadialGradient(540, 960, 200, 540, 960, 900);
+    grad.addColorStop(0, "rgba(255, 62, 0, 0.08)");
+    grad.addColorStop(1, "rgba(0, 0, 0, 0.6)");
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 1080, 1920);
+
+    // 2. Borders
     ctx.strokeStyle = "#ff3e00";
     ctx.lineWidth = 4;
-    ctx.strokeRect(30, 30, 1020, 1860);
-    ctx.lineWidth = 1;
-    ctx.strokeRect(42, 42, 996, 1836);
+    ctx.strokeRect(36, 36, 1008, 1848);
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+    ctx.strokeRect(48, 48, 984, 1824);
 
-    // Header "chennairents.in"
-    ctx.fillStyle = "#ff3e00";
+    // 3. Header
+    ctx.fillStyle = "#ffffff";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.font = "bold 72px 'Georgia', serif";
-    ctx.fillText("chennairents.in", 540, 200);
+    ctx.font = "bold 68px 'Plus Jakarta Sans', Georgia, sans-serif";
+    ctx.fillText("chennairents.in", 540, 190);
 
-    // Tagline
-    ctx.fillStyle = "#e2e8f0";
-    ctx.font = "600 24px 'Inter', sans-serif";
-    if (ctx.letterSpacing !== undefined) ctx.letterSpacing = "6px";
-    ctx.fillText("CROWDSOURCED RENTAL INDEX", 540, 280);
-    if (ctx.letterSpacing !== undefined) ctx.letterSpacing = "0px";
+    ctx.fillStyle = "#ff6b35";
+    ctx.font = "700 22px 'Inter', sans-serif";
+    ctx.fillText("CROWDSOURCED RENTAL TRANSPARENCY REGISTRY", 540, 255);
 
-    // Divider line
-    ctx.strokeStyle = "rgba(255, 62, 0, 0.3)";
+    ctx.strokeStyle = "rgba(255, 62, 0, 0.4)";
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(150, 340);
-    ctx.lineTo(930, 340);
+    ctx.moveTo(120, 310);
+    ctx.lineTo(960, 310);
     ctx.stroke();
 
-    // Pin Drawing
+    // 4. Pin Graphics
+    const isSale = currentPin.transaction_type === 'sale' || (currentPin.feedback && currentPin.feedback.includes('[FOR_SALE'));
+    const pinColor = isSale ? "#8B263E" : (currentPin.is_listing ? "#22c55e" : (currentPin.gated ? "#2563eb" : "#d97706"));
+
     const pinX = 540;
-    const pinY = 650;
+    const pinY = 560;
     ctx.beginPath();
-    ctx.arc(pinX, pinY - 80, 100, 0, Math.PI, true);
-    ctx.lineTo(pinX, pinY + 80);
+    ctx.arc(pinX, pinY - 70, 90, 0, Math.PI, true);
+    ctx.lineTo(pinX, pinY + 70);
     ctx.closePath();
-    ctx.fillStyle = "#ff3e00";
+    ctx.fillStyle = pinColor;
     ctx.fill();
-    // Inner circle
+
     ctx.beginPath();
-    ctx.arc(pinX, pinY - 80, 35, 0, Math.PI * 2);
-    ctx.fillStyle = "#0d0d0d";
+    ctx.arc(pinX, pinY - 70, 32, 0, Math.PI * 2);
+    ctx.fillStyle = "#0c0a09";
     ctx.fill();
 
-    // Details
-    const flatType = currentPin.is_listing ? (currentPin.looking_for_flatmate ? 'Room in Shared Flat' : 'Whole Flat') : 'Rent Report';
-    ctx.fillStyle = "#9ca3af";
-    ctx.font = "700 36px 'Inter', sans-serif";
-    ctx.fillText(`${currentPin.bhk} BHK • ${flatType.toUpperCase()}`, 540, 950);
-
-    const rentFormatted = Number(currentPin.rent).toLocaleString('en-IN');
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "900 110px 'Inter', sans-serif";
-    ctx.fillText(`₹${rentFormatted}`, 540, 1080);
+    // 5. Category Badge Text
+    const flatType = isSale 
+        ? 'FOR SALE' 
+        : (currentPin.is_listing ? (currentPin.looking_for_flatmate ? 'Room in Shared Flat' : 'Whole Flat Listed') : (currentPin.gated ? 'Gated Community Rent' : 'Standalone Rent'));
     
-    ctx.fillStyle = "#ff3e00";
-    ctx.font = "700 36px 'Inter', sans-serif";
-    ctx.fillText("/ month", 540, 1170);
+    ctx.fillStyle = "#9ca3af";
+    const badgeText = `${currentPin.bhk} BHK • ${flatType.toUpperCase()}`;
+    drawFittedText(ctx, badgeText, 540, 750, 34, 22, 860, "'Inter', sans-serif", '700');
 
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "italic 700 56px 'Georgia', serif";
-    ctx.fillText(`at ${currentPin.area || 'Chennai'}`, 540, 1300);
-
-    if (currentPin.society) {
-        ctx.fillStyle = "#cbd5e1";
-        ctx.font = "500 36px 'Inter', sans-serif";
-        ctx.fillText(currentPin.society, 540, 1380);
+    // 6. Price Display
+    let priceText = '';
+    let unitText = '';
+    if (isSale) {
+        const saleAmt = currentPin.sale_price || currentPin.rent;
+        priceText = formatInLakhsCrores(saleAmt);
+        unitText = "Total Asking Price";
+    } else {
+        const rentFormatted = Number(currentPin.rent).toLocaleString('en-IN');
+        priceText = `₹${rentFormatted}`;
+        unitText = "/ month";
     }
 
-    // Bottom divider
-    ctx.strokeStyle = "rgba(255, 62, 0, 0.3)";
+    ctx.fillStyle = "#ffffff";
+    drawFittedText(ctx, priceText, 540, 880, 100, 56, 860, "'Plus Jakarta Sans', 'Inter', sans-serif", '900');
+
+    ctx.fillStyle = "#ff6b35";
+    ctx.font = "700 32px 'Inter', sans-serif";
+    ctx.fillText(unitText, 540, 960);
+
+    // 7. Locality / Area
+    const areaName = currentPin.area || 'Chennai';
+    ctx.fillStyle = "#ffffff";
+    drawFittedText(ctx, `in ${areaName}`, 540, 1080, 54, 30, 860, "Georgia, serif", 'italic 700');
+
+    // 8. Society / Building
+    let nextY = 1150;
+    if (currentPin.society) {
+        ctx.fillStyle = "#cbd5e1";
+        ctx.font = "600 34px 'Inter', sans-serif";
+        const societyText = currentPin.society;
+        if (ctx.measureText(societyText).width > 860) {
+            ctx.font = "600 28px 'Inter', sans-serif";
+            nextY = drawWrappedText(ctx, societyText, 540, nextY, 860, 38, 2);
+        } else {
+            ctx.fillText(societyText, 540, nextY);
+            nextY += 46;
+        }
+    }
+
+    // 9. Key Highlights Row
+    const highlights = [];
+    if (currentPin.sqft) highlights.push(`${currentPin.sqft} sq.ft`);
+    if (currentPin.furnishing && currentPin.furnishing !== 'unspecified') {
+        highlights.push(currentPin.furnishing.replace(/_/g, ' ').toUpperCase());
+    }
+    if (currentPin.pets_allowed === 'yes') highlights.push('PETS ALLOWED 🐕');
+    if (currentPin.advance_months) highlights.push(`${currentPin.advance_months}M ADVANCE`);
+
+    if (highlights.length > 0) {
+        ctx.fillStyle = "#94a3b8";
+        drawFittedText(ctx, highlights.join('  •  '), 540, nextY + 30, 24, 18, 860, "'Inter', sans-serif", '600');
+        nextY += 70;
+    }
+
+    // 10. Feedback Snippet
+    if (currentPin.feedback && !currentPin.feedback.startsWith('[FOR_SALE')) {
+        ctx.fillStyle = "#a1a1aa";
+        ctx.font = "italic 26px 'Inter', Georgia, sans-serif";
+        const cleanFeedback = `"${currentPin.feedback.replace(/\s+/g, ' ').trim()}"`;
+        drawWrappedText(ctx, cleanFeedback, 540, Math.max(nextY + 30, 1340), 840, 38, 2);
+    }
+
+    // 11. Bottom Divider
+    ctx.strokeStyle = "rgba(255, 62, 0, 0.4)";
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(150, 1500);
-    ctx.lineTo(930, 1500);
+    ctx.moveTo(120, 1530);
+    ctx.lineTo(960, 1530);
     ctx.stroke();
 
-    // CTA
+    // 12. Bottom Trust Statement & Brand
     ctx.fillStyle = "#9ca3af";
-    ctx.font = "500 28px 'Inter', sans-serif";
-    ctx.fillText("Spot broker inflation. Share what you pay.", 540, 1590);
-    ctx.fillText("Help map Chennai's rents anonymously.", 540, 1640);
+    ctx.font = "500 26px 'Inter', sans-serif";
+    ctx.fillText("Spot broker inflation. Help map Chennai's rents anonymously.", 540, 1605);
+    ctx.fillStyle = "#e2e8f0";
+    ctx.font = "600 24px 'Inter', sans-serif";
+    ctx.fillText("Real tenant-reported data • 100% free • Zero broker fees", 540, 1655);
 
     ctx.fillStyle = "#ff3e00";
-    ctx.font = "bold 48px 'Inter', sans-serif";
-    ctx.fillText("www.chennairents.in", 540, 1770);
+    ctx.font = "800 46px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("www.chennairents.in", 540, 1750);
 
-    const link = document.createElement("a");
-    link.download = `chennai_rent_${currentPin.bhk}bhk_${(currentPin.area || 'locality').replace(/\s+/g, '_').toLowerCase()}.png`;
-    link.href = canvas.toDataURL("image/png");
-    link.click();
+    const dataUrl = canvas.toDataURL("image/png");
+    window._currentStoryDataUrl = dataUrl;
+    window._currentStoryFilename = `chennai_rent_${currentPin.bhk}bhk_${(currentPin.area || 'chennai').replace(/[^a-zA-Z0-9]+/g, '_').toLowerCase()}.png`;
+
+    // Immediately display the Story preview modal
+    const previewImg = document.getElementById("ig-story-preview-img");
+    if (previewImg) previewImg.src = dataUrl;
+    openModal("ig-story-modal");
+
+    // Prepare blob in background for native file sharing
+    canvas.toBlob((blob) => {
+        window._currentStoryBlob = blob;
+    }, 'image/png');
+};
+
+window.openInstagramDirectly = async function() {
+    // If browser supports native Web Share with files, invoke during this user tap
+    if (navigator.canShare && window._currentStoryBlob) {
+        try {
+            const file = new File([window._currentStoryBlob], window._currentStoryFilename || 'chennai-rents-story.png', { type: 'image/png' });
+            if (navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                    files: [file],
+                    title: `Chennai Rents: ${currentPin ? currentPin.bhk : ''} BHK in ${currentPin ? (currentPin.area || 'Chennai') : 'Chennai'}`,
+                    text: `Crowdsourced rent transparency for Chennai on chennairents.in`,
+                    url: 'https://www.chennairents.in/listings'
+                });
+                return;
+            }
+        } catch (err) {
+            if (err.name === 'AbortError') return;
+        }
+    }
+
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (isMobile) {
+        window.location.href = "instagram://story-camera";
+        setTimeout(() => {
+            window.open("https://www.instagram.com/", "_blank");
+        }, 1200);
+    } else {
+        window.open("https://www.instagram.com/", "_blank");
+    }
+};
+
+window.copyStoryLink = function() {
+    const url = window.location.origin + '/listings';
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(() => {
+            const btn = document.getElementById("ig-copy-link-btn");
+            if (btn) {
+                const prev = btn.innerHTML;
+                btn.innerHTML = "✓ Link Copied to Clipboard!";
+                btn.style.color = "#22c55e";
+                setTimeout(() => {
+                    btn.innerHTML = prev;
+                    btn.style.color = "";
+                }, 2500);
+            }
+        });
+    }
+};
+
+window.saveGeneratedStoryImage = function() {
+    if (!window._currentStoryDataUrl) return;
+    const a = document.createElement("a");
+    a.download = window._currentStoryFilename || "chennai-rents-story.png";
+    a.href = window._currentStoryDataUrl;
+    a.click();
+    const btn = document.getElementById("ig-save-img-btn");
+    if (btn) {
+        const prev = btn.innerHTML;
+        btn.innerHTML = "✓ Image Saved to Downloads!";
+        setTimeout(() => { btn.innerHTML = prev; }, 2500);
+    }
 };
 
 window.openExpressInterest = function() {
