@@ -421,12 +421,46 @@ export default function PostTemplate() {
         <h3 style={{ marginBottom: '1.25rem' }}>Explore More</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           {post.nearbyAreas?.map((area, i) => (
-            <Link key={`mob-near-${i}`} to={`/rent/${area.slug}`} className="btn-dark" style={{ backgroundColor: '#F8F5EE', color: 'var(--c-ink) !important', border: '1px solid var(--c-border)', justifyContent: 'flex-start' }}>
+            <Link
+              key={`mob-near-${i}`}
+              to={`/chennai/${area.slug}`}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                backgroundColor: '#F8F5EE',
+                color: 'var(--c-ink)',
+                border: '1px solid var(--c-border)',
+                borderRadius: 'var(--radius-md, 8px)',
+                padding: '0.65rem 1rem',
+                textDecoration: 'none',
+                fontFamily: 'var(--font-heading)',
+                fontWeight: 700,
+                fontSize: '0.92rem',
+              }}
+            >
               📍 {area.name}
             </Link>
           ))}
           {post.relatedGuides?.map((guide, i) => (
-            <Link key={`mob-guide-${i}`} to={`/guide/${guide.slug}`} className="btn-dark" style={{ backgroundColor: '#EBF3FA', color: 'var(--c-ink) !important', border: '1px solid var(--c-marina-blue)', justifyContent: 'flex-start' }}>
+            <Link
+              key={`mob-guide-${i}`}
+              to={`/guides/${guide.slug}`}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                backgroundColor: '#EBF3FA',
+                color: 'var(--c-marina-blue-dk)',
+                border: '1px solid var(--c-marina-blue)',
+                borderRadius: 'var(--radius-md, 8px)',
+                padding: '0.65rem 1rem',
+                textDecoration: 'none',
+                fontFamily: 'var(--font-heading)',
+                fontWeight: 700,
+                fontSize: '0.92rem',
+              }}
+            >
               📘 {guide.title}
             </Link>
           ))}
