@@ -51,9 +51,10 @@ export default function Header() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          paddingBlock: '0.7rem',
-          minHeight: '70px',
-          gap: '1rem',
+          paddingBlock: '0.6rem',
+          minHeight: '64px',
+          gap: '0.5rem',
+          overflow: 'hidden',
         }}
       >
         {/* Official Brand Logo & Identity */}
@@ -63,8 +64,9 @@ export default function Header() {
             textDecoration: 'none',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.85rem',
-            flexShrink: 0,
+            gap: '0.6rem',
+            flexShrink: 1,
+            minWidth: 0,
           }}
           aria-label="Chennai Rents home"
         >
@@ -72,7 +74,7 @@ export default function Header() {
             src="/chennai-rents-icon-transparent.png"
             alt="Chennai Rents"
             style={{
-              height: '42px',
+              height: '38px',
               width: 'auto',
               objectFit: 'contain',
               display: 'block',
@@ -85,25 +87,27 @@ export default function Header() {
               flexDirection: 'column',
               justifyContent: 'center',
               borderLeft: '1.5px solid var(--c-border)',
-              paddingLeft: '0.85rem',
+              paddingLeft: '0.65rem',
               lineHeight: 1.15,
+              minWidth: 0,
             }}
           >
             <div
               style={{
                 display: 'flex',
                 alignItems: 'baseline',
-                gap: '0.28rem',
+                gap: '0.22rem',
               }}
             >
               <span
                 style={{
                   fontFamily: 'var(--font-heading)',
                   fontWeight: 800,
-                  fontSize: '1.25rem',
+                  fontSize: 'clamp(1rem, 3.5vw, 1.25rem)',
                   color: 'var(--c-ink)',
                   letterSpacing: '-0.025em',
                   lineHeight: 1.1,
+                  whiteSpace: 'nowrap',
                 }}
               >
                 Chennai
@@ -112,10 +116,11 @@ export default function Header() {
                 style={{
                   fontFamily: 'var(--font-heading)',
                   fontWeight: 900,
-                  fontSize: '1.25rem',
+                  fontSize: 'clamp(1rem, 3.5vw, 1.25rem)',
                   color: 'var(--c-auto-yellow-dk)',
                   letterSpacing: '-0.02em',
                   lineHeight: 1.1,
+                  whiteSpace: 'nowrap',
                 }}
               >
                 Rents
@@ -125,9 +130,9 @@ export default function Header() {
               style={{
                 fontFamily: 'var(--font-body)',
                 fontWeight: 600,
-                fontSize: '0.68rem',
+                fontSize: '0.65rem',
                 color: 'var(--c-ink-muted)',
-                letterSpacing: '0.04em',
+                letterSpacing: '0.03em',
                 lineHeight: 1.2,
                 marginTop: '2px',
                 whiteSpace: 'nowrap',
@@ -222,22 +227,23 @@ export default function Header() {
 
         {/* Mobile menu trigger */}
         <div
-          style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}
           className="cr-mobile-controls"
         >
           <a
             href="/listings/list-property.html"
             className="btn-red"
             style={{
-              padding: '0.4rem 0.85rem',
-              fontSize: '0.82rem',
+              padding: '0.38rem 0.75rem',
+              fontSize: '0.8rem',
               minHeight: '36px',
               borderRadius: '6px',
               whiteSpace: 'nowrap',
+              flexShrink: 0,
             }}
           >
-            <Plus size={14} />
-            <span>List</span>
+            <Plus size={13} />
+            <span className="hdr-list-label">List</span>
           </a>
 
           <button
@@ -246,19 +252,20 @@ export default function Header() {
               background: 'var(--c-card-bg)',
               border: '1.5px solid var(--c-border)',
               borderRadius: '6px',
-              padding: '0.45rem',
+              padding: '0.42rem',
               cursor: 'pointer',
               color: 'var(--c-ink)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              minWidth: '40px',
-              minHeight: '40px',
+              minWidth: '38px',
+              minHeight: '38px',
+              flexShrink: 0,
             }}
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            {mobileMenuOpen ? <X size={19} /> : <Menu size={19} />}
           </button>
         </div>
       </div>
