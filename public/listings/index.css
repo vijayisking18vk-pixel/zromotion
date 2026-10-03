@@ -2357,9 +2357,9 @@ h1, h2, h3, h4, .modal-title, .feed-title, .page-title, .brand-text, .detail-amo
 }
 
 /* ----- body and html overrides for map page ----- */
+/* NOTE: Do NOT override background/color here — the map page uses a dark theme (#0d0d0d).
+   These overrides only apply to font rendering. */
 html.map-page,
 body.map-page {
-    background-color: var(--c-page-bg) !important;
     font-family: var(--font-body) !important;
-    color: var(--c-ink) !important;
 }
