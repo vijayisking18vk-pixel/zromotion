@@ -145,24 +145,25 @@
         </button>
     </div>
 
-    <!-- Chicklet Action Bar Shortcuts -->
-    <div class="chicklet-bar" id="chicklet-bar">
-        <button class="chicklet" onclick="window.location.href='/'"><span class="chicklet-icon">🏠</span>Home</button>
-        <!-- Mode switcher -->
-        <div class="chicklet-mode-group">
-            <button class="chicklet chicklet-mode active" id="mode-btn-all" onclick="setTransactionMode('all')">All</button>
-            <button class="chicklet chicklet-mode" id="mode-btn-rent" onclick="setTransactionMode('rent')">🏠 Rent</button>
-            <button class="chicklet chicklet-mode" id="mode-btn-sale" onclick="setTransactionMode('sale')">🏷️ Buy & Sell</button>
+    <!-- Chicklet Action Bar Shortcuts (Streamlined with Navigation Controls) -->
+    <div class="chicklet-nav-wrap">
+        <button class="chicklet-scroll-arrow left" id="chicklet-scroll-left" onclick="scrollChickletRow(-220)" aria-label="Scroll left" style="display:none;">‹</button>
+        <div class="chicklet-bar" id="chicklet-bar">
+            <!-- Mode switcher -->
+            <div class="chicklet-mode-group">
+                <button class="chicklet chicklet-mode active" id="chicklet-mode-all" onclick="setTransactionMode('all')">All</button>
+                <button class="chicklet chicklet-mode" id="chicklet-mode-rent" onclick="setTransactionMode('rent')">🏠 Rent</button>
+                <button class="chicklet chicklet-mode" id="chicklet-mode-sale" onclick="setTransactionMode('sale')">🏷️ Buy & Sell</button>
+            </div>
+            <button class="chicklet" id="chicklet-pin" onclick="startPinFlow()"><span class="chicklet-icon">📌</span>Pin Price</button>
+            <button class="chicklet" id="chicklet-list" onclick="startOwnerFlow()"><span class="chicklet-icon">💼</span>List Property</button>
+            <button class="chicklet" onclick="startSeekerFlow()"><span class="chicklet-icon">🔍</span>Find Home</button>
+            <button class="chicklet" id="chicklet-avlb" onclick="toggleAvailableOnly()"><span class="chicklet-icon">✨</span>Available Only</button>
+            <button class="chicklet" onclick="window.location.href='listings.html'"><span class="chicklet-icon">📋</span>Browse Listings</button>
+            <button class="chicklet" onclick="openLiveStats()"><span class="chicklet-icon">📊</span>Live Stats</button>
+            <button class="chicklet" onclick="openFaq()"><span class="chicklet-icon">❓</span>FAQ</button>
         </div>
-        <button class="chicklet" id="chicklet-pin" onclick="startPinFlow()"><span class="chicklet-icon">📌</span>Pin Price</button>
-        <button class="chicklet" id="chicklet-list" onclick="startOwnerFlow()"><span class="chicklet-icon">💼</span>List Property</button>
-        <button class="chicklet" onclick="startSeekerFlow()"><span class="chicklet-icon">🔍</span>Find Home</button>
-        <button class="chicklet" onclick="window.location.href='listings.html'"><span class="chicklet-icon">📋</span>Browse Listings</button>
-        <button class="chicklet" id="chicklet-avlb" onclick="toggleAvailableOnly()"><span class="chicklet-icon">✨</span>Available Only</button>
-        <button class="chicklet" onclick="openLiveStats()"><span class="chicklet-icon">📊</span>Live Stats</button>
-        <button class="chicklet" onclick="openContentPortal()"><span class="chicklet-icon">📚</span>Guides</button>
-        <button class="chicklet" onclick="openTutorial()"><span class="chicklet-icon">🎓</span>How to use</button>
-        <button class="chicklet" onclick="openFaq()"><span class="chicklet-icon">❓</span>FAQ</button>
+        <button class="chicklet-scroll-arrow right" id="chicklet-scroll-right" onclick="scrollChickletRow(220)" aria-label="Scroll right" style="display:none;">›</button>
     </div>
 
     <!-- Map Control Stack (Right Side Floating HUD) -->

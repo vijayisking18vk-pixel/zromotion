@@ -205,9 +205,62 @@ const METRO_LINES = {
     }
 };
 
+// Chicklet Horizontal Navigation & Arrow Controls
+window.scrollChickletRow = function(offset) {
+    const bar = document.getElementById("chicklet-bar");
+    if (bar) {
+        bar.scrollBy({ left: offset, behavior: 'smooth' });
+        setTimeout(updateChickletArrows, 280);
+    }
+};
+
+function updateChickletArrows() {
+    const bar = document.getElementById("chicklet-bar");
+    const leftBtn = document.getElementById("chicklet-scroll-left");
+    const rightBtn = document.getElementById("chicklet-scroll-right");
+    if (!bar || !leftBtn || !rightBtn) return;
+
+    if (window.innerWidth <= 640) {
+        leftBtn.style.display = 'none';
+        rightBtn.style.display = 'none';
+        return;
+    }
+
+    const maxScroll = bar.scrollWidth - bar.clientWidth;
+    if (maxScroll > 6) {
+        leftBtn.style.display = bar.scrollLeft > 6 ? 'flex' : 'none';
+        rightBtn.style.display = bar.scrollLeft < maxScroll - 6 ? 'flex' : 'none';
+    } else {
+        leftBtn.style.display = 'none';
+        rightBtn.style.display = 'none';
+    }
+}
+
+function initChickletNavigation() {
+    const bar = document.getElementById("chicklet-bar");
+    if (!bar) return;
+
+    bar.addEventListener("scroll", updateChickletArrows, { passive: true });
+    window.addEventListener("resize", updateChickletArrows);
+
+    // Mouse wheel horizontal scrolling: when hovering over the chicklet bar, vertical wheel scrolls horizontally
+    bar.addEventListener("wheel", (e) => {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+            e.preventDefault();
+            bar.scrollLeft += e.deltaY;
+            updateChickletArrows();
+        }
+    }, { passive: false });
+
+    // Initial check
+    updateChickletArrows();
+    setTimeout(updateChickletArrows, 400);
+}
+
 // 4. Initialize Application
 document.addEventListener("DOMContentLoaded", async () => {
     initDeviceId();
+    initChickletNavigation();
     // Don't await IP hash — it's only needed for pin submission, not map render
     fetchIpAndHash();
     initMap();
