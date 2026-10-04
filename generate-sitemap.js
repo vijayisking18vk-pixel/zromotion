@@ -9,6 +9,7 @@ const __dirname = path.dirname(__filename);
 import { LOCALITIES, shouldIndexPage, parseIntent } from './src/data/localities.js';
 import { POSTS } from './src/data/posts.js';
 import { SUPPORTING_RENTAL_PAGES } from './src/data/rentalGuideData.js';
+import { VELACHERY_PAGES } from './src/data/velacheryLandingPages.js';
 
 const DOMAIN = 'https://www.chennairents.in';
 
@@ -123,6 +124,11 @@ function generateSitemaps() {
         facetUrls.push(`${DOMAIN}/chennai/${loc.slug}/${facet}`);
       }
     });
+  });
+
+  // 3b. Velachery Programmatic SEO Landing Pages (19 long-form micro-markets)
+  VELACHERY_PAGES.forEach((page) => {
+    facetUrls.push(page.canonical);
   });
 
   // 4. Authentic editorial guide posts (/guides/:slug) and data stories (/stories/:slug)

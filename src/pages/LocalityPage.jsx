@@ -24,6 +24,8 @@ import { GUIDE_POSTS } from '../data/posts';
 import { AUTHOR_INFO } from '../data/rentalGuideData';
 import SEOHead from '../components/SEOHead';
 import MarinaDivider from '../components/MarinaDivider';
+import { VELACHERY_PAGES_MAP } from '../data/velacheryLandingPages';
+import VelacheryLandingPage from './VelacheryLandingPage';
 
 // ─── FAQ Accordion ────────────────────────────────────────────────────────────
 function FAQItem({ q, a, idx }) {
@@ -376,6 +378,11 @@ export default function LocalityPage({ localitySlug: propSlug }) {
   // 404 → redirect to Chennai hub
   if (!locality) {
     return <Navigate to="/chennai/rentals" replace />;
+  }
+
+  // Velachery Programmatic SEO Landing Pages
+  if (locality.slug === 'velachery' && intent && VELACHERY_PAGES_MAP[intent]) {
+    return <VelacheryLandingPage data={VELACHERY_PAGES_MAP[intent]} />;
   }
 
   const meta = generateSEOMeta({ locality, intent });

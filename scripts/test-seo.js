@@ -19,6 +19,7 @@ const __dirname = path.dirname(__filename);
 const ROOT_DIR = path.resolve(__dirname, '..');
 const DIST_DIR = path.join(ROOT_DIR, 'dist');
 const PUBLIC_DIR = path.join(ROOT_DIR, 'public');
+import { VELACHERY_PAGES } from '../src/data/velacheryLandingPages.js';
 
 let totalTests = 0;
 let passedTests = 0;
@@ -131,6 +132,20 @@ function runTests() {
           });
         }
       }
+    }
+  });
+
+  // Test Group 1b: Velachery 19 Programmatic Landing Pages
+  console.log('\n🏙️ Test Group 1b: Velachery Programmatic SEO Cluster (19 Slugs)');
+  VELACHERY_PAGES.forEach((vp) => {
+    const pageFile = path.join(DIST_DIR, 'chennai', 'velachery', vp.slug, 'index.html');
+    assert(fs.existsSync(pageFile), `Velachery [${vp.slug}] pre-rendered HTML exists`);
+    if (fs.existsSync(pageFile)) {
+      const content = fs.readFileSync(pageFile, 'utf8');
+      assert(content.includes(vp.canonical), `Canonical URL exact for ${vp.slug}`);
+      assert(content.includes('RealEstateListing') || content.includes('BreadcrumbList'), `JSON-LD Schema present for ${vp.slug}`);
+      const rootMatch = content.match(/<div id="root">([\s\S]*?)<\/div>/i);
+      assert(rootMatch && rootMatch[1].trim().length > 500, `DOM pre-rendered into root for ${vp.slug}`);
     }
   });
 

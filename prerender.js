@@ -24,6 +24,7 @@ const SSR_DIR = path.resolve(__dirname, 'dist-ssr');
 import { LOCALITIES, generateSEOMeta, parseIntent, getIndexingDirective } from './src/data/localities.js';
 import { POSTS } from './src/data/posts.js';
 import { CHENNAI_RENT_HUB_DATA, SUPPORTING_RENTAL_PAGES, AUTHOR_INFO } from './src/data/rentalGuideData.js';
+import { VELACHERY_PAGES, VELACHERY_GEO } from './src/data/velacheryLandingPages.js';
 
 const LOCALITY_FACETS = [
   'flats-for-rent',
@@ -492,6 +493,75 @@ async function runPrerender() {
           },
         ],
       });
+    });
+  });
+
+  // 3b. Velachery Programmatic SEO Landing Pages (19 long-form micro-markets)
+  VELACHERY_PAGES.forEach((page) => {
+    const breadcrumbs = [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
+      { '@type': 'ListItem', position: 3, name: 'Velachery', item: `${DOMAIN}/chennai/velachery` },
+      { '@type': 'ListItem', position: 4, name: page.h1, item: page.canonical },
+    ];
+
+    const schemas = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'RealEstateListing',
+        name: page.h1,
+        description: page.metaDescription,
+        url: page.canonical,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: VELACHERY_GEO.latitude,
+          longitude: VELACHERY_GEO.longitude,
+        },
+        geoWithin: {
+          '@type': 'GeoShape',
+          box: `${VELACHERY_GEO.geoBoundingBox.south} ${VELACHERY_GEO.geoBoundingBox.west} ${VELACHERY_GEO.geoBoundingBox.north} ${VELACHERY_GEO.geoBoundingBox.east}`,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Velachery',
+          addressRegion: 'Tamil Nadu',
+          addressCountry: 'IN',
+          postalCode: VELACHERY_GEO.pincode,
+        },
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'INR',
+          lowPrice: page.priceRange.min,
+          highPrice: page.priceRange.max,
+          offerCount: 25,
+        },
+      },
+    ];
+
+    if (page.faqs && page.faqs.length > 0) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: page.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      });
+    }
+
+    routes.push({
+      path: `/chennai/velachery/${page.slug}`,
+      title: page.metaTitle,
+      description: page.metaDescription,
+      canonical: page.canonical,
+      robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+      schema: schemas,
     });
   });
 
