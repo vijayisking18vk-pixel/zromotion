@@ -27,6 +27,9 @@ import { CHENNAI_RENT_HUB_DATA, SUPPORTING_RENTAL_PAGES, AUTHOR_INFO } from './s
 import { VELACHERY_PAGES, VELACHERY_GEO } from './src/data/velacheryLandingPages.js';
 import { VALASARAVAKKAM_PAGES, VALASARAVAKKAM_GEO } from './src/data/valasaravakkamLandingPages.js';
 import { ADYAR_PAGES, ADYAR_GEO } from './src/data/adyarLandingPages.js';
+import { SHOLINGANALLUR_PAGES, SHOLINGANALLUR_GEO } from './src/data/sholinganallurLandingPages.js';
+import { PORUR_PAGES, PORUR_GEO } from './src/data/porurLandingPages.js';
+import { ANNA_NAGAR_PAGES, ANNA_NAGAR_GEO } from './src/data/annaNagarLandingPages.js';
 
 const LOCALITY_FACETS = [
   'flats-for-rent',
@@ -697,6 +700,213 @@ async function runPrerender() {
 
     routes.push({
       path: `/chennai/adyar/${page.slug}`,
+      title: page.metaTitle,
+      description: page.metaDescription,
+      canonical: page.canonical,
+      robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+      schema: schemas,
+    });
+  });
+
+  // 3e. Sholinganallur Programmatic SEO Landing Pages (19 long-form micro-markets)
+  SHOLINGANALLUR_PAGES.forEach((page) => {
+    const breadcrumbs = [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
+      { '@type': 'ListItem', position: 3, name: 'Sholinganallur', item: `${DOMAIN}/chennai/sholinganallur` },
+      { '@type': 'ListItem', position: 4, name: page.h1, item: page.canonical },
+    ];
+
+    const schemas = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'RealEstateListing',
+        name: page.h1,
+        description: page.metaDescription,
+        url: page.canonical,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: SHOLINGANALLUR_GEO.latitude,
+          longitude: SHOLINGANALLUR_GEO.longitude,
+        },
+        geoWithin: {
+          '@type': 'GeoShape',
+          box: `${SHOLINGANALLUR_GEO.geoBoundingBox.south} ${SHOLINGANALLUR_GEO.geoBoundingBox.west} ${SHOLINGANALLUR_GEO.geoBoundingBox.north} ${SHOLINGANALLUR_GEO.geoBoundingBox.east}`,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Sholinganallur',
+          addressRegion: 'Tamil Nadu',
+          addressCountry: 'IN',
+          postalCode: SHOLINGANALLUR_GEO.pincode,
+        },
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'INR',
+          lowPrice: page.priceRange.min,
+          highPrice: page.priceRange.max,
+          offerCount: 28,
+        },
+      },
+    ];
+
+    if (page.faqs && page.faqs.length > 0) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: page.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      });
+    }
+
+    routes.push({
+      path: `/chennai/sholinganallur/${page.slug}`,
+      title: page.metaTitle,
+      description: page.metaDescription,
+      canonical: page.canonical,
+      robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+      schema: schemas,
+    });
+  });
+
+  // 3f. Porur Programmatic SEO Landing Pages (19 long-form micro-markets)
+  PORUR_PAGES.forEach((page) => {
+    const breadcrumbs = [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
+      { '@type': 'ListItem', position: 3, name: 'Porur', item: `${DOMAIN}/chennai/porur` },
+      { '@type': 'ListItem', position: 4, name: page.h1, item: page.canonical },
+    ];
+
+    const schemas = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'RealEstateListing',
+        name: page.h1,
+        description: page.metaDescription,
+        url: page.canonical,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: PORUR_GEO.latitude,
+          longitude: PORUR_GEO.longitude,
+        },
+        geoWithin: {
+          '@type': 'GeoShape',
+          box: `${PORUR_GEO.geoBoundingBox.south} ${PORUR_GEO.geoBoundingBox.west} ${PORUR_GEO.geoBoundingBox.north} ${PORUR_GEO.geoBoundingBox.east}`,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Porur',
+          addressRegion: 'Tamil Nadu',
+          addressCountry: 'IN',
+          postalCode: PORUR_GEO.pincode,
+        },
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'INR',
+          lowPrice: page.priceRange.min,
+          highPrice: page.priceRange.max,
+          offerCount: 30,
+        },
+      },
+    ];
+
+    if (page.faqs && page.faqs.length > 0) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: page.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      });
+    }
+
+    routes.push({
+      path: `/chennai/porur/${page.slug}`,
+      title: page.metaTitle,
+      description: page.metaDescription,
+      canonical: page.canonical,
+      robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+      schema: schemas,
+    });
+  });
+
+  // 3g. Anna Nagar Programmatic SEO Landing Pages (19 long-form micro-markets)
+  ANNA_NAGAR_PAGES.forEach((page) => {
+    const breadcrumbs = [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
+      { '@type': 'ListItem', position: 3, name: 'Anna Nagar', item: `${DOMAIN}/chennai/anna-nagar` },
+      { '@type': 'ListItem', position: 4, name: page.h1, item: page.canonical },
+    ];
+
+    const schemas = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'RealEstateListing',
+        name: page.h1,
+        description: page.metaDescription,
+        url: page.canonical,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: ANNA_NAGAR_GEO.latitude,
+          longitude: ANNA_NAGAR_GEO.longitude,
+        },
+        geoWithin: {
+          '@type': 'GeoShape',
+          box: `${ANNA_NAGAR_GEO.geoBoundingBox.south} ${ANNA_NAGAR_GEO.geoBoundingBox.west} ${ANNA_NAGAR_GEO.geoBoundingBox.north} ${ANNA_NAGAR_GEO.geoBoundingBox.east}`,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Anna Nagar',
+          addressRegion: 'Tamil Nadu',
+          addressCountry: 'IN',
+          postalCode: ANNA_NAGAR_GEO.pincode,
+        },
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'INR',
+          lowPrice: page.priceRange.min,
+          highPrice: page.priceRange.max,
+          offerCount: 35,
+        },
+      },
+    ];
+
+    if (page.faqs && page.faqs.length > 0) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: page.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      });
+    }
+
+    routes.push({
+      path: `/chennai/anna-nagar/${page.slug}`,
       title: page.metaTitle,
       description: page.metaDescription,
       canonical: page.canonical,

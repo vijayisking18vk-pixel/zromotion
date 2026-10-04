@@ -12,6 +12,9 @@ import { SUPPORTING_RENTAL_PAGES } from './src/data/rentalGuideData.js';
 import { VELACHERY_PAGES } from './src/data/velacheryLandingPages.js';
 import { VALASARAVAKKAM_PAGES } from './src/data/valasaravakkamLandingPages.js';
 import { ADYAR_PAGES } from './src/data/adyarLandingPages.js';
+import { SHOLINGANALLUR_PAGES } from './src/data/sholinganallurLandingPages.js';
+import { PORUR_PAGES } from './src/data/porurLandingPages.js';
+import { ANNA_NAGAR_PAGES } from './src/data/annaNagarLandingPages.js';
 
 const DOMAIN = 'https://www.chennairents.in';
 
@@ -140,6 +143,21 @@ function generateSitemaps() {
 
   // 3d. Adyar Programmatic SEO Landing Pages (19 long-form micro-markets)
   ADYAR_PAGES.forEach((page) => {
+    facetUrls.push(page.canonical);
+  });
+
+  // 3e. Sholinganallur Programmatic SEO Landing Pages (19 long-form micro-markets)
+  SHOLINGANALLUR_PAGES.forEach((page) => {
+    facetUrls.push(page.canonical);
+  });
+
+  // 3f. Porur Programmatic SEO Landing Pages (19 long-form micro-markets)
+  PORUR_PAGES.forEach((page) => {
+    facetUrls.push(page.canonical);
+  });
+
+  // 3g. Anna Nagar Programmatic SEO Landing Pages (19 long-form micro-markets)
+  ANNA_NAGAR_PAGES.forEach((page) => {
     facetUrls.push(page.canonical);
   });
 

@@ -30,6 +30,12 @@ import { VALASARAVAKKAM_PAGES_MAP } from '../data/valasaravakkamLandingPages';
 import ValasaravakkamLandingPage from './ValasaravakkamLandingPage';
 import { ADYAR_PAGES_MAP } from '../data/adyarLandingPages';
 import AdyarLandingPage from './AdyarLandingPage';
+import { SHOLINGANALLUR_PAGES_MAP } from '../data/sholinganallurLandingPages';
+import SholinganallurLandingPage from './SholinganallurLandingPage';
+import { PORUR_PAGES_MAP } from '../data/porurLandingPages';
+import PorurLandingPage from './PorurLandingPage';
+import { ANNA_NAGAR_PAGES_MAP } from '../data/annaNagarLandingPages';
+import AnnaNagarLandingPage from './AnnaNagarLandingPage';
 
 // ─── FAQ Accordion ────────────────────────────────────────────────────────────
 function FAQItem({ q, a, idx }) {
@@ -397,6 +403,21 @@ export default function LocalityPage({ localitySlug: propSlug }) {
   // Adyar Programmatic SEO Landing Pages
   if (locality.slug === 'adyar' && intent && ADYAR_PAGES_MAP[intent]) {
     return <AdyarLandingPage data={ADYAR_PAGES_MAP[intent]} />;
+  }
+
+  // Sholinganallur Programmatic SEO Landing Pages
+  if (locality.slug === 'sholinganallur' && intent && SHOLINGANALLUR_PAGES_MAP[intent]) {
+    return <SholinganallurLandingPage data={SHOLINGANALLUR_PAGES_MAP[intent]} />;
+  }
+
+  // Porur Programmatic SEO Landing Pages
+  if (locality.slug === 'porur' && intent && PORUR_PAGES_MAP[intent]) {
+    return <PorurLandingPage data={PORUR_PAGES_MAP[intent]} />;
+  }
+
+  // Anna Nagar Programmatic SEO Landing Pages
+  if (locality.slug === 'anna-nagar' && intent && ANNA_NAGAR_PAGES_MAP[intent]) {
+    return <AnnaNagarLandingPage data={ANNA_NAGAR_PAGES_MAP[intent]} />;
   }
 
   const meta = generateSEOMeta({ locality, intent });
