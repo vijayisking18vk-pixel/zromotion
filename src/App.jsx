@@ -55,6 +55,18 @@ function ListingsRedirect() {
   );
 }
 
+// Hard-redirect helper to cleanly transition to static authors team page
+function AuthorsRedirect() {
+  useEffect(() => {
+    window.location.replace('/authors');
+  }, []);
+  return (
+    <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-heading)' }}>
+      <p style={{ color: 'var(--c-ink-muted)', fontSize: '1.1rem' }}>Loading Chennai Rents Team...</p>
+    </div>
+  );
+}
+
 // ─── Scroll-To-Top on Route Change ─────────────────────────────────────────
 function ScrollToTop() {
   const { pathname, search, hash } = useLocation();
@@ -156,6 +168,11 @@ export default function App() {
             <Route path="/listings" element={<ListingsRedirect />} />
             <Route path="/listings/*" element={<ListingsRedirect />} />
             <Route path="/map" element={<ListingsRedirect />} />
+
+            {/* ── AUTHORS / TEAM (Direct to static authors team page) ── */}
+            <Route path="/authors" element={<AuthorsRedirect />} />
+            <Route path="/authors/*" element={<AuthorsRedirect />} />
+            <Route path="/author" element={<AuthorsRedirect />} />
 
             {/* ── SEO GEO ROUTES ── */}
             {/* City hub */}

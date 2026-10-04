@@ -59,7 +59,10 @@
     { "source": "/3-bhk-house-for-rent-in-chennai.html", "destination": "/3-bhk-house-for-rent-in-chennai", "permanent": true },
     { "source": "/house-for-rent-in-chennai.html", "destination": "/house-for-rent-in-chennai", "permanent": true },
     { "source": "/house-rent-in-chennai.html", "destination": "/house-rent-in-chennai", "permanent": true },
-    { "source": "/listings/index.html", "destination": "/listings", "permanent": true }
+    { "source": "/listings/index.html", "destination": "/listings", "permanent": true },
+    { "source": "/author/vijayrajkumar", "destination": "/authors", "permanent": true },
+    { "source": "/author", "destination": "/authors", "permanent": true },
+    { "source": "/author/r-vijayrajkumar", "destination": "/authors", "permanent": true }
   ],
   "headers": [
     {
@@ -82,6 +85,14 @@
     {
       "source": "/api/(.*)",
       "destination": "/api/$1"
+    },
+    {
+      "source": "/authors",
+      "destination": "/authors/index.html"
+    },
+    {
+      "source": "/authors/(.*)",
+      "destination": "/authors/$1"
     },
     {
       "source": "/listings",

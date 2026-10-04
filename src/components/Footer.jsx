@@ -259,8 +259,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/author/vijayrajkumar" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
-                  → Editorial Team & Reviewer Bio
+                <Link to="/authors" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
+                  → Editorial Team & Co-founders
                 </Link>
               </li>
               <li>
