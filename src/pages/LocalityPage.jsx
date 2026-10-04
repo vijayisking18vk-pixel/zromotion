@@ -26,6 +26,8 @@ import SEOHead from '../components/SEOHead';
 import MarinaDivider from '../components/MarinaDivider';
 import { VELACHERY_PAGES_MAP } from '../data/velacheryLandingPages';
 import VelacheryLandingPage from './VelacheryLandingPage';
+import { VALASARAVAKKAM_PAGES_MAP } from '../data/valasaravakkamLandingPages';
+import ValasaravakkamLandingPage from './ValasaravakkamLandingPage';
 
 // ─── FAQ Accordion ────────────────────────────────────────────────────────────
 function FAQItem({ q, a, idx }) {
@@ -383,6 +385,11 @@ export default function LocalityPage({ localitySlug: propSlug }) {
   // Velachery Programmatic SEO Landing Pages
   if (locality.slug === 'velachery' && intent && VELACHERY_PAGES_MAP[intent]) {
     return <VelacheryLandingPage data={VELACHERY_PAGES_MAP[intent]} />;
+  }
+
+  // Valasaravakkam Programmatic SEO Landing Pages
+  if (locality.slug === 'valasaravakkam' && intent && VALASARAVAKKAM_PAGES_MAP[intent]) {
+    return <ValasaravakkamLandingPage data={VALASARAVAKKAM_PAGES_MAP[intent]} />;
   }
 
   const meta = generateSEOMeta({ locality, intent });

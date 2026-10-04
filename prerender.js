@@ -25,6 +25,7 @@ import { LOCALITIES, generateSEOMeta, parseIntent, getIndexingDirective } from '
 import { POSTS } from './src/data/posts.js';
 import { CHENNAI_RENT_HUB_DATA, SUPPORTING_RENTAL_PAGES, AUTHOR_INFO } from './src/data/rentalGuideData.js';
 import { VELACHERY_PAGES, VELACHERY_GEO } from './src/data/velacheryLandingPages.js';
+import { VALASARAVAKKAM_PAGES, VALASARAVAKKAM_GEO } from './src/data/valasaravakkamLandingPages.js';
 
 const LOCALITY_FACETS = [
   'flats-for-rent',
@@ -557,6 +558,75 @@ async function runPrerender() {
 
     routes.push({
       path: `/chennai/velachery/${page.slug}`,
+      title: page.metaTitle,
+      description: page.metaDescription,
+      canonical: page.canonical,
+      robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+      schema: schemas,
+    });
+  });
+
+  // 3c. Valasaravakkam Programmatic SEO Landing Pages (19 long-form micro-markets)
+  VALASARAVAKKAM_PAGES.forEach((page) => {
+    const breadcrumbs = [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
+      { '@type': 'ListItem', position: 3, name: 'Valasaravakkam', item: `${DOMAIN}/chennai/valasaravakkam` },
+      { '@type': 'ListItem', position: 4, name: page.h1, item: page.canonical },
+    ];
+
+    const schemas = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'RealEstateListing',
+        name: page.h1,
+        description: page.metaDescription,
+        url: page.canonical,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: VALASARAVAKKAM_GEO.latitude,
+          longitude: VALASARAVAKKAM_GEO.longitude,
+        },
+        geoWithin: {
+          '@type': 'GeoShape',
+          box: `${VALASARAVAKKAM_GEO.geoBoundingBox.south} ${VALASARAVAKKAM_GEO.geoBoundingBox.west} ${VALASARAVAKKAM_GEO.geoBoundingBox.north} ${VALASARAVAKKAM_GEO.geoBoundingBox.east}`,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Valasaravakkam',
+          addressRegion: 'Tamil Nadu',
+          addressCountry: 'IN',
+          postalCode: VALASARAVAKKAM_GEO.pincode,
+        },
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'INR',
+          lowPrice: page.priceRange.min,
+          highPrice: page.priceRange.max,
+          offerCount: 25,
+        },
+      },
+    ];
+
+    if (page.faqs && page.faqs.length > 0) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: page.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      });
+    }
+
+    routes.push({
+      path: `/chennai/valasaravakkam/${page.slug}`,
       title: page.metaTitle,
       description: page.metaDescription,
       canonical: page.canonical,
