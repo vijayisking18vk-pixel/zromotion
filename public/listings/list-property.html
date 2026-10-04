@@ -99,30 +99,31 @@
       align-items: center;
       gap: 10px;
       text-decoration: none;
-      color: var(--c-ink);
+      color: inherit;
     }
 
-    .brand-mark {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      border: 1px solid var(--c-sand);
-      background: var(--c-card);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--c-red);
+    .brand-logo-img {
+      height: 38px;
+      width: auto;
+      border-radius: 4px;
+      mix-blend-mode: multiply;
+      display: block;
       flex-shrink: 0;
     }
 
     .brand-name {
-      font-size: 1.25rem;
+      display: flex;
+      align-items: baseline;
+      line-height: 1;
+      font-size: 20px;
       font-weight: 700;
+      color: var(--c-ink);
       letter-spacing: -0.02em;
     }
 
     .brand-name span {
       color: var(--c-red);
+      font-weight: 800;
     }
 
     .header-back-link {
@@ -1008,20 +1009,15 @@
       <path d="M50 10v80 M10 50h80 M22 22l56 56 M22 78l56-56"/>
     </svg>
 
-    <!-- Header with illustrated skyline logo mark -->
+    <!-- Header with official brand logo -->
     <header class="site-header">
       <div class="header-inner">
         <a href="/" class="brand-logo" aria-label="ChennaiRents Home">
-          <div class="brand-mark">
-            <!-- Illustrated minimal skyline mark -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B5372B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 21h18"/>
-              <path d="M5 21V9l4-3v15"/>
-              <path d="M9 10h4v11"/>
-              <path d="M15 6h4v15"/>
-              <circle cx="17" cy="4" r="1.2" fill="#B5372B"/>
-            </svg>
-          </div>
+          <img
+            src="/chennai-rents-logo-new.jpg"
+            alt="Chennai Rents Logo"
+            class="brand-logo-img"
+          >
           <div class="brand-name">Chennai<span>Rents</span></div>
         </a>
 
