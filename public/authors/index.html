@@ -648,7 +648,7 @@
       width: 100%;
       position: relative;
       background: var(--bg);
-      padding-top: 32px;
+      padding-top: 100px;
       padding-bottom: 24px;
       margin-top: auto;
       overflow: hidden;
@@ -657,32 +657,30 @@
 
     .skyline-footer-strip {
       width: 100%;
-      height: 160px;
+      height: 240px;
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
       pointer-events: none;
-      opacity: 0.13;
-      color: var(--ink);
-      -webkit-mask-image: linear-gradient(to bottom, transparent, #000 45%);
-      mask-image: linear-gradient(to bottom, transparent, #000 45%);
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 35%);
+      mask-image: linear-gradient(to bottom, transparent 0%, #000 35%);
       z-index: 0;
     }
 
-    @media (min-width: 900px) {
-      .skyline-footer-strip {
-        height: 220px;
-        max-width: 1000px;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-    }
-
-    .skyline-footer-strip svg {
+    .skyline-footer-img {
       width: 100%;
-      height: 100%;
+      max-width: 1100px;
+      height: auto;
+      max-height: 240px;
+      object-fit: cover;
+      object-position: bottom center;
       display: block;
+      opacity: 0.35;
     }
 
     .footer-content {
@@ -920,7 +918,7 @@
   <!-- ── 9. SKYLINE STRIP & FOOTER ── -->
   <footer class="site-footer">
     <div class="skyline-footer-strip" aria-hidden="true">
-      <svg><use href="#skyline-art"/></svg>
+      <img src="/images/chennai-skyline-footer.png" alt="Chennai Skyline" class="skyline-footer-img">
     </div>
 
     <div class="footer-content">

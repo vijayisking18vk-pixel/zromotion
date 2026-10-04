@@ -31,7 +31,49 @@ export default function Footer() {
         paddingBottom: '5.5rem', // extra clearance for sticky mobile bar
       }}
     >
-      {/* Mallipoo Garland — full-width decorative separator above content */}
+      {/* Chennai Skyline Panoramic Backdrop */}
+      <div
+        className="footer-skyline-backdrop"
+        style={{
+          width: '100%',
+          overflow: 'hidden',
+          position: 'relative',
+          backgroundColor: '#FAF6EE',
+          lineHeight: 0,
+        }}
+        aria-hidden="true"
+      >
+        <div
+          style={{
+            maxWidth: '1280px',
+            margin: '0 auto',
+            position: 'relative',
+            maxHeight: '300px',
+            overflow: 'hidden',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+          }}
+        >
+          <img
+            src="/images/chennai-skyline-footer.png"
+            alt="Chennai Skyline - Ripon Building, Chennai Central, Kapaleeshwarar Temple, Marina Lighthouse"
+            style={{
+              width: '100%',
+              height: 'auto',
+              maxHeight: '300px',
+              objectFit: 'cover',
+              objectPosition: 'bottom center',
+              display: 'block',
+              margin: '0 auto',
+              maskImage: 'linear-gradient(to bottom, transparent 0%, black 28%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 28%)',
+            }}
+          />
+        </div>
+      </div>
+
+      {/* Mallipoo Garland - full-width decorative separator above content */}
       <div
         style={{
           backgroundColor: 'rgba(0,0,0,0.15)',
@@ -282,7 +324,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Doodle Row — each with whileInView fade+slide animation */}
+        {/* Doodle Row - each with whileInView fade and slide animation */}
         <div
           style={{
             paddingBlock: '1.75rem',
@@ -353,7 +395,37 @@ export default function Footer() {
         </div>
       </div>
 
-
+      {/* Subtle bottom skyline watermark */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '140px',
+          overflow: 'hidden',
+          pointerEvents: 'none',
+          opacity: 0.12,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'flex-end',
+          zIndex: 0,
+        }}
+        aria-hidden="true"
+      >
+        <img
+          src="/images/chennai-skyline-footer.png"
+          alt=""
+          style={{
+            width: '100%',
+            maxWidth: '1200px',
+            maxHeight: '140px',
+            objectFit: 'cover',
+            objectPosition: 'bottom center',
+            filter: 'brightness(2.2) contrast(1.1)',
+          }}
+        />
+      </div>
 
       {/* Responsive grid override */}
       <style>{`
