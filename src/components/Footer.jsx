@@ -1,15 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Heart, Instagram } from 'lucide-react';
+import { ShieldCheck, Heart } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import {
   AutoRickshawDoodle,
   RiponBuildingDoodle,
   FilterCoffeeDoodle,
   MallipooGarland,
-
 } from './ChennaiDoodles';
-import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../config';
 
 const doodleItems = [
   { Component: AutoRickshawDoodle, width: 85, height: 55, label: 'Chennai Autos' },
@@ -23,67 +21,63 @@ export default function Footer() {
   return (
     <footer
       style={{
-        backgroundColor: 'var(--c-temple-green)',
-        color: '#FDFBF7',
+        backgroundColor: '#FAF6EE',
+        color: '#1F1A17',
         position: 'relative',
         overflow: 'hidden',
         marginTop: '4rem',
-        paddingBottom: '5.5rem', // extra clearance for sticky mobile bar
+        paddingBottom: '6.5rem', // extra clearance for sticky mobile bar
+        borderTop: '1px solid #E9DFC9',
       }}
     >
-      {/* Chennai Skyline Panoramic Backdrop */}
+      {/* Authentic Chennai Skyline Panoramic Backdrop - 100% Uncut and Mobile Optimised */}
       <div
         className="footer-skyline-backdrop"
         style={{
           width: '100%',
-          overflow: 'hidden',
-          position: 'relative',
           backgroundColor: '#FAF6EE',
-          lineHeight: 0,
+          position: 'relative',
+          paddingTop: '2rem',
+          paddingBottom: '0.5rem',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
         aria-hidden="true"
       >
         <div
           style={{
-            maxWidth: '1280px',
+            width: '100%',
+            maxWidth: '1024px',
             margin: '0 auto',
-            position: 'relative',
-            maxHeight: '300px',
-            overflow: 'hidden',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'flex-end',
+            padding: '0 1rem',
           }}
         >
           <img
             src="/images/chennai-skyline-footer.png"
-            alt="Chennai Skyline - Ripon Building, Chennai Central, Kapaleeshwarar Temple, Marina Lighthouse"
+            alt="Chennai Skyline - Ripon Building, Chennai Central, Kapaleeshwarar Temple Gopuram, Marina Beach Lighthouse"
             style={{
               width: '100%',
               height: 'auto',
-              maxHeight: '300px',
-              objectFit: 'cover',
-              objectPosition: 'bottom center',
               display: 'block',
               margin: '0 auto',
-              maskImage: 'linear-gradient(to bottom, transparent 0%, black 28%)',
-              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 28%)',
             }}
           />
         </div>
       </div>
 
-      {/* Mallipoo Garland - full-width decorative separator above content */}
+      {/* Mallipoo Garland - full-width decorative separator below skyline */}
       <div
         style={{
-          backgroundColor: 'rgba(0,0,0,0.15)',
-          borderBottom: '1px solid rgba(255,255,255,0.12)',
+          borderTop: '1px solid #E9DFC9',
+          borderBottom: '1px solid #E9DFC9',
+          backgroundColor: '#FFFDF9',
         }}
       >
         <MallipooGarland />
       </div>
 
-      <div className="container" style={{ paddingTop: '3rem', position: 'relative', zIndex: 1 }}>
+      <div className="container" style={{ paddingTop: '2.5rem', position: 'relative', zIndex: 1 }}>
 
         {/* Main 3-Column Grid */}
         <div
@@ -93,7 +87,7 @@ export default function Footer() {
             gridTemplateColumns: '1fr',
             gap: '2.5rem',
             paddingBottom: '2.5rem',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+            borderBottom: '1px solid #E9DFC9',
           }}
         >
 
@@ -101,26 +95,36 @@ export default function Footer() {
           <div>
             {/* Image Logo + Tamil Brand Line */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', marginBottom: '1.25rem' }}>
-              <div style={{ background: '#FAF7F2', padding: '5px 10px', borderRadius: '8px', display: 'flex', alignItems: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.12)' }}>
+              <div
+                style={{
+                  background: '#FFFDF9',
+                  border: '1px solid #E9DFC9',
+                  padding: '6px 12px',
+                  borderRadius: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  boxShadow: '0 2px 8px rgba(31,26,23,0.04)',
+                }}
+              >
                 <img 
                   src="/chennai-rents-icon-transparent.png" 
                   alt="Chennai Rents" 
                   style={{ 
-                    height: '30px',
+                    height: '32px',
                     width: 'auto',
                     objectFit: 'contain',
-                    display: 'block'
+                    display: 'block',
                   }} 
                 />
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid rgba(255,255,255,0.2)', paddingLeft: '0.85rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1.5px solid #E9DFC9', paddingLeft: '0.85rem' }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', lineHeight: 1.1 }}>
                   <span
                     style={{
                       fontFamily: 'var(--font-heading)',
-                      fontSize: '1.15rem',
+                      fontSize: '1.2rem',
                       fontWeight: 800,
-                      color: '#FDFBF7',
+                      color: '#1F1A17',
                       letterSpacing: '-0.02em',
                     }}
                   >
@@ -129,9 +133,9 @@ export default function Footer() {
                   <span
                     style={{
                       fontFamily: 'var(--font-heading)',
-                      fontSize: '1.15rem',
+                      fontSize: '1.2rem',
                       fontWeight: 900,
-                      color: 'var(--c-auto-yellow)',
+                      color: 'var(--c-ripon-red)',
                       letterSpacing: '-0.02em',
                     }}
                   >
@@ -141,9 +145,9 @@ export default function Footer() {
                 <span
                   style={{
                     fontFamily: 'var(--font-body)',
-                    fontSize: '0.72rem',
+                    fontSize: '0.75rem',
                     fontWeight: 600,
-                    color: 'rgba(253,251,247,0.7)',
+                    color: '#6B5E55',
                     letterSpacing: '0.04em',
                     marginTop: '2px',
                   }}
@@ -157,11 +161,11 @@ export default function Footer() {
             <p
               style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: '0.85rem',
+                fontSize: '0.82rem',
                 fontWeight: 600,
-                color: 'rgba(253,251,247,0.75)',
+                color: '#6B5E55',
                 textTransform: 'uppercase',
-                letterSpacing: '0.05em',
+                letterSpacing: '0.06em',
                 marginBottom: '0.6rem',
               }}
             >
@@ -174,7 +178,7 @@ export default function Footer() {
                 fontFamily: 'var(--font-heading)',
                 fontSize: '1.1rem',
                 fontWeight: 700,
-                color: 'var(--c-auto-yellow)',
+                color: 'var(--c-ripon-red)',
                 marginBottom: '1.1rem',
               }}
             >
@@ -186,16 +190,18 @@ export default function Footer() {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.5rem',
-                padding: '0.4rem 0.85rem',
-                backgroundColor: 'rgba(0, 0, 0, 0.25)',
-                borderRadius: '6px',
+                gap: '0.55rem',
+                padding: '0.5rem 0.9rem',
+                backgroundColor: '#FFFDF9',
+                border: '1px solid #E9DFC9',
+                borderRadius: '10px',
                 fontSize: '0.82rem',
-                color: 'var(--c-auto-yellow)',
+                color: '#2E7D4F',
+                boxShadow: '0 1px 4px rgba(31,26,23,0.03)',
               }}
             >
-              <ShieldCheck size={16} />
-              <span>No tracking here. We do not collect anything on this site.</span>
+              <ShieldCheck size={16} color="#2E7D4F" />
+              <span style={{ color: '#3A322C', fontWeight: 500 }}>No tracking here. We do not collect anything on this site.</span>
             </div>
           </div>
 
@@ -203,12 +209,12 @@ export default function Footer() {
           <div>
             <h4
               style={{
-                color: 'var(--c-auto-yellow)',
+                color: 'var(--c-ripon-red)',
                 marginBottom: '1rem',
-                fontSize: '0.95rem',
+                fontSize: '0.92rem',
                 fontFamily: 'var(--font-heading)',
                 textTransform: 'uppercase',
-                letterSpacing: '0.06em',
+                letterSpacing: '0.08em',
                 fontWeight: 800,
               }}
             >
@@ -219,8 +225,10 @@ export default function Footer() {
                 listStyle: 'none',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '0.6rem',
+                gap: '0.65rem',
                 fontSize: '0.92rem',
+                padding: 0,
+                margin: 0,
               }}
             >
               {[
@@ -233,8 +241,21 @@ export default function Footer() {
                 { to: '/chennai/rentals', label: 'Browse All Localities →' },
               ].map(({ to, label }) => (
                 <li key={to}>
-                  <Link to={to} style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
-                    → {label}
+                  <Link
+                    to={to}
+                    className="cr-footer-link"
+                    style={{
+                      color: '#2B2523',
+                      textDecoration: 'none',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      transition: 'all 0.15s ease',
+                      fontWeight: 500,
+                    }}
+                  >
+                    <span style={{ color: 'var(--c-ripon-red)', fontWeight: 700 }}>→</span>
+                    <span>{label}</span>
                   </Link>
                 </li>
               ))}
@@ -245,12 +266,12 @@ export default function Footer() {
           <div>
             <h4
               style={{
-                color: 'var(--c-auto-yellow)',
+                color: 'var(--c-ripon-red)',
                 marginBottom: '1rem',
-                fontSize: '0.95rem',
+                fontSize: '0.92rem',
                 fontFamily: 'var(--font-heading)',
                 textTransform: 'uppercase',
-                letterSpacing: '0.06em',
+                letterSpacing: '0.08em',
                 fontWeight: 800,
               }}
             >
@@ -261,65 +282,44 @@ export default function Footer() {
                 listStyle: 'none',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '0.55rem',
-                fontSize: '0.88rem',
+                gap: '0.6rem',
+                fontSize: '0.9rem',
+                padding: 0,
+                margin: 0,
               }}
             >
-              <li>
-                <Link to="/listings" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
-                  → Chennai Rent Map & Live Listings
-                </Link>
-              </li>
-              <li>
-                <Link to="/house-rent-in-chennai" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
-                  → House Rent in Chennai: Guide & Rates
-                </Link>
-              </li>
-              <li>
-                <Link to="/guides/advance-deposit-chennai" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
-                  → Advance Deposit: 10 Months vs Reality
-                </Link>
-              </li>
-              <li>
-                <Link to="/guides/tenant-rules-chennai" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
-                  → Rental Agreements & Tenant Rights
-                </Link>
-              </li>
-              <li>
-                <Link to="/methodology" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
-                  → Research & Data Methodology
-                </Link>
-              </li>
-              <li>
-                <Link to="/verification" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
-                  → Listing Verification Standards
-                </Link>
-              </li>
-              <li>
-                <Link to="/corrections" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
-                  → Corrections & Editorial Policy
-                </Link>
-              </li>
-              <li>
-                <Link to="/authors" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
-                  → Editorial Team & Co-founders
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
-                  → About Chennai Rents
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
-                  → Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/privacy" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
-                  → Privacy & Data Deletion
-                </Link>
-              </li>
+              {[
+                { to: '/listings', label: 'Chennai Rent Map & Live Listings' },
+                { to: '/house-rent-in-chennai', label: 'House Rent in Chennai: Guide & Rates' },
+                { to: '/guides/advance-deposit-chennai', label: 'Advance Deposit: 10 Months vs Reality' },
+                { to: '/guides/tenant-rules-chennai', label: 'Rental Agreements & Tenant Rights' },
+                { to: '/methodology', label: 'Research & Data Methodology' },
+                { to: '/verification', label: 'Listing Verification Standards' },
+                { to: '/corrections', label: 'Corrections & Editorial Policy' },
+                { to: '/authors', label: 'Editorial Team & Co-founders' },
+                { to: '/about', label: 'About Chennai Rents' },
+                { to: '/contact', label: 'Contact Us' },
+                { to: '/privacy', label: 'Privacy & Data Deletion' },
+              ].map(({ to, label }) => (
+                <li key={to}>
+                  <Link
+                    to={to}
+                    className="cr-footer-link"
+                    style={{
+                      color: '#2B2523',
+                      textDecoration: 'none',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      transition: 'all 0.15s ease',
+                      fontWeight: 500,
+                    }}
+                  >
+                    <span style={{ color: 'var(--c-ripon-red)', fontWeight: 700 }}>→</span>
+                    <span>{label}</span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -328,7 +328,7 @@ export default function Footer() {
         <div
           style={{
             paddingBlock: '1.75rem',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.15)',
+            borderBottom: '1px solid #E9DFC9',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-around',
@@ -348,8 +348,8 @@ export default function Footer() {
               <Component width={width} height={height} />
               <span
                 style={{
-                  fontSize: '0.85rem',
-                  color: 'rgba(253, 251, 247, 0.9)',
+                  fontSize: '0.88rem',
+                  color: '#1F1A17',
                   fontWeight: 600,
                   fontFamily: 'var(--font-body)',
                 }}
@@ -377,7 +377,7 @@ export default function Footer() {
               fontFamily: 'var(--font-heading)',
               fontSize: '1.05rem',
               fontWeight: 700,
-              color: 'var(--c-auto-yellow)',
+              color: '#1F1A17',
               letterSpacing: '0.02em',
             }}
           >
@@ -389,49 +389,31 @@ export default function Footer() {
               style={{ display: 'inline', marginInline: '2px', verticalAlign: 'middle' }}
             />
           </p>
-          <p style={{ fontSize: '0.8rem', color: 'rgba(253, 251, 247, 0.7)' }}>
+          <p style={{ fontSize: '0.82rem', color: '#6B5E55' }}>
             © {new Date().getFullYear()} Chennai Rents. Purely content and Instagram Reels.
           </p>
         </div>
       </div>
 
-      {/* Subtle bottom skyline watermark */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: '140px',
-          overflow: 'hidden',
-          pointerEvents: 'none',
-          opacity: 0.12,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'flex-end',
-          zIndex: 0,
-        }}
-        aria-hidden="true"
-      >
-        <img
-          src="/images/chennai-skyline-footer.png"
-          alt=""
-          style={{
-            width: '100%',
-            maxWidth: '1200px',
-            maxHeight: '140px',
-            objectFit: 'cover',
-            objectPosition: 'bottom center',
-            filter: 'brightness(2.2) contrast(1.1)',
-          }}
-        />
-      </div>
-
-      {/* Responsive grid override */}
+      {/* Embedded Styles for hover and mobile layout */}
       <style>{`
+        .cr-footer-link:hover {
+          color: var(--c-ripon-red) !important;
+          transform: translateX(2px);
+        }
         @media (min-width: 768px) {
           .footer-grid {
-            grid-template-columns: 1fr 1fr 1fr !important;
+            grid-template-columns: 1.1fr 1fr 1.1fr !important;
+          }
+        }
+        @media (max-width: 767px) {
+          .footer-skyline-backdrop {
+            padding-top: 1rem !important;
+            padding-bottom: 0 !important;
+          }
+          .cr-footer-link {
+            padding: 4px 0;
+            min-height: 40px;
           }
         }
       `}</style>
