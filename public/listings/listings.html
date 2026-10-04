@@ -73,11 +73,11 @@ body{
 .btn{display:flex;align-items:center;justify-content:center;gap:6px;min-height:52px;width:100%;border:0;border-radius:30px;background:var(--red);color:#fff;font:600 17px Outfit,sans-serif;text-decoration:none;cursor:pointer;box-shadow:0 6px 14px rgba(181,55,43,.22);transition:background 0.15s ease,transform 0.1s ease}
 .btn:hover{background:#9e2f24;transform:translateY(-1px)}
 
-.ftoggle{display:flex;justify-content:space-between;align-items:center;min-height:52px;width:100%;margin-top:14px;padding:0 20px;border:1px solid var(--sand);border-radius:16px;background:var(--card);font:600 16px Outfit,sans-serif;color:var(--ink);cursor:pointer}
+.ftoggle{display:flex;justify-content:space-between;align-items:center;min-height:52px;width:100%;margin-top:0;padding:0 20px;border:1px solid var(--sand);border-radius:16px;background:var(--card);font:600 16px Outfit,sans-serif;color:var(--ink);cursor:pointer}
 .ftoggle span{background:var(--red);color:#fff;border-radius:12px;padding:0 9px;font-size:13px;min-width:24px;text-align:center;line-height:22px}
-.filters{display:none;margin-top:14px;border:1px solid var(--sand);border-radius:24px;background:var(--card);padding:22px}
+.filters{display:none;margin-top:0;border:1px solid var(--sand);border-radius:24px;background:var(--card);padding:22px}
 .filters.open{display:block}
-@media(min-width:900px){.ftoggle{display:none}.filters{display:block;margin-top:24px}}
+@media(min-width:900px){.ftoggle{display:none}.filters{display:block;margin-top:0}}
 
 .fh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
 .fh h2{margin:0;font-size:20px}
@@ -192,12 +192,7 @@ h1{margin:0 0 6px;font-size:28px;line-height:1.15;font-weight:700;letter-spacing
       src="/chennai-rents-logo-new.jpg"
       alt="Chennai Rents Logo"
       class="brand-logo-img"
-      onerror="this.style.display='none'; document.getElementById('sky-mark').style.display='inline-flex';"
     >
-    <svg id="sky-mark" width="34" height="26" viewBox="0 0 40 30" fill="none" stroke="#B5372B" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true">
-      <path d="M1 29h38M3 29V16h14v13M3 16l7-6 7 6M7 29v-7h6v7M19 29V12h8v17M19 12l4-6 4 6M29 29V19h10v10M33 19v-4h2v4"/>
-      <path d="M9 4h4" stroke="#D9A21B"/>
-    </svg>
     <div class="brand-txt">
       <b>Chennai</b><b class="red">Rents</b>
     </div>
@@ -213,23 +208,6 @@ h1{margin:0 0 6px;font-size:28px;line-height:1.15;font-weight:700;letter-spacing
 <main class="page">
   <!-- Sidebar -->
   <aside class="side">
-    <div class="post">
-      <svg class="art" viewBox="0 0 300 70" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true">
-        <path d="M0 68h300" />
-        <rect x="30" y="30" width="60" height="38" fill="#FFFDF9"/>
-        <path d="M24 30l36-22 36 22z" fill="#B5372B"/>
-        <rect x="52" y="46" width="16" height="22" fill="#D9A21B"/>
-        <circle cx="140" cy="46" r="14" fill="#2E7D4F" stroke="none"/>
-        <circle cx="160" cy="50" r="12" fill="#2E7D4F" stroke="none"/>
-        <path d="M150 64V52" stroke="#6B4A2F" stroke-width="3"/>
-        <path d="M200 66q15-8 30 0t30 0" stroke="#1F5F8B"/>
-        <circle cx="270" cy="16" r="9" fill="#D9A21B" stroke="none"/>
-      </svg>
-      <h2>List your property</h2>
-      <p>Rent out or sell your flat, villa, or plot directly to verified tenants and buyers.</p>
-      <a class="btn" href="list-property.html">+ Post listing</a>
-    </div>
-
     <!-- Mobile Filters Button -->
     <button class="ftoggle" id="ft" aria-expanded="false" aria-controls="fl">
       Filters <span id="fc">0</span>

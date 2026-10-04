@@ -1159,54 +1159,6 @@
               </select>
             </div>
 
-            <!-- Visual Quick-Select Cards (Synchronized with dropdown) -->
-            <div style="margin-top: 18px;">
-              <span class="form-label" style="font-size: 0.88rem; color: var(--c-ink-muted);">
-                Or quick-select:
-              </span>
-              <div class="type-grid" role="radiogroup" aria-label="Quick Select Listing Type">
-                <!-- Card 1: Rent flat/house -->
-                <div class="type-option-card selected" id="type-card-rent" onclick="selectListingType('rent')" role="radio" aria-checked="true" tabindex="0">
-                  <div class="type-icon">
-                    <!-- Monoline Building SVG: 1.5px stroke, brick red #B5372B -->
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B5372B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                      <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/>
-                      <path d="M9 22v-4h6v4"/>
-                      <path d="M8 6h.01M16 6h.01M12 6h.01"/>
-                      <path d="M8 10h.01M16 10h.01M12 10h.01"/>
-                      <path d="M8 14h.01M16 14h.01M12 14h.01"/>
-                    </svg>
-                  </div>
-                  <div class="type-label">Rent flat / house</div>
-                </div>
-
-                <!-- Card 2: Sell property -->
-                <div class="type-option-card" id="type-card-sale" onclick="selectListingType('sale')" role="radio" aria-checked="false" tabindex="0">
-                  <div class="type-icon">
-                    <!-- Monoline Tag SVG: 1.5px stroke, brick red #B5372B -->
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B5372B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/>
-                      <circle cx="7" cy="7" r="1.5" fill="#B5372B"/>
-                    </svg>
-                  </div>
-                  <div class="type-label">Sell property</div>
-                </div>
-
-                <!-- Card 3: Room/flatmate -->
-                <div class="type-option-card" id="type-card-room" onclick="selectListingType('room')" role="radio" aria-checked="false" tabindex="0">
-                  <div class="type-icon">
-                    <!-- Monoline Bed SVG: 1.5px stroke, brick red #B5372B -->
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B5372B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10"/>
-                      <path d="M2 17h20"/>
-                      <path d="M6 8v9"/>
-                    </svg>
-                  </div>
-                  <div class="type-label">Room / flatmate</div>
-                </div>
-              </div>
-            </div>
-
             <div class="nav-actions-row">
               <button type="button" class="btn-primary" onclick="goToStep(2)">
                 <span>Continue to Location</span>
