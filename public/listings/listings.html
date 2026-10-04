@@ -529,6 +529,50 @@
         .empty-state-icon { font-size: 36px; margin-bottom: 12px; }
         .empty-state h3 { font-family: var(--font-heading); font-size: 18px; margin: 0 0 8px 0; color: var(--c-ink); }
         .empty-state p { color: var(--c-ink-muted); font-size: 13.5px; margin: 0 0 16px 0; }
+
+        /* Mobile-First Ergonomics & Responsiveness (360px - 640px) */
+        @media (max-width: 640px) {
+            .nav-header {
+                padding: 12px 14px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+            .nav-header > div:last-child {
+                display: flex;
+                gap: 8px;
+                overflow-x: auto;
+                padding-bottom: 2px;
+                -webkit-overflow-scrolling: touch;
+            }
+            .container {
+                padding: 16px 14px 48px 14px;
+                gap: 20px;
+            }
+            .listings-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .feed-title {
+                font-size: 22px;
+            }
+            .feed-tabs {
+                gap: 8px;
+            }
+            .feed-tab {
+                padding: 6px 12px;
+                font-size: 12.5px;
+            }
+            .form-select, .form-input {
+                font-size: 16px;
+                min-height: 48px;
+            }
+            .filter-chip {
+                min-height: 40px;
+                display: inline-flex;
+                align-items: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -653,6 +697,33 @@
         </main>
         
     </div>
+
+    <!-- Footer with Chennai Architectural Skyline Strip (Ripon Building, Central, Lighthouse - NO gopuram) -->
+    <footer style="position: relative; overflow: hidden; padding: 48px 20px 36px; border-top: 1px solid var(--c-border); background: var(--c-sand-light); text-align: center; margin-top: 48px;">
+        <div style="position: relative; z-index: 2; max-width: 600px; margin: 0 auto;">
+            <p style="font-family: var(--font-heading); font-weight: 700; color: var(--c-ink); margin: 0 0 6px 0; font-size: 14px;">
+                chennairents.in • Chennai Crowdsourced Rental &amp; Sale Transparency
+            </p>
+            <p style="font-size: 12px; color: var(--c-ink-muted); margin: 0 0 16px 0;">
+                Zero brokerage • Direct owners • Real community data
+            </p>
+            <div style="display: flex; gap: 14px; justify-content: center; font-size: 12px; flex-wrap: wrap;">
+                <a href="index.html" style="color: var(--c-ink-muted); text-decoration: none;">Interactive Map</a>
+                <span style="color: var(--c-border);">•</span>
+                <a href="list-property.html" style="color: var(--c-ripon-red); font-weight: 700; text-decoration: none;">+ List Property</a>
+                <span style="color: var(--c-border);">•</span>
+                <a href="/" style="color: var(--c-ink-muted); text-decoration: none;">Home</a>
+            </div>
+        </div>
+        <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 130px; pointer-events: none; opacity: 0.12; mask-image: linear-gradient(to top, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%); -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%);" aria-hidden="true">
+            <svg style="width: 100%; height: 100%; display: block;" viewBox="0 0 1200 160" preserveAspectRatio="none" fill="none" stroke="#B5372B" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M40 160V95h320v65 M40 95l160-22 160 22 M160 73V45h80v28 M185 45c0-12 15-20 15-20s15 8 15 20 M175 58h50 M80 115h30v45H80z M140 115h30v45h-30z M230 115h30v45h-30z M290 115h30v45h-30z M95 102c0-5 7-9 15-9s15 4 15 9 M155 102c0-5 7-9 15-9s15 4 15 9 M245 102c0-5 7-9 15-9s15 4 15 9 M305 102c0-5 7-9 15-9s15 4 15 9" />
+                <path d="M460 160V85h280v75 M540 85V30h120v55 M575 30V10l25-10 25 10v20 M600 50a12 12 0 1 0 0.01 0 M480 110h40v50h-40z M680 110h40v50h-40z M500 98c0-8 10-14 20-14s20 6 20 14 M700 98c0-8 10-14 20-14s20 6 20 14 M555 125h90v35h-90z" />
+                <path d="M880 160V60h80v100 M900 60V25h40V60 M920 25c0-10 10-15 10-15s10 5 10 15 M890 60h60 M910 40h20 M960 110l40-20v70h-40z M840 135l40-15v40h-40z" />
+                <path d="M0 160h1200 M1020 155c25-4 50 4 75 0s50-4 75 0 M1040 160c20-3 40 3 60 0" />
+            </svg>
+        </div>
+    </footer>
 
     <!-- Supabase UMD Javascript SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>

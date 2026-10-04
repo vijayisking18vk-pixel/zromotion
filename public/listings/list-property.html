@@ -264,7 +264,7 @@
       background: var(--c-blue);
       border-radius: 2px;
       transition: width 0.35s ease;
-      width: 15%;
+      width: 20%;
     }
 
     .auto-rickshaw-carrier {
@@ -272,7 +272,7 @@
       top: 50%;
       transform: translate(-50%, -50%);
       transition: left 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
-      left: 15%;
+      left: 20%;
       z-index: 5;
       pointer-events: none;
     }
@@ -298,6 +298,8 @@
       border-radius: 14px;
       padding: 24px 20px;
       margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
     }
 
     .step-card-heading {
@@ -318,13 +320,8 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
+      margin-top: 14px;
       margin-bottom: 12px;
-    }
-
-    @media (max-width: 420px) {
-      .type-grid {
-        grid-template-columns: 1fr;
-      }
     }
 
     .type-option-card {
@@ -356,6 +353,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
     }
 
     .type-option-card .type-label {
@@ -427,6 +425,7 @@
       background-position: right 14px center;
       background-size: 16px;
       padding-right: 38px;
+      cursor: pointer;
     }
 
     .form-input:focus,
@@ -467,13 +466,14 @@
       border-radius: 12px;
       max-height: 220px;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
       z-index: 50;
       display: none;
       box-shadow: 0 8px 24px rgba(31, 26, 23, 0.08);
     }
 
     .combobox-option {
-      padding: 11px 14px;
+      padding: 12px 14px;
       font-size: 0.95rem;
       color: var(--c-ink);
       cursor: pointer;
@@ -481,6 +481,7 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid var(--c-sand-light);
+      min-height: 44px;
     }
 
     .combobox-option:last-child {
@@ -536,12 +537,6 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
-    }
-
-    @media (max-width: 480px) {
-      .form-grid-2 {
-        grid-template-columns: 1fr;
-      }
     }
 
     /* Indian Currency Prefix */
@@ -886,24 +881,100 @@
       line-height: 1.6;
     }
 
-    /* Line-Art Skyline Background Strip */
+    /* Background Kolam Corner Watermark */
+    .bg-kolam-watermark {
+      position: fixed;
+      top: 18px;
+      right: -15px;
+      width: 150px;
+      height: 150px;
+      opacity: 0.08;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Fixed Line-Art Skyline Background Strip */
     .skyline-art-container {
-      position: relative;
+      position: fixed;
+      bottom: 0;
+      left: 0;
       width: 100%;
-      height: 130px;
-      margin-top: 40px;
+      height: 140px;
       overflow: hidden;
       pointer-events: none;
-      z-index: 1;
-      opacity: 0.12; /* strictly 10-14% */
-      mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
-      -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+      z-index: 0;
+      opacity: 0.14; /* strictly within 10-14% */
+      mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 100%);
+      -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 100%);
     }
 
     .skyline-art-svg {
       width: 100%;
       height: 100%;
       display: block;
+    }
+
+    /* Mobile Ergonomics & Responsive Behavior (360px - 480px) */
+    @media (max-width: 480px) {
+      .main-content {
+        padding: 16px 14px 36px !important;
+      }
+
+      .step-card {
+        padding: 20px 15px !important;
+        border-radius: 14px !important;
+      }
+
+      .type-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+      }
+
+      .type-option-card {
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        text-align: left !important;
+        padding: 14px 16px !important;
+        gap: 14px !important;
+        min-height: 52px !important;
+      }
+
+      .type-option-card .type-label {
+        font-size: 0.96rem !important;
+      }
+
+      .form-grid-2 {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+      }
+
+      .nav-actions-row {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        width: 100% !important;
+      }
+
+      .dropzone-buttons-row {
+        flex-direction: column !important;
+        gap: 8px !important;
+      }
+
+      .btn-photo-action {
+        width: 100% !important;
+        justify-content: center !important;
+      }
+
+      .step-labels-row {
+        font-size: 0.72rem !important;
+      }
+
+      .photo-gallery-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
     }
 
     /* Respect reduced motion */
@@ -918,6 +989,14 @@
 
 <body>
   <div class="app-wrap">
+
+    <!-- Background Kolam Corner Watermark -->
+    <svg class="bg-kolam-watermark" viewBox="0 0 100 100" fill="none" stroke="#D9A21B" stroke-width="1.2" aria-hidden="true">
+      <circle cx="50" cy="50" r="40" stroke-dasharray="3 3"/>
+      <circle cx="50" cy="50" r="26"/>
+      <circle cx="50" cy="50" r="12" fill="#D9A21B" fill-opacity="0.1"/>
+      <path d="M50 10v80 M10 50h80 M22 22l56 56 M22 78l56-56"/>
+    </svg>
 
     <!-- Header with illustrated skyline logo mark -->
     <header class="site-header">
@@ -969,7 +1048,7 @@
             </div>
             <div class="trust-pill">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></polyline>
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
               </svg>
               <span>You control who sees your number</span>
@@ -989,16 +1068,16 @@
         <div class="progress-box" aria-label="Form progress">
           <div class="progress-header">
             <span class="progress-step-title" id="step-name-display">Step 1 of 4: Type</span>
-            <span class="progress-step-count" id="step-count-display">25% completed</span>
+            <span class="progress-step-count" id="step-count-display">20% completed</span>
           </div>
 
           <div class="progress-track-wrap">
             <div class="progress-rail">
-              <div class="progress-fill" id="progress-fill-bar" style="width: 25%;"></div>
+              <div class="progress-fill" id="progress-fill-bar" style="width: 20%;"></div>
             </div>
 
             <!-- Auto-rickshaw on the Marina rail -->
-            <div class="auto-rickshaw-carrier" id="auto-rickshaw" style="left: 25%;">
+            <div class="auto-rickshaw-carrier" id="auto-rickshaw" style="left: 20%;">
               <svg width="28" height="20" viewBox="0 0 28 20" fill="none" aria-label="Auto-rickshaw moving along progress rail">
                 <!-- Wheels -->
                 <circle cx="7" cy="15.5" r="3.5" fill="#1F1A17" stroke="#D9A21B" stroke-width="1"/>
@@ -1042,54 +1121,81 @@
         <!-- FORM STEPS -->
         <form id="property-form" novalidate onsubmit="return false;">
 
-          <!-- STEP 1: LISTING TYPE -->
+          <!-- STEP 1: LISTING TYPE (With Dropdown + Selectable Cards) -->
           <div class="step-card" id="step-section-1">
             <h2 class="step-card-heading">1. Listing type</h2>
-            <p class="step-card-sub">What kind of property are you posting today?</p>
+            <p class="step-card-sub">Choose your transaction mode and property format.</p>
 
-            <div class="type-grid" role="radiogroup" aria-label="Select Listing Type">
-              <!-- Card 1: Rent flat/house -->
-              <div class="type-option-card selected" id="type-card-rent" onclick="selectListingType('rent')" role="radio" aria-checked="true" tabindex="0">
-                <div class="type-icon">
-                  <!-- Monoline Building SVG: 1.5px stroke, brick red #B5372B -->
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B5372B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/>
-                    <path d="M9 22v-4h6v4"/>
-                    <path d="M8 6h.01M16 6h.01M12 6h.01"/>
-                    <path d="M8 10h.01M16 10h.01M12 10h.01"/>
-                    <path d="M8 14h.01M16 14h.01M12 14h.01"/>
-                  </svg>
-                </div>
-                <div class="type-label">Rent flat / house</div>
-              </div>
-
-              <!-- Card 2: Sell property -->
-              <div class="type-option-card" id="type-card-sale" onclick="selectListingType('sale')" role="radio" aria-checked="false" tabindex="0">
-                <div class="type-icon">
-                  <!-- Monoline Tag SVG: 1.5px stroke, brick red #B5372B -->
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B5372B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/>
-                    <circle cx="7" cy="7" r="1.5" fill="#B5372B"/>
-                  </svg>
-                </div>
-                <div class="type-label">Sell property</div>
-              </div>
-
-              <!-- Card 3: Room/flatmate -->
-              <div class="type-option-card" id="type-card-room" onclick="selectListingType('room')" role="radio" aria-checked="false" tabindex="0">
-                <div class="type-icon">
-                  <!-- Monoline Bed SVG: 1.5px stroke, brick red #B5372B -->
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B5372B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10"/>
-                    <path d="M2 17h20"/>
-                    <path d="M6 8v9"/>
-                  </svg>
-                </div>
-                <div class="type-label">Room / flatmate</div>
-              </div>
+            <!-- Prominent Listing Type Dropdown -->
+            <div class="form-group">
+              <label for="listing-type-dropdown" class="form-label">
+                Select listing type / வகை
+              </label>
+              <select id="listing-type-dropdown" class="form-select" onchange="handleDropdownTypeChange(this.value)">
+                <option value="rent" selected>Rent flat or house (வாடகைக்கு விட)</option>
+                <option value="sale">Sell property (விற்பனை செய்ய)</option>
+                <option value="room">Room / Flatmate (அறை / தோழர்)</option>
+              </select>
+              <p class="helper-text">Direct owner listings only. No broker commissions.</p>
             </div>
 
-            <p class="helper-text">Direct owners and genuine tenants only. Zero brokerage on all listings.</p>
+            <!-- Property Category Sub-Dropdown -->
+            <div class="form-group" id="sub-category-wrap">
+              <label for="property-category-select" class="form-label">
+                Property category / பிரிவு
+              </label>
+              <select id="property-category-select" class="form-select" onchange="handleSubCategoryChange(this.value)">
+                <!-- Populated dynamically -->
+              </select>
+            </div>
+
+            <!-- Visual Quick-Select Cards (Synchronized with dropdown) -->
+            <div style="margin-top: 18px;">
+              <span class="form-label" style="font-size: 0.88rem; color: var(--c-ink-muted);">
+                Or quick-select:
+              </span>
+              <div class="type-grid" role="radiogroup" aria-label="Quick Select Listing Type">
+                <!-- Card 1: Rent flat/house -->
+                <div class="type-option-card selected" id="type-card-rent" onclick="selectListingType('rent')" role="radio" aria-checked="true" tabindex="0">
+                  <div class="type-icon">
+                    <!-- Monoline Building SVG: 1.5px stroke, brick red #B5372B -->
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B5372B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/>
+                      <path d="M9 22v-4h6v4"/>
+                      <path d="M8 6h.01M16 6h.01M12 6h.01"/>
+                      <path d="M8 10h.01M16 10h.01M12 10h.01"/>
+                      <path d="M8 14h.01M16 14h.01M12 14h.01"/>
+                    </svg>
+                  </div>
+                  <div class="type-label">Rent flat / house</div>
+                </div>
+
+                <!-- Card 2: Sell property -->
+                <div class="type-option-card" id="type-card-sale" onclick="selectListingType('sale')" role="radio" aria-checked="false" tabindex="0">
+                  <div class="type-icon">
+                    <!-- Monoline Tag SVG: 1.5px stroke, brick red #B5372B -->
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B5372B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/>
+                      <circle cx="7" cy="7" r="1.5" fill="#B5372B"/>
+                    </svg>
+                  </div>
+                  <div class="type-label">Sell property</div>
+                </div>
+
+                <!-- Card 3: Room/flatmate -->
+                <div class="type-option-card" id="type-card-room" onclick="selectListingType('room')" role="radio" aria-checked="false" tabindex="0">
+                  <div class="type-icon">
+                    <!-- Monoline Bed SVG: 1.5px stroke, brick red #B5372B -->
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B5372B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10"/>
+                      <path d="M2 17h20"/>
+                      <path d="M6 8v9"/>
+                    </svg>
+                  </div>
+                  <div class="type-label">Room / flatmate</div>
+                </div>
+              </div>
+            </div>
 
             <div class="nav-actions-row">
               <button type="button" class="btn-primary" onclick="goToStep(2)">
@@ -1583,8 +1689,8 @@
 
     </main>
 
-    <!-- Line-art Skyline Strip at Bottom (Ripon Building, Central, Lighthouse - NO gopuram) -->
-    <!-- 10-14% opacity, strictly behind footer/submit area only, never behind form fields -->
+    <!-- Fixed Line-art Skyline Background Strip at Bottom (Ripon Building, Central, Lighthouse - NO gopuram) -->
+    <!-- Strictly 14% opacity, behind footer/submit area only, never behind form fields -->
     <div class="skyline-art-container" aria-hidden="true">
       <svg class="skyline-art-svg" viewBox="0 0 1200 160" preserveAspectRatio="none" fill="none" stroke="#B5372B" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
         <!-- Ripon Building Neoclassical Facade & Arches -->
@@ -1620,6 +1726,7 @@
     let formState = {
       currentStep: 1,
       listingType: 'rent', // 'rent', 'sale', 'room'
+      propertyCategory: 'Entire Apartment / Flat',
       area: '',
       landmark: '',
       bhk: '2 BHK',
@@ -1668,6 +1775,7 @@
 
       setupCombobox();
       setupDropzone();
+      updateSubCategories('rent');
       loadDraftFromStorage();
       updateProgressDisplay();
     });
@@ -1768,10 +1876,19 @@
       goToStep(next);
     }
 
-    // 2. Listing Type Selector
+    // 2. Listing Type Selectors: Dropdown & Visual Cards Synchronization
+    function handleDropdownTypeChange(val) {
+      selectListingType(val);
+    }
+
     function selectListingType(type) {
       formState.listingType = type;
 
+      // Sync dropdown value
+      const dd = document.getElementById('listing-type-dropdown');
+      if (dd && dd.value !== type) dd.value = type;
+
+      // Sync cards active state
       const types = ['rent', 'sale', 'room'];
       types.forEach(t => {
         const card = document.getElementById(`type-card-${t}`);
@@ -1785,6 +1902,9 @@
           }
         }
       });
+
+      // Update Sub-category options
+      updateSubCategories(type);
 
       // Price label & deposit adjustments
       const priceLabel = document.getElementById('price-label');
@@ -1801,6 +1921,49 @@
         if (depositWrap) depositWrap.style.display = 'block';
       }
 
+      saveDraftToStorage();
+    }
+
+    function updateSubCategories(type) {
+      const selectEl = document.getElementById('property-category-select');
+      if (!selectEl) return;
+      selectEl.innerHTML = '';
+
+      let options = [];
+      if (type === 'sale') {
+        options = [
+          { val: 'Apartment / Flat', label: 'Apartment / Flat for Sale' },
+          { val: 'Independent House / Villa', label: 'Independent House / Villa for Sale' },
+          { val: 'Residential Plot / Land', label: 'Residential Plot / Land for Sale' },
+          { val: 'Commercial Property', label: 'Commercial / Shop Space' }
+        ];
+      } else if (type === 'room') {
+        options = [
+          { val: 'Private Room', label: 'Private Room in Shared Flat' },
+          { val: 'Shared Room', label: 'Shared Room (Twin / Multi-sharing)' },
+          { val: 'PG / Co-Living Studio', label: 'PG / Co-Living Studio' }
+        ];
+      } else {
+        options = [
+          { val: 'Entire Apartment / Flat', label: 'Entire Apartment / Flat' },
+          { val: 'Independent House / Villa', label: 'Independent House / Standalone Villa' },
+          { val: 'Builder Floor Portion', label: 'Builder Floor / Ground Floor Portion' },
+          { val: 'Studio / 1 RK Flat', label: 'Compact Studio / 1 RK Flat' }
+        ];
+      }
+
+      options.forEach(opt => {
+        const optEl = document.createElement('option');
+        optEl.value = opt.val;
+        optEl.textContent = opt.label;
+        selectEl.appendChild(optEl);
+      });
+
+      formState.propertyCategory = options[0].val;
+    }
+
+    function handleSubCategoryChange(val) {
+      formState.propertyCategory = val;
       saveDraftToStorage();
     }
 
@@ -1825,7 +1988,7 @@
           return;
         }
 
-        matches.forEach((area, idx) => {
+        matches.forEach((area) => {
           const opt = document.createElement('div');
           opt.className = 'combobox-option';
           opt.setAttribute('role', 'option');
@@ -2280,7 +2443,7 @@
       if (summaryBox) {
         summaryBox.innerHTML = `
           <div style="font-weight: 700; color: var(--c-ink); margin-bottom: 8px;">Listing Overview:</div>
-          <div>• <strong>Type:</strong> ${formState.listingType === 'sale' ? 'Sale Property' : formState.listingType === 'room' ? 'Room / Flatmate' : 'Rental Flat / House'}</div>
+          <div>• <strong>Type:</strong> ${formState.listingType === 'sale' ? 'Sale Property' : formState.listingType === 'room' ? 'Room / Flatmate' : 'Rental Flat / House'} (${formState.propertyCategory})</div>
           <div>• <strong>Location:</strong> ${formState.area || 'Chennai'}, ${formState.landmark ? 'near ' + formState.landmark : 'Tamil Nadu'}</div>
           <div>• <strong>Configuration:</strong> ${formState.bhk} (${formState.furnishing})</div>
           <div>• <strong>${formState.listingType === 'sale' ? 'Price' : 'Monthly Rent'}:</strong> ₹${formatIndianNumber(formState.price)}</div>
@@ -2321,6 +2484,7 @@
         const draftPayload = {
           currentStep: formState.currentStep,
           listingType: formState.listingType,
+          propertyCategory: formState.propertyCategory,
           area: formState.area,
           landmark: formState.landmark,
           bhk: formState.bhk,
@@ -2359,6 +2523,11 @@
         if (!draft) return;
 
         if (draft.listingType) selectListingType(draft.listingType);
+        if (draft.propertyCategory) {
+          const subSel = document.getElementById('property-category-select');
+          if (subSel) subSel.value = draft.propertyCategory;
+          formState.propertyCategory = draft.propertyCategory;
+        }
         if (draft.area) {
           const locInput = document.getElementById('locality-input');
           if (locInput) locInput.value = draft.area;
