@@ -11,1076 +11,474 @@
     gtag('config', 'G-65F8MTB16E');
   </script>
 
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="favicon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Available Flats & Properties (Rent & Buy) | chennairents.in</title>
-    <meta name="description" content="Browse verified direct owner listings for Rent and Sale in Chennai. Filter by rent, purchase price, BHK, and gated community." />
-    <link rel="canonical" href="https://www.chennairents.in/listings/listings.html" />
-    <link rel="stylesheet" href="index.css">
-    <!-- Google Fonts: Plus Jakarta Sans (Headings) + Inter (Body) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-color: var(--c-page-bg);
-            color: var(--c-ink);
-            font-family: var(--font-body);
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            overflow-y: auto;
-        }
-        
-        .nav-header {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background: var(--c-header-bg);
-            backdrop-filter: blur(20px) saturate(1.4);
-            -webkit-backdrop-filter: blur(20px) saturate(1.4);
-            border-bottom: 1px solid var(--c-border);
-            padding: 16px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-        
-        .brand-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--c-ripon-red);
-            box-shadow: 0 0 0 2px var(--c-header-bg), 0 0 0 3.5px var(--c-ripon-red);
-        }
-        
-        .brand-text {
-            font-family: var(--font-heading);
-            font-size: 20px;
-            font-weight: 900;
-            color: var(--c-ink);
-            letter-spacing: -0.3px;
-        }
+  <meta charset="utf-8">
+  <meta name="color-scheme" content="light only">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Chennai Property Listings | ChennaiRents</title>
+  <meta name="description" content="Verified direct owner flats and properties for rent and sale in Chennai. 0% broker commission.">
+  <link rel="canonical" href="https://www.chennairents.in/listings/listings.html">
+  <link rel="icon" type="image/png" href="/chennai-rents-logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        .back-link {
-            font-family: var(--font-heading);
-            font-size: 13.5px;
-            font-weight: 700;
-            color: var(--c-ink-muted);
-            text-decoration: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-        }
+<style>
+:root{
+  color-scheme:light;
+  --bg:#FAF6EE;
+  --card:#FFFDF9;
+  --ink:#1F1A17;
+  --mute:#6B6159;
+  --sand:#E9DFC9;
+  --red:#B5372B;
+  --redt:#F6E3DF;
+  --yel:#D9A21B;
+  --yelt:#F4E7C2;
+  --blue:#1F5F8B;
+  --bluet:#E3EDF4;
+  --grn:#2E7D4F;
+  --grnt:#E1F0E6;
+  box-sizing:border-box;
+  padding-bottom:env(safe-area-inset-bottom,0px)
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*:before,*:after{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font:400 16px/1.5 Outfit,system-ui,-apple-system,"Segoe UI",sans-serif;
+  border-top:3px solid #4A2C1F;
+  padding-top:env(safe-area-inset-top,0px);
+  -webkit-text-size-adjust:100%;
+  position:relative;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+.page{max-width:1240px;margin:0 auto;padding:20px 20px 230px;display:grid;gap:20px;grid-template-columns:1fr;position:relative;z-index:1}
+@media(min-width:900px){.page{grid-template-columns:340px 1fr;gap:36px;padding:32px 24px 230px}.side{position:sticky;top:16px;align-self:start}}
+.bar{max-width:1240px;margin:0 auto;padding:14px 20px 0;display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.brand-link{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.brand-logo-img{height:38px;width:auto;border-radius:4px;mix-blend-mode:multiply;display:block}
+.brand-txt{display:flex;align-items:baseline;line-height:1}
+.brand-txt b{font-size:20px;font-weight:700;color:var(--ink)}
+.brand-txt b.red{color:var(--red);font-weight:800}
+.bar-right{margin-left:auto;display:flex;align-items:center;gap:14px}
+.bar-link{font-size:14px;font-weight:600;color:var(--mute);text-decoration:none;padding:6px 10px;border-radius:8px;transition:background 0.15s ease}
+.bar-link:hover{background:var(--sand)}
+.bar em{font-style:normal;font-size:14px;color:var(--grn);font-weight:600;background:var(--grnt);padding:4px 10px;border-radius:12px}
 
-        .back-link:hover {
-            color: var(--c-ripon-red);
-            background: var(--c-sand-light);
-        }
+.post{border:1.5px dashed var(--sand);border-radius:24px;background:#F6F1E7;padding:22px;position:relative;overflow:hidden}
+.post .art{display:block;width:100%;height:70px;margin:0 0 14px;color:var(--ink)}
+.post h2,.filters h2{margin:0 0 8px;font-size:19px;font-weight:600}
+.post p{margin:0 0 18px;color:var(--mute);font-size:15px}
+.btn{display:flex;align-items:center;justify-content:center;gap:6px;min-height:52px;width:100%;border:0;border-radius:30px;background:var(--red);color:#fff;font:600 17px Outfit,sans-serif;text-decoration:none;cursor:pointer;box-shadow:0 6px 14px rgba(181,55,43,.22);transition:background 0.15s ease,transform 0.1s ease}
+.btn:hover{background:#9e2f24;transform:translateY(-1px)}
 
-        .container {
-            max-width: 1160px;
-            margin: 0 auto;
-            padding: 32px 24px 60px 24px;
-            display: grid;
-            grid-template-columns: 290px 1fr;
-            gap: 36px;
-        }
+.ftoggle{display:flex;justify-content:space-between;align-items:center;min-height:52px;width:100%;margin-top:14px;padding:0 20px;border:1px solid var(--sand);border-radius:16px;background:var(--card);font:600 16px Outfit,sans-serif;color:var(--ink);cursor:pointer}
+.ftoggle span{background:var(--red);color:#fff;border-radius:12px;padding:0 9px;font-size:13px;min-width:24px;text-align:center;line-height:22px}
+.filters{display:none;margin-top:14px;border:1px solid var(--sand);border-radius:24px;background:var(--card);padding:22px}
+.filters.open{display:block}
+@media(min-width:900px){.ftoggle{display:none}.filters{display:block;margin-top:24px}}
 
-        @media (max-width: 860px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-        }
+.fh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.fh h2{margin:0;font-size:20px}
+.clr{background:none;border:0;color:var(--red);font:500 15px Outfit,sans-serif;cursor:pointer;min-height:44px}
+.clr:hover{text-decoration:underline}
+.lab{display:block;margin:18px 0 8px;font-size:14px;font-weight:600;letter-spacing:.03em;text-transform:uppercase}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 16px;border:1px solid var(--sand);border-radius:12px;background:var(--card);font:600 15px Outfit,sans-serif;color:var(--ink);cursor:pointer;transition:all 0.15s ease}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--red);border-color:var(--red);color:#fff}
+.chip svg{width:18px;height:18px}
+input,select{width:100%;min-height:50px;padding:0 16px;border:1px solid var(--sand);border-radius:14px;background:var(--card);color:var(--ink);font:16px Outfit,sans-serif}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--mute) 50%),linear-gradient(135deg,var(--mute) 50%,transparent 50%);background-position:calc(100% - 20px) 22px,calc(100% - 15px) 22px;background-size:5px 5px;background-repeat:no-repeat;cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 
-        /* ── Left Sidebar: Filters & CTA ── */
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+h1{margin:0 0 6px;font-size:28px;line-height:1.15;font-weight:700;letter-spacing:-.01em}
+@media(min-width:700px){h1{font-size:38px}}
+.sub{margin:0 0 20px;color:var(--mute);font-size:16px}
+.tabs{display:flex;gap:10px;overflow-x:auto;padding-bottom:10px;margin-bottom:0;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 20px;border:1px solid var(--sand);border-radius:26px;background:var(--card);font:600 16px Outfit,sans-serif;color:var(--ink);cursor:pointer;transition:all 0.15s ease}
+.tab:hover{border-color:var(--ink)}
+.tab svg{width:20px;height:20px;color:var(--red)}
+.tab b{background:var(--yelt);border-radius:12px;min-width:26px;padding:0 8px;font-size:13px;line-height:24px;text-align:center;color:var(--ink)}
+.tab[aria-selected=true]{background:#1F1A17;border-color:#1F1A17;color:#fff}
+.tab[aria-selected=true] svg{color:#fff}
+.tab[aria-selected=true] b{background:#4A4440;color:#fff}
 
-        .filter-panel {
-            background: var(--c-card-bg);
-            border: 1px solid var(--c-border);
-            border-radius: 16px;
-            padding: 22px;
-            box-shadow: 0 4px 16px rgba(30, 27, 24, 0.05);
-        }
-        
-        .filter-header {
-            font-family: var(--font-heading);
-            font-size: 16px;
-            font-weight: 800;
-            color: var(--c-ink);
-            margin-bottom: 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.kol{display:block;width:100%;max-width:300px;height:24px;margin:4px 0 22px;color:var(--yel)}
+.grid{display:grid;gap:18px;grid-template-columns:1fr}
+@media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
 
-        .clear-btn {
-            background: none;
-            border: none;
-            color: var(--c-ripon-red);
-            font-size: 12px;
-            font-weight: 700;
-            font-family: var(--font-heading);
-            cursor: pointer;
-            padding: 0;
-        }
+.card{border:1px solid var(--sand);border-radius:20px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;transition:border-color 0.2s ease,transform 0.2s ease}
+.card:hover{border-color:var(--mute);transform:translateY(-2px)}
+.pic{position:relative;height:150px;background:var(--bluet)!important;border-bottom:1px solid var(--sand);color:var(--ink);overflow:hidden}
+.pic svg.sc{position:absolute;inset:0;width:100%;height:100%}
+.pic .tag{position:absolute;left:12px;top:12px;background:var(--red);color:#fff;font-size:13px;font-weight:600;padding:3px 12px;border-radius:12px;z-index:2}
+.pic .ver{position:absolute;right:12px;top:12px;background:var(--grnt);color:var(--grn);font-size:13px;font-weight:600;padding:3px 10px;border-radius:12px;z-index:2;display:inline-flex;align-items:center;gap:4px}
+.body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.body h3{margin:0;font-size:19px;font-weight:600;line-height:1.25}
+.loc{display:flex;gap:6px;align-items:center;color:var(--mute);font-size:14px;margin-top:-4px}
+.loc svg{width:16px;height:16px;flex:none;color:var(--red)}
+.price{font-size:24px;font-weight:700;color:var(--red)}
+.price small{font-size:14px;font-weight:500;color:var(--mute)}
 
-        .clear-btn:hover {
-            text-decoration: underline;
-        }
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.meta span{background:#F6F1E7;border:1px solid var(--sand);border-radius:8px;padding:4px 10px;font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap;line-height:1.3}
 
-        .field-group { margin-bottom: 18px; }
-        .field-label { color: var(--c-ink); font-size: 12.5px; font-weight: 700; font-family: var(--font-heading); margin-bottom: 8px; display: block; text-transform: uppercase; letter-spacing: 0.03em; }
-        
-        .chips-row { display: flex; gap: 6px; flex-wrap: wrap; }
-        .filter-chip {
-            padding: 6px 12px;
-            border: 1.5px solid var(--c-border);
-            border-radius: 8px;
-            background: var(--c-card-bg);
-            color: var(--c-ink-muted);
-            font-family: var(--font-heading);
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.15s ease;
-        }
-        .filter-chip:hover {
-            border-color: var(--c-ink);
-            color: var(--c-ink);
-        }
-        .filter-chip.active {
-            background: var(--c-ripon-red);
-            border-color: var(--c-ripon-red);
-            color: #FFFFFF;
-        }
-        .filter-chip.active.sale {
-            background: #8B263E;
-            border-color: #8B263E;
-            color: #FFFFFF;
-        }
+.req{margin-top:auto;min-height:48px;border:1.5px solid var(--red);border-radius:14px;background:transparent;color:var(--red);font:600 15px Outfit,sans-serif;cursor:pointer;transition:all 0.15s ease}
+.req:hover{background:var(--red);color:#fff}
+.req[disabled]{background:var(--grnt);border-color:var(--grn);color:var(--grn);cursor:default}
 
-        .form-select, .form-input {
-            width: 100%;
-            padding: 10px 12px;
-            background: var(--c-sand-light);
-            border: 1.5px solid var(--c-border);
-            border-radius: 8px;
-            color: var(--c-ink);
-            font-family: var(--font-body);
-            font-size: 13.5px;
-            box-sizing: border-box;
-        }
-        .form-select:focus, .form-input:focus {
-            outline: none;
-            border-color: var(--c-ripon-red);
-            background: #FFFFFF;
-        }
+.empty{border:1.5px dashed var(--sand);border-radius:20px;padding:40px 20px;text-align:center;color:var(--mute);background:var(--card)}
+.empty svg{width:90px;height:64px;margin:0 auto 6px;display:block}
+.empty b{display:block;color:var(--ink);font-size:18px;margin-bottom:4px}
+.empty button{margin-top:14px;min-height:48px;padding:0 22px;border-radius:24px;border:1px solid var(--red);background:var(--red);color:#fff;font:600 15px Outfit,sans-serif;cursor:pointer}
 
-        .cta-box {
-            background: var(--c-sand-light);
-            border: 1.5px dashed var(--c-border);
-            border-radius: 16px;
-            padding: 22px;
-        }
-
-        .cta-box h3 {
-            font-family: var(--font-heading);
-            color: var(--c-ink);
-            font-weight: 800;
-            margin-top: 0;
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
-
-        .cta-box p {
-            font-size: 13px;
-            color: var(--c-ink-muted);
-            line-height: 1.5;
-            margin-bottom: 16px;
-        }
-
-        .btn-list-flat {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background: var(--c-ripon-red);
-            color: #FFFFFF;
-            text-align: center;
-            border-radius: 10px;
-            text-decoration: none;
-            font-family: var(--font-heading);
-            font-weight: 700;
-            font-size: 14px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(178, 58, 46, 0.2);
-            box-sizing: border-box;
-        }
-
-        .btn-list-flat:hover {
-            background: var(--c-ripon-red-dk);
-            transform: translateY(-1px);
-        }
-
-        /* ── Right Content: Listing Grid ── */
-        .feed-header {
-            margin-bottom: 20px;
-        }
-
-        .feed-title {
-            font-family: var(--font-heading);
-            font-size: 28px;
-            font-weight: 900;
-            color: var(--c-ink);
-            margin: 0 0 6px 0;
-            letter-spacing: -0.4px;
-        }
-
-        .feed-subtitle {
-            font-size: 14px;
-            color: var(--c-ink-muted);
-            margin: 0 0 20px 0;
-        }
-
-        /* Feed Mode Switcher Tabs */
-        .feed-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 24px;
-            border-bottom: 1.5px solid var(--c-border);
-            padding-bottom: 12px;
-            flex-wrap: wrap;
-        }
-
-        .feed-tab {
-            background: transparent;
-            border: 1.5px solid var(--c-border);
-            border-radius: 20px;
-            padding: 8px 18px;
-            font-family: var(--font-heading);
-            font-size: 13.5px;
-            font-weight: 700;
-            color: var(--c-ink-muted);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .feed-tab:hover {
-            background: var(--c-sand-light);
-            color: var(--c-ink);
-        }
-
-        .feed-tab.active {
-            background: var(--c-ink);
-            border-color: var(--c-ink);
-            color: #FFFFFF;
-        }
-
-        .feed-tab.active[data-tab="sale"] {
-            background: #8B263E;
-            border-color: #8B263E;
-            color: #FFFFFF;
-        }
-
-        .feed-tab.active[data-tab="rent"] {
-            background: #2F7D4F;
-            border-color: #2F7D4F;
-            color: #FFFFFF;
-        }
-
-        .feed-tab-count {
-            background: rgba(255, 255, 255, 0.25);
-            padding: 2px 7px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 800;
-        }
-
-        .feed-tab:not(.active) .feed-tab-count {
-            background: var(--c-border);
-            color: var(--c-ink);
-        }
-
-        .listings-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-            gap: 20px;
-        }
-
-        /* Listing Card */
-        .listing-card {
-            background: var(--c-card-bg);
-            border: 1.5px solid var(--c-border);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 4px 14px rgba(30, 27, 24, 0.04);
-        }
-
-        .listing-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--c-ink);
-            box-shadow: 0 10px 24px rgba(30, 27, 24, 0.08);
-        }
-
-        .card-img-placeholder {
-            height: 140px;
-            background: var(--c-sand-light);
-            border-bottom: 1px solid var(--c-border-subtle);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .card-img-placeholder svg {
-            color: var(--c-border);
-            width: 44px;
-            height: 44px;
-        }
-
-        .status-badge {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 800;
-            font-family: var(--font-heading);
-            letter-spacing: 0.02em;
-        }
-        
-        .status-badge.sale {
-            background: #FBF0F3;
-            color: #8B263E;
-            border: 1.5px solid rgba(139, 38, 62, 0.4);
-        }
-
-        .status-badge.rent {
-            background: #EBF6EE;
-            color: #2F7D4F;
-            border: 1.5px solid rgba(47, 125, 79, 0.4);
-        }
-
-        .status-badge.room {
-            background: #FFF8E6;
-            color: #B45309;
-            border: 1.5px solid rgba(180, 83, 9, 0.35);
-        }
-        
-        .gated-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: #EBF3FA;
-            color: var(--c-marina-blue-dk);
-            border: 1.5px solid rgba(31, 111, 168, 0.4);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            font-family: var(--font-heading);
-        }
-
-        .card-content {
-            padding: 18px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-price-row {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            margin-bottom: 6px;
-        }
-
-        .card-price {
-            font-family: var(--font-heading);
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--c-ink);
-            letter-spacing: -0.4px;
-        }
-
-        .card-price.sale-color {
-            color: #8B263E;
-        }
-
-        .card-price span {
-            font-size: 13px;
-            color: var(--c-ink-muted);
-            font-weight: 500;
-            font-family: var(--font-body);
-        }
-
-        .card-rate-sqft {
-            font-size: 12px;
-            color: var(--c-ink-muted);
-            font-weight: 600;
-        }
-
-        .card-title {
-            font-family: var(--font-heading);
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--c-ink);
-            margin-bottom: 10px;
-            line-height: 1.35;
-        }
-
-        .card-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 16px;
-            font-size: 12.5px;
-            color: var(--c-ink-muted);
-        }
-
-        .card-meta-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background: var(--c-sand-light);
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-weight: 600;
-        }
-
-        .card-footer {
-            margin-top: auto;
-            border-top: 1px solid var(--c-border-subtle);
-            padding-top: 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-view-map {
-            background: transparent;
-            color: var(--c-ripon-red);
-            border: 1.5px solid var(--c-ripon-red);
-            padding: 7px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 700;
-            font-family: var(--font-heading);
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            white-space: nowrap;
-        }
-
-        .btn-view-map:hover {
-            background: var(--c-ripon-red);
-            color: #FFFFFF;
-        }
-
-        .btn-contact-action {
-            background: #2F7D4F;
-            color: #FFFFFF;
-            padding: 7px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 700;
-            font-family: var(--font-heading);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-
-        .btn-contact-action.sale {
-            background: #8B263E;
-        }
-
-        .btn-contact-action:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-
-        .empty-state {
-            grid-column: 1 / -1;
-            padding: 48px 24px;
-            text-align: center;
-            background: var(--c-card-bg);
-            border: 1px solid var(--c-border);
-            border-radius: 16px;
-        }
-        .empty-state-icon { font-size: 36px; margin-bottom: 12px; }
-        .empty-state h3 { font-family: var(--font-heading); font-size: 18px; margin: 0 0 8px 0; color: var(--c-ink); }
-        .empty-state p { color: var(--c-ink-muted); font-size: 13.5px; margin: 0 0 16px 0; }
-
-        /* Mobile-First Ergonomics & Responsiveness (360px - 640px) */
-        @media (max-width: 640px) {
-            .nav-header {
-                padding: 12px 14px;
-                flex-direction: column;
-                align-items: stretch;
-                gap: 10px;
-            }
-            .nav-header > div:last-child {
-                display: flex;
-                gap: 8px;
-                overflow-x: auto;
-                padding-bottom: 2px;
-                -webkit-overflow-scrolling: touch;
-            }
-            .container {
-                padding: 16px 14px 48px 14px;
-                gap: 20px;
-            }
-            .listings-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-            .feed-title {
-                font-size: 22px;
-            }
-            .feed-tabs {
-                gap: 8px;
-            }
-            .feed-tab {
-                padding: 6px 12px;
-                font-size: 12.5px;
-            }
-            .form-select, .form-input {
-                font-size: 16px;
-                min-height: 48px;
-            }
-            .filter-chip {
-                min-height: 40px;
-                display: inline-flex;
-                align-items: center;
-            }
-        }
-    </style>
+.skyline{position:absolute;left:0;right:0;bottom:0;height:210px;pointer-events:none;z-index:0;opacity:.13;color:var(--ink);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 45%);mask-image:linear-gradient(to bottom,transparent,#000 45%)}
+.skyline svg{width:100%;height:100%;display:block}
+.foot{position:absolute;left:0;right:0;bottom:16px;text-align:center;font-size:14px;color:var(--mute);z-index:1;margin:0}
+.drive{position:absolute;bottom:2px;width:46px;animation:roll 22s linear infinite}
+@keyframes roll{from{left:-60px}to{left:100%}}
+@media(prefers-reduced-motion:reduce){.drive{animation:none;left:20px}.card,.btn,.tab{transition:none}}
+</style>
 </head>
 <body>
 
-    <!-- Header Navigation -->
-    <header class="nav-header">
-        <a href="/" class="brand" style="text-decoration:none; display:flex; align-items:center; gap:10px;">
-            <img src="/chennai-rents-icon-transparent.png" alt="Chennai Rents" style="height:34px; width:auto; object-fit:contain;" />
-            <div style="display:flex; align-items:baseline; gap:4px;">
-                <span style="font-family:var(--font-heading); font-size:18px; font-weight:800; color:var(--c-ink); letter-spacing:-0.02em;">Chennai</span>
-                <span style="font-family:var(--font-heading); font-size:18px; font-weight:900; color:var(--c-auto-yellow-dk); letter-spacing:-0.02em;">Rents</span>
-            </div>
-        </a>
-        <div style="display: flex; gap: 12px; align-items: center;">
-            <a href="index.html" class="back-link" style="white-space:nowrap;">🗺️ Chennai Map</a>
-            <a href="list-property.html" class="back-link" style="color: var(--c-ripon-red); font-weight: 800; white-space:nowrap;">+ List Property</a>
-            <a href="/" class="back-link" style="white-space:nowrap;">&larr; Home</a>
-        </div>
-    </header>
+<!-- Hidden SVG Symbol Definitions -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+      <path d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6"/>
+    </symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+      <path d="M3 12L12 3h9v9l-9 9zM16.5 7.5h.01"/>
+    </symbol>
+    <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+      <path d="M5 21V4h10v17M15 9h4v12M3 21h18M8 8h2M8 12h2M8 16h2"/>
+    </symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+      <path d="M12 21s7-6.2 7-11.5A7 7 0 005 9.5C5 14.800 12 21 12 21zM12 12a2.500 2.500 0 100-5 2.500 2.500 0 000 5z"/>
+    </symbol>
+    <symbol id="kolam" viewBox="0 0 300 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+      <path d="M0 12h92M208 12h92"/>
+      <circle cx="98" cy="12" r="2.500" fill="currentColor"/>
+      <circle cx="202" cy="12" r="2.500" fill="currentColor"/>
+      <path d="M110 12l10-8 10 8-10 8zM130 12l10-8 10 8-10 8zM150 12l10-8 10 8-10 8zM170 12l10-8 10 8-10 8z"/>
+    </symbol>
+    <symbol id="auto" viewBox="0 0 40 28" fill="none">
+      <path d="M4 22V10c0-3 2-5 5-5h14c4 0 7 3 8 7l3 6v4z" fill="#D9A21B" stroke="#1F1A17" stroke-width="1.200" stroke-linejoin="round"/>
+      <path d="M4 8h26l-3-4H8z" fill="#2E7D4F" stroke="#1F1A17" stroke-width="1.200"/>
+      <circle cx="10" cy="23" r="3.500" fill="#1F1A17"/>
+      <circle cx="31" cy="23" r="3.500" fill="#1F1A17"/>
+      <path d="M9 12h10v6H9z" fill="#FFFDF9" stroke="#1F1A17"/>
+    </symbol>
+    <symbol id="skyline" viewBox="0 0 1200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+      <!-- Lighthouse (Marina Beach) -->
+      <path d="M0 199H1200M70 199l14-110h22l14 110M88 89h26M84 89l-4-10h42l-4 10M92 79V62h18v17M90 62h22l-11-14z"/>
+      <!-- Ripon Building Neoclassical Arches & Facade -->
+      <path d="M300 199V120h300v79M300 120h300M330 120V100h240v20M440 100V76h80v24M450 76V54h60v22M468 54l12-22 12 22M350 140v59M390 140v59M430 140v59M470 140v59M510 140v59M550 140v59M470 199v-30a10 10 0 0120 0v30"/>
+      <!-- Chennai Central Gothic Arches & Clock Tower (NO Gopuram) -->
+      <path d="M760 199V130h300v69M780 130V112h260v18M900 112V70h40v42M898 70V38h44v32M903 38l17-14 17 14M909 52a11 11 0 1022 0a11 11 0 10-22 0M800 199v-45M840 199v-45M880 199v-45M960 199v-45M1000 199v-45M1040 199v-45M900 199v-50h40v50"/>
+    </symbol>
+  </defs>
+</svg>
 
-    <div class="container">
-        
-        <!-- Sidebar Filters -->
-        <aside class="sidebar">
-            
-            <div class="cta-box">
-                <h3>List Your Property</h3>
-                <p>Rent out or sell your flat, villa, or plot directly to verified tenants and buyers.</p>
-                <a href="list-property.html" class="btn-list-flat">+ Post Listing</a>
-            </div>
+<!-- Header with Top-Left Official Logo -->
+<header class="bar">
+  <a href="/" class="brand-link" aria-label="ChennaiRents Home">
+    <img
+      src="/chennai-rents-logo-new.jpg"
+      alt="Chennai Rents Logo"
+      class="brand-logo-img"
+      onerror="this.style.display='none'; document.getElementById('sky-mark').style.display='inline-flex';"
+    >
+    <svg id="sky-mark" width="34" height="26" viewBox="0 0 40 30" fill="none" stroke="#B5372B" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true">
+      <path d="M1 29h38M3 29V16h14v13M3 16l7-6 7 6M7 29v-7h6v7M19 29V12h8v17M19 12l4-6 4 6M29 29V19h10v10M33 19v-4h2v4"/>
+      <path d="M9 4h4" stroke="#D9A21B"/>
+    </svg>
+    <div class="brand-txt">
+      <b>Chennai</b><b class="red">Rents</b>
+    </div>
+  </a>
+  <div class="bar-right">
+    <a href="/listings" class="bar-link">Map</a>
+    <a href="list-property.html" class="bar-link" style="color:var(--red); font-weight:700;">+ Post Listing</a>
+    <em>0% broker</em>
+  </div>
+</header>
 
-            <div class="filter-panel">
-                <div class="filter-header">
-                    <span>Filters</span>
-                    <button class="clear-btn" onclick="resetFilters()">Clear All</button>
-                </div>
-
-                <div class="field-group">
-                    <label class="field-label">Transaction Mode</label>
-                    <div class="chips-row" id="filter-mode-chips">
-                        <div class="filter-chip active" onclick="setModeFilter('all')">All</div>
-                        <div class="filter-chip" onclick="setModeFilter('rent')">🏠 Rent</div>
-                        <div class="filter-chip" onclick="setModeFilter('sale')">🏷️ Buy/Sell</div>
-                    </div>
-                </div>
-                
-                <div class="field-group">
-                    <label class="field-label">Location / Neighbourhood</label>
-                    <select id="filter-location" class="form-select" onchange="applyFilters()">
-                        <option value="">All Chennai</option>
-                        <option value="omr">OMR (IT Corridor)</option>
-                        <option value="anna nagar">Anna Nagar</option>
-                        <option value="velachery">Velachery</option>
-                        <option value="adyar">Adyar</option>
-                        <option value="besant nagar">Besant Nagar</option>
-                        <option value="sholinganallur">Sholinganallur</option>
-                        <option value="porur">Porur</option>
-                        <option value="ecr">ECR</option>
-                        <option value="medavakkam">Medavakkam</option>
-                        <option value="tambaram">Tambaram</option>
-                        <option value="t. nagar">T. Nagar</option>
-                    </select>
-                </div>
-
-                <div class="field-group">
-                    <label class="field-label">BHK Size</label>
-                    <div class="chips-row" id="filter-bhk-chips">
-                        <div class="filter-chip active" onclick="setBhkFilter(0)">All</div>
-                        <div class="filter-chip" onclick="setBhkFilter(1)">1 BHK</div>
-                        <div class="filter-chip" onclick="setBhkFilter(2)">2 BHK</div>
-                        <div class="filter-chip" onclick="setBhkFilter(3)">3 BHK</div>
-                        <div class="filter-chip" onclick="setBhkFilter(4)">4+ BHK</div>
-                    </div>
-                </div>
-
-                <div class="field-group" id="group-filter-rent">
-                    <label class="field-label">Max Rent (₹/month)</label>
-                    <input type="number" id="filter-rent-max" class="form-input" placeholder="e.g. 35000" oninput="applyFilters()" />
-                </div>
-
-                <div class="field-group" id="group-filter-sale">
-                    <label class="field-label">Max Sale Price (₹ Lakhs)</label>
-                    <input type="number" id="filter-sale-max" class="form-input" placeholder="e.g. 120 (for 1.2 Cr)" oninput="applyFilters()" />
-                </div>
-                
-                <div class="field-group" style="margin-bottom: 0;">
-                    <label class="field-label">Community</label>
-                    <div class="chips-row" id="filter-gated-chips">
-                        <div class="filter-chip active" onclick="setGatedFilter(null)">Any</div>
-                        <div class="filter-chip" onclick="setGatedFilter(true)">Gated Only</div>
-                        <div class="filter-chip" onclick="setGatedFilter(false)">Standalone</div>
-                    </div>
-                </div>
-            </div>
-            
-        </aside>
-
-        <!-- Main Feed -->
-        <main class="feed-content">
-            <div class="feed-header">
-                <h1 class="feed-title">Chennai Property Listings</h1>
-                <p class="feed-subtitle">Verified direct owner flats and properties for Rent & Sale. 0% broker commission.</p>
-                
-                <!-- Tab switchers -->
-                <div class="feed-tabs">
-                    <button class="feed-tab active" data-tab="all" onclick="setModeFilter('all')">
-                        All Listings <span class="feed-tab-count" id="count-all">0</span>
-                    </button>
-                    <button class="feed-tab" data-tab="rent" onclick="setModeFilter('rent')">
-                        🏠 For Rent <span class="feed-tab-count" id="count-rent">0</span>
-                    </button>
-                    <button class="feed-tab" data-tab="sale" onclick="setModeFilter('sale')">
-                        🏷️ For Sale (Buy) <span class="feed-tab-count" id="count-sale">0</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Feed Grid -->
-            <div class="listings-grid" id="listings-grid">
-                <!-- Rendered dynamically via JavaScript -->
-            </div>
-        </main>
-        
+<!-- Main Page Layout -->
+<main class="page">
+  <!-- Sidebar -->
+  <aside class="side">
+    <div class="post">
+      <svg class="art" viewBox="0 0 300 70" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true">
+        <path d="M0 68h300" />
+        <rect x="30" y="30" width="60" height="38" fill="#FFFDF9"/>
+        <path d="M24 30l36-22 36 22z" fill="#B5372B"/>
+        <rect x="52" y="46" width="16" height="22" fill="#D9A21B"/>
+        <circle cx="140" cy="46" r="14" fill="#2E7D4F" stroke="none"/>
+        <circle cx="160" cy="50" r="12" fill="#2E7D4F" stroke="none"/>
+        <path d="M150 64V52" stroke="#6B4A2F" stroke-width="3"/>
+        <path d="M200 66q15-8 30 0t30 0" stroke="#1F5F8B"/>
+        <circle cx="270" cy="16" r="9" fill="#D9A21B" stroke="none"/>
+      </svg>
+      <h2>List your property</h2>
+      <p>Rent out or sell your flat, villa, or plot directly to verified tenants and buyers.</p>
+      <a class="btn" href="list-property.html">+ Post listing</a>
     </div>
 
-    <!-- Footer with Chennai Architectural Skyline Strip (Ripon Building, Central, Lighthouse - NO gopuram) -->
-    <footer style="position: relative; overflow: hidden; padding: 48px 20px 36px; border-top: 1px solid var(--c-border); background: var(--c-sand-light); text-align: center; margin-top: 48px;">
-        <div style="position: relative; z-index: 2; max-width: 600px; margin: 0 auto;">
-            <p style="font-family: var(--font-heading); font-weight: 700; color: var(--c-ink); margin: 0 0 6px 0; font-size: 14px;">
-                chennairents.in • Chennai Crowdsourced Rental &amp; Sale Transparency
-            </p>
-            <p style="font-size: 12px; color: var(--c-ink-muted); margin: 0 0 16px 0;">
-                Zero brokerage • Direct owners • Real community data
-            </p>
-            <div style="display: flex; gap: 14px; justify-content: center; font-size: 12px; flex-wrap: wrap;">
-                <a href="index.html" style="color: var(--c-ink-muted); text-decoration: none;">Interactive Map</a>
-                <span style="color: var(--c-border);">•</span>
-                <a href="list-property.html" style="color: var(--c-ripon-red); font-weight: 700; text-decoration: none;">+ List Property</a>
-                <span style="color: var(--c-border);">•</span>
-                <a href="/" style="color: var(--c-ink-muted); text-decoration: none;">Home</a>
-            </div>
+    <!-- Mobile Filters Button -->
+    <button class="ftoggle" id="ft" aria-expanded="false" aria-controls="fl">
+      Filters <span id="fc">0</span>
+    </button>
+
+    <!-- Filters Panel -->
+    <section class="filters" id="fl" aria-label="Filters">
+      <div class="fh">
+        <h2>Filters</h2>
+        <button class="clr" id="clr" type="button">Clear all</button>
+      </div>
+
+      <span class="lab">Transaction mode</span>
+      <div class="chips" id="fm" role="group" aria-label="Transaction mode">
+        <button class="chip" data-v="all" aria-pressed="true" type="button">All</button>
+        <button class="chip" data-v="rent" aria-pressed="false" type="button">
+          <svg><use href="#i-home"/></svg>Rent
+        </button>
+        <button class="chip" data-v="sale" aria-pressed="false" type="button">
+          <svg><use href="#i-tag"/></svg>Buy/Sell
+        </button>
+      </div>
+
+      <label class="lab" for="fa">Location / neighbourhood</label>
+      <select id="fa">
+        <option value="">All Chennai</option>
+      </select>
+
+      <span class="lab">BHK size</span>
+      <div class="chips" id="fb" role="group" aria-label="BHK size">
+        <button class="chip" data-v="all" aria-pressed="true" type="button">All</button>
+        <button class="chip" data-v="1" aria-pressed="false" type="button">1 BHK</button>
+        <button class="chip" data-v="2" aria-pressed="false" type="button">2 BHK</button>
+        <button class="chip" data-v="3" aria-pressed="false" type="button">3 BHK</button>
+        <button class="chip" data-v="4" aria-pressed="false" type="button">4+ BHK</button>
+      </div>
+
+      <label class="lab" for="fr">Max rent (₹/month)</label>
+      <input id="fr" type="text" inputmode="numeric" placeholder="e.g. 35000">
+
+      <label class="lab" for="fs">Max sale price (₹ lakhs)</label>
+      <input id="fs" type="text" inputmode="numeric" placeholder="e.g. 120 (for 1.2 Cr)">
+    </section>
+  </aside>
+
+  <!-- Feed Area -->
+  <section>
+    <h1>Chennai property listings</h1>
+    <p class="sub">Verified direct owner flats and properties for rent and sale. 0% broker commission. Find your next home with real people.</p>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <svg class="kol" aria-hidden="true"><use href="#kolam"/></svg>
+    <div id="out" aria-live="polite"></div>
+  </section>
+</main>
+
+<!-- Bottom Skyline Strip & Driving Auto-Rickshaw -->
+<div class="skyline" aria-hidden="true">
+  <svg viewBox="0 0 1200 200" preserveAspectRatio="xMidYMax slice">
+    <use href="#skyline"/>
+  </svg>
+</div>
+<svg class="drive" viewBox="0 0 40 28" aria-hidden="true" style="z-index:1">
+  <use href="#auto"/>
+</svg>
+<p class="foot">Made in Chennai, for Chennai</p>
+
+<!-- Application Scripts -->
+<script>
+// Sample listings for preview. Replace with your real data source.
+const L = [
+  {id:1,type:"rent",bhk:2,area:"Adyar",land:"Near Adyar signal",price:32000,dep:"3 months",furn:"Semi-furnished",fl:"2nd of 4",sq:1050,face:"East",ten:"Family",water:"Metro water",park:"Bike and car"},
+  {id:2,type:"rent",bhk:1,area:"Velachery",land:"5 min from Velachery MRTS",price:16500,dep:"2 months",furn:"Unfurnished",fl:"1st of 3",sq:580,face:"North",ten:"Bachelors",water:"Both",park:"Bike"},
+  {id:3,type:"rent",bhk:3,area:"Anna Nagar",land:"Near Anna Nagar Tower",price:48000,dep:"6 months",furn:"Fully furnished",fl:"5th of 8",sq:1600,face:"West",ten:"Family, company lease",water:"Metro water",park:"Bike and car"},
+  {id:4,type:"sale",bhk:3,area:"Thiruvanmiyur",land:"Walkable to Beach Road",price:13500000,dep:"",furn:"Ready to Move",fl:"3rd of 5",sq:1680,face:"North-East",ten:"Freehold Title",water:"Metro water",park:"2 Covered Cars"},
+  {id:5,type:"sale",bhk:2,area:"OMR",land:"Near Sholinganallur Junction",price:6800000,dep:"",furn:"Semi-furnished",fl:"6th of 14",sq:1120,face:"East",ten:"Clear Deed",water:"Both",park:"1 Covered Car"}
+];
+
+const AREAS = [
+  "Adyar","Alwarpet","Ambattur","Anna Nagar","Besant Nagar","Chromepet",
+  "ECR","Guindy","Kilpauk","Kodambakkam","Madipakkam","Medavakkam",
+  "Mogappair","Mylapore","Navalur","Nungambakkam","OMR","Pallavaram",
+  "Perambur","Perungudi","Porur","Royapettah","Sholinganallur","T. Nagar",
+  "Tambaram","Thiruvanmiyur","Thoraipakkam","Velachery","Villivakkam"
+];
+
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const F = {mode:"all",area:"",bhk:"all",rent:"",sale:""};
+
+const inr = n => {
+  n = String(n);
+  return n.length <= 3 ? n : n.slice(0,-3).replace(/\B(?=(\d{2})+(?!\d))/g,",") + "," + n.slice(-3);
+};
+
+$("#fa").insertAdjacentHTML("beforeend", AREAS.map(a => `<option value="${a}">${a}</option>`).join(""));
+const asked = new Set();
+
+function match(x) {
+  if (F.mode != "all" && x.type != F.mode) return false;
+  if (F.area && x.area != F.area) return false;
+  if (F.bhk != "all" && (F.bhk == "4" ? x.bhk < 4 : x.bhk != +F.bhk)) return false;
+  if (x.type == "rent" && F.rent && x.price > +F.rent) return false;
+  if (x.type == "sale" && F.sale && x.price > +F.sale * 100000) return false;
+  return true;
+}
+
+const SUN = '<circle cx="335" cy="36" r="16" fill="#D9A21B"/>';
+const TREE = (x,y) => `<rect x="${x-4}" y="${y}" width="8" height="40" fill="#6B4A2F"/><circle cx="${x}" cy="${y-8}" r="26" fill="#2E7D4F"/><circle cx="${x-20}" cy="${y+6}" r="17" fill="#2E7D4F"/><circle cx="${x+20}" cy="${y+6}" r="17" fill="#2E7D4F"/>`;
+const WAVE = '<path d="M0 134q25-8 50 0t50 0 50 0 50 0 50 0 50 0 50 0 50 0v16H0z" fill="#1F5F8B" opacity=".4"/>';
+const G = '<path d="M0 148h400" stroke="#1F1A17" stroke-width="2"/>';
+
+function scene(i) {
+  const k = i % 3;
+  if (k == 1) {
+    return SUN + WAVE + '<rect x="50" y="86" width="84" height="48" fill="#FFFDF9" stroke="#1F1A17" stroke-width="2"/><path d="M42 86l50-32 50 32z" fill="#B5372B" stroke="#1F1A17" stroke-width="2"/><rect x="82" y="106" width="20" height="28" fill="#D9A21B" stroke="#1F1A17" stroke-width="2"/>' + TREE(240,84) + G;
+  }
+  if (k == 2) {
+    return SUN + '<rect x="40" y="96" width="320" height="22" rx="4" fill="#B5372B" stroke="#1F1A17" stroke-width="2"/><path d="M40 108h320" stroke="#D9A21B" stroke-width="4"/><path d="M0 128h400" stroke="#1F1A17" stroke-width="3"/><path d="M60 96V84M140 96V84M220 96V84M300 96V84M40 84h340" stroke="#1F1A17" stroke-width="2"/>' + TREE(80,60) + G;
+  }
+  return SUN + '<rect x="150" y="30" width="70" height="104" fill="#FFFDF9" stroke="#1F1A17" stroke-width="2"/><path d="M164 50h12M194 50h12M164 74h12M194 74h12M164 98h12M194 98h12" stroke="#B5372B" stroke-width="5"/><rect x="22" y="70" width="90" height="64" fill="#F4E7C2" stroke="#1F1A17" stroke-width="2"/>' + TREE(300,84) + G;
+}
+
+function card(x) {
+  const sale = x.type == "sale";
+  return `
+    <article class="card">
+      <div class="pic">
+        <svg class="sc" viewBox="0 0 400 150" preserveAspectRatio="xMidYMax slice" aria-hidden="true">${scene(x.id)}</svg>
+        <span class="tag">${sale ? "For sale" : "For rent"}</span>
+        <span class="ver">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          Verified owner
+        </span>
+      </div>
+      <div class="body">
+        <h3>${x.bhk} BHK in ${x.area}</h3>
+        <div class="loc"><svg><use href="#i-pin"/></svg>${x.land}</div>
+        <div class="price">₹${inr(x.price)}${sale ? "" : " <small>/month</small>"}</div>
+        <div class="meta">
+          <span>${x.furn}</span>
+          <span>${x.sq} sq ft</span>
+          <span>${x.fl} floor</span>
+          <span>${x.face} facing</span>
+          ${sale ? "" : `<span>Deposit ${x.dep}</span>`}
+          <span>${x.water}</span>
+          <span>Parking: ${x.park}</span>
+          <span>${x.ten}</span>
         </div>
-        <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 130px; pointer-events: none; opacity: 0.12; mask-image: linear-gradient(to top, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%); -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%);" aria-hidden="true">
-            <svg style="width: 100%; height: 100%; display: block;" viewBox="0 0 1200 160" preserveAspectRatio="none" fill="none" stroke="#B5372B" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M40 160V95h320v65 M40 95l160-22 160 22 M160 73V45h80v28 M185 45c0-12 15-20 15-20s15 8 15 20 M175 58h50 M80 115h30v45H80z M140 115h30v45h-30z M230 115h30v45h-30z M290 115h30v45h-30z M95 102c0-5 7-9 15-9s15 4 15 9 M155 102c0-5 7-9 15-9s15 4 15 9 M245 102c0-5 7-9 15-9s15 4 15 9 M305 102c0-5 7-9 15-9s15 4 15 9" />
-                <path d="M460 160V85h280v75 M540 85V30h120v55 M575 30V10l25-10 25 10v20 M600 50a12 12 0 1 0 0.01 0 M480 110h40v50h-40z M680 110h40v50h-40z M500 98c0-8 10-14 20-14s20 6 20 14 M700 98c0-8 10-14 20-14s20 6 20 14 M555 125h90v35h-90z" />
-                <path d="M880 160V60h80v100 M900 60V25h40V60 M920 25c0-10 10-15 10-15s10 5 10 15 M890 60h60 M910 40h20 M960 110l40-20v70h-40z M840 135l40-15v40h-40z" />
-                <path d="M0 160h1200 M1020 155c25-4 50 4 75 0s50-4 75 0 M1040 160c20-3 40 3 60 0" />
-            </svg>
-        </div>
-    </footer>
+        <button type="button" class="req" data-id="${x.id}" ${asked.has(x.id) ? "disabled" : ""}>
+          ${asked.has(x.id) ? "Requested. Owner will reply soon" : "Request owner's number"}
+        </button>
+      </div>
+    </article>
+  `;
+}
 
-    <!-- Supabase UMD Javascript SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+function render() {
+  const c = t => L.filter(x => t == "all" || x.type == t).length;
+  $("#tabs").innerHTML = [
+    ["all","All listings","i-list"],
+    ["rent","For rent","i-home"],
+    ["sale","For sale (buy)","i-tag"]
+  ].map(([k,n,i]) => `
+    <button class="tab" role="tab" data-v="${k}" aria-selected="${F.mode == k}">
+      <svg><use href="#${i}"/></svg>${n}<b>${c(k)}</b>
+    </button>
+  `).join("");
 
-    <script>
-        const SUPABASE_URL = 'https://hnnkhmfrpwdrkkjbgckv.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhubmtobWZycHdkcmtramJnY2t2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4NDk1ODgsImV4cCI6MjA5NzQyNTU4OH0.oCXDCH1J80HLb8AfQA31Fdqi-vbVN2cMdCTZm-NWngc';
-        const db = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
-
-        // State
-        let allListings = [];
-        let currentMode = 'all'; // 'all', 'rent', 'sale'
-        let currentBhk = 0; // 0 = any
-        let currentGated = null; // null = any, true, false
-        let filterLocation = '';
-        let filterRentMax = null;
-        let filterSaleMax = null;
-
-        function formatInLakhsCrores(amt) {
-            if (!amt) return '';
-            if (amt >= 10000000) {
-                const cr = amt / 10000000;
-                return cr % 1 === 0 ? cr.toFixed(0) + ' Cr' : cr.toFixed(2) + ' Cr';
-            } else if (amt >= 100000) {
-                const lk = amt / 100000;
-                return lk % 1 === 0 ? lk.toFixed(0) + ' Lakhs' : lk.toFixed(1) + ' Lakhs';
-            }
-            return '₹' + amt.toLocaleString('en-IN');
+  const r = L.filter(match);
+  $("#out").innerHTML = r.length
+    ? `<div class="grid">${r.map(card).join("")}</div>`
+    : `
+      <div class="empty">
+        <svg viewBox="0 0 40 28" aria-hidden="true"><use href="#auto"/></svg>
+        <b>No homes match yet</b>
+        ${F.mode == "sale" && !L.some(x => x.type == "sale")
+          ? "No sale listings right now. Check back soon, or list yours."
+          : "Try a higher budget or a different area."
         }
+        <br>
+        <button type="button" id="reset">Clear filters</button>
+      </div>
+    `;
 
-        async function initFeed() {
-            let remotePins = [];
-            if (db) {
-                try {
-                    const { data, error } = await db.from('pins_public').select('*');
-                    if (!error && data) remotePins = data;
-                } catch (e) {
-                    console.warn('Supabase fetch notice:', e);
-                }
-            }
+  $$("#fm .chip").forEach(b => b.setAttribute("aria-pressed", b.dataset.v == F.mode));
+  $$("#fb .chip").forEach(b => b.setAttribute("aria-pressed", b.dataset.v == F.bhk));
 
-            // Parse for-sale pins
-            remotePins.forEach(p => {
-                if (p.feedback && p.feedback.includes('[FOR_SALE')) {
-                    const match = p.feedback.match(/\[FOR_SALE:(\d+):?([a-zA-Z]*)\]/);
-                    if (match) {
-                        p.transaction_type = 'sale';
-                        p.sale_price = parseFloat(match[1]);
-                        if (match[2]) p.property_type = match[2];
-                    }
-                } else if (p.is_listing) {
-                    p.transaction_type = 'rent';
-                }
-            });
+  const n = (F.mode != "all") + (!!F.area) + (F.bhk != "all") + (!!F.rent) + (!!F.sale);
+  $("#fc").textContent = n;
+}
 
-            // Local user pins
-            let customPins = [];
-            try {
-                customPins = JSON.parse(localStorage.getItem('chennai_custom_pins') || '[]');
-            } catch (e) {}
+$("#tabs").onclick = e => {
+  const b = e.target.closest(".tab");
+  if (b) { F.mode = b.dataset.v; render(); }
+};
 
-            // Filter authentic listings from Supabase database (rental listings, for-sale pins)
-            const dbListings = remotePins.filter(p => p.is_listing || p.transaction_type === 'sale' || (p.feedback && p.feedback.includes('[FOR_SALE')));
+$("#fm").onclick = e => {
+  const b = e.target.closest(".chip");
+  if (b) { F.mode = b.dataset.v; render(); }
+};
 
-            // Enhanced multi-attribute deduplication (by ID, and by phone + location + rent signature)
-            const seenKeys = new Set();
-            const deduplicated = [];
-            [...dbListings, ...customPins].forEach(item => {
-                const phone = (item.contact_phone || item.phone || '').trim();
-                const lat = Number(item.latitude || 0).toFixed(4);
-                const lng = Number(item.longitude || 0).toFixed(4);
-                const rent = item.rent || item.sale_price || 0;
-                const sig = item.id ? `id_${item.id}` : `geo_${lat}_${lng}_${rent}_${phone}`;
-                if (!seenKeys.has(sig)) {
-                    seenKeys.add(sig);
-                    deduplicated.push(item);
-                }
-            });
-            allListings = deduplicated;
+$("#fb").onclick = e => {
+  const b = e.target.closest(".chip");
+  if (b) { F.bhk = b.dataset.v; render(); }
+};
 
-            updateTabCounts();
-            renderListings();
-        }
+$("#fa").onchange = e => {
+  F.area = e.target.value;
+  render();
+};
 
-        function updateTabCounts() {
-            const rentCount = allListings.filter(l => l.transaction_type === 'rent' || (!l.transaction_type && !l.feedback?.includes('[FOR_SALE'))).length;
-            const saleCount = allListings.filter(l => l.transaction_type === 'sale' || l.feedback?.includes('[FOR_SALE')).length;
-            const allCount = allListings.length;
+$("#fr").oninput = e => {
+  F.rent = e.target.value = e.target.value.replace(/\D/g, "");
+  render();
+};
 
-            document.getElementById('count-all').innerText = allCount;
-            document.getElementById('count-rent').innerText = rentCount;
-            document.getElementById('count-sale').innerText = saleCount;
-        }
+$("#fs").oninput = e => {
+  F.sale = e.target.value = e.target.value.replace(/\D/g, "");
+  render();
+};
 
-        function setModeFilter(mode) {
-            currentMode = mode;
-            // Update tabs
-            document.querySelectorAll('.feed-tab').forEach(t => {
-                if (t.getAttribute('data-tab') === mode) t.classList.add('active');
-                else t.classList.remove('active');
-            });
-            // Update sidebar chip
-            const chips = document.querySelectorAll('#filter-mode-chips .filter-chip');
-            chips.forEach(c => {
-                const text = c.innerText.toLowerCase();
-                if ((mode === 'all' && text.includes('all')) ||
-                    (mode === 'rent' && text.includes('rent')) ||
-                    (mode === 'sale' && text.includes('sell'))) {
-                    c.classList.add('active');
-                } else {
-                    c.classList.remove('active');
-                }
-            });
-            // Show/hide rent vs sale filter inputs
-            document.getElementById('group-filter-rent').style.display = (mode === 'sale') ? 'none' : 'block';
-            document.getElementById('group-filter-sale').style.display = (mode === 'rent') ? 'none' : 'block';
+function reset() {
+  Object.assign(F, {mode:"all", area:"", bhk:"all", rent:"", sale:""});
+  $("#fa").value = "";
+  $("#fr").value = "";
+  $("#fs").value = "";
+  render();
+}
 
-            renderListings();
-        }
+$("#clr").onclick = reset;
 
-        function setBhkFilter(bhk) {
-            currentBhk = bhk;
-            const chips = document.querySelectorAll('#filter-bhk-chips .filter-chip');
-            chips.forEach(c => {
-                const text = c.innerText;
-                if ((bhk === 0 && text === 'All') ||
-                    (bhk === 1 && text.includes('1')) ||
-                    (bhk === 2 && text.includes('2')) ||
-                    (bhk === 3 && text.includes('3')) ||
-                    (bhk === 4 && text.includes('4+'))) {
-                    c.classList.add('active');
-                } else {
-                    c.classList.remove('active');
-                }
-            });
-            renderListings();
-        }
+$("#out").onclick = e => {
+  if (e.target.id == "reset") return reset();
+  const b = e.target.closest(".req");
+  if (b && !b.disabled) {
+    asked.add(+b.dataset.id);
+    render();
+  }
+};
 
-        function setGatedFilter(val) {
-            currentGated = val;
-            const chips = document.querySelectorAll('#filter-gated-chips .filter-chip');
-            chips.forEach(c => {
-                const text = c.innerText.toLowerCase();
-                if ((val === null && text.includes('any')) ||
-                    (val === true && text.includes('gated')) ||
-                    (val === false && text.includes('standalone'))) {
-                    c.classList.add('active');
-                } else {
-                    c.classList.remove('active');
-                }
-            });
-            renderListings();
-        }
+$("#ft").onclick = () => {
+  const o = $("#fl").classList.toggle("open");
+  $("#ft").setAttribute("aria-expanded", o);
+};
 
-        function applyFilters() {
-            filterLocation = document.getElementById('filter-location').value.toLowerCase().trim();
-            filterRentMax = parseFloat(document.getElementById('filter-rent-max').value) || null;
-            filterSaleMax = parseFloat(document.getElementById('filter-sale-max').value) || null;
-            renderListings();
-        }
-
-        function resetFilters() {
-            currentMode = 'all';
-            currentBhk = 0;
-            currentGated = null;
-            filterLocation = '';
-            filterRentMax = null;
-            filterSaleMax = null;
-            document.getElementById('filter-location').value = '';
-            document.getElementById('filter-rent-max').value = '';
-            document.getElementById('filter-sale-max').value = '';
-
-            document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-            document.querySelector('#filter-mode-chips .filter-chip:first-child').classList.add('active');
-            document.querySelector('#filter-bhk-chips .filter-chip:first-child').classList.add('active');
-            document.querySelector('#filter-gated-chips .filter-chip:first-child').classList.add('active');
-            setModeFilter('all');
-        }
-
-        function matchesListing(item) {
-            const isSale = item.transaction_type === 'sale' || (item.feedback && item.feedback.includes('[FOR_SALE'));
-
-            // Mode check
-            if (currentMode === 'rent' && isSale) return false;
-            if (currentMode === 'sale' && !isSale) return false;
-
-            // BHK check
-            if (currentBhk > 0) {
-                if (currentBhk === 4 && (item.bhk < 4)) return false;
-                if (currentBhk < 4 && item.bhk !== currentBhk) return false;
-            }
-
-            // Gated check
-            if (currentGated !== null && item.gated !== currentGated) return false;
-
-            // Location check
-            if (filterLocation) {
-                const haystack = `${item.area || ''} ${item.society || ''} ${item.feedback || ''}`.toLowerCase();
-                if (!haystack.includes(filterLocation)) return false;
-            }
-
-            // Rent max
-            if (!isSale && filterRentMax && item.rent > filterRentMax) return false;
-
-            // Sale max (in Lakhs: input 100 = 10,000,000)
-            if (isSale && filterSaleMax) {
-                const saleAmt = item.sale_price || item.rent;
-                if (saleAmt > filterSaleMax * 100000) return false;
-            }
-
-            return true;
-        }
-
-        function renderListings() {
-            const container = document.getElementById('listings-grid');
-            container.innerHTML = '';
-
-            const filtered = allListings.filter(matchesListing);
-
-            if (filtered.length === 0) {
-                const emptyMsg = currentMode === 'sale' 
-                    ? 'No properties are currently listed for sale in this category. Be the first owner to list your property!'
-                    : (currentMode === 'rent'
-                        ? 'No rental listings currently match this filter. Be the first owner or flatmate to post a listing!'
-                        : 'No listings currently match your selected filters.');
-                container.innerHTML = `
-                    <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 48px 20px;">
-                        <div class="empty-state-icon" style="font-size: 40px; margin-bottom: 12px;">🏠</div>
-                        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 8px;">No Live Listings Found</h3>
-                        <p style="color: var(--c-ink-muted); max-width: 480px; margin: 0 auto 16px;">${emptyMsg}</p>
-                        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-                            <button class="btn-list-flat" onclick="resetFilters()" style="padding: 10px 18px; border-radius: 8px; cursor: pointer;">Reset Filters</button>
-                            <a href="list-property.html" class="btn-list-flat" style="text-decoration: none; padding: 10px 18px; border-radius: 8px; background: var(--c-primary); color: white;">+ List Property</a>
-                        </div>
-                    </div>
-                `;
-                return;
-            }
-
-            filtered.forEach(item => {
-                const isSale = item.transaction_type === 'sale' || (item.feedback && item.feedback.includes('[FOR_SALE'));
-                const saleAmt = item.sale_price || item.rent;
-                const card = document.createElement('div');
-                card.className = 'listing-card';
-
-                // Status badge
-                let statusBadgeHtml = '';
-                if (isSale) {
-                    statusBadgeHtml = `<span class="status-badge sale">🏷️ FOR SALE</span>`;
-                } else if (item.looking_for_flatmate) {
-                    statusBadgeHtml = `<span class="status-badge room">🛏️ ROOM AVLB</span>`;
-                } else {
-                    statusBadgeHtml = `<span class="status-badge rent">🏠 FOR RENT</span>`;
-                }
-
-                // Gated badge
-                const gatedBadgeHtml = `<span class="gated-badge">${item.gated ? 'Gated' : 'Standalone'}</span>`;
-
-                // Price display
-                let priceHtml = '';
-                if (isSale) {
-                    const rateSqft = item.sqft ? `₹${Math.round(saleAmt / item.sqft).toLocaleString('en-IN')}/sq.ft` : '';
-                    priceHtml = `
-                        <div class="card-price-row">
-                            <div class="card-price sale-color">₹${formatInLakhsCrores(saleAmt)}</div>
-                            ${rateSqft ? `<div class="card-rate-sqft">${rateSqft}</div>` : ''}
-                        </div>
-                    `;
-                } else {
-                    priceHtml = `
-                        <div class="card-price-row">
-                            <div class="card-price">₹${Number(item.rent).toLocaleString('en-IN')}<span>/mo</span></div>
-                            <div class="card-rate-sqft">Dep: ₹${item.deposit ? Number(item.deposit).toLocaleString('en-IN') : '--'}</div>
-                        </div>
-                    `;
-                }
-
-                // Title
-                const titleText = item.society || `${item.bhk || 2} BHK ${(item.property_type || 'Apartment').toUpperCase()} in ${item.area || 'Chennai'}`;
-
-                // Meta items
-                let metaHtml = '';
-                if (isSale) {
-                    metaHtml = `
-                        <div class="card-meta">
-                            <div class="card-meta-item">🛏️ ${item.bhk} BHK</div>
-                            ${item.sqft ? `<div class="card-meta-item">📐 ${item.sqft} sq.ft</div>` : ''}
-                            <div class="card-meta-item">🔑 ${(item.possession || 'ready').replace('_', ' ').toUpperCase()}</div>
-                            <div class="card-meta-item">🚗 ${item.parking_count || 1} Park</div>
-                        </div>
-                    `;
-                } else {
-                    metaHtml = `
-                        <div class="card-meta">
-                            <div class="card-meta-item">🛏️ ${item.bhk} BHK</div>
-                            <div class="card-meta-item">🛋️ ${(item.furnishing || 'semi').toUpperCase()}</div>
-                            <div class="card-meta-item">🚗 ${item.parking_count || 1} Park</div>
-                        </div>
-                    `;
-                }
-
-                // Contact button
-                const phone = item.contact_phone || item.phone;
-                let contactBtnHtml = '';
-                if (phone) {
-                    contactBtnHtml = `<a href="tel:${phone.replace(/\s+/g, '')}" class="btn-contact-action ${isSale ? 'sale' : ''}">📞 Contact Owner</a>`;
-                } else {
-                    contactBtnHtml = `<a href="index.html?lat=${item.latitude}&lng=${item.longitude}" class="btn-contact-action ${isSale ? 'sale' : ''}">Inquire Direct</a>`;
-                }
-
-                // Verified & Date badges
-                const verifiedHtml = `<span style="background: #E6F4EA; color: #137333; font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 4px; display: inline-flex; align-items: center; gap: 3px;">✓ Verified</span>`;
-                const postedDate = item.created_at ? new Date(item.created_at).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' }) : 'October 2026';
-                const dateBadgeHtml = `<span style="font-size: 11px; color: var(--c-ink-muted);">Posted: ${postedDate}</span>`;
-
-                card.innerHTML = `
-                    <div class="card-img-placeholder">
-                        ${statusBadgeHtml}
-                        ${gatedBadgeHtml}
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                    </div>
-                    <div class="card-content">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                            ${verifiedHtml}
-                            ${dateBadgeHtml}
-                        </div>
-                        ${priceHtml}
-                        <div class="card-title">${titleText}</div>
-                        ${metaHtml}
-                        <p style="font-size: 13px; color: var(--c-ink-muted); margin: 0 0 14px 0; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
-                            ${item.feedback ? item.feedback.replace(/\[FOR_SALE:[^\]]+\]/, '').trim() : 'Direct owner property.'}
-                        </p>
-                        <div class="card-footer">
-                            <a href="${mapLink}" class="btn-view-map">📍 Pin on Map</a>
-                            ${contactBtnHtml}
-                        </div>
-                    </div>
-                `;
-
-                container.appendChild(card);
-            });
-        }
-
-        // Initialize when DOM ready
-        document.addEventListener('DOMContentLoaded', () => {
-            initFeed();
-        });
-    </script>
+// Initial render
+render();
+</script>
 </body>
 </html>
