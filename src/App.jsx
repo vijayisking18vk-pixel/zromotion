@@ -161,6 +161,7 @@ export default function App() {
 
             {/* ── CHENNAI HOUSING PILLAR HUB & SUPPORTING GUIDES ── */}
             <Route path="/house-for-rent-in-chennai" element={<HouseRentChennaiHub />} />
+            <Route path="/house-rent-in-chennai" element={<HouseRentChennaiHub customSlug="house-rent-in-chennai" />} />
             <Route path="/1-bhk-house-for-rent-in-chennai" element={<HouseRentChennaiHub customSlug="1-bhk-house-for-rent-in-chennai" />} />
             <Route path="/2-bhk-house-for-rent-in-chennai" element={<HouseRentChennaiHub customSlug="2-bhk-house-for-rent-in-chennai" />} />
             <Route path="/3-bhk-house-for-rent-in-chennai" element={<HouseRentChennaiHub customSlug="3-bhk-house-for-rent-in-chennai" />} />

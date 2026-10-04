@@ -229,6 +229,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/house-rent-in-chennai" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
+                  → House Rent in Chennai: Guide & Rates
+                </Link>
+              </li>
+              <li>
                 <Link to="/guides/advance-deposit-chennai" style={{ color: '#FDFBF7', textDecoration: 'none', opacity: 0.9 }}>
                   → Advance Deposit: 10 Months vs Reality
                 </Link>

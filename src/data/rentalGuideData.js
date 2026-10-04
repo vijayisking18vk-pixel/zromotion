@@ -165,8 +165,15 @@ export const CHENNAI_RENT_HUB_DATA = {
   ],
 };
 
-// Supporting guides catalog for dedicated search pages
 export const SUPPORTING_RENTAL_PAGES = [
+  {
+    slug: 'house-rent-in-chennai',
+    title: 'House Rent in Chennai: Verified Rates, Localities & Budgets | Chennai Rents',
+    h1: 'House Rent in Chennai: Verified Rates, Localities & Budgets',
+    description: 'Find verified house rent in Chennai across all budgets. Explore 1-3 BHK flats, independent houses, realistic locality rents, water ratings, and direct owner connections.',
+    priceRange: '₹7,000 – ₹45,000+ / month',
+    recommendedLocalities: ['velachery', 'adyar', 'anna-nagar', 'porur', 'omr', 'medavakkam', 'valasaravakkam'],
+  },
   {
     slug: '1-bhk-house-for-rent-in-chennai',
     title: '1 BHK Houses for Rent in Chennai: Prices & Localities | Chennai Rents',

@@ -57,6 +57,8 @@
     { "source": "/guides/how-much-rent-2026.html", "destination": "/guides/cost-of-living-chennai-2026", "permanent": true },
     { "source": "/chennai/rent-in-:locality", "destination": "/chennai/:locality", "permanent": true },
     { "source": "/3-bhk-house-for-rent-in-chennai.html", "destination": "/3-bhk-house-for-rent-in-chennai", "permanent": true },
+    { "source": "/house-for-rent-in-chennai.html", "destination": "/house-for-rent-in-chennai", "permanent": true },
+    { "source": "/house-rent-in-chennai.html", "destination": "/house-rent-in-chennai", "permanent": true },
     { "source": "/listings/index.html", "destination": "/listings", "permanent": true }
   ],
   "headers": [
