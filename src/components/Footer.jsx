@@ -30,48 +30,49 @@ export default function Footer() {
         borderTop: '1px solid #E9DFC9',
       }}
     >
-      {/* Authentic Chennai Skyline Panoramic Backdrop - 100% Uncut and Mobile Optimised */}
+      {/* Authentic Chennai Skyline Backdrop - Translucent watermark behind all sections */}
       <div
-        className="footer-skyline-backdrop"
+        className="footer-skyline-bg"
         style={{
-          width: '100%',
-          backgroundColor: '#FAF6EE',
-          position: 'relative',
-          paddingTop: '2rem',
-          paddingBottom: '0.5rem',
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0,
+          pointerEvents: 'none',
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
+          alignItems: 'flex-end',
+          overflow: 'hidden',
+          zIndex: 0,
+          opacity: 0.16,
+          maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 12%)',
         }}
         aria-hidden="true"
       >
-        <div
+        <img
+          src="/images/chennai-skyline-footer.png"
+          alt=""
           style={{
             width: '100%',
-            maxWidth: '1024px',
-            margin: '0 auto',
-            padding: '0 1rem',
+            maxWidth: '1240px',
+            height: 'auto',
+            maxHeight: '100%',
+            objectFit: 'contain',
+            objectPosition: 'bottom center',
+            display: 'block',
           }}
-        >
-          <img
-            src="/images/chennai-skyline-footer.png"
-            alt="Chennai Skyline - Ripon Building, Chennai Central, Kapaleeshwarar Temple Gopuram, Marina Beach Lighthouse"
-            style={{
-              width: '100%',
-              height: 'auto',
-              display: 'block',
-              margin: '0 auto',
-            }}
-          />
-        </div>
+        />
       </div>
 
-      {/* Mallipoo Garland - full-width decorative separator below skyline */}
+      {/* Mallipoo Garland - full-width decorative separator */}
       <div
         style={{
-          borderTop: '1px solid #E9DFC9',
           borderBottom: '1px solid #E9DFC9',
-          backgroundColor: '#FFFDF9',
+          backgroundColor: 'rgba(255, 253, 249, 0.7)',
+          position: 'relative',
+          zIndex: 1,
         }}
       >
         <MallipooGarland />
@@ -407,10 +408,6 @@ export default function Footer() {
           }
         }
         @media (max-width: 767px) {
-          .footer-skyline-backdrop {
-            padding-top: 1rem !important;
-            padding-bottom: 0 !important;
-          }
           .cr-footer-link {
             padding: 4px 0;
             min-height: 40px;
