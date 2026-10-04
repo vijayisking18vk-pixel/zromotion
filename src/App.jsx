@@ -75,6 +75,13 @@ function ScrollToTop() {
     }
     if (document.documentElement) document.documentElement.scrollTop = 0;
     if (document.body) document.body.scrollTop = 0;
+
+    // Notify Google Analytics on SPA page navigations
+    if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+      window.gtag('config', 'G-65F8MTB16E', {
+        page_path: pathname + (search || ''),
+      });
+    }
   }, [pathname, search, hash]);
 
   return null;
