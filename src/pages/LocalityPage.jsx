@@ -28,6 +28,8 @@ import { VELACHERY_PAGES_MAP } from '../data/velacheryLandingPages';
 import VelacheryLandingPage from './VelacheryLandingPage';
 import { VALASARAVAKKAM_PAGES_MAP } from '../data/valasaravakkamLandingPages';
 import ValasaravakkamLandingPage from './ValasaravakkamLandingPage';
+import { ADYAR_PAGES_MAP } from '../data/adyarLandingPages';
+import AdyarLandingPage from './AdyarLandingPage';
 
 // ─── FAQ Accordion ────────────────────────────────────────────────────────────
 function FAQItem({ q, a, idx }) {
@@ -390,6 +392,11 @@ export default function LocalityPage({ localitySlug: propSlug }) {
   // Valasaravakkam Programmatic SEO Landing Pages
   if (locality.slug === 'valasaravakkam' && intent && VALASARAVAKKAM_PAGES_MAP[intent]) {
     return <ValasaravakkamLandingPage data={VALASARAVAKKAM_PAGES_MAP[intent]} />;
+  }
+
+  // Adyar Programmatic SEO Landing Pages
+  if (locality.slug === 'adyar' && intent && ADYAR_PAGES_MAP[intent]) {
+    return <AdyarLandingPage data={ADYAR_PAGES_MAP[intent]} />;
   }
 
   const meta = generateSEOMeta({ locality, intent });

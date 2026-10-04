@@ -11,6 +11,7 @@ import { POSTS } from './src/data/posts.js';
 import { SUPPORTING_RENTAL_PAGES } from './src/data/rentalGuideData.js';
 import { VELACHERY_PAGES } from './src/data/velacheryLandingPages.js';
 import { VALASARAVAKKAM_PAGES } from './src/data/valasaravakkamLandingPages.js';
+import { ADYAR_PAGES } from './src/data/adyarLandingPages.js';
 
 const DOMAIN = 'https://www.chennairents.in';
 
@@ -134,6 +135,11 @@ function generateSitemaps() {
 
   // 3c. Valasaravakkam Programmatic SEO Landing Pages (19 long-form micro-markets)
   VALASARAVAKKAM_PAGES.forEach((page) => {
+    facetUrls.push(page.canonical);
+  });
+
+  // 3d. Adyar Programmatic SEO Landing Pages (19 long-form micro-markets)
+  ADYAR_PAGES.forEach((page) => {
     facetUrls.push(page.canonical);
   });
 

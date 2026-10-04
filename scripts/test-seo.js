@@ -21,6 +21,7 @@ const DIST_DIR = path.join(ROOT_DIR, 'dist');
 const PUBLIC_DIR = path.join(ROOT_DIR, 'public');
 import { VELACHERY_PAGES } from '../src/data/velacheryLandingPages.js';
 import { VALASARAVAKKAM_PAGES } from '../src/data/valasaravakkamLandingPages.js';
+import { ADYAR_PAGES } from '../src/data/adyarLandingPages.js';
 
 let totalTests = 0;
 let passedTests = 0;
@@ -161,6 +162,20 @@ function runTests() {
       assert(content.includes('RealEstateListing') || content.includes('BreadcrumbList'), `JSON-LD Schema present for ${vp.slug}`);
       const rootMatch = content.match(/<div id="root">([\s\S]*?)<\/div>/i);
       assert(rootMatch && rootMatch[1].trim().length > 500, `DOM pre-rendered into root for ${vp.slug}`);
+    }
+  });
+
+  // Test Group 1d: Adyar 19 Programmatic Landing Pages
+  console.log('\n🏙️ Test Group 1d: Adyar Programmatic SEO Cluster (19 Slugs)');
+  ADYAR_PAGES.forEach((ap) => {
+    const pageFile = path.join(DIST_DIR, 'chennai', 'adyar', ap.slug, 'index.html');
+    assert(fs.existsSync(pageFile), `Adyar [${ap.slug}] pre-rendered HTML exists`);
+    if (fs.existsSync(pageFile)) {
+      const content = fs.readFileSync(pageFile, 'utf8');
+      assert(content.includes(ap.canonical), `Canonical URL exact for ${ap.slug}`);
+      assert(content.includes('RealEstateListing') || content.includes('BreadcrumbList'), `JSON-LD Schema present for ${ap.slug}`);
+      const rootMatch = content.match(/<div id="root">([\s\S]*?)<\/div>/i);
+      assert(rootMatch && rootMatch[1].trim().length > 500, `DOM pre-rendered into root for ${ap.slug}`);
     }
   });
 
