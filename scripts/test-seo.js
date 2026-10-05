@@ -28,6 +28,9 @@ import { ANNA_NAGAR_PAGES } from '../src/data/annaNagarLandingPages.js';
 import { T_NAGAR_PAGES } from '../src/data/tNagarLandingPages.js';
 import { NUNGAMBAKKAM_PAGES } from '../src/data/nungambakkamLandingPages.js';
 import { MEDAVAKKAM_PAGES } from '../src/data/medavakkamLandingPages.js';
+import { OMR_PAGES } from '../src/data/omrLandingPages.js';
+import { PERUNGUDI_PAGES } from '../src/data/perungudiLandingPages.js';
+import { TAMBARAM_PAGES } from '../src/data/tambaramLandingPages.js';
 
 let totalTests = 0;
 let passedTests = 0;
@@ -266,6 +269,48 @@ function runTests() {
       assert(content.includes('RealEstateListing') || content.includes('BreadcrumbList'), `JSON-LD Schema present for ${mdp.slug}`);
       const rootMatch = content.match(/<div id="root">([\s\S]*?)<\/div>/i);
       assert(rootMatch && rootMatch[1].trim().length > 500, `DOM pre-rendered into root for ${mdp.slug}`);
+    }
+  });
+
+  // Test Group 1k: OMR 19 Programmatic Landing Pages
+  console.log('\n🏙️ Test Group 1k: OMR Programmatic SEO Cluster (19 Slugs)');
+  OMR_PAGES.forEach((op) => {
+    const pageFile = path.join(DIST_DIR, 'chennai', 'omr', op.slug, 'index.html');
+    assert(fs.existsSync(pageFile), `OMR [${op.slug}] pre-rendered HTML exists`);
+    if (fs.existsSync(pageFile)) {
+      const content = fs.readFileSync(pageFile, 'utf8');
+      assert(content.includes(op.canonical), `Canonical URL exact for ${op.slug}`);
+      assert(content.includes('RealEstateListing') || content.includes('BreadcrumbList'), `JSON-LD Schema present for ${op.slug}`);
+      const rootMatch = content.match(/<div id="root">([\s\S]*?)<\/div>/i);
+      assert(rootMatch && rootMatch[1].trim().length > 500, `DOM pre-rendered into root for ${op.slug}`);
+    }
+  });
+
+  // Test Group 1l: Perungudi 19 Programmatic Landing Pages
+  console.log('\n🏙️ Test Group 1l: Perungudi Programmatic SEO Cluster (19 Slugs)');
+  PERUNGUDI_PAGES.forEach((pgp) => {
+    const pageFile = path.join(DIST_DIR, 'chennai', 'perungudi', pgp.slug, 'index.html');
+    assert(fs.existsSync(pageFile), `Perungudi [${pgp.slug}] pre-rendered HTML exists`);
+    if (fs.existsSync(pageFile)) {
+      const content = fs.readFileSync(pageFile, 'utf8');
+      assert(content.includes(pgp.canonical), `Canonical URL exact for ${pgp.slug}`);
+      assert(content.includes('RealEstateListing') || content.includes('BreadcrumbList'), `JSON-LD Schema present for ${pgp.slug}`);
+      const rootMatch = content.match(/<div id="root">([\s\S]*?)<\/div>/i);
+      assert(rootMatch && rootMatch[1].trim().length > 500, `DOM pre-rendered into root for ${pgp.slug}`);
+    }
+  });
+
+  // Test Group 1m: Tambaram 19 Programmatic Landing Pages
+  console.log('\n🏙️ Test Group 1m: Tambaram Programmatic SEO Cluster (19 Slugs)');
+  TAMBARAM_PAGES.forEach((tbp) => {
+    const pageFile = path.join(DIST_DIR, 'chennai', 'tambaram', tbp.slug, 'index.html');
+    assert(fs.existsSync(pageFile), `Tambaram [${tbp.slug}] pre-rendered HTML exists`);
+    if (fs.existsSync(pageFile)) {
+      const content = fs.readFileSync(pageFile, 'utf8');
+      assert(content.includes(tbp.canonical), `Canonical URL exact for ${tbp.slug}`);
+      assert(content.includes('RealEstateListing') || content.includes('BreadcrumbList'), `JSON-LD Schema present for ${tbp.slug}`);
+      const rootMatch = content.match(/<div id="root">([\s\S]*?)<\/div>/i);
+      assert(rootMatch && rootMatch[1].trim().length > 500, `DOM pre-rendered into root for ${tbp.slug}`);
     }
   });
 

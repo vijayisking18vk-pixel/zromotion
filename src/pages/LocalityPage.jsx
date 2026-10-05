@@ -42,6 +42,12 @@ import { NUNGAMBAKKAM_PAGES_MAP } from '../data/nungambakkamLandingPages';
 import NungambakkamLandingPage from './NungambakkamLandingPage';
 import { MEDAVAKKAM_PAGES_MAP } from '../data/medavakkamLandingPages';
 import MedavakkamLandingPage from './MedavakkamLandingPage';
+import { OMR_PAGES_MAP } from '../data/omrLandingPages';
+import OMRLandingPage from './OMRLandingPage';
+import { PERUNGUDI_PAGES_MAP } from '../data/perungudiLandingPages';
+import PerungudiLandingPage from './PerungudiLandingPage';
+import { TAMBARAM_PAGES_MAP } from '../data/tambaramLandingPages';
+import TambaramLandingPage from './TambaramLandingPage';
 
 // ─── FAQ Accordion ────────────────────────────────────────────────────────────
 function FAQItem({ q, a, idx }) {
@@ -439,6 +445,21 @@ export default function LocalityPage({ localitySlug: propSlug }) {
   // Medavakkam Programmatic SEO Landing Pages
   if (locality.slug === 'medavakkam' && intent && MEDAVAKKAM_PAGES_MAP[intent]) {
     return <MedavakkamLandingPage data={MEDAVAKKAM_PAGES_MAP[intent]} />;
+  }
+
+  // OMR Programmatic SEO Landing Pages
+  if (locality.slug === 'omr' && intent && OMR_PAGES_MAP[intent]) {
+    return <OMRLandingPage data={OMR_PAGES_MAP[intent]} />;
+  }
+
+  // Perungudi Programmatic SEO Landing Pages
+  if (locality.slug === 'perungudi' && intent && PERUNGUDI_PAGES_MAP[intent]) {
+    return <PerungudiLandingPage data={PERUNGUDI_PAGES_MAP[intent]} />;
+  }
+
+  // Tambaram Programmatic SEO Landing Pages
+  if (locality.slug === 'tambaram' && intent && TAMBARAM_PAGES_MAP[intent]) {
+    return <TambaramLandingPage data={TAMBARAM_PAGES_MAP[intent]} />;
   }
 
   const meta = generateSEOMeta({ locality, intent });

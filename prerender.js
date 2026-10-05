@@ -33,6 +33,9 @@ import { ANNA_NAGAR_PAGES, ANNA_NAGAR_GEO } from './src/data/annaNagarLandingPag
 import { T_NAGAR_PAGES, T_NAGAR_GEO } from './src/data/tNagarLandingPages.js';
 import { NUNGAMBAKKAM_PAGES, NUNGAMBAKKAM_GEO } from './src/data/nungambakkamLandingPages.js';
 import { MEDAVAKKAM_PAGES, MEDAVAKKAM_GEO } from './src/data/medavakkamLandingPages.js';
+import { OMR_PAGES, OMR_GEO } from './src/data/omrLandingPages.js';
+import { PERUNGUDI_PAGES, PERUNGUDI_GEO } from './src/data/perungudiLandingPages.js';
+import { TAMBARAM_PAGES, TAMBARAM_GEO } from './src/data/tambaramLandingPages.js';
 
 const LOCALITY_FACETS = [
   'flats-for-rent',
@@ -1136,6 +1139,213 @@ async function runPrerender() {
 
     routes.push({
       path: `/chennai/medavakkam/${page.slug}`,
+      title: page.metaTitle,
+      description: page.metaDescription,
+      canonical: page.canonical,
+      robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+      schema: schemas,
+    });
+  });
+
+  // 3k. OMR Programmatic SEO Landing Pages (19 long-form micro-markets)
+  OMR_PAGES.forEach((page) => {
+    const breadcrumbs = [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
+      { '@type': 'ListItem', position: 3, name: 'OMR', item: `${DOMAIN}/chennai/omr` },
+      { '@type': 'ListItem', position: 4, name: page.h1, item: page.canonical },
+    ];
+
+    const schemas = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'RealEstateListing',
+        name: page.h1,
+        description: page.metaDescription,
+        url: page.canonical,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: OMR_GEO.latitude,
+          longitude: OMR_GEO.longitude,
+        },
+        geoWithin: {
+          '@type': 'GeoShape',
+          box: `${OMR_GEO.geoBoundingBox.south} ${OMR_GEO.geoBoundingBox.west} ${OMR_GEO.geoBoundingBox.north} ${OMR_GEO.geoBoundingBox.east}`,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'OMR',
+          addressRegion: 'Tamil Nadu',
+          addressCountry: 'IN',
+          postalCode: OMR_GEO.pincode,
+        },
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'INR',
+          lowPrice: page.priceRange.min,
+          highPrice: page.priceRange.max,
+          offerCount: 35,
+        },
+      },
+    ];
+
+    if (page.faqs && page.faqs.length > 0) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: page.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      });
+    }
+
+    routes.push({
+      path: `/chennai/omr/${page.slug}`,
+      title: page.metaTitle,
+      description: page.metaDescription,
+      canonical: page.canonical,
+      robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+      schema: schemas,
+    });
+  });
+
+  // 3l. Perungudi Programmatic SEO Landing Pages (19 long-form micro-markets)
+  PERUNGUDI_PAGES.forEach((page) => {
+    const breadcrumbs = [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
+      { '@type': 'ListItem', position: 3, name: 'Perungudi', item: `${DOMAIN}/chennai/perungudi` },
+      { '@type': 'ListItem', position: 4, name: page.h1, item: page.canonical },
+    ];
+
+    const schemas = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'RealEstateListing',
+        name: page.h1,
+        description: page.metaDescription,
+        url: page.canonical,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: PERUNGUDI_GEO.latitude,
+          longitude: PERUNGUDI_GEO.longitude,
+        },
+        geoWithin: {
+          '@type': 'GeoShape',
+          box: `${PERUNGUDI_GEO.geoBoundingBox.south} ${PERUNGUDI_GEO.geoBoundingBox.west} ${PERUNGUDI_GEO.geoBoundingBox.north} ${PERUNGUDI_GEO.geoBoundingBox.east}`,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Perungudi',
+          addressRegion: 'Tamil Nadu',
+          addressCountry: 'IN',
+          postalCode: PERUNGUDI_GEO.pincode,
+        },
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'INR',
+          lowPrice: page.priceRange.min,
+          highPrice: page.priceRange.max,
+          offerCount: 28,
+        },
+      },
+    ];
+
+    if (page.faqs && page.faqs.length > 0) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: page.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      });
+    }
+
+    routes.push({
+      path: `/chennai/perungudi/${page.slug}`,
+      title: page.metaTitle,
+      description: page.metaDescription,
+      canonical: page.canonical,
+      robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+      schema: schemas,
+    });
+  });
+
+  // 3m. Tambaram Programmatic SEO Landing Pages (19 long-form micro-markets)
+  TAMBARAM_PAGES.forEach((page) => {
+    const breadcrumbs = [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
+      { '@type': 'ListItem', position: 3, name: 'Tambaram', item: `${DOMAIN}/chennai/tambaram` },
+      { '@type': 'ListItem', position: 4, name: page.h1, item: page.canonical },
+    ];
+
+    const schemas = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'RealEstateListing',
+        name: page.h1,
+        description: page.metaDescription,
+        url: page.canonical,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: TAMBARAM_GEO.latitude,
+          longitude: TAMBARAM_GEO.longitude,
+        },
+        geoWithin: {
+          '@type': 'GeoShape',
+          box: `${TAMBARAM_GEO.geoBoundingBox.south} ${TAMBARAM_GEO.geoBoundingBox.west} ${TAMBARAM_GEO.geoBoundingBox.north} ${TAMBARAM_GEO.geoBoundingBox.east}`,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Tambaram',
+          addressRegion: 'Tamil Nadu',
+          addressCountry: 'IN',
+          postalCode: TAMBARAM_GEO.pincode,
+        },
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'INR',
+          lowPrice: page.priceRange.min,
+          highPrice: page.priceRange.max,
+          offerCount: 30,
+        },
+      },
+    ];
+
+    if (page.faqs && page.faqs.length > 0) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: page.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      });
+    }
+
+    routes.push({
+      path: `/chennai/tambaram/${page.slug}`,
       title: page.metaTitle,
       description: page.metaDescription,
       canonical: page.canonical,

@@ -18,6 +18,9 @@ import { ANNA_NAGAR_PAGES } from './src/data/annaNagarLandingPages.js';
 import { T_NAGAR_PAGES } from './src/data/tNagarLandingPages.js';
 import { NUNGAMBAKKAM_PAGES } from './src/data/nungambakkamLandingPages.js';
 import { MEDAVAKKAM_PAGES } from './src/data/medavakkamLandingPages.js';
+import { OMR_PAGES } from './src/data/omrLandingPages.js';
+import { PERUNGUDI_PAGES } from './src/data/perungudiLandingPages.js';
+import { TAMBARAM_PAGES } from './src/data/tambaramLandingPages.js';
 
 const DOMAIN = 'https://www.chennairents.in';
 
@@ -176,6 +179,21 @@ function generateSitemaps() {
 
   // 3j. Medavakkam Programmatic SEO Landing Pages (19 long-form micro-markets)
   MEDAVAKKAM_PAGES.forEach((page) => {
+    facetUrls.push(page.canonical);
+  });
+
+  // 3k. OMR Programmatic SEO Landing Pages (19 long-form micro-markets)
+  OMR_PAGES.forEach((page) => {
+    facetUrls.push(page.canonical);
+  });
+
+  // 3l. Perungudi Programmatic SEO Landing Pages (19 long-form micro-markets)
+  PERUNGUDI_PAGES.forEach((page) => {
+    facetUrls.push(page.canonical);
+  });
+
+  // 3m. Tambaram Programmatic SEO Landing Pages (19 long-form micro-markets)
+  TAMBARAM_PAGES.forEach((page) => {
     facetUrls.push(page.canonical);
   });
 
