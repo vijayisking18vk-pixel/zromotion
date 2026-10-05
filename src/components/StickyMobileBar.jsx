@@ -124,6 +124,9 @@ export default function StickyMobileBar() {
         aria-label={`Follow ${INSTAGRAM_HANDLE} on Instagram`}
       >
         <Instagram size={22} aria-hidden="true" />
+        <span style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap', border: 0 }}>
+          Follow {INSTAGRAM_HANDLE} on Instagram
+        </span>
       </a>
     </>
   );

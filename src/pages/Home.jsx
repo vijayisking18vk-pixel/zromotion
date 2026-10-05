@@ -8,6 +8,36 @@ import { AutoRickshawDoodle, HandDrawnArrow } from '../components/ChennaiDoodles
 import { MapPin, Plus, Compass, Instagram, Building2, CheckCircle2, ArrowRight } from 'lucide-react';
 import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../config';
 
+const POST_CTA_MAP = {
+  'rent-in-valasaravakkam': 'Explore Valasaravakkam',
+  'rent-in-velachery': 'Explore Velachery',
+  'rent-in-adyar': 'Explore Adyar',
+  'advance-deposit-chennai': 'Read Deposit Guide',
+  'tenant-rules-chennai': 'Read Agreement Rules',
+  'how-to-write-rental-listing': 'Read Listing Playbook',
+  'checklist-rental-advance': 'Read Advance Checklist',
+  'how-to-list-flat-directly': 'Read Direct Listing Guide',
+  'how-to-negotiate-rent': 'Read Negotiation Guide',
+  'how-to-price-flat-fairly': 'Read Valuation Guide',
+  'best-chennai-areas': 'Read Best Areas Guide',
+  'broker-fee-vs-direct-owner': 'Read Broker Comparison',
+  'cost-of-living-chennai-2026': 'Read Cost of Living Guide',
+  'no-deposit-flats-chennai': 'Read Low Deposit Guide',
+  'gated-vs-standalone': 'Read Gated vs Standalone',
+  'localities-heating-up': 'Read Market Heatmap',
+  'metro-access-rent-premiums': 'Read Metro Impact Report',
+  'where-2bhk-moving-fastest': 'Read 2BHK Growth Report',
+};
+
+function getPostCta(post) {
+  if (POST_CTA_MAP[post.slug]) return POST_CTA_MAP[post.slug];
+  if (post.type === 'locality') {
+    const name = post.slug.replace('rent-in-', '').split('-').map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
+    return `Explore ${name}`;
+  }
+  return `Read ${post.title.split(':')[0]}`;
+}
+
 export default function Home() {
   const [activeTab, setActiveTab] = useState('all');
   const reduce = useReducedMotion();
@@ -27,7 +57,7 @@ export default function Home() {
       style={{ paddingBottom: '3rem' }}
     >
       <SEOHead
-        title="Chennai Rents: The Locality-First Rental & Home Guide for Chennai"
+        title="Chennai Rents: Locality-First Rental Guide for Chennai"
         description="Real rent rates, water reality, flood history, crowdsourced map, and verified direct owner listings in Chennai. Neighborhood by neighborhood."
         canonical="https://www.chennairents.in/"
       />
@@ -45,10 +75,10 @@ export default function Home() {
               Renting in Chennai: Locality by Locality
             </h1>
             <p style={{ fontSize: '1.2rem', color: 'var(--c-ripon-red)', fontWeight: 700, fontFamily: 'var(--font-heading)', marginBottom: '1.15rem', lineHeight: 1.35 }}>
-              The honest, crowdsourced guide to finding a home in Chennai.
+              The honest, crowdsourced guide to renting a home in Chennai locality by locality.
             </p>
             <p style={{ fontSize: '1rem', color: 'var(--c-ink-muted)', marginBottom: '1.75rem', maxWidth: '540px', lineHeight: 1.65 }}>
-              Real rent rates, tap-water scores, flood history, and verified owner connections. Curated neighborhood by neighborhood with zero broker commissions.
+              Renting in Chennai made transparent. Real rent rates, tap-water scores, flood history, and verified owner connections curated across every Chennai locality with zero broker commissions.
             </p>
 
             {/* Hero Action Buttons — full-width on mobile, inline on desktop */}
@@ -371,6 +401,7 @@ export default function Home() {
                       <Link
                         to={targetUrl}
                         className="btn-yellow"
+                        aria-label={getPostCta(post)}
                         style={{
                           alignSelf: 'flex-start',
                           fontSize: '0.85rem',
@@ -379,7 +410,7 @@ export default function Home() {
                           borderRadius: '6px',
                         }}
                       >
-                        <span>Explore {post.type === 'guide' ? 'Guide' : 'Locality'}</span>
+                        <span>{getPostCta(post)}</span>
                         <ArrowRight size={14} />
                       </Link>
                     </div>

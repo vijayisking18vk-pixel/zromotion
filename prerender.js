@@ -77,7 +77,7 @@ async function runPrerender() {
   // 1. Core pages
   routes.push({
     path: '/',
-    title: 'Chennai Rents: The Locality-First Rental & Home Guide for Chennai',
+    title: 'Chennai Rents: Locality-First Rental Guide for Chennai',
     description: 'Real rent rates, water reality, flood history, crowdsourced map, and verified direct owner listings in Chennai. Neighborhood by neighborhood.',
     canonical: `${DOMAIN}/`,
     robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',

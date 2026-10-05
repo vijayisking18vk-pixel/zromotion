@@ -53,7 +53,7 @@ export default function Footer() {
       >
         <img
           src="/images/chennai-skyline-footer.png"
-          alt=""
+          alt="Chennai Skyline"
           style={{
             width: '100%',
             maxWidth: '1240px',
