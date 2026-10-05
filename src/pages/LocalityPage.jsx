@@ -36,6 +36,12 @@ import { PORUR_PAGES_MAP } from '../data/porurLandingPages';
 import PorurLandingPage from './PorurLandingPage';
 import { ANNA_NAGAR_PAGES_MAP } from '../data/annaNagarLandingPages';
 import AnnaNagarLandingPage from './AnnaNagarLandingPage';
+import { T_NAGAR_PAGES_MAP } from '../data/tNagarLandingPages';
+import TNagarLandingPage from './TNagarLandingPage';
+import { NUNGAMBAKKAM_PAGES_MAP } from '../data/nungambakkamLandingPages';
+import NungambakkamLandingPage from './NungambakkamLandingPage';
+import { MEDAVAKKAM_PAGES_MAP } from '../data/medavakkamLandingPages';
+import MedavakkamLandingPage from './MedavakkamLandingPage';
 
 // ─── FAQ Accordion ────────────────────────────────────────────────────────────
 function FAQItem({ q, a, idx }) {
@@ -418,6 +424,21 @@ export default function LocalityPage({ localitySlug: propSlug }) {
   // Anna Nagar Programmatic SEO Landing Pages
   if (locality.slug === 'anna-nagar' && intent && ANNA_NAGAR_PAGES_MAP[intent]) {
     return <AnnaNagarLandingPage data={ANNA_NAGAR_PAGES_MAP[intent]} />;
+  }
+
+  // T. Nagar Programmatic SEO Landing Pages
+  if (locality.slug === 't-nagar' && intent && T_NAGAR_PAGES_MAP[intent]) {
+    return <TNagarLandingPage data={T_NAGAR_PAGES_MAP[intent]} />;
+  }
+
+  // Nungambakkam Programmatic SEO Landing Pages
+  if (locality.slug === 'nungambakkam' && intent && NUNGAMBAKKAM_PAGES_MAP[intent]) {
+    return <NungambakkamLandingPage data={NUNGAMBAKKAM_PAGES_MAP[intent]} />;
+  }
+
+  // Medavakkam Programmatic SEO Landing Pages
+  if (locality.slug === 'medavakkam' && intent && MEDAVAKKAM_PAGES_MAP[intent]) {
+    return <MedavakkamLandingPage data={MEDAVAKKAM_PAGES_MAP[intent]} />;
   }
 
   const meta = generateSEOMeta({ locality, intent });

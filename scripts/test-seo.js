@@ -25,6 +25,9 @@ import { ADYAR_PAGES } from '../src/data/adyarLandingPages.js';
 import { SHOLINGANALLUR_PAGES } from '../src/data/sholinganallurLandingPages.js';
 import { PORUR_PAGES } from '../src/data/porurLandingPages.js';
 import { ANNA_NAGAR_PAGES } from '../src/data/annaNagarLandingPages.js';
+import { T_NAGAR_PAGES } from '../src/data/tNagarLandingPages.js';
+import { NUNGAMBAKKAM_PAGES } from '../src/data/nungambakkamLandingPages.js';
+import { MEDAVAKKAM_PAGES } from '../src/data/medavakkamLandingPages.js';
 
 let totalTests = 0;
 let passedTests = 0;
@@ -221,6 +224,48 @@ function runTests() {
       assert(content.includes('RealEstateListing') || content.includes('BreadcrumbList'), `JSON-LD Schema present for ${anp.slug}`);
       const rootMatch = content.match(/<div id="root">([\s\S]*?)<\/div>/i);
       assert(rootMatch && rootMatch[1].trim().length > 500, `DOM pre-rendered into root for ${anp.slug}`);
+    }
+  });
+
+  // Test Group 1h: T. Nagar 19 Programmatic Landing Pages
+  console.log('\n🏙️ Test Group 1h: T. Nagar Programmatic SEO Cluster (19 Slugs)');
+  T_NAGAR_PAGES.forEach((tnp) => {
+    const pageFile = path.join(DIST_DIR, 'chennai', 't-nagar', tnp.slug, 'index.html');
+    assert(fs.existsSync(pageFile), `T. Nagar [${tnp.slug}] pre-rendered HTML exists`);
+    if (fs.existsSync(pageFile)) {
+      const content = fs.readFileSync(pageFile, 'utf8');
+      assert(content.includes(tnp.canonical), `Canonical URL exact for ${tnp.slug}`);
+      assert(content.includes('RealEstateListing') || content.includes('BreadcrumbList'), `JSON-LD Schema present for ${tnp.slug}`);
+      const rootMatch = content.match(/<div id="root">([\s\S]*?)<\/div>/i);
+      assert(rootMatch && rootMatch[1].trim().length > 500, `DOM pre-rendered into root for ${tnp.slug}`);
+    }
+  });
+
+  // Test Group 1i: Nungambakkam 19 Programmatic Landing Pages
+  console.log('\n🏙️ Test Group 1i: Nungambakkam Programmatic SEO Cluster (19 Slugs)');
+  NUNGAMBAKKAM_PAGES.forEach((nbp) => {
+    const pageFile = path.join(DIST_DIR, 'chennai', 'nungambakkam', nbp.slug, 'index.html');
+    assert(fs.existsSync(pageFile), `Nungambakkam [${nbp.slug}] pre-rendered HTML exists`);
+    if (fs.existsSync(pageFile)) {
+      const content = fs.readFileSync(pageFile, 'utf8');
+      assert(content.includes(nbp.canonical), `Canonical URL exact for ${nbp.slug}`);
+      assert(content.includes('RealEstateListing') || content.includes('BreadcrumbList'), `JSON-LD Schema present for ${nbp.slug}`);
+      const rootMatch = content.match(/<div id="root">([\s\S]*?)<\/div>/i);
+      assert(rootMatch && rootMatch[1].trim().length > 500, `DOM pre-rendered into root for ${nbp.slug}`);
+    }
+  });
+
+  // Test Group 1j: Medavakkam 19 Programmatic Landing Pages
+  console.log('\n🏙️ Test Group 1j: Medavakkam Programmatic SEO Cluster (19 Slugs)');
+  MEDAVAKKAM_PAGES.forEach((mdp) => {
+    const pageFile = path.join(DIST_DIR, 'chennai', 'medavakkam', mdp.slug, 'index.html');
+    assert(fs.existsSync(pageFile), `Medavakkam [${mdp.slug}] pre-rendered HTML exists`);
+    if (fs.existsSync(pageFile)) {
+      const content = fs.readFileSync(pageFile, 'utf8');
+      assert(content.includes(mdp.canonical), `Canonical URL exact for ${mdp.slug}`);
+      assert(content.includes('RealEstateListing') || content.includes('BreadcrumbList'), `JSON-LD Schema present for ${mdp.slug}`);
+      const rootMatch = content.match(/<div id="root">([\s\S]*?)<\/div>/i);
+      assert(rootMatch && rootMatch[1].trim().length > 500, `DOM pre-rendered into root for ${mdp.slug}`);
     }
   });
 

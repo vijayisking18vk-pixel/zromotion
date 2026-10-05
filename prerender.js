@@ -30,6 +30,9 @@ import { ADYAR_PAGES, ADYAR_GEO } from './src/data/adyarLandingPages.js';
 import { SHOLINGANALLUR_PAGES, SHOLINGANALLUR_GEO } from './src/data/sholinganallurLandingPages.js';
 import { PORUR_PAGES, PORUR_GEO } from './src/data/porurLandingPages.js';
 import { ANNA_NAGAR_PAGES, ANNA_NAGAR_GEO } from './src/data/annaNagarLandingPages.js';
+import { T_NAGAR_PAGES, T_NAGAR_GEO } from './src/data/tNagarLandingPages.js';
+import { NUNGAMBAKKAM_PAGES, NUNGAMBAKKAM_GEO } from './src/data/nungambakkamLandingPages.js';
+import { MEDAVAKKAM_PAGES, MEDAVAKKAM_GEO } from './src/data/medavakkamLandingPages.js';
 
 const LOCALITY_FACETS = [
   'flats-for-rent',
@@ -926,6 +929,213 @@ async function runPrerender() {
 
     routes.push({
       path: `/chennai/anna-nagar/${page.slug}`,
+      title: page.metaTitle,
+      description: page.metaDescription,
+      canonical: page.canonical,
+      robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+      schema: schemas,
+    });
+  });
+
+  // 3h. T. Nagar Programmatic SEO Landing Pages (19 long-form micro-markets)
+  T_NAGAR_PAGES.forEach((page) => {
+    const breadcrumbs = [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
+      { '@type': 'ListItem', position: 3, name: 'T. Nagar', item: `${DOMAIN}/chennai/t-nagar` },
+      { '@type': 'ListItem', position: 4, name: page.h1, item: page.canonical },
+    ];
+
+    const schemas = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'RealEstateListing',
+        name: page.h1,
+        description: page.metaDescription,
+        url: page.canonical,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: T_NAGAR_GEO.latitude,
+          longitude: T_NAGAR_GEO.longitude,
+        },
+        geoWithin: {
+          '@type': 'GeoShape',
+          box: `${T_NAGAR_GEO.geoBoundingBox.south} ${T_NAGAR_GEO.geoBoundingBox.west} ${T_NAGAR_GEO.geoBoundingBox.north} ${T_NAGAR_GEO.geoBoundingBox.east}`,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'T. Nagar',
+          addressRegion: 'Tamil Nadu',
+          addressCountry: 'IN',
+          postalCode: T_NAGAR_GEO.pincode,
+        },
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'INR',
+          lowPrice: page.priceRange.min,
+          highPrice: page.priceRange.max,
+          offerCount: 32,
+        },
+      },
+    ];
+
+    if (page.faqs && page.faqs.length > 0) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: page.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      });
+    }
+
+    routes.push({
+      path: `/chennai/t-nagar/${page.slug}`,
+      title: page.metaTitle,
+      description: page.metaDescription,
+      canonical: page.canonical,
+      robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+      schema: schemas,
+    });
+  });
+
+  // 3i. Nungambakkam Programmatic SEO Landing Pages (19 long-form micro-markets)
+  NUNGAMBAKKAM_PAGES.forEach((page) => {
+    const breadcrumbs = [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
+      { '@type': 'ListItem', position: 3, name: 'Nungambakkam', item: `${DOMAIN}/chennai/nungambakkam` },
+      { '@type': 'ListItem', position: 4, name: page.h1, item: page.canonical },
+    ];
+
+    const schemas = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'RealEstateListing',
+        name: page.h1,
+        description: page.metaDescription,
+        url: page.canonical,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: NUNGAMBAKKAM_GEO.latitude,
+          longitude: NUNGAMBAKKAM_GEO.longitude,
+        },
+        geoWithin: {
+          '@type': 'GeoShape',
+          box: `${NUNGAMBAKKAM_GEO.geoBoundingBox.south} ${NUNGAMBAKKAM_GEO.geoBoundingBox.west} ${NUNGAMBAKKAM_GEO.geoBoundingBox.north} ${NUNGAMBAKKAM_GEO.geoBoundingBox.east}`,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Nungambakkam',
+          addressRegion: 'Tamil Nadu',
+          addressCountry: 'IN',
+          postalCode: NUNGAMBAKKAM_GEO.pincode,
+        },
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'INR',
+          lowPrice: page.priceRange.min,
+          highPrice: page.priceRange.max,
+          offerCount: 28,
+        },
+      },
+    ];
+
+    if (page.faqs && page.faqs.length > 0) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: page.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      });
+    }
+
+    routes.push({
+      path: `/chennai/nungambakkam/${page.slug}`,
+      title: page.metaTitle,
+      description: page.metaDescription,
+      canonical: page.canonical,
+      robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+      schema: schemas,
+    });
+  });
+
+  // 3j. Medavakkam Programmatic SEO Landing Pages (19 long-form micro-markets)
+  MEDAVAKKAM_PAGES.forEach((page) => {
+    const breadcrumbs = [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
+      { '@type': 'ListItem', position: 3, name: 'Medavakkam', item: `${DOMAIN}/chennai/medavakkam` },
+      { '@type': 'ListItem', position: 4, name: page.h1, item: page.canonical },
+    ];
+
+    const schemas = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'RealEstateListing',
+        name: page.h1,
+        description: page.metaDescription,
+        url: page.canonical,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: MEDAVAKKAM_GEO.latitude,
+          longitude: MEDAVAKKAM_GEO.longitude,
+        },
+        geoWithin: {
+          '@type': 'GeoShape',
+          box: `${MEDAVAKKAM_GEO.geoBoundingBox.south} ${MEDAVAKKAM_GEO.geoBoundingBox.west} ${MEDAVAKKAM_GEO.geoBoundingBox.north} ${MEDAVAKKAM_GEO.geoBoundingBox.east}`,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Medavakkam',
+          addressRegion: 'Tamil Nadu',
+          addressCountry: 'IN',
+          postalCode: MEDAVAKKAM_GEO.pincode,
+        },
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'INR',
+          lowPrice: page.priceRange.min,
+          highPrice: page.priceRange.max,
+          offerCount: 35,
+        },
+      },
+    ];
+
+    if (page.faqs && page.faqs.length > 0) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: page.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      });
+    }
+
+    routes.push({
+      path: `/chennai/medavakkam/${page.slug}`,
       title: page.metaTitle,
       description: page.metaDescription,
       canonical: page.canonical,
