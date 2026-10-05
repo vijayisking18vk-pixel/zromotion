@@ -21,6 +21,10 @@ import { MEDAVAKKAM_PAGES } from './src/data/medavakkamLandingPages.js';
 import { OMR_PAGES } from './src/data/omrLandingPages.js';
 import { PERUNGUDI_PAGES } from './src/data/perungudiLandingPages.js';
 import { TAMBARAM_PAGES } from './src/data/tambaramLandingPages.js';
+import { CHROMEPET_PAGES } from './src/data/chromepetLandingPages.js';
+import { TARAMANI_PAGES } from './src/data/taramaniLandingPages.js';
+import { THIRUVANMIYUR_PAGES } from './src/data/thiruvanmiyurLandingPages.js';
+import { THORAIPAKKAM_PAGES } from './src/data/thoraipakkamLandingPages.js';
 
 const DOMAIN = 'https://www.chennairents.in';
 
@@ -194,6 +198,26 @@ function generateSitemaps() {
 
   // 3m. Tambaram Programmatic SEO Landing Pages (19 long-form micro-markets)
   TAMBARAM_PAGES.forEach((page) => {
+    facetUrls.push(page.canonical);
+  });
+
+  // 3n. Chromepet Programmatic SEO Landing Pages (19 long-form micro-markets)
+  CHROMEPET_PAGES.forEach((page) => {
+    facetUrls.push(page.canonical);
+  });
+
+  // 3o. Taramani Programmatic SEO Landing Pages (19 long-form micro-markets)
+  TARAMANI_PAGES.forEach((page) => {
+    facetUrls.push(page.canonical);
+  });
+
+  // 3p. Thiruvanmiyur Programmatic SEO Landing Pages (19 long-form micro-markets)
+  THIRUVANMIYUR_PAGES.forEach((page) => {
+    facetUrls.push(page.canonical);
+  });
+
+  // 3q. Thoraipakkam Programmatic SEO Landing Pages (19 long-form micro-markets)
+  THORAIPAKKAM_PAGES.forEach((page) => {
     facetUrls.push(page.canonical);
   });
 

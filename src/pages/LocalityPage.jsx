@@ -48,6 +48,14 @@ import { PERUNGUDI_PAGES_MAP } from '../data/perungudiLandingPages';
 import PerungudiLandingPage from './PerungudiLandingPage';
 import { TAMBARAM_PAGES_MAP } from '../data/tambaramLandingPages';
 import TambaramLandingPage from './TambaramLandingPage';
+import { CHROMEPET_PAGES_MAP } from '../data/chromepetLandingPages';
+import ChromepetLandingPage from './ChromepetLandingPage';
+import { TARAMANI_PAGES_MAP } from '../data/taramaniLandingPages';
+import TaramaniLandingPage from './TaramaniLandingPage';
+import { THIRUVANMIYUR_PAGES_MAP } from '../data/thiruvanmiyurLandingPages';
+import ThiruvanmiyurLandingPage from './ThiruvanmiyurLandingPage';
+import { THORAIPAKKAM_PAGES_MAP } from '../data/thoraipakkamLandingPages';
+import ThoraipakkamLandingPage from './ThoraipakkamLandingPage';
 
 // ─── FAQ Accordion ────────────────────────────────────────────────────────────
 function FAQItem({ q, a, idx }) {
@@ -460,6 +468,26 @@ export default function LocalityPage({ localitySlug: propSlug }) {
   // Tambaram Programmatic SEO Landing Pages
   if (locality.slug === 'tambaram' && intent && TAMBARAM_PAGES_MAP[intent]) {
     return <TambaramLandingPage data={TAMBARAM_PAGES_MAP[intent]} />;
+  }
+
+  // Chromepet Programmatic SEO Landing Pages
+  if (locality.slug === 'chromepet' && intent && CHROMEPET_PAGES_MAP[intent]) {
+    return <ChromepetLandingPage data={CHROMEPET_PAGES_MAP[intent]} />;
+  }
+
+  // Taramani Programmatic SEO Landing Pages
+  if (locality.slug === 'taramani' && intent && TARAMANI_PAGES_MAP[intent]) {
+    return <TaramaniLandingPage data={TARAMANI_PAGES_MAP[intent]} />;
+  }
+
+  // Thiruvanmiyur Programmatic SEO Landing Pages
+  if (locality.slug === 'thiruvanmiyur' && intent && THIRUVANMIYUR_PAGES_MAP[intent]) {
+    return <ThiruvanmiyurLandingPage data={THIRUVANMIYUR_PAGES_MAP[intent]} />;
+  }
+
+  // Thoraipakkam Programmatic SEO Landing Pages
+  if (locality.slug === 'thoraipakkam' && intent && THORAIPAKKAM_PAGES_MAP[intent]) {
+    return <ThoraipakkamLandingPage data={THORAIPAKKAM_PAGES_MAP[intent]} />;
   }
 
   const meta = generateSEOMeta({ locality, intent });

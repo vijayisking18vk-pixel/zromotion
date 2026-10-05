@@ -36,6 +36,10 @@ import { MEDAVAKKAM_PAGES, MEDAVAKKAM_GEO } from './src/data/medavakkamLandingPa
 import { OMR_PAGES, OMR_GEO } from './src/data/omrLandingPages.js';
 import { PERUNGUDI_PAGES, PERUNGUDI_GEO } from './src/data/perungudiLandingPages.js';
 import { TAMBARAM_PAGES, TAMBARAM_GEO } from './src/data/tambaramLandingPages.js';
+import { CHROMEPET_PAGES, CHROMEPET_GEO } from './src/data/chromepetLandingPages.js';
+import { TARAMANI_PAGES, TARAMANI_GEO } from './src/data/taramaniLandingPages.js';
+import { THIRUVANMIYUR_PAGES, THIRUVANMIYUR_GEO } from './src/data/thiruvanmiyurLandingPages.js';
+import { THORAIPAKKAM_PAGES, THORAIPAKKAM_GEO } from './src/data/thoraipakkamLandingPages.js';
 
 const LOCALITY_FACETS = [
   'flats-for-rent',
@@ -1346,6 +1350,282 @@ async function runPrerender() {
 
     routes.push({
       path: `/chennai/tambaram/${page.slug}`,
+      title: page.metaTitle,
+      description: page.metaDescription,
+      canonical: page.canonical,
+      robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+      schema: schemas,
+    });
+  });
+
+  // 3n. Chromepet Programmatic SEO Landing Pages (19 long-form micro-markets)
+  CHROMEPET_PAGES.forEach((page) => {
+    const breadcrumbs = [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
+      { '@type': 'ListItem', position: 3, name: 'Chromepet', item: `${DOMAIN}/chennai/chromepet` },
+      { '@type': 'ListItem', position: 4, name: page.h1, item: page.canonical },
+    ];
+
+    const schemas = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'RealEstateListing',
+        name: page.h1,
+        description: page.metaDescription,
+        url: page.canonical,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: CHROMEPET_GEO.latitude,
+          longitude: CHROMEPET_GEO.longitude,
+        },
+        geoWithin: {
+          '@type': 'GeoShape',
+          box: `${CHROMEPET_GEO.geoBoundingBox.south} ${CHROMEPET_GEO.geoBoundingBox.west} ${CHROMEPET_GEO.geoBoundingBox.north} ${CHROMEPET_GEO.geoBoundingBox.east}`,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Chromepet',
+          addressRegion: 'Tamil Nadu',
+          addressCountry: 'IN',
+          postalCode: CHROMEPET_GEO.pincode,
+        },
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'INR',
+          lowPrice: page.priceRange.min,
+          highPrice: page.priceRange.max,
+          offerCount: 28,
+        },
+      },
+    ];
+
+    if (page.faqs && page.faqs.length > 0) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: page.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      });
+    }
+
+    routes.push({
+      path: `/chennai/chromepet/${page.slug}`,
+      title: page.metaTitle,
+      description: page.metaDescription,
+      canonical: page.canonical,
+      robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+      schema: schemas,
+    });
+  });
+
+  // 3o. Taramani Programmatic SEO Landing Pages (19 long-form micro-markets)
+  TARAMANI_PAGES.forEach((page) => {
+    const breadcrumbs = [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
+      { '@type': 'ListItem', position: 3, name: 'Taramani', item: `${DOMAIN}/chennai/taramani` },
+      { '@type': 'ListItem', position: 4, name: page.h1, item: page.canonical },
+    ];
+
+    const schemas = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'RealEstateListing',
+        name: page.h1,
+        description: page.metaDescription,
+        url: page.canonical,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: TARAMANI_GEO.latitude,
+          longitude: TARAMANI_GEO.longitude,
+        },
+        geoWithin: {
+          '@type': 'GeoShape',
+          box: `${TARAMANI_GEO.geoBoundingBox.south} ${TARAMANI_GEO.geoBoundingBox.west} ${TARAMANI_GEO.geoBoundingBox.north} ${TARAMANI_GEO.geoBoundingBox.east}`,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Taramani',
+          addressRegion: 'Tamil Nadu',
+          addressCountry: 'IN',
+          postalCode: TARAMANI_GEO.pincode,
+        },
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'INR',
+          lowPrice: page.priceRange.min,
+          highPrice: page.priceRange.max,
+          offerCount: 30,
+        },
+      },
+    ];
+
+    if (page.faqs && page.faqs.length > 0) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: page.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      });
+    }
+
+    routes.push({
+      path: `/chennai/taramani/${page.slug}`,
+      title: page.metaTitle,
+      description: page.metaDescription,
+      canonical: page.canonical,
+      robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+      schema: schemas,
+    });
+  });
+
+  // 3p. Thiruvanmiyur Programmatic SEO Landing Pages (19 long-form micro-markets)
+  THIRUVANMIYUR_PAGES.forEach((page) => {
+    const breadcrumbs = [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
+      { '@type': 'ListItem', position: 3, name: 'Thiruvanmiyur', item: `${DOMAIN}/chennai/thiruvanmiyur` },
+      { '@type': 'ListItem', position: 4, name: page.h1, item: page.canonical },
+    ];
+
+    const schemas = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'RealEstateListing',
+        name: page.h1,
+        description: page.metaDescription,
+        url: page.canonical,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: THIRUVANMIYUR_GEO.latitude,
+          longitude: THIRUVANMIYUR_GEO.longitude,
+        },
+        geoWithin: {
+          '@type': 'GeoShape',
+          box: `${THIRUVANMIYUR_GEO.geoBoundingBox.south} ${THIRUVANMIYUR_GEO.geoBoundingBox.west} ${THIRUVANMIYUR_GEO.geoBoundingBox.north} ${THIRUVANMIYUR_GEO.geoBoundingBox.east}`,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Thiruvanmiyur',
+          addressRegion: 'Tamil Nadu',
+          addressCountry: 'IN',
+          postalCode: THIRUVANMIYUR_GEO.pincode,
+        },
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'INR',
+          lowPrice: page.priceRange.min,
+          highPrice: page.priceRange.max,
+          offerCount: 32,
+        },
+      },
+    ];
+
+    if (page.faqs && page.faqs.length > 0) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: page.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      });
+    }
+
+    routes.push({
+      path: `/chennai/thiruvanmiyur/${page.slug}`,
+      title: page.metaTitle,
+      description: page.metaDescription,
+      canonical: page.canonical,
+      robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+      schema: schemas,
+    });
+  });
+
+  // 3q. Thoraipakkam Programmatic SEO Landing Pages (19 long-form micro-markets)
+  THORAIPAKKAM_PAGES.forEach((page) => {
+    const breadcrumbs = [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${DOMAIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
+      { '@type': 'ListItem', position: 3, name: 'Thoraipakkam', item: `${DOMAIN}/chennai/thoraipakkam` },
+      { '@type': 'ListItem', position: 4, name: page.h1, item: page.canonical },
+    ];
+
+    const schemas = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs,
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'RealEstateListing',
+        name: page.h1,
+        description: page.metaDescription,
+        url: page.canonical,
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: THORAIPAKKAM_GEO.latitude,
+          longitude: THORAIPAKKAM_GEO.longitude,
+        },
+        geoWithin: {
+          '@type': 'GeoShape',
+          box: `${THORAIPAKKAM_GEO.geoBoundingBox.south} ${THORAIPAKKAM_GEO.geoBoundingBox.west} ${THORAIPAKKAM_GEO.geoBoundingBox.north} ${THORAIPAKKAM_GEO.geoBoundingBox.east}`,
+        },
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Thoraipakkam',
+          addressRegion: 'Tamil Nadu',
+          addressCountry: 'IN',
+          postalCode: THORAIPAKKAM_GEO.pincode,
+        },
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'INR',
+          lowPrice: page.priceRange.min,
+          highPrice: page.priceRange.max,
+          offerCount: 26,
+        },
+      },
+    ];
+
+    if (page.faqs && page.faqs.length > 0) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: page.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      });
+    }
+
+    routes.push({
+      path: `/chennai/thoraipakkam/${page.slug}`,
       title: page.metaTitle,
       description: page.metaDescription,
       canonical: page.canonical,
