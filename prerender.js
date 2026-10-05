@@ -78,7 +78,7 @@ async function runPrerender() {
   routes.push({
     path: '/',
     title: 'Chennai Rents: Locality-First Rental Guide for Chennai',
-    description: 'Real rent rates, water reality, flood history, crowdsourced map, and verified direct owner listings in Chennai. Neighborhood by neighborhood.',
+    description: 'Explore real rent rates, water reality, flood history, crowdsourced rental map, and verified direct owner listings in Chennai. Honest locality guides with zero broker fees.',
     canonical: `${DOMAIN}/`,
     robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
     schema: [

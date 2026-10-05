@@ -188,11 +188,17 @@ h1{margin:0 0 6px;font-size:28px;line-height:1.15;font-weight:700;letter-spacing
 <!-- Header with Top-Left Official Logo -->
 <header class="bar">
   <a href="/" class="brand-link" aria-label="ChennaiRents Home">
-    <img
-      src="/chennai-rents-logo-new.jpg"
-      alt="Chennai Rents Logo"
-      class="brand-logo-img"
-    >
+    <picture>
+      <source srcset="/chennai-rents-logo-new.webp" type="image/webp">
+      <img
+        src="/chennai-rents-logo-new.jpg"
+        alt="Chennai Rents Logo"
+        class="brand-logo-img"
+        width="38"
+        height="38"
+        decoding="async"
+      >
+    </picture>
     <div class="brand-txt">
       <b>Chennai</b><b class="red">Rents</b>
     </div>
@@ -265,7 +271,10 @@ h1{margin:0 0 6px;font-size:28px;line-height:1.15;font-weight:700;letter-spacing
 
 <!-- Bottom Skyline Strip & Driving Auto-Rickshaw -->
 <div class="skyline" aria-hidden="true">
-  <img src="/images/chennai-skyline-footer.png" alt="Chennai Skyline" class="skyline-img">
+  <picture>
+    <source srcset="/images/chennai-skyline-footer.webp" type="image/webp">
+    <img src="/images/chennai-skyline-footer.png" alt="Chennai Skyline" class="skyline-img" width="1024" height="686" loading="lazy" decoding="async">
+  </picture>
 </div>
 <svg class="drive" viewBox="0 0 40 28" aria-hidden="true" style="z-index:1">
   <use href="#auto"/>

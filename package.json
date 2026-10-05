@@ -9,7 +9,8 @@
     "prebuild": "node generate-sitemap.js && node scripts/check-emdash.js",
     "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node prerender.js",
     "preview": "vite preview",
-    "test:seo": "node scripts/test-seo.js"
+    "test:seo": "node scripts/test-seo.js",
+    "optimize:images": "node scripts/optimize-images.js"
   },
   "dependencies": {
     "@react-three/drei": "^9.105.6",
@@ -30,6 +31,7 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",
     "leaflet": "^1.9.4",
+    "sharp": "^0.35.5",
     "vite": "^5.2.13"
   }
 }

@@ -58,7 +58,7 @@ export default function Home() {
     >
       <SEOHead
         title="Chennai Rents: Locality-First Rental Guide for Chennai"
-        description="Real rent rates, water reality, flood history, crowdsourced map, and verified direct owner listings in Chennai. Neighborhood by neighborhood."
+        description="Explore real rent rates, water reality, flood history, crowdsourced rental map, and verified direct owner listings in Chennai. Honest locality guides with zero broker fees."
         canonical="https://www.chennairents.in/"
       />
 
@@ -419,6 +419,195 @@ export default function Home() {
               })}
             </AnimatePresence>
           </motion.div>
+        </div>
+      </section>
+
+      {/* ── LOCALITY RENTAL & GROUND REALITY COMPARISON MATRIX ── */}
+      <section style={{ backgroundColor: 'var(--c-sand-light)', paddingBlock: '3.75rem', borderTop: '1px solid var(--c-border)', borderBottom: '1px solid var(--c-border)' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+            <span className="tag-eyebrow" style={{ display: 'inline-flex', marginBottom: '0.4rem' }}>
+              <span className="tag-bullet" /> EMPIRICAL BENCHMARKS
+            </span>
+            <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, margin: '0 0 0.5rem 0' }}>
+              Chennai Locality Rental &amp; Ground Reality Matrix
+            </h2>
+            <p style={{ color: 'var(--c-ink-muted)', fontSize: '1rem', maxWidth: '640px', margin: '0 auto', lineHeight: 1.6 }}>
+              Direct comparison of rental brackets, summer groundwater scores, and cyclonic flood history across top residential micro-markets.
+            </p>
+          </div>
+
+          <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch', borderRadius: '12px', border: '1.5px solid var(--c-border)', background: '#FFFFFF', boxShadow: '0 4px 16px rgba(30, 27, 24, 0.04)' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '680px', fontSize: '0.92rem' }}>
+              <thead>
+                <tr style={{ backgroundColor: '#FAF6EE', borderBottom: '1.5px solid var(--c-border)' }}>
+                  <th style={{ padding: '1rem 1.25rem', fontFamily: 'var(--font-heading)', fontWeight: 800, color: 'var(--c-ink)' }}>Locality</th>
+                  <th style={{ padding: '1rem 1.25rem', fontFamily: 'var(--font-heading)', fontWeight: 800, color: 'var(--c-ink)' }}>Typical 2 BHK Rent</th>
+                  <th style={{ padding: '1rem 1.25rem', fontFamily: 'var(--font-heading)', fontWeight: 800, color: 'var(--c-ink)' }}>Water Reality</th>
+                  <th style={{ padding: '1rem 1.25rem', fontFamily: 'var(--font-heading)', fontWeight: 800, color: 'var(--c-ink)' }}>Flood Resilience</th>
+                  <th style={{ padding: '1rem 1.25rem', fontFamily: 'var(--font-heading)', fontWeight: 800, color: 'var(--c-ink)' }}>Intelligence</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { name: 'Velachery', tag: 'South IT Corridor', rent: '₹18,000 - ₹26,000', water: '6.0 / 10', waterNote: 'Summer tanker reliance', flood: 'Moderate', floodNote: 'Low pockets require checking', slug: 'velachery' },
+                  { name: 'Valasaravakkam', tag: 'West Residential Hub', rent: '₹15,000 - ₹22,000', water: '6.5 / 10', waterNote: 'CMWSSB sump + borewell', flood: 'Low to Moderate', floodNote: 'Safe near Kesavardhini', slug: 'valasaravakkam' },
+                  { name: 'Adyar', tag: 'Coastal Prime', rent: '₹26,000 - ₹42,000', water: '8.0 / 10', waterNote: 'High coastal water table', flood: 'Low Risk', floodNote: 'Elevated coastal terrain', slug: 'adyar' },
+                  { name: 'Sholinganallur', tag: 'OMR Tech Core', rent: '₹20,000 - ₹32,000', water: '5.5 / 10', waterNote: 'Gated RO + private tankers', flood: 'Moderate', floodNote: 'Link road surface run-off', slug: 'sholinganallur' },
+                  { name: 'Porur', tag: 'DLF IT Corridor', rent: '₹16,000 - ₹24,000', water: '6.0 / 10', waterNote: 'Deep borewell reliance', flood: 'Moderate', floodNote: 'Avoid lake overflow alleys', slug: 'porur' },
+                  { name: 'Anna Nagar', tag: 'North-Central Metro Hub', rent: '₹24,000 - ₹38,000', water: '7.5 / 10', waterNote: 'Grid CMWSSB supply', flood: 'Low Risk', floodNote: 'Engineered avenue drainage', slug: 'anna-nagar' },
+                ].map((item, idx) => (
+                  <tr key={item.slug} style={{ borderBottom: idx < 5 ? '1px solid var(--c-border)' : 'none', backgroundColor: idx % 2 === 1 ? 'rgba(250, 246, 238, 0.4)' : '#FFFFFF' }}>
+                    <td style={{ padding: '1rem 1.25rem' }}>
+                      <div style={{ fontWeight: 800, color: 'var(--c-ink)' }}>{item.name}</div>
+                      <div style={{ fontSize: '0.78rem', color: 'var(--c-ink-muted)' }}>{item.tag}</div>
+                    </td>
+                    <td style={{ padding: '1rem 1.25rem', fontWeight: 700, color: 'var(--c-ripon-red)' }}>{item.rent}</td>
+                    <td style={{ padding: '1rem 1.25rem' }}>
+                      <span className="stamp-badge stamp-blue" style={{ fontSize: '0.68rem', marginRight: '6px' }}>{item.water}</span>
+                      <span style={{ fontSize: '0.82rem', color: 'var(--c-ink-muted)' }}>{item.waterNote}</span>
+                    </td>
+                    <td style={{ padding: '1rem 1.25rem' }}>
+                      <span className="stamp-badge stamp-yellow" style={{ fontSize: '0.68rem', marginRight: '6px' }}>{item.flood}</span>
+                      <span style={{ fontSize: '0.82rem', color: 'var(--c-ink-muted)' }}>{item.floodNote}</span>
+                    </td>
+                    <td style={{ padding: '1rem 1.25rem' }}>
+                      <Link
+                        to={`/chennai/${item.slug}`}
+                        aria-label={`View ${item.name} Locality Intelligence`}
+                        className="btn-yellow"
+                        style={{ padding: '0.35rem 0.75rem', fontSize: '0.78rem', borderRadius: '6px', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+                      >
+                        <span>View {item.name} Data</span>
+                        <ArrowRight size={12} />
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* ── RESEARCH METHODOLOGY & VERIFICATION SUMMARY ── */}
+      <section style={{ backgroundColor: 'var(--c-page-bg)', paddingBlock: '3.75rem', borderBottom: '1px solid var(--c-border)' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+            <span className="tag-eyebrow" style={{ display: 'inline-flex', marginBottom: '0.4rem' }}>
+              <span className="tag-bullet" /> EDITORIAL INTEGRITY
+            </span>
+            <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, margin: '0 0 0.5rem 0' }}>
+              How Locality Rental Data is Verified
+            </h2>
+            <p style={{ color: 'var(--c-ink-muted)', fontSize: '1rem', maxWidth: '620px', margin: '0 auto', lineHeight: 1.6 }}>
+              Every rent index and livability score on Chennai Rents is grounded in real tenant disclosures and empirical neighborhood audits.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '2.5rem' }}>
+            <div className="content-card" style={{ padding: '1.75rem', backgroundColor: '#FFFFFF' }}>
+              <div style={{ width: '40px', height: '40px', borderRadius: '8px', backgroundColor: 'var(--c-hero-sky)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--c-marina-blue)', marginBottom: '1rem' }}>
+                <CheckCircle2 size={20} />
+              </div>
+              <h3 style={{ fontSize: '1.15rem', fontFamily: 'var(--font-heading)', fontWeight: 800, margin: '0 0 0.5rem 0' }}>
+                Empirical Lease Audits
+              </h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--c-ink-muted)', lineHeight: 1.65, margin: 0 }}>
+                Rental brackets are compiled from actual tenant submissions cross-referenced against closed rental agreements, filtering out inflated broker asking quotes.
+              </p>
+            </div>
+
+            <div className="content-card" style={{ padding: '1.75rem', backgroundColor: '#FFFFFF' }}>
+              <div style={{ width: '40px', height: '40px', borderRadius: '8px', backgroundColor: 'var(--c-sand-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--c-auto-yellow-dk)', marginBottom: '1rem' }}>
+                <Building2 size={20} />
+              </div>
+              <h3 style={{ fontSize: '1.15rem', fontFamily: 'var(--font-heading)', fontWeight: 800, margin: '0 0 0.5rem 0' }}>
+                Ground-Truth Water Audits
+              </h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--c-ink-muted)', lineHeight: 1.65, margin: 0 }}>
+                We track CMWSSB piped water frequency, borewell depth reliability, and peak summer private tanker reliance street-by-street.
+              </p>
+            </div>
+
+            <div className="content-card" style={{ padding: '1.75rem', backgroundColor: '#FFFFFF' }}>
+              <div style={{ width: '40px', height: '40px', borderRadius: '8px', backgroundColor: '#FAF2F0', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--c-ripon-red)', marginBottom: '1rem' }}>
+                <MapPin size={20} />
+              </div>
+              <h3 style={{ fontSize: '1.15rem', fontFamily: 'var(--font-heading)', fontWeight: 800, margin: '0 0 0.5rem 0' }}>
+                Micro-Pocket Flood Mapping
+              </h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--c-ink-muted)', lineHeight: 1.65, margin: 0 }}>
+                Elevation vulnerabilities are derived from actual street stagnation levels recorded during Cyclone Michaung and heavy monsoon events.
+              </p>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            <Link to="/methodology" className="btn-dark">
+              <span>View Full Data Methodology</span>
+              <ArrowRight size={15} />
+            </Link>
+            <Link to="/verification" className="btn-yellow">
+              <span>View Listing Verification Framework</span>
+              <ArrowRight size={15} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── VERIFIED COMMUNITY EXPERIENCES ── */}
+      <section style={{ backgroundColor: 'var(--c-sand-light)', paddingBlock: '3.75rem', borderBottom: '1px solid var(--c-border)' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+            <span className="tag-eyebrow" style={{ display: 'inline-flex', marginBottom: '0.4rem' }}>
+              <span className="tag-bullet" /> COMMUNITY EXPERIENCES
+            </span>
+            <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, margin: '0 0 0.5rem 0' }}>
+              Direct Rentals Across Chennai
+            </h2>
+            <p style={{ color: 'var(--c-ink-muted)', fontSize: '1rem', maxWidth: '620px', margin: '0 auto', lineHeight: 1.6 }}>
+              Real Chennai tenants and homeowners connecting directly without broker markups or non-refundable commission fees.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.75rem' }}>
+            <div className="content-card" style={{ padding: '2rem', backgroundColor: '#FFFFFF', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div>
+                <span className="tag-eyebrow" style={{ color: 'var(--c-marina-blue)', marginBottom: '0.75rem', display: 'inline-block' }}>
+                  TENANT EXPERIENCE • PORUR
+                </span>
+                <p style={{ fontSize: '0.96rem', color: 'var(--c-ink)', lineHeight: 1.7, fontStyle: 'italic', marginBottom: '1.25rem' }}>
+                  "Finding an honest 2 BHK near DLF IT Park without paying ₹25,000 in broker fees seemed impossible until we checked direct owner listings here. We connected with the landlord directly, verified the lease terms, and moved in within a week."
+                </p>
+              </div>
+              <div style={{ borderTop: '1px solid var(--c-border)', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                  <div style={{ fontWeight: 800, fontSize: '0.92rem', color: 'var(--c-ink)' }}>Karthik Subramanian</div>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--c-ink-muted)' }}>IT Professional, DLF Cybercity</div>
+                </div>
+                <span className="stamp-badge stamp-green" style={{ fontSize: '0.68rem' }}>0% Brokerage</span>
+              </div>
+            </div>
+
+            <div className="content-card" style={{ padding: '2rem', backgroundColor: '#FFFFFF', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div>
+                <span className="tag-eyebrow" style={{ color: 'var(--c-temple-green)', marginBottom: '0.75rem', display: 'inline-block' }}>
+                  OWNER EXPERIENCE • VALASARAVAKKAM
+                </span>
+                <p style={{ fontSize: '0.96rem', color: 'var(--c-ink)', lineHeight: 1.7, fontStyle: 'italic', marginBottom: '1.25rem' }}>
+                  "Listing our first-floor flat in Kesavardhini Nagar directly saved us weeks of duplicate broker inquiries. Genuine tenants reached out via WhatsApp, we verified their employment credentials, and completed the rental agreement smoothly."
+                </p>
+              </div>
+              <div style={{ borderTop: '1px solid var(--c-border)', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                  <div style={{ fontWeight: 800, fontSize: '0.92rem', color: 'var(--c-ink)' }}>S. Lakshmi Narayanan</div>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--c-ink-muted)' }}>Independent Property Owner</div>
+                </div>
+                <span className="stamp-badge stamp-green" style={{ fontSize: '0.68rem' }}>Direct Tenant</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

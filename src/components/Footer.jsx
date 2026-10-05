@@ -51,19 +51,26 @@ export default function Footer() {
         }}
         aria-hidden="true"
       >
-        <img
-          src="/images/chennai-skyline-footer.png"
-          alt="Chennai Skyline"
-          style={{
-            width: '100%',
-            maxWidth: '1240px',
-            height: 'auto',
-            maxHeight: '100%',
-            objectFit: 'contain',
-            objectPosition: 'bottom center',
-            display: 'block',
-          }}
-        />
+        <picture style={{ width: '100%', maxWidth: '1240px', display: 'flex', justifyContent: 'center' }}>
+          <source srcSet="/images/chennai-skyline-footer.webp" type="image/webp" />
+          <img
+            src="/images/chennai-skyline-footer.png"
+            alt="Chennai Skyline"
+            width="1024"
+            height="686"
+            loading="lazy"
+            decoding="async"
+            style={{
+              width: '100%',
+              maxWidth: '1240px',
+              height: 'auto',
+              maxHeight: '100%',
+              objectFit: 'contain',
+              objectPosition: 'bottom center',
+              display: 'block',
+            }}
+          />
+        </picture>
       </div>
 
       {/* Mallipoo Garland - full-width decorative separator */}
@@ -107,16 +114,23 @@ export default function Footer() {
                   boxShadow: '0 2px 8px rgba(31,26,23,0.04)',
                 }}
               >
-                <img 
-                  src="/chennai-rents-icon-transparent.png" 
-                  alt="Chennai Rents" 
-                  style={{ 
-                    height: '32px',
-                    width: 'auto',
-                    objectFit: 'contain',
-                    display: 'block',
-                  }} 
-                />
+                <picture>
+                  <source srcSet="/chennai-rents-icon-transparent.webp" type="image/webp" />
+                  <img 
+                    src="/chennai-rents-icon-transparent.png" 
+                    alt="Chennai Rents" 
+                    width="111"
+                    height="32"
+                    loading="lazy"
+                    decoding="async"
+                    style={{ 
+                      height: '32px',
+                      width: 'auto',
+                      objectFit: 'contain',
+                      display: 'block',
+                    }} 
+                  />
+                </picture>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1.5px solid #E9DFC9', paddingLeft: '0.85rem' }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', lineHeight: 1.1 }}>

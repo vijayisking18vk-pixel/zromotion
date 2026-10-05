@@ -70,20 +70,25 @@ export default function Header() {
           }}
           aria-label="Chennai Rents home"
         >
-          <img
-            src="/chennai-rents-logo-new.jpg"
-            alt="Chennai Rents Logo"
-            style={{
-              height: '42px',
-              width: 'auto',
-              objectFit: 'contain',
-              display: 'block',
-              flexShrink: 0,
-              background: 'transparent',
-              mixBlendMode: 'multiply',
-              borderRadius: '4px',
-            }}
-          />
+          <picture style={{ display: 'block', flexShrink: 0, height: '42px' }}>
+            <source srcSet="/chennai-rents-logo-new.webp" type="image/webp" />
+            <img
+              src="/chennai-rents-logo-new.jpg"
+              alt="Chennai Rents Logo"
+              width="42"
+              height="42"
+              decoding="async"
+              style={{
+                height: '42px',
+                width: 'auto',
+                objectFit: 'contain',
+                display: 'block',
+                background: 'transparent',
+                mixBlendMode: 'multiply',
+                borderRadius: '4px',
+              }}
+            />
+          </picture>
           <div
             style={{
               display: 'flex',
