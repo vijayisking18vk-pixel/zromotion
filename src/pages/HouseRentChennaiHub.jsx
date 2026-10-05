@@ -130,7 +130,7 @@ export default function HouseRentChennaiHub({ customSlug }) {
 
   return (
     <motion.main
-      initial={{ opacity: 0, y: 10 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.28 }}
@@ -378,6 +378,12 @@ export default function HouseRentChennaiHub({ customSlug }) {
                     </li>
                   ))}
                 </ul>
+                <div style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--c-border-subtle)' }}>
+                  <Link to="/house-for-rent-in-chennai-without-brokers" className="btn-yellow" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.88rem' }}>
+                    <span>Browse Houses for Rent in Chennai Without Brokers</span>
+                    <ArrowRight size={14} />
+                  </Link>
+                </div>
               </div>
             </section>
 
@@ -489,8 +495,19 @@ export default function HouseRentChennaiHub({ customSlug }) {
               <h4>Browse by BHK</h4>
               <Link to="/1-bhk-house-for-rent-in-chennai" className="rail-link">1 BHK Houses for Rent</Link>
               <Link to="/2-bhk-house-for-rent-in-chennai" className="rail-link">2 BHK Houses for Rent</Link>
+              <Link to="/3-bhk-house-for-rent-in-chennai" className="rail-link">3 BHK Houses for Rent</Link>
               <Link to="/independent-house-for-rent-in-chennai" className="rail-link">Independent Houses</Link>
               <Link to="/co-living-in-chennai" className="rail-link">Co-Living & PG Options</Link>
+            </div>
+
+            <div className="rail-card">
+              <h4>Locality House Rentals</h4>
+              <Link to="/house-for-rent-in-anna-nagar-chennai" className="rail-link">House in Anna Nagar</Link>
+              <Link to="/house-for-rent-in-porur-chennai" className="rail-link">House in Porur</Link>
+              <Link to="/house-for-rent-in-t-nagar-chennai" className="rail-link">House in T. Nagar</Link>
+              <Link to="/house-for-rent-in-chennai-without-brokers" className="rail-link">Homes Without Brokers</Link>
+              <Link to="/bachelor-rentals-in-chennai" className="rail-link">Bachelor Rentals Hub</Link>
+              <Link to="/family-houses-for-rent-in-chennai" className="rail-link">Family Houses Hub</Link>
             </div>
 
             <div className="rail-card">

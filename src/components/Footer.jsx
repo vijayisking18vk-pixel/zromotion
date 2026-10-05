@@ -63,13 +63,12 @@ export default function Footer() {
             sizes="(max-width: 480px) 360px, (max-width: 768px) 768px, 1024px"
           />
           <img
-            src="/images/chennai-skyline-footer-360w.png"
+            src="/images/chennai-skyline-footer.png"
             srcSet="/images/chennai-skyline-footer-360w.png 360w, /images/chennai-skyline-footer-480w.png 480w, /images/chennai-skyline-footer-768w.png 768w, /images/chennai-skyline-footer.png 1024w"
             sizes="(max-width: 480px) 360px, (max-width: 768px) 768px, 1024px"
             alt="Chennai Skyline"
             width="1024"
             height="686"
-            loading="lazy"
             decoding="async"
             style={{
               width: '100%',
@@ -138,13 +137,13 @@ export default function Footer() {
                     src="/chennai-rents-icon-transparent-112w.png" 
                     srcSet="/chennai-rents-icon-transparent-112w.png 1x, /chennai-rents-icon-transparent-224w.png 2x"
                     alt="Chennai Rents" 
-                    width="111"
+                    width="112"
                     height="32"
-                    loading="lazy"
+                    loading="eager"
                     decoding="async"
                     style={{ 
                       height: '32px',
-                      width: 'auto',
+                      width: '112px',
                       objectFit: 'contain',
                       display: 'block',
                     }} 
@@ -231,11 +230,11 @@ export default function Footer() {
                 borderRadius: '10px',
                 fontSize: '0.82rem',
                 color: '#2E7D4F',
-                boxShadow: '0 1px 4px rgba(31,26,23,0.03)',
+                boxShadow: '0 1px 4px rgba(31,26,23,0.04)',
               }}
             >
               <ShieldCheck size={16} color="#2E7D4F" />
-              <span style={{ color: '#3A322C', fontWeight: 500 }}>No tracking here. We do not collect anything on this site.</span>
+              <span style={{ color: '#3A322C', fontWeight: 500 }}>Zero ad trackers. Voluntary submissions protected under DPDP Act 2023.</span>
             </div>
           </div>
 
@@ -333,7 +332,8 @@ export default function Footer() {
                 { to: '/authors', label: 'Editorial Team & Co-founders' },
                 { to: '/about', label: 'About Chennai Rents' },
                 { to: '/contact', label: 'Contact Us' },
-                { to: '/privacy', label: 'Privacy & Data Deletion' },
+                { to: '/privacy', label: 'Privacy Policy' },
+                { to: '/data-deletion', label: 'Data Deletion Request' },
               ].map(({ to, label }) => (
                 <li key={to}>
                   <Link
@@ -424,7 +424,7 @@ export default function Footer() {
             />
           </p>
           <p style={{ fontSize: '0.82rem', color: '#6B5E55' }}>
-            © {new Date().getFullYear()} Chennai Rents. Purely content and Instagram Reels.
+            © {new Date().getFullYear()} Chennai Rents. Locality-First Rental Intelligence &amp; Verified Direct Listings.
           </p>
         </div>
       </div>

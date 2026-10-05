@@ -50,7 +50,7 @@ export default function Home() {
 
   return (
     <motion.main
-      initial={{ opacity: 0, y: 10 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.28 }}
@@ -66,7 +66,7 @@ export default function Home() {
       <section className="hero-sky-section">
         <div className="container home-hero-grid">
           <motion.div
-            initial={reduce ? false : { opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           >
@@ -87,6 +87,10 @@ export default function Home() {
                 <MapPin size={17} style={{ color: 'var(--c-auto-yellow)', flexShrink: 0 }} />
                 <span>Explore Rent &amp; Buy Map</span>
               </a>
+              <Link to="/chennai/rentals" className="btn-yellow hero-btn">
+                <Compass size={17} style={{ flexShrink: 0 }} />
+                <span>Browse 16 Localities</span>
+              </Link>
               <a href="/listings/list-property.html" className="btn-red hero-btn">
                 <Plus size={17} strokeWidth={2.5} style={{ flexShrink: 0 }} />
                 <span>List Property (0% Broker)</span>
@@ -97,7 +101,7 @@ export default function Home() {
           {/* Decorative numeral column — desktop only */}
           <div className="home-numeral-col" style={{ position: 'relative', flexDirection: 'column', alignItems: 'center' }}>
             <motion.div
-              initial={reduce ? false : { scale: 0.85, opacity: 0 }}
+              initial={false}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.15, type: 'spring' }}
             >
@@ -278,11 +282,16 @@ export default function Home() {
       {/* ── INSTAGRAM COMMUNITY STRIP ── */}
       <section style={{ backgroundColor: 'var(--c-header-bg)', borderBottom: '1px solid var(--c-border)', paddingBlock: '2.25rem' }}>
         <div className="container" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '1.25rem', textAlign: 'center' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', justifyContent: 'center', maxWidth: '580px' }}>
             <HandDrawnArrow width={34} height={34} direction="right" style={{ display: 'inline-block', transform: 'translateY(4px)', flexShrink: 0 }} />
-            <h3 style={{ margin: 0, color: 'var(--c-ink)', fontSize: '1.05rem', fontWeight: 700, lineHeight: 1.4 }}>
-              Vacant verified homes are posted as Reels on Instagram first.
-            </h3>
+            <div style={{ textAlign: 'left' }}>
+              <h3 style={{ margin: 0, color: 'var(--c-ink)', fontSize: '1.05rem', fontWeight: 700, lineHeight: 1.4 }}>
+                Walk-through video tours of vacant homes are published on Instagram first.
+              </h3>
+              <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--c-ink-muted)' }}>
+                Inspect natural light, layout, parking, and direct owner contact before visiting in person.
+              </p>
+            </div>
           </div>
 
           <motion.a
@@ -294,7 +303,7 @@ export default function Home() {
             whileTap={reduce ? {} : { y: 0 }}
           >
             <Instagram size={17} />
-            <span>Follow {INSTAGRAM_HANDLE}</span>
+            <span>Watch Video Tours on {INSTAGRAM_HANDLE}</span>
           </motion.a>
         </div>
       </section>
@@ -352,15 +361,21 @@ export default function Home() {
           >
             <AnimatePresence mode="popLayout">
               {filteredPosts.map((post, idx) => {
-                const targetUrl = post.type === 'guide'
+                const targetUrl = post.type === 'story'
+                  ? `/stories/${post.slug}`
+                  : post.type === 'guide'
                   ? `/guides/${post.slug}`
                   : `/chennai/${post.slug.replace('rent-in-', '')}`;
+
+                const cleanScore = post.waterReality?.score
+                  ? String(post.waterReality.score).replace(/\s*\/\s*10\s*$/i, '')
+                  : null;
 
                 return (
                   <motion.article
                     layout
                     key={post.slug}
-                    initial={{ opacity: 0, y: 16 }}
+                    initial={false}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
                     transition={{ ...springConfig, delay: reduce ? 0 : (idx % 6) * 0.04 }}
@@ -373,11 +388,11 @@ export default function Home() {
                     <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
                         <span className="tag-eyebrow" style={{ margin: 0 }}>
-                          <span className="tag-bullet" /> {post.badge || (post.type === 'locality' ? 'LOCALITY' : 'GUIDE')}
+                          <span className="tag-bullet" /> {post.badge || (post.type === 'locality' ? 'LOCALITY' : post.type === 'story' ? 'DATA STORY' : 'GUIDE')}
                         </span>
-                        {post.waterReality?.score && (
+                        {cleanScore && (
                           <span className="stamp-badge stamp-blue" style={{ fontSize: '0.65rem' }}>
-                            Water: {post.waterReality.score}/10
+                            Water: {cleanScore}/10
                           </span>
                         )}
                       </div>

@@ -65,7 +65,7 @@ function LocalityCard({ locality, index, filterBhk, isPg }) {
 
   return (
     <motion.article
-      initial={reduce ? false : { opacity: 0, y: 16 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.45, delay: (index % 6) * 0.06, ease: [0.16, 1, 0.3, 1] }}
@@ -162,9 +162,9 @@ function ZoneSection({ zone, filterBhk, isPg }) {
 function BHKHubs({ activeBhk, isPg }) {
   const hubs = [
     { bhk: '1', label: '1 BHK Flats in Chennai', sub: '₹7,000 – ₹16,000', slug: '1-bhk-for-rent' },
-    { bhk: '2', label: '2 BHK Flats in Chennai', sub: '₹14,000 – ₹32,000', slug: '2-bhk-for-rent' },
-    { bhk: '3', label: '3 BHK Flats in Chennai', sub: '₹24,000 – ₹65,000+', slug: '3-bhk-for-rent' },
-    { bhk: 'PG', label: 'PG Accommodation', sub: '₹4,500 – ₹12,000/person', slug: 'pg' },
+    { bhk: '2', label: '2 BHK Flats in Chennai', sub: '₹14,000 - ₹32,000', slug: '2-bhk-for-rent' },
+    { bhk: '3', label: '3 BHK Flats in Chennai', sub: '₹24,000 - ₹65,000+', slug: '3-bhk-for-rent' },
+    { bhk: 'PG', label: 'PG Accommodation', sub: '₹4,500 - ₹12,000/person', slug: 'pg' },
   ];
   return (
     <section style={{ marginBottom: '3rem' }}>
@@ -173,7 +173,7 @@ function BHKHubs({ activeBhk, isPg }) {
         {hubs.map(({ bhk, label, sub, slug }) => {
           const isCurrent = (activeBhk === bhk) || (isPg && bhk === 'PG');
           return (
-            <Link key={slug} to={`/chennai/${slug}/`} style={{ textDecoration: 'none' }}>
+            <Link key={slug} to={`/chennai/${slug}`} style={{ textDecoration: 'none' }}>
               <div style={{
                 background: isCurrent ? 'var(--c-sand-light)' : '#fff',
                 border: isCurrent ? '2px solid var(--c-ripon-red)' : '1.5px solid var(--c-border)',
@@ -331,7 +331,7 @@ export default function ChennaiHub({ bhk, pg }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }} />
 
       <motion.main
-        initial={{ opacity: 0, y: 10 }}
+        initial={false}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.28 }}
@@ -341,7 +341,7 @@ export default function ChennaiHub({ bhk, pg }) {
         <section className="hero-sky-section">
           <div className="container home-hero-grid">
             <motion.div
-              initial={reduce ? false : { opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
               style={{ maxWidth: '580px' }}
@@ -439,7 +439,7 @@ export default function ChennaiHub({ bhk, pg }) {
               {GUIDE_POSTS.slice(0, 6).map((post, i) => (
                 <motion.article
                   key={post.slug}
-                  initial={reduce ? false : { opacity: 0, y: 12 }}
+                  initial={false}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.1 }}
                   transition={{ duration: 0.4, delay: i * 0.07 }}
@@ -451,12 +451,12 @@ export default function ChennaiHub({ bhk, pg }) {
                     {post.badge || 'GUIDE'}
                   </span>
                   <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>
-                    <Link to={`/guides/${post.slug}/`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                    <Link to={`/guides/${post.slug}`} style={{ color: 'inherit', textDecoration: 'none' }}>
                       {post.title}
                     </Link>
                   </h3>
                   <p style={{ fontSize: '0.9rem', marginBottom: '1rem' }}>{post.summary}</p>
-                  <Link to={`/guides/${post.slug}/`} className="btn-yellow" style={{ fontSize: '0.82rem', minHeight: '36px', padding: '0.4rem 0.9rem', alignSelf: 'flex-start' }}>
+                  <Link to={`/guides/${post.slug}`} className="btn-yellow" style={{ fontSize: '0.82rem', minHeight: '36px', padding: '0.4rem 0.9rem', alignSelf: 'flex-start' }}>
                     Read Guide →
                   </Link>
                 </motion.article>

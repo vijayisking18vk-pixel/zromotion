@@ -148,7 +148,7 @@ export default function PostTemplate() {
             </p>
             
             <div className="meta-editorial" style={{ marginTop: '2rem' }}>
-              READ TIME: {post.readTime} MIN • UPDATED: {post.updatedDate}
+              {post.readTime ? post.readTime.toUpperCase() : '5 MIN READ'} • UPDATED: {post.updatedDate}
             </div>
           </motion.div>
 

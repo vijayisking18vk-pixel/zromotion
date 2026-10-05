@@ -2560,3 +2560,13 @@ html.map-page,
 body.map-page {
     font-family: var(--font-body) !important;
 }
+
+/* Chicklet cluster divider */
+.chicklet-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--c-border, rgba(30, 27, 24, 0.15));
+    align-self: center;
+    flex-shrink: 0;
+    margin: 0 4px;
+}

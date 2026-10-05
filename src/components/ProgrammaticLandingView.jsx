@@ -176,6 +176,7 @@ export default function ProgrammaticLandingView({
 
   // Lateral internal link clusters
   const typologyLinks = [
+    { label: 'All Flats for Rent', slug: `flats-for-rent-in-${localitySlug}` },
     { label: '1RK Studio Rooms', slug: `1rk-for-rent-in-${localitySlug}` },
     { label: '1 BHK Flats', slug: `1bhk-flats-for-rent-in-${localitySlug}` },
     { label: '2 BHK Flats', slug: `2bhk-flats-for-rent-in-${localitySlug}` },
@@ -216,7 +217,7 @@ export default function ProgrammaticLandingView({
       />
 
       <motion.div
-        initial={{ opacity: 0, y: 8 }}
+        initial={false}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.25 }}

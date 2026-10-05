@@ -175,8 +175,8 @@ export default function Header() {
             <span>Map</span>
           </Link>
 
-          <Link
-            to="/listings"
+          <a
+            href="/listings/listings.html"
             style={{
               ...navLinkStyle({ isActive: false }),
               color: 'var(--c-ink)',
@@ -184,9 +184,9 @@ export default function Header() {
           >
             <Compass size={15} style={{ color: 'var(--c-marina-blue)' }} />
             <span>Listings</span>
-          </Link>
+          </a>
 
-          <NavLink to="/#localities" style={navLinkStyle}>
+          <NavLink to="/chennai/rentals" style={navLinkStyle}>
             <span>Localities</span>
           </NavLink>
 
@@ -344,8 +344,8 @@ export default function Header() {
               <span>Chennai Rental & Buy Map</span>
             </Link>
 
-            <Link
-              to="/listings"
+            <a
+              href="/listings/listings.html"
               style={{
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 700,
@@ -362,11 +362,11 @@ export default function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               <Compass size={17} style={{ color: 'var(--c-marina-blue)' }} />
-              <span>Browse All Listings</span>
-            </Link>
+              <span>Browse All Listings Feed</span>
+            </a>
 
             <Link
-              to="/#localities"
+              to="/chennai/rentals"
               onClick={() => setMobileMenuOpen(false)}
               style={{
                 fontFamily: 'var(--font-heading)',

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Instagram } from 'lucide-react';
 import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../config';
@@ -10,9 +11,15 @@ import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../config';
  * CTA button that pulses via Framer Motion. Respects prefers-reduced-motion.
  *
  * Desktop equivalent: a circular fixed FAB at bottom-right (shown via CSS).
+ * Automatically suppressed on map, listings, and form views to prevent blocking interactive controls.
  */
 export default function StickyMobileBar() {
   const prefersReduced = useReducedMotion();
+  const location = useLocation();
+
+  const suppressedPaths = ['/listings', '/map', '/data-deletion'];
+  const isSuppressed = suppressedPaths.some((p) => location.pathname.startsWith(p));
+  if (isSuppressed) return null;
 
   /* Pulse animation only when motion is acceptable */
   const pulseAnimation = prefersReduced

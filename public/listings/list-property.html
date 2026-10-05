@@ -221,7 +221,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 24px 0;
+      margin: 14px 0;
       user-select: none;
     }
 
@@ -230,8 +230,8 @@
       background: var(--c-card);
       border: 1px solid var(--c-sand);
       border-radius: 14px;
-      padding: 16px 18px;
-      margin-bottom: 24px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
     }
 
     .progress-header {
@@ -1082,7 +1082,7 @@
         <!-- Progress Rail with moving Auto-Rickshaw icon -->
         <div class="progress-box" aria-label="Form progress">
           <div class="progress-header">
-            <span class="progress-step-title" id="step-name-display">Step 1 of 4: Type</span>
+            <span class="progress-step-title" id="step-name-display">Step 1 of 5: Type</span>
             <span class="progress-step-count" id="step-count-display">20% completed</span>
           </div>
 
@@ -1708,16 +1708,17 @@
       whatsappNumber: ''
     };
 
+    const TOTAL_STEPS = 5;
     const STEP_NAMES = [
       "",
-      "Step 1 of 4: Type",
-      "Step 2 of 4: Location",
-      "Step 3 of 4: Details",
-      "Step 4 of 4: Photos",
-      "Step 5: Contact & Publish"
+      "Step 1 of 5: Type",
+      "Step 2 of 5: Location",
+      "Step 3 of 5: Details",
+      "Step 4 of 5: Photos",
+      "Step 5 of 5: Contact & Publish"
     ];
 
-    const PROGRESS_PERCENTS = [0, 20, 42, 65, 88, 100];
+    const PROGRESS_PERCENTS = [0, 20, 40, 60, 80, 100];
 
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {

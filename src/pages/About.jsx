@@ -73,12 +73,13 @@ export default function About() {
 
           <div className="box-notice" style={{ padding: '1.5rem 1.75rem' }}>
             <h3 style={{ fontSize: '1.3rem', color: 'var(--c-ink)', marginBottom: '0.5rem' }}>
-              The No-Listing Philosophy
+              The Anti-Broker, Direct Rental Philosophy
             </h3>
             <p style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--c-ink-muted)' }}>
-              Most property listing portals are broken. They are filled with expired photos taken five years ago, phantom broker phone numbers, 
+              Traditional property listing portals are broken: packed with expired photos, phantom broker intermediaries, 
               and robotic algorithms that do not know the difference between Dhandeeswaram Nagar and Baby Nagar. 
-              We decided not to build another spammy listing portal.
+              Chennai Rents rejects that middleman model. Instead of broker listings, we provide honest locality research 
+              and a free, direct owner rental map connecting real tenants and owners directly with zero broker fees.
             </p>
           </div>
 

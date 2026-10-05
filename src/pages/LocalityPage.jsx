@@ -116,7 +116,7 @@ function WaterScoreBadge({ score }) {
         borderRadius: '4px',
       }}
     >
-       {score}/10
+      Water: {score}/10
     </span>
   );
 }
@@ -125,9 +125,9 @@ function WaterScoreBadge({ score }) {
 function FloodBadge({ risk }) {
   const map = {
     low: { label: 'Low Risk', color: 'var(--c-temple-green)' },
-    'low-moderate': { label: 'Low–Moderate', color: 'var(--c-marina-blue)' },
-    moderate: { label: 'Moderate', color: '#F5A623' },
-    'moderate-high': { label: 'Moderate–High', color: 'var(--c-ripon-red)' },
+    'low-moderate': { label: 'Low-Moderate', color: 'var(--c-marina-blue)' },
+    moderate: { label: 'Moderate Risk', color: '#F5A623' },
+    'moderate-high': { label: 'Moderate-High Caution', color: 'var(--c-ripon-red)' },
     'high-caution': { label: 'High Caution', color: 'var(--c-ripon-red)' },
   };
   const { label, color } = map[risk] || map['moderate'];
@@ -145,7 +145,7 @@ function FloodBadge({ risk }) {
         borderRadius: '4px',
       }}
     >
-      ⚠ {label}
+      Flood: {label}
     </span>
   );
 }
@@ -264,6 +264,7 @@ function QuickFactsCard({ locality }) {
 // ─── Search Controls / Related Intent Links ───────────────────────────────────
 function RelatedIntentLinks({ locality, activeIntent }) {
   const intents = [
+    { label: `Flats for Rent in ${locality.name}`, path: `/chennai/${locality.slug}/flats-for-rent-in-${locality.slug}` },
     { label: `1 BHK in ${locality.name}`, path: `/chennai/${locality.slug}/1-bhk-for-rent` },
     { label: `2 BHK in ${locality.name}`, path: `/chennai/${locality.slug}/2-bhk-for-rent` },
     { label: `3 BHK in ${locality.name}`, path: `/chennai/${locality.slug}/3-bhk-for-rent` },
@@ -271,6 +272,11 @@ function RelatedIntentLinks({ locality, activeIntent }) {
     { label: `Furnished flats in ${locality.name}`, path: `/chennai/${locality.slug}/fully-furnished-flats-for-rent` },
     { label: `Flats under ₹20,000 in ${locality.name}`, path: `/chennai/${locality.slug}/flats-for-rent-under-20000` },
   ];
+
+  if (locality.slug === 'anna-nagar' || locality.slug === 'porur' || locality.slug === 't-nagar') {
+    intents.push({ label: `Independent House in ${locality.name}`, path: `/house-for-rent-in-${locality.slug}-chennai` });
+  }
+
   return (
     <div className="quick-jump-box" style={{ marginBottom: '2.5rem' }}>
       <h4>Filter & Search in {locality.name}</h4>
@@ -568,7 +574,7 @@ export default function LocalityPage({ localitySlug: propSlug }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }} />
 
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
+        initial={false}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.28 }}
