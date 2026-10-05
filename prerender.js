@@ -69,7 +69,26 @@ async function runPrerender() {
     process.exit(1);
   }
 
-  const baseTemplate = fs.readFileSync(templatePath, 'utf8');
+  let baseTemplate = fs.readFileSync(templatePath, 'utf8');
+
+  // Inline CSS into <style> to eliminate render-blocking stylesheet requests
+  const assetsDir = path.join(DIST_DIR, 'assets');
+  let inlinedStyles = '';
+  if (fs.existsSync(assetsDir)) {
+    const cssFiles = fs.readdirSync(assetsDir).filter((f) => f.endsWith('.css'));
+    for (const cssFile of cssFiles) {
+      const cssContent = fs.readFileSync(path.join(assetsDir, cssFile), 'utf8');
+      inlinedStyles += cssContent + '\n';
+    }
+  }
+
+  if (inlinedStyles) {
+    baseTemplate = baseTemplate.replace(
+      /<link\s+[^>]*href="\/assets\/[^"]+\.css"[^>]*\/?>/i,
+      `<style id="cr-critical-css">${inlinedStyles}</style>`
+    );
+    console.log(`📦 Successfully inlined ${inlinedStyles.length} bytes of compiled CSS (0 render-blocking stylesheets)!`);
+  }
 
   // Build the complete route list
   const routes = [];

@@ -52,9 +52,20 @@ export default function Footer() {
         aria-hidden="true"
       >
         <picture style={{ width: '100%', maxWidth: '1240px', display: 'flex', justifyContent: 'center' }}>
-          <source srcSet="/images/chennai-skyline-footer.webp" type="image/webp" />
+          <source
+            type="image/webp"
+            srcSet="/images/chennai-skyline-footer-360w.webp 360w, /images/chennai-skyline-footer-480w.webp 480w, /images/chennai-skyline-footer-768w.webp 768w, /images/chennai-skyline-footer-1024w.webp 1024w"
+            sizes="(max-width: 480px) 360px, (max-width: 768px) 768px, 1024px"
+          />
+          <source
+            type="image/png"
+            srcSet="/images/chennai-skyline-footer-360w.png 360w, /images/chennai-skyline-footer-480w.png 480w, /images/chennai-skyline-footer-768w.png 768w, /images/chennai-skyline-footer.png 1024w"
+            sizes="(max-width: 480px) 360px, (max-width: 768px) 768px, 1024px"
+          />
           <img
-            src="/images/chennai-skyline-footer.png"
+            src="/images/chennai-skyline-footer-360w.png"
+            srcSet="/images/chennai-skyline-footer-360w.png 360w, /images/chennai-skyline-footer-480w.png 480w, /images/chennai-skyline-footer-768w.png 768w, /images/chennai-skyline-footer.png 1024w"
+            sizes="(max-width: 480px) 360px, (max-width: 768px) 768px, 1024px"
             alt="Chennai Skyline"
             width="1024"
             height="686"
@@ -115,9 +126,17 @@ export default function Footer() {
                 }}
               >
                 <picture>
-                  <source srcSet="/chennai-rents-icon-transparent.webp" type="image/webp" />
+                  <source
+                    type="image/webp"
+                    srcSet="/chennai-rents-icon-transparent-112w.webp 1x, /chennai-rents-icon-transparent-224w.webp 2x"
+                  />
+                  <source
+                    type="image/png"
+                    srcSet="/chennai-rents-icon-transparent-112w.png 1x, /chennai-rents-icon-transparent-224w.png 2x"
+                  />
                   <img 
-                    src="/chennai-rents-icon-transparent.png" 
+                    src="/chennai-rents-icon-transparent-112w.png" 
+                    srcSet="/chennai-rents-icon-transparent-112w.png 1x, /chennai-rents-icon-transparent-224w.png 2x"
                     alt="Chennai Rents" 
                     width="111"
                     height="32"
