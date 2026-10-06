@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Instagram, Menu, X, MapPin, Compass, Plus, Info, LogOut } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion, useScroll, useMotionValueEvent } from 'framer-motion';
-import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../config';
+import { INSTAGRAM_URL, INSTAGRAM_HANDLE, supabase } from '../config';
 import { GoogleSignInButton } from './GoogleSignInButton';
 
 const AUTH_SESSION_KEY = 'cr_google_profile';
@@ -17,16 +17,29 @@ export function Header() {
   useEffect(() => {
     try {
       const raw = sessionStorage.getItem(AUTH_SESSION_KEY);
-      if (!raw) return;
-      const parsed = JSON.parse(raw);
-      if (parsed.expiresAt && Date.now() < parsed.expiresAt) {
-        setUser(parsed);
-      } else {
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed.expiresAt && Date.now() < parsed.expiresAt) {
+          setUser(parsed);
+          return;
+        }
         sessionStorage.removeItem(AUTH_SESSION_KEY);
       }
     } catch {
       sessionStorage.removeItem(AUTH_SESSION_KEY);
     }
+
+    supabase.auth.getSession().then(({ data }) => {
+      const sessionUser = data?.session?.user;
+      if (sessionUser) {
+        const meta = sessionUser.user_metadata || {};
+        setUser({
+          name: meta.full_name || meta.name || sessionUser.email?.split('@')[0],
+          given_name: meta.given_name || null,
+          picture: meta.avatar_url || meta.picture || null,
+        });
+      }
+    }).catch(() => {});
   }, []);
 
   const handleLoginSuccess = (userData) => {
@@ -50,6 +63,7 @@ export function Header() {
     try {
       sessionStorage.removeItem(AUTH_SESSION_KEY);
       window.google?.accounts?.id?.disableAutoSelect();
+      supabase.auth.signOut().catch(() => {});
     } catch {
       // Ignore cleanup errors
     }

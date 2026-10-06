@@ -614,3 +614,88 @@ begin
 end;
 $$;
 
+
+-- 18. Google Auth Users Table & Secure Upsert RPC
+create table if not exists public.users (
+    id uuid primary key default gen_random_uuid(),
+    auth_user_id uuid references auth.users(id) on delete set null,
+    google_id text unique not null,
+    email text unique not null,
+    name text not null,
+    given_name text,
+    picture text,
+    email_verified boolean default true not null,
+    login_count integer default 1 not null,
+    created_at timestamptz default now() not null,
+    last_login_at timestamptz default now() not null
+);
+
+create index if not exists users_google_id_idx on public.users (google_id);
+create index if not exists users_email_idx on public.users (email);
+create index if not exists users_last_login_idx on public.users (last_login_at desc);
+
+alter table public.users enable row level security;
+
+drop policy if exists "Users can view own profile" on public.users;
+create policy "Users can view own profile" on public.users
+    for select
+    using (auth.uid() = auth_user_id);
+
+create or replace function public.upsert_google_user(
+    p_google_id text,
+    p_email text,
+    p_name text,
+    p_given_name text default null,
+    p_picture text default null,
+    p_email_verified boolean default true
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+    v_user record;
+begin
+    insert into public.users (
+        auth_user_id,
+        google_id,
+        email,
+        name,
+        given_name,
+        picture,
+        email_verified,
+        login_count,
+        created_at,
+        last_login_at
+    )
+    values (
+        auth.uid(),
+        p_google_id,
+        lower(trim(p_email)),
+        coalesce(nullif(trim(p_name), ''), split_part(p_email, '@', 1)),
+        p_given_name,
+        p_picture,
+        coalesce(p_email_verified, true),
+        1,
+        now(),
+        now()
+    )
+    on conflict (google_id) do update
+    set
+        auth_user_id = coalesce(auth.uid(), public.users.auth_user_id),
+        email = excluded.email,
+        name = excluded.name,
+        given_name = coalesce(excluded.given_name, public.users.given_name),
+        picture = coalesce(excluded.picture, public.users.picture),
+        email_verified = excluded.email_verified,
+        login_count = public.users.login_count + 1,
+        last_login_at = now()
+    returning id, google_id, email, name, given_name, picture, login_count, created_at, last_login_at
+    into v_user;
+
+    return to_jsonb(v_user);
+end;
+$$;
+
+grant execute on function public.upsert_google_user(text, text, text, text, text, boolean) to anon, authenticated;
