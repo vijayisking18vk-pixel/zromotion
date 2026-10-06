@@ -1,14 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Instagram, Menu, X, MapPin, Compass, Plus, Info } from 'lucide-react';
+import { Instagram, Menu, X, MapPin, Compass, Plus, Info, LogOut } from 'lucide-react';
 import { motion, AnimatePresence, useReducedMotion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../config';
+import { GoogleSignInButton } from './GoogleSignInButton';
 
-export default function Header() {
+const AUTH_SESSION_KEY = 'cr_google_profile';
+
+export function Header() {
+  const [user, setUser] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const prefersReduced = useReducedMotion();
   const { scrollY } = useScroll();
+
+  useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem(AUTH_SESSION_KEY);
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      if (parsed.expiresAt && Date.now() < parsed.expiresAt) {
+        setUser(parsed);
+      } else {
+        sessionStorage.removeItem(AUTH_SESSION_KEY);
+      }
+    } catch {
+      sessionStorage.removeItem(AUTH_SESSION_KEY);
+    }
+  }, []);
+
+  const handleLoginSuccess = (userData) => {
+    const expiresAt = userData.exp ? userData.exp * 1000 : Date.now() + 3600 * 1000;
+    const profile = {
+      name: userData.name,
+      given_name: userData.given_name,
+      picture: userData.picture,
+      expiresAt,
+    };
+    setUser(profile);
+    try {
+      sessionStorage.setItem(AUTH_SESSION_KEY, JSON.stringify(profile));
+    } catch {
+      // Ignore storage quota errors
+    }
+  };
+
+  const handleSignOut = () => {
+    setUser(null);
+    try {
+      sessionStorage.removeItem(AUTH_SESSION_KEY);
+      window.google?.accounts?.id?.disableAutoSelect();
+    } catch {
+      // Ignore cleanup errors
+    }
+  };
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     const shouldBeScrolled = latest > 20;
@@ -235,6 +280,71 @@ export default function Header() {
             <Instagram size={15} />
             <span>Instagram</span>
           </motion.a>
+
+          {/* Google Sign-Up / Authenticated User Profile */}
+          {user ? (
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.3rem 0.65rem',
+                backgroundColor: 'var(--c-card-bg)',
+                border: '1.5px solid var(--c-border)',
+                borderRadius: '999px',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {user.picture && (
+                <img
+                  src={user.picture}
+                  alt={user.name}
+                  referrerPolicy="no-referrer"
+                  style={{
+                    width: '28px',
+                    height: '28px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    border: '1px solid var(--c-border)',
+                  }}
+                />
+              )}
+              <span
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: '0.82rem',
+                  fontWeight: 700,
+                  color: 'var(--c-ink)',
+                }}
+              >
+                Welcome, {user.given_name || user.name}
+              </span>
+              <button
+                type="button"
+                onClick={handleSignOut}
+                title="Sign out"
+                aria-label="Sign out"
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  padding: '0.2rem',
+                  cursor: 'pointer',
+                  color: 'var(--c-ink-muted)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                }}
+              >
+                <LogOut size={14} />
+              </button>
+            </div>
+          ) : (
+            <GoogleSignInButton
+              id="google-btn"
+              onLoginSuccess={(userData) => handleLoginSuccess(userData)}
+              text="signup_with"
+              size="medium"
+            />
+          )}
         </nav>
 
         {/* Mobile menu trigger */}
@@ -307,6 +417,86 @@ export default function Header() {
               boxShadow: '0 12px 28px rgba(30, 27, 24, 0.08)',
             }}
           >
+            {/* Mobile Google Auth Section */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                paddingBottom: '0.6rem',
+                marginBottom: '0.25rem',
+                borderBottom: '1px solid var(--c-border-subtle)',
+              }}
+            >
+              {user ? (
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                    padding: '0.5rem 0.75rem',
+                    backgroundColor: 'var(--c-card-bg)',
+                    border: '1.5px solid var(--c-border)',
+                    borderRadius: '8px',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                    {user.picture && (
+                      <img
+                        src={user.picture}
+                        alt={user.name}
+                        referrerPolicy="no-referrer"
+                        style={{
+                          width: '32px',
+                          height: '32px',
+                          borderRadius: '50%',
+                          objectFit: 'cover',
+                        }}
+                      />
+                    )}
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-heading)',
+                        fontSize: '0.9rem',
+                        fontWeight: 700,
+                        color: 'var(--c-ink)',
+                      }}
+                    >
+                      Welcome, {user.name}
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleSignOut}
+                    style={{
+                      background: 'transparent',
+                      border: '1px solid var(--c-border)',
+                      borderRadius: '6px',
+                      padding: '0.35rem 0.6rem',
+                      cursor: 'pointer',
+                      fontSize: '0.78rem',
+                      fontWeight: 600,
+                      color: 'var(--c-ink-muted)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}
+                  >
+                    <LogOut size={14} />
+                    <span>Sign out</span>
+                  </button>
+                </div>
+              ) : (
+                <GoogleSignInButton
+                  id="google-btn-mobile"
+                  onLoginSuccess={(userData) => handleLoginSuccess(userData)}
+                  text="signup_with"
+                  size="large"
+                />
+              )}
+            </div>
+
             <a
               href="/listings/list-property.html"
               className="btn-red"
@@ -438,3 +628,5 @@ export default function Header() {
     </header>
   );
 }
+
+export default Header;

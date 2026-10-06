@@ -9,6 +9,12 @@ export const SITE_NAME = 'Chennai Rents';
 export const SITE_TAGLINE = 'Locality-First Rental Guide';
 
 /**
+ * Google Identity Services (OAuth 2.0 Public Client ID)
+ */
+export const GOOGLE_CLIENT_ID = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GOOGLE_CLIENT_ID)
+  || '958648905879-5k4ilnqjr7l2r3a5l0l7dkebdgd41s5n.apps.googleusercontent.com';
+
+/**
  * Supabase Database Client & Configuration
  * Connected to project: hnnkhmfrpwdrkkjbgckv
  */
