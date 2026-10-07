@@ -573,7 +573,7 @@ export const TAMBARAM_PAGES = [
     targetPrimaryKeywords: ['co living in tambaram', 'coliving spaces tambaram'],
     secondaryKeywords: ['coliving space tambaram', 'fully managed rooms tambaram', 'managed stays tambaram', 'coliving near mepz'],
     metaTitle: 'Co-Living Spaces in Tambaram | Managed Modern Stays',
-    metaDescription: 'Modern co-living accommodations in Tambaram. High-speed Wi-Fi, daily housekeeping, food options, and zero brokerage hassles near GST Road.',
+    metaDescription: 'Modern co-living accommodations in Tambaram. High-speed Wi-Fi, daily housekeeping, food options, and free listing and follow up near GST Road.',
     h1: 'Co-Living Spaces in Tambaram, Chennai',
     bhk: 'Room/Studio',
     priceRange: { min: 5000, max: 17000, display: '₹5,000 - ₹17,000/bed' },

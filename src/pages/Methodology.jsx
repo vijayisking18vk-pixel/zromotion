@@ -62,7 +62,7 @@ export default function Methodology() {
             </p>
             <ul style={{ paddingLeft: '1.4rem', marginBlock: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <li><strong>Direct Tenancy Review:</strong> Quarterly anonymous survey responses from active tenants across 14 Chennai zones sharing actual signed lease amounts, maintenance charges, and advance deposits.</li>
-              <li><strong>Owner-Direct Submissions:</strong> Real listings vetted through our zero-brokerage platform where title deeds and recent utility bills confirm realistic asking prices.</li>
+              <li><strong>Owner-Direct Submissions:</strong> Real listings vetted through our platform with free listing and follow up where title deeds and recent utility bills confirm realistic asking prices.</li>
               <li><strong>Local On-Ground Checks:</strong> Direct field visits and local Resident Welfare Association (RWA) consultations in high-velocity neighbourhoods like Velachery, Porur, OMR, and Valasaravakkam.</li>
             </ul>
             <p>

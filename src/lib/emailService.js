@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Client Email Dispatch Helper for Chennai Rents
  * Communicates with /api/send-email (powered by Resend)
  */
@@ -43,9 +43,9 @@ export async function sendSeekerAlertConfirmation({ email, area, budget, minBhk 
         <p style="margin: 6px 0;"><strong>Max Budget:</strong> ₹${Number(budget).toLocaleString('en-IN')}/month</p>
         <p style="margin: 6px 0;"><strong>Preferred BHK:</strong> ${minBhk ? minBhk + ' BHK' : 'Any'}</p>
       </div>
-      <p style="font-size: 14px; color: #4A433B; line-height: 1.6;">When a direct owner posts a flat matching your criteria within 2.5km, we will notify you immediately with zero broker fees.</p>
+      <p style="font-size: 14px; color: #4A433B; line-height: 1.6;">When a direct owner posts a flat matching your criteria within 2.5km, we will notify you immediately with free listing and follow up.</p>
       <div style="margin-top: 24px; border-top: 1px solid #E8DFC8; padding-top: 12px; font-size: 12px; color: #7A7064;">
-        Chennai Rents • 100% Free Locality-First Rental Guide • No Broker Commission
+        Chennai Rents • 100% Free Locality-First Rental Guide • Free Listing &amp; Follow Up
       </div>
     </div>
   `;
@@ -70,9 +70,9 @@ export async function sendOwnerListingConfirmation({ email, area, bhk, rent, dep
         <p style="margin: 6px 0;"><strong>BHK Type:</strong> ${bhk} BHK</p>
         <p style="margin: 6px 0;"><strong>Monthly Rent:</strong> ₹${Number(rent).toLocaleString('en-IN')}</p>
         <p style="margin: 6px 0;"><strong>Security Deposit:</strong> ₹${Number(deposit).toLocaleString('en-IN')}</p>
-        <p style="margin: 6px 0;"><strong>Broker Commission:</strong> ₹0 (100% Free)</p>
+        <p style="margin: 6px 0;"><strong>Platform Service:</strong> Free listing and follow up</p>
       </div>
-      <p style="font-size: 14px; color: #4A433B; line-height: 1.6;">Prospective tenants will reach out to you directly via phone or WhatsApp. We never charge any brokerage or platform fee.</p>
+      <p style="font-size: 14px; color: #4A433B; line-height: 1.6;">Prospective tenants will reach out to you directly via phone or WhatsApp. We provide free listing and follow up.</p>
       <div style="margin-top: 24px; border-top: 1px solid #E8DFC8; padding-top: 12px; font-size: 12px; color: #7A7064;">
         Chennai Rents • 100% Free Locality-First Rental Guide
       </div>

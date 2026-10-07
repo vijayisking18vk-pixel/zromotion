@@ -357,7 +357,7 @@ export default function ChennaiHub({ bhk, pg }) {
                 {bhk
                   ? `Real rates. Verified square footage. Water reports. Across ${LOCALITIES.length} Chennai neighborhoods.`
                   : isPg
-                  ? `Clean PG rooms, food ratings, Wi-Fi speeds, and zero-brokerage stays.`
+                  ? `Clean PG rooms, food ratings, Wi-Fi speeds, with free listing and follow up.`
                   : `Real rent rates. Honest water reports. Flood history. Locality by locality.`}
               </p>
               <p style={{ fontSize: '1rem', color: 'var(--c-ink-muted)', maxWidth: '520px' }}>

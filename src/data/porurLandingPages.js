@@ -511,7 +511,7 @@ export const PORUR_PAGES = [
     targetPrimaryKeywords: ['co living in porur', 'coliving spaces porur'],
     secondaryKeywords: ['coliving space porur', 'fully managed rooms porur', 'managed co-living near dlf'],
     metaTitle: 'Co-Living Spaces in Porur | Managed Modern Stays',
-    metaDescription: 'Modern co-living accommodations in Porur. High-speed Wi-Fi, daily housekeeping, food options, and zero brokerage hassles near DLF Cybercity.',
+    metaDescription: 'Modern co-living accommodations in Porur. High-speed Wi-Fi, daily housekeeping, food options, and free listing and follow up near DLF Cybercity.',
     h1: 'Co-Living Spaces in Porur, Chennai',
     bhk: 'pg',
     priceRange: { min: 6500, max: 22000, display: '₹6,500 - ₹22,000' },

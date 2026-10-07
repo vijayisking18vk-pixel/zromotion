@@ -546,7 +546,7 @@ export const VALASARAVAKKAM_PAGES = [
     targetPrimaryKeywords: ['co living in valasaravakkam', 'coliving spaces valasaravakkam'],
     secondaryKeywords: ['coliving space valasaravakkam', 'fully managed rooms valasaravakkam', 'co living near dlf porur'],
     metaTitle: 'Co-Living Spaces in Valasaravakkam | Managed Modern Stays',
-    metaDescription: 'Modern co-living accommodations in Valasaravakkam. High-speed Wi-Fi, daily housekeeping, food options, and zero brokerage hassles.',
+    metaDescription: 'Modern co-living accommodations in Valasaravakkam. High-speed Wi-Fi, daily housekeeping, food options, and free listing and follow up.',
     h1: 'Co-Living Spaces in Valasaravakkam',
     bhk: 'coliving',
     priceRange: { min: 6500, max: 21000, display: '₹6,500 - ₹21,000' },

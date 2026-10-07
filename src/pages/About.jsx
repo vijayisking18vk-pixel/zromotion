@@ -79,7 +79,7 @@ export default function About() {
               Traditional property listing portals are broken: packed with expired photos, phantom broker intermediaries, 
               and robotic algorithms that do not know the difference between Dhandeeswaram Nagar and Baby Nagar. 
               Chennai Rents rejects that middleman model. Instead of broker listings, we provide honest locality research 
-              and a free, direct owner rental map connecting real tenants and owners directly with zero broker fees.
+              and a free, direct owner rental map connecting real tenants and owners directly with free listing and follow up.
             </p>
           </div>
 

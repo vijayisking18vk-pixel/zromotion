@@ -187,7 +187,7 @@ Local Chennai Tip:
       },
       {
         q: 'Do I have to pay brokerage if I find a home via Instagram?',
-        a: 'No! Homes posted on Chennai Rents Instagram reels are direct owner connections or zero-brokerage verified leads. There are no brokerage charges.'
+        a: 'No! Homes posted on Chennai Rents Instagram reels are direct owner connections with free listing and follow up.'
       }
     ],
 
@@ -928,7 +928,7 @@ You keep ₹1,32,000 in your bank account generating interest.`
   {
     slug: 'no-deposit-flats-chennai',
     type: 'guide',
-    title: 'Low Deposit & Zero Brokerage Flats in Chennai: What You Must Know',
+    title: 'Low Deposit & Free Listing and Follow Up Flats in Chennai: What You Must Know',
     subheading: 'Tenant Advisory: How to Access Low-Deposit Rentals Without Falling for Rental Scams',
     tagline: 'Practical legal rights, corporate lease options, co-living alternatives, and red flags when searching for low-deposit homes in Chennai.',
     badge: 'Deposit Guide',

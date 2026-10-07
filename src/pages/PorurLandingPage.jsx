@@ -253,7 +253,7 @@ export default function PorurLandingPage({ data }) {
                 padding: '0.2rem 0.6rem', 
                 borderRadius: '4px' 
               }}>
-                ✓ 0% Broker Commission
+                ✓ Free Listing &amp; Follow Up
               </span>
               <span style={{ 
                 background: '#FFFDF9', 

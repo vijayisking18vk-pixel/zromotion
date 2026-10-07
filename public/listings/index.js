@@ -2433,22 +2433,22 @@ window.shareWhatsApp = function() {
     const areaName = currentPin.area || 'Chennai';
 
     const header = isSale 
-        ? '🏡 *DIRECT OWNER PROPERTY FOR SALE - ZERO BROKERAGE*' 
+        ? '🏡 *DIRECT OWNER PROPERTY FOR SALE - FREE LISTING AND FOLLOW UP*' 
         : isRoom 
-        ? '🛏️ *FLATMATE WANTED / ROOM FOR RENT - ZERO BROKERAGE*' 
-        : '🏡 *DIRECT OWNER RENTAL - ZERO BROKERAGE*';
+        ? '🛏️ *FLATMATE WANTED / ROOM FOR RENT - FREE LISTING AND FOLLOW UP*' 
+        : '🏡 *DIRECT OWNER RENTAL - FREE LISTING AND FOLLOW UP*';
 
     const msg = `${header}
 
 📍 *Location:* ${areaName}, Chennai
 🏠 *Configuration:* ${currentPin.bhk || ''} BHK ${flatType}
 💰 *${isSale ? 'Asking Price' : 'Rent'}:* ${priceText}
-✨ *100% Broker-Free • Verified Registry*
+✨ *Free Listing & Follow Up • Verified Registry*
 
 👉 *View verified details on Chennai Rents:*
 https://www.chennairents.in/listings
 
-_Shared via chennairents.in - Chennai's Zero Broker Rental Registry_`;
+_Shared via chennairents.in - Free listing and follow up_`;
 
     const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank');
@@ -2654,7 +2654,7 @@ window.shareInstagramStory = function() {
     ctx.fillText("Spot broker inflation. Help map Chennai's rents anonymously.", 540, 1605);
     ctx.fillStyle = "#e2e8f0";
     ctx.font = "600 24px 'Inter', sans-serif";
-    ctx.fillText("Real tenant-reported data • 100% free • Zero broker fees", 540, 1655);
+    ctx.fillText("Real tenant-reported data • Free listing and follow up", 540, 1655);
 
     ctx.fillStyle = "#ff3e00";
     ctx.font = "800 46px 'Plus Jakarta Sans', sans-serif";

@@ -14,8 +14,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="color-scheme" content="light">
-  <title>List Your Property | ChennaiRents: Zero Broker Marketplace</title>
-  <meta name="description" content="List your Chennai flat, house, or room directly with tenants. 100% zero brokerage, phone verified owners, real people, real homes.">
+  <title>List Your Property | ChennaiRents: Free Listing and Follow Up</title>
+  <meta name="description" content="List your Chennai flat, house, or room directly with tenants. Free listing and follow up, phone verified owners, real people, real homes.">
   <link rel="icon" type="image/png" href="/chennai-rents-logo.png">
 
   <!-- Google Fonts: Humanist Sans (Outfit) -->
@@ -1443,7 +1443,7 @@
         <section class="intro-section">
           <div class="tamil-greeting">Vanakkam / வணக்கம்</div>
           <h1 class="page-title">List your property</h1>
-          <p class="lead-tagline">No brokers. No fees. Real people, real homes.</p>
+          <p class="lead-tagline">Free listing and follow up. Real people, real homes.</p>
           <p class="micro-time">Tell us about your place. Takes about 3 minutes.</p>
 
           <!-- Trust Badges Row -->
@@ -1544,7 +1544,7 @@
                 <option value="sale">Sell property (விற்பனை செய்ய)</option>
                 <option value="room">Room / Flatmate (அறை / தோழர்)</option>
               </select>
-              <p class="helper-text">Direct owner listings only. No broker commissions.</p>
+              <p class="helper-text">Direct owner listings only. Free listing and follow up.</p>
             </div>
 
             <!-- Property Category Sub-Dropdown -->
@@ -2039,7 +2039,7 @@
 
         <h2 class="thank-you-title">Nandri! Your listing is in review.</h2>
         <p class="thank-you-desc">
-          வணக்கம்! We have received your property details. Our editorial team reviews every listing within 2 to 4 hours to verify water scores and keep ChennaiRents 100% broker-free.
+          வணக்கம்! We have received your property details. Our editorial team reviews every listing within 2 to 4 hours to verify water scores and ensure free listing and follow up.
         </p>
 
         <!-- SHARE YOUR LISTING HUB (WhatsApp Group & Instagram Stories) -->
@@ -2048,7 +2048,7 @@
             <span class="share-hub-pill">⚡ FAST-TRACK LEADS</span>
             <h3 class="share-hub-title">Share Your Listing</h3>
             <p class="share-hub-subtitle">
-              Get direct tenants faster without broker spam. Broadcast to Chennai flatmate &amp; housing WhatsApp groups or post a custom Instagram Story card.
+              Get direct tenants faster with free listing and follow up. Broadcast to Chennai flatmate &amp; housing WhatsApp groups or post a custom Instagram Story card.
             </p>
           </div>
 
@@ -3014,10 +3014,10 @@
       const isRoom = formState.listingType === 'room';
       
       const header = isSale 
-        ? '🏡 *DIRECT OWNER PROPERTY FOR SALE - ZERO BROKERAGE*' 
+        ? '🏡 *DIRECT OWNER PROPERTY FOR SALE - FREE LISTING AND FOLLOW UP*' 
         : isRoom 
-        ? '🛏️ *FLATMATE WANTED / ROOM FOR RENT - ZERO BROKERAGE*' 
-        : '🏡 *DIRECT OWNER RENTAL LISTING - ZERO BROKERAGE*';
+        ? '🛏️ *FLATMATE WANTED / ROOM FOR RENT - FREE LISTING AND FOLLOW UP*' 
+        : '🏡 *DIRECT OWNER RENTAL LISTING - FREE LISTING AND FOLLOW UP*';
 
       const typeDesc = isSale 
         ? `${formState.bhk} ${formState.propertyCategory || 'Property'}` 
@@ -3053,12 +3053,12 @@ ${locationLine}
 🏠 *Configuration:* ${typeDesc}
 💵 *${priceLabel}:* ${priceVal}${depositLine}
 ${detailsText}${photosNote}
-✨ *100% Zero Brokerage • Direct Owner Verification*
+✨ *Free Listing & Follow Up • Direct Owner Verification*
 👉 *View details on Chennai Rents:*
 https://www.chennairents.in/listings
 
 📞 *Contact Owner Directly:* ${formState.name || 'Owner'} (+91 ${formState.phone})
-_Shared via chennairents.in - Chennai's Zero Broker Rental Registry_`;
+_Shared via chennairents.in - Free listing and follow up_`;
 
       return msg;
     }
@@ -3223,7 +3223,7 @@ _Shared via chennairents.in - Chennai's Zero Broker Rental Registry_`;
 
       ctx.fillStyle = '#D9A21B';
       ctx.font = "700 22px 'Outfit', sans-serif";
-      ctx.fillText('ZERO BROKERAGE • DIRECT OWNER REGISTRY', 540, 222);
+      ctx.fillText('FREE LISTING & FOLLOW UP • DIRECT OWNER REGISTRY', 540, 222);
 
       ctx.strokeStyle = 'rgba(217, 162, 27, 0.4)';
       ctx.lineWidth = 2;
@@ -3298,7 +3298,7 @@ _Shared via chennairents.in - Chennai's Zero Broker Rental Registry_`;
 
       ctx.fillStyle = '#D9A21B';
       ctx.font = "700 26px 'Outfit', sans-serif";
-      ctx.fillText(isSale ? 'Total Asking Price' : '/ month (Zero Broker Fee)', 540, currentY);
+      ctx.fillText(isSale ? 'Total Asking Price' : '/ month (Free Listing & Follow Up)', 540, currentY);
       currentY += 70;
 
       // Locality
@@ -3395,7 +3395,7 @@ _Shared via chennairents.in - Chennai's Zero Broker Rental Registry_`;
             await navigator.share({
               files: [file],
               title: `Chennai Rents: ${formState.bhk} in ${formState.area || 'Chennai'}`,
-              text: `Direct owner listing on chennairents.in (Zero Brokerage)`,
+              text: `Direct owner listing on chennairents.in (Free listing and follow up)`,
               url: 'https://www.chennairents.in/listings'
             });
             return;

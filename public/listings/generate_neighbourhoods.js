@@ -1,4 +1,4 @@
-﻿const fs = require('fs');
+const fs = require('fs');
 const path = require('path');
 
 const LOCALITIES = {
@@ -7,7 +7,7 @@ const LOCALITIES = {
     center: [12.9229, 80.2312],
     db_name: "OMR",
     title: "Rented House in OMR Chennai: Average Rent & Tenant Reports | chennairents.in",
-    meta_desc: "Explore real tenant rent reports, average prices, and historical trends for OMR (Old Mahabalipuram Road) Chennai. Find broker-free rented houses directly from owners.",
+    meta_desc: "Explore real tenant rent reports, average prices, and historical trends for OMR (Old Mahabalipuram Road) Chennai. Find rented houses directly from owners with free listing and follow up.",
     desc: "OMR (Old Mahabalipuram Road) is Chennai's primary IT corridor, stretching from Madhya Kailash down to Siruseri. It hosts major technology parks like TIDEL Park, and attracts a massive population of working professionals and students. Over the last decade, rent prices along OMR have experienced double-digit yearly inflation, heavily driven by broker cartels. Real tenant records gathered here cut through inflated agency listings to reveal actual base rents paid across major high-rises in Sholinganallur, Perungudi, and Karapakkam.",
     faqs: [
       {
@@ -19,8 +19,8 @@ const LOCALITIES = {
         a: "Landlords along the IT corridor traditionally request a 10-month rental advance. However, with the transparency provided by OMR rent indexes, many tenants negotiate this down to 5-6 months."
       },
       {
-        q: "Is it possible to find a rented house in OMR without broker fees?",
-        a: "Yes. By using the crowdsourced map on chennairents.in, you can connect directly with owners listing their flats, skipping the standard 1-month brokerage fee commonly charged by local agents."
+        q: "Is it possible to find a rented house in OMR with free listing and follow up?",
+        a: "Yes. By using the crowdsourced map on chennairents.in, you can connect directly with owners listing their flats with free listing and follow up."
       }
     ]
   },
@@ -29,7 +29,7 @@ const LOCALITIES = {
     center: [13.0850, 80.2101],
     db_name: "Anna Nagar",
     title: "Rented House in Anna Nagar Chennai: Average Rent & Tenant Reports | chennairents.in",
-    meta_desc: "Check crowdsourced rents, average prices, and tenant reviews for flats and houses in Anna Nagar, Chennai. Access broker-free rentals directly from owners.",
+    meta_desc: "Check crowdsourced rents, average prices, and tenant reviews for flats and houses in Anna Nagar, Chennai. Access rentals directly from owners with free listing and follow up.",
     desc: "Anna Nagar is a premium, well-planned residential layout in North-Western Chennai. Renowned for its grid-patterned layout, wide tree-lined avenues, elite schools, upscale restaurants, and the iconic Anna Tower Park. Rents in Anna Nagar command a premium due to high demand from families wanting access to top-tier schools and shopping. Standalone bungalows and luxury gated properties are common, making broker-free transparency highly crucial for tenants navigating this residential market.",
     faqs: [
       {
@@ -73,7 +73,7 @@ const LOCALITIES = {
     center: [13.0418, 80.2341],
     db_name: "T. Nagar",
     title: "Rented House in T. Nagar Chennai: Average Rent & Tenant Reports | chennairents.in",
-    meta_desc: "Find average rents, tenant reviews, and broker-free house listings in T. Nagar (Thyagaraya Nagar) Chennai. Check crowdsourced rental metrics.",
+    meta_desc: "Find average rents, tenant reviews, and house listings with free listing and follow up in T. Nagar (Thyagaraya Nagar) Chennai. Check crowdsourced rental metrics.",
     desc: "Thyagaraya Nagar (T. Nagar) is the retail and shopping heart of Chennai, famous for saree shops and jewelry stores. It is also a highly dense, central residential zone with traditional independent houses and modern low-rise apartments. Rents here are steep due to central city location and commercial proximity. Finding broker-free homes in T. Nagar is notoriously difficult due to agency dominance, making the crowdsourced registry highly valuable.",
     faqs: [
       {
@@ -81,8 +81,8 @@ const LOCALITIES = {
         a: "Central location and commercial density command high rent in T. Nagar. A 2BHK apartment ranges from ₹20,000 to ₹30,000, while older independent houses may cost between ₹18,000 and ₹25,000."
       },
       {
-        q: "How do I find a broker-free house in T. Nagar?",
-        a: "Finding broker-free flats in T. Nagar is difficult due to local broker monopolies. Utilizing the crowdsourced map on chennairents.in allows you to identify owner-listed pins directly."
+        q: "How do I find a house with free listing and follow up in T. Nagar?",
+        a: "Utilizing the crowdsourced map on chennairents.in allows you to identify owner-listed pins directly with free listing and follow up."
       }
     ]
   },
@@ -91,7 +91,7 @@ const LOCALITIES = {
     center: [13.0012, 80.2565],
     db_name: "Adyar",
     title: "Rented House in Adyar Chennai: Average Rent & Tenant Reports | chennairents.in",
-    meta_desc: "View real rents, average prices, and tenant reviews for apartments in Adyar Chennai. Find broker-free owner rentals directly.",
+    meta_desc: "View real rents, average prices, and tenant reviews for apartments in Adyar Chennai. Find owner rentals directly with free listing and follow up.",
     desc: "Adyar is an upscale, historic neighbourhood in South Chennai, bordered by the Adyar River. It features quiet residential lanes, premium institutes like IIT Madras, and proximity to Elliott's Beach in Besant Nagar. Adyar is known for high deposits (often the traditional 10-month advance) and long tenancy periods. Tenant inputs on this platform reveal negotiated rates that bypass inflated real estate listing platforms.",
     faqs: [
       {
@@ -109,7 +109,7 @@ const LOCALITIES = {
     center: [12.9262, 80.1289],
     db_name: "Tambaram",
     title: "Rented House in Tambaram Chennai: Average Rent & Tenant Reports | chennairents.in",
-    meta_desc: "Explore affordable rent indices and tenant reports for flats in Tambaram Chennai. Find direct owner rentals without brokers.",
+    meta_desc: "Explore affordable rent indices and tenant reports for flats in Tambaram Chennai. Find direct owner rentals with free listing and follow up.",
     desc: "Tambaram is a prominent residential and commercial gateway in South-Western Chennai. Famously known for its historic railway station and the Madras Christian College (MCC), it serves as a massive transport node. Over the last few years, Tambaram has seen rapid residential development, offering affordable to mid-range flats. Real tenant entries help separate true rental value from speculative broker pricing near transit lines.",
     faqs: [
       {
@@ -163,7 +163,7 @@ const LOCALITIES = {
     center: [13.0406, 80.1569],
     db_name: "Porur",
     title: "Rented House in Porur Chennai: Average Rent & Tenant Reports | chennairents.in",
-    meta_desc: "Find average rents, student housing trends, and broker-free flats in Porur Chennai. Access real crowdsourced rent data.",
+    meta_desc: "Find average rents, student housing trends, and flats with free listing and follow up in Porur Chennai. Access real crowdsourced rent data.",
     desc: "Porur is a major manufacturing and IT hub in Western Chennai, hosting DLF IT Park and Ramachandra Medical College. Rents have surged due to massive influxes of medical students and tech workforce. Crowdsourced averages help check realistic advances and rents near Mount-Poonamallee Road.",
     faqs: [
       {
@@ -181,7 +181,7 @@ const LOCALITIES = {
     center: [12.9146, 80.1924],
     db_name: "Medavakkam",
     title: "Rented House in Medavakkam Chennai: Average Rent & Tenant Reports | chennairents.in",
-    meta_desc: "Check budget-friendly rent indexes and direct listings in Medavakkam Chennai. Connect directly with owners with zero broker fees.",
+    meta_desc: "Check budget-friendly rent indexes and direct listings in Medavakkam Chennai. Connect directly with owners with free listing and follow up.",
     desc: "Medavakkam is a fast-growing residential suburb situated close to OMR and Velachery. Known for offering relatively budget-friendly housing options compared to its upscale neighbours, it is a preferred choice for young families and IT professionals. The crowdsourced map helps monitor sub-market averages.",
     faqs: [
       {
@@ -213,7 +213,7 @@ const template = `<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>#TITLE#</title>
     <meta name="description" content="#META_DESC#" />
-    <meta name="keywords" content="rented house in #NAME#, rent in #NAME#, flat for rent #NAME#, chennai rent map, chennai rents, no broker chennai, rent transparency" />
+    <meta name="keywords" content="rented house in #NAME#, rent in #NAME#, flat for rent #NAME#, chennai rent map, chennai rents, free listing chennai, rent transparency" />
     <link rel="canonical" href="https://www.chennairents.in/neighbourhood/#KEY#.html" />
     <link rel="stylesheet" href="/index.css">
     

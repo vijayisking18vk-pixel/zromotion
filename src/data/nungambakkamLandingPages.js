@@ -577,7 +577,7 @@ export const NUNGAMBAKKAM_PAGES = [
     keyAdvantages: [
       { title: 'Turnkey Luxury Living', desc: 'Designer air-conditioned suites with orthopaedic beds, ergonomic work desks, and wardrobes.' },
       { title: 'All-inclusive Monthly Fee', desc: 'Rent covers 300+ Mbps Wi-Fi, power, water, daily housekeeping, and lounge access.' },
-      { title: 'Flexible Lease Terms', desc: 'Low 1 to 2 months deposit with month-to-month flexibility and no brokerage.' }
+      { title: 'Flexible Lease Terms', desc: 'Low 1 to 2 months deposit with month-to-month flexibility, free listing and follow up.' }
     ],
     primeNeighborhoods: 'Near Sterling Road, KNK Road periphery, College Road, and Mahalingapuram.',
     financials: [

@@ -785,7 +785,7 @@ export default function LocalityPage({ localitySlug: propSlug }) {
                   </a>
                   <a href="/listings/list-property.html" className="btn-red" style={{ textDecoration: 'none' }}>
                     <Plus size={16} />
-                    <span>List Property (0% Brokerage)</span>
+                    <span>List Property (Free Listing &amp; Follow Up)</span>
                   </a>
                 </div>
               </div>

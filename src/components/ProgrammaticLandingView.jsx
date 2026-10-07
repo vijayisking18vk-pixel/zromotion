@@ -262,7 +262,7 @@ export default function ProgrammaticLandingView({
                 padding: '0.2rem 0.6rem', 
                 borderRadius: '4px' 
               }}>
-                ✓ 0% Broker Commission
+                ✓ Free Listing &amp; Follow Up
               </span>
               {geo?.pincode && (
                 <span style={{ 

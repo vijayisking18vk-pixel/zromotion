@@ -58,7 +58,7 @@ export default function Home() {
     >
       <SEOHead
         title="Chennai Rents: Locality-First Rental Guide for Chennai"
-        description="Explore real rent rates, water reality, flood history, crowdsourced rental map, and verified direct owner listings in Chennai. Honest locality guides with zero broker fees."
+        description="Explore real rent rates, water reality, flood history, crowdsourced rental map, and verified direct owner listings in Chennai. Honest locality guides with free listing and follow up."
         canonical="https://www.chennairents.in/"
       />
 
@@ -78,7 +78,7 @@ export default function Home() {
               The honest, crowdsourced guide to renting a home in Chennai locality by locality.
             </p>
             <p style={{ fontSize: '1rem', color: 'var(--c-ink-muted)', marginBottom: '1.75rem', maxWidth: '540px', lineHeight: 1.65 }}>
-              Renting in Chennai made transparent. Real rent rates, tap-water scores, flood history, and verified owner connections curated across every Chennai locality with zero broker commissions.
+              Renting in Chennai made transparent. Real rent rates, tap-water scores, flood history, and verified owner connections curated across every Chennai locality with free listing and follow up.
             </p>
 
             {/* Hero Action Buttons — full-width on mobile, inline on desktop */}
@@ -93,7 +93,7 @@ export default function Home() {
               </Link>
               <a href="/listings/list-property.html" className="btn-red hero-btn">
                 <Plus size={17} strokeWidth={2.5} style={{ flexShrink: 0 }} />
-                <span>List Property (0% Broker)</span>
+                <span>List Property (Free Listing &amp; Follow Up)</span>
               </a>
             </div>
           </motion.div>
@@ -121,13 +121,13 @@ export default function Home() {
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '2.75rem' }}>
             <span className="tag-eyebrow" style={{ display: 'inline-flex', marginBottom: '0.4rem' }}>
-              <span className="tag-bullet" /> ZERO BROKER RENTALS &amp; SALES
+              <span className="tag-bullet" /> FREE LISTING &amp; FOLLOW UP
             </span>
             <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, margin: '0 0 0.5rem 0' }}>
               Direct Connection Between Tenants &amp; Property Owners
             </h2>
             <p style={{ color: 'var(--c-ink-muted)', fontSize: '1.05rem', maxWidth: '620px', margin: '0 auto', lineHeight: 1.6 }}>
-              Whether you are hunting for an honest rental or listing a vacant flat in Chennai, connect directly with complete transparency and zero middleman fees.
+              Whether you are hunting for an honest rental or listing a vacant flat in Chennai, connect directly with complete transparency, free listing and follow up.
             </p>
           </div>
 
@@ -258,7 +258,7 @@ export default function Home() {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <CheckCircle2 size={16} style={{ color: 'var(--c-temple-green)', flexShrink: 0 }} />
-                    <span><strong>Zero Broker Commission</strong> on lease or sale</span>
+                    <span><strong>Free Listing &amp; Follow Up</strong> on lease or sale</span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <CheckCircle2 size={16} style={{ color: 'var(--c-temple-green)', flexShrink: 0 }} />
@@ -582,7 +582,7 @@ export default function Home() {
               Direct Rentals Across Chennai
             </h2>
             <p style={{ color: 'var(--c-ink-muted)', fontSize: '1rem', maxWidth: '620px', margin: '0 auto', lineHeight: 1.6 }}>
-              Real Chennai tenants and homeowners connecting directly without broker markups or non-refundable commission fees.
+              Real Chennai tenants and homeowners connecting directly with free listing and follow up.
             </p>
           </div>
 
@@ -593,7 +593,7 @@ export default function Home() {
                   TENANT EXPERIENCE • PORUR
                 </span>
                 <p style={{ fontSize: '0.96rem', color: 'var(--c-ink)', lineHeight: 1.7, fontStyle: 'italic', marginBottom: '1.25rem' }}>
-                  "Finding an honest 2 BHK near DLF IT Park without paying ₹25,000 in broker fees seemed impossible until we checked direct owner listings here. We connected with the landlord directly, verified the lease terms, and moved in within a week."
+                  "Finding an honest 2 BHK near DLF IT Park without paying extra fees seemed impossible until we checked direct owner listings here. We connected with the landlord directly, verified the lease terms, and moved in within a week."
                 </p>
               </div>
               <div style={{ borderTop: '1px solid var(--c-border)', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -601,7 +601,7 @@ export default function Home() {
                   <div style={{ fontWeight: 800, fontSize: '0.92rem', color: 'var(--c-ink)' }}>Karthik Subramanian</div>
                   <div style={{ fontSize: '0.8rem', color: 'var(--c-ink-muted)' }}>IT Professional, DLF Cybercity</div>
                 </div>
-                <span className="stamp-badge stamp-green" style={{ fontSize: '0.68rem' }}>0% Brokerage</span>
+                <span className="stamp-badge stamp-green" style={{ fontSize: '0.68rem' }}>Free Listing &amp; Follow Up</span>
               </div>
             </div>
 

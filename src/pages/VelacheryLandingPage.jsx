@@ -261,7 +261,7 @@ export default function VelacheryLandingPage({ data }) {
                 padding: '0.2rem 0.6rem', 
                 borderRadius: '4px' 
               }}>
-                ✓ 0% Broker Commission
+                ✓ Free Listing &amp; Follow Up
               </span>
               <span style={{ 
                 background: '#FFFDF9', 
@@ -810,13 +810,13 @@ export default function VelacheryLandingPage({ data }) {
                 letterSpacing: '0.04em',
                 textTransform: 'uppercase'
               }}>
-                Zero Middlemen • Zero Brokerage Fees
+                Direct Owner Connection • Free Listing &amp; Follow Up
               </span>
               <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--c-ink)', marginTop: '0.75rem', marginBottom: '0.5rem' }}>
                 Browse Verified Direct Owner Homes in Velachery
               </h3>
               <p style={{ color: 'var(--c-ink-muted)', maxWidth: '620px', margin: '0 auto 1.5rem auto', lineHeight: 1.6, fontSize: '0.98rem' }}>
-                Connect directly with property owners without paying any 1-month brokerage fee. View geo-tagged floor plans, street elevations, and direct owner WhatsApp contacts.
+                Connect directly with property owners with free listing and follow up. View geo-tagged floor plans, street elevations, and direct owner WhatsApp contacts.
               </p>
               <div style={{ display: 'flex', gap: '0.85rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                 <a 

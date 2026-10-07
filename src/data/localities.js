@@ -64,7 +64,7 @@ export const LOCALITIES = [
     ],
     seo: {
       title: 'Flats for Rent in Velachery, Chennai | Chennai Rents',
-      description: 'Find flats and apartments for rent in Velachery, Chennai. Real rent rates, water reports, flood history. 1, 2, 3 BHK listings. No brokerage.',
+      description: 'Find flats and apartments for rent in Velachery, Chennai. Real rent rates, water reports, flood history. 1, 2, 3 BHK listings. Free listing and follow up.',
       h1: 'Flats for Rent in Velachery, Chennai',
     },
   },
@@ -101,7 +101,7 @@ export const LOCALITIES = [
     relatedGuides: [{ slug: 'advance-deposit-chennai', title: 'Advance Deposit Norms' }],
     seo: {
       title: 'Flats for Rent in Taramani, Chennai | Chennai Rents',
-      description: 'Find 1, 2, 3 BHK flats, PG, and apartments for rent in Taramani, Chennai near Tidel Park and Ascendas. Real rent rates, no brokerage.',
+      description: 'Find 1, 2, 3 BHK flats, PG, and apartments for rent in Taramani, Chennai near Tidel Park and Ascendas. Real rent rates, free listing and follow up.',
       h1: 'Flats for Rent in Taramani, Chennai',
     },
   },
@@ -137,7 +137,7 @@ export const LOCALITIES = [
     relatedGuides: [{ slug: 'advance-deposit-chennai', title: 'Advance Deposit Norms' }],
     seo: {
       title: 'Flats for Rent in Sholinganallur, Chennai | Chennai Rents',
-      description: 'Find 1, 2, 3 BHK flats for rent in Sholinganallur, Chennai near OMR IT parks. Real rent rates, no brokerage.',
+      description: 'Find 1, 2, 3 BHK flats for rent in Sholinganallur, Chennai near OMR IT parks. Real rent rates, free listing and follow up.',
       h1: 'Flats for Rent in Sholinganallur, Chennai',
     },
   },
@@ -173,7 +173,7 @@ export const LOCALITIES = [
     relatedGuides: [{ slug: 'advance-deposit-chennai', title: 'Advance Deposit Norms' }],
     seo: {
       title: 'Flats for Rent in Thoraipakkam, Chennai | Chennai Rents',
-      description: 'Find flats for rent in Thoraipakkam, Chennai. 1, 2, 3 BHK apartments near OMR IT corridor. Real rent rates, no brokerage.',
+      description: 'Find flats for rent in Thoraipakkam, Chennai. 1, 2, 3 BHK apartments near OMR IT corridor. Real rent rates, free listing and follow up.',
       h1: 'Flats for Rent in Thoraipakkam, Chennai',
     },
   },
@@ -295,7 +295,7 @@ export const LOCALITIES = [
     ],
     seo: {
       title: 'Flats for Rent in T. Nagar, Chennai | Chennai Rents',
-      description: 'Find flats for rent in T. Nagar, Chennai. 1, 2, 3 BHK apartments near Metro. Real rent rates, no brokerage.',
+      description: 'Find flats for rent in T. Nagar, Chennai. 1, 2, 3 BHK apartments near Metro. Real rent rates, free listing and follow up.',
       h1: 'Flats for Rent in T. Nagar, Chennai',
     },
   },
@@ -375,7 +375,7 @@ export const LOCALITIES = [
     ],
     seo: {
       title: 'Flats for Rent in Valasaravakkam, Chennai | Chennai Rents',
-      description: 'Find flats for rent in Valasaravakkam, Chennai. 1, 2, 3 BHK listings near Porur IT corridor. Real rent rates, water reports, no brokerage.',
+      description: 'Find flats for rent in Valasaravakkam, Chennai. 1, 2, 3 BHK listings near Porur IT corridor. Real rent rates, water reports, free listing and follow up.',
       h1: 'Flats for Rent in Valasaravakkam, Chennai',
     },
   },
@@ -414,7 +414,7 @@ export const LOCALITIES = [
     relatedGuides: [{ slug: 'advance-deposit-chennai', title: 'Advance Deposit Norms' }],
     seo: {
       title: 'Flats for Rent in Porur, Chennai | Chennai Rents',
-      description: 'Find flats for rent in Porur, Chennai near DLF Cybercity. 1, 2, 3 BHK apartments. Real rent rates, no brokerage.',
+      description: 'Find flats for rent in Porur, Chennai near DLF Cybercity. 1, 2, 3 BHK apartments. Real rent rates, free listing and follow up.',
       h1: 'Flats for Rent in Porur, Chennai',
     },
   },
@@ -450,7 +450,7 @@ export const LOCALITIES = [
     relatedGuides: [{ slug: 'advance-deposit-chennai', title: 'Advance Deposit Norms' }],
     seo: {
       title: 'Flats for Rent in Medavakkam, Chennai | Chennai Rents',
-      description: 'Find affordable 1, 2, 3 BHK flats for rent in Medavakkam, Chennai. Real rent rates, water reports, and no brokerage listings.',
+      description: 'Find affordable 1, 2, 3 BHK flats for rent in Medavakkam, Chennai. Real rent rates, water reports, with free listing and follow up.',
       h1: 'Flats for Rent in Medavakkam, Chennai',
     },
   },
@@ -488,7 +488,7 @@ export const LOCALITIES = [
     relatedGuides: [{ slug: 'advance-deposit-chennai', title: 'Advance Deposit Norms' }],
     seo: {
       title: 'Flats for Rent in Anna Nagar, Chennai | Chennai Rents',
-      description: 'Find flats and apartments for rent in Anna Nagar, Chennai. Real rent rates, water reports, flood history. 1, 2, 3 BHK listings. No brokerage.',
+      description: 'Find flats and apartments for rent in Anna Nagar, Chennai. Real rent rates, water reports, flood history. 1, 2, 3 BHK listings. Free listing and follow up.',
       h1: 'Flats for Rent in Anna Nagar, Chennai',
     },
   },
@@ -528,7 +528,7 @@ export const LOCALITIES = [
     relatedGuides: [{ slug: 'cost-of-living-chennai-2026', title: 'Cost of Living in Chennai' }],
     seo: {
       title: 'Flats for Rent in OMR, Chennai | Chennai Rents',
-      description: 'Find flats and apartments for rent in OMR (Old Mahabalipuram Road), Chennai. Real rent rates, water reports, flood history. 1, 2, 3 BHK listings. No brokerage.',
+      description: 'Find flats and apartments for rent in OMR (Old Mahabalipuram Road), Chennai. Real rent rates, water reports, flood history. 1, 2, 3 BHK listings. Free listing and follow up.',
       h1: 'Flats for Rent in OMR, Chennai',
     },
   },
@@ -566,7 +566,7 @@ export const LOCALITIES = [
     relatedGuides: [{ slug: 'advance-deposit-chennai', title: 'Advance Deposit Norms' }],
     seo: {
       title: 'Flats for Rent in Tambaram, Chennai | Chennai Rents',
-      description: 'Find flats and apartments for rent in Tambaram, Chennai. Real rent rates, water reports, flood history. 1, 2, 3 BHK listings. No brokerage.',
+      description: 'Find flats and apartments for rent in Tambaram, Chennai. Real rent rates, water reports, flood history. 1, 2, 3 BHK listings. Free listing and follow up.',
       h1: 'Flats for Rent in Tambaram, Chennai',
     },
   },
@@ -603,7 +603,7 @@ export const LOCALITIES = [
     relatedGuides: [{ slug: 'tenant-rules-chennai', title: 'Tenant Rights in Chennai' }],
     seo: {
       title: 'Flats for Rent in Chromepet, Chennai | Chennai Rents',
-      description: 'Find flats and apartments for rent in Chromepet, Chennai. Real rent rates, water reports, flood history. 1, 2, 3 BHK listings. No brokerage.',
+      description: 'Find flats and apartments for rent in Chromepet, Chennai. Real rent rates, water reports, flood history. 1, 2, 3 BHK listings. Free listing and follow up.',
       h1: 'Flats for Rent in Chromepet, Chennai',
     },
   },
@@ -641,7 +641,7 @@ export const LOCALITIES = [
     relatedGuides: [{ slug: 'best-chennai-areas', title: 'Best Chennai Areas' }],
     seo: {
       title: 'Flats for Rent in Thiruvanmiyur, Chennai | Chennai Rents',
-      description: 'Find flats and apartments for rent in Thiruvanmiyur, Chennai. Real rent rates, water reports, flood history. 1, 2, 3 BHK listings. No brokerage.',
+      description: 'Find flats and apartments for rent in Thiruvanmiyur, Chennai. Real rent rates, water reports, flood history. 1, 2, 3 BHK listings. Free listing and follow up.',
       h1: 'Flats for Rent in Thiruvanmiyur, Chennai',
     },
   },
@@ -691,7 +691,7 @@ export function generateSEOMeta({ locality, intent, bhk, propertyType, furnishin
   return {
     h1,
     title: `${h1} | Chennai Rents`,
-    description: `Find ${bhkStr.toLowerCase().trim()} ${furnStr.toLowerCase().trim()} ${propStr.toLowerCase()} for rent in ${locationStr}${budgetStr}. Real rent rates, water reports, flood check, owner contact. No brokerage.`.replace(/\s+/g, ' ').trim(),
+    description: `Find ${bhkStr.toLowerCase().trim()} ${furnStr.toLowerCase().trim()} ${propStr.toLowerCase()} for rent in ${locationStr}${budgetStr}. Real rent rates, water reports, flood check, owner contact. Free listing and follow up.`.replace(/\s+/g, ' ').trim(),
   };
 }
 

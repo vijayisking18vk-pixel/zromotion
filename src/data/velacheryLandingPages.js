@@ -478,7 +478,7 @@ export const VELACHERY_PAGES = [
       },
       {
         q: 'Can bachelors rent standalone builder apartments without brokers?',
-        a: 'Yes, our platform connects tenants directly with owners who have registered zero-broker bachelor vacancies.'
+        a: 'Yes, our platform connects tenants directly with owners who have registered vacancies with free listing and follow up.'
       },
       {
         q: 'What documents do bachelors need to rent in Velachery?',

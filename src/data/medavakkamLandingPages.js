@@ -495,8 +495,8 @@ export const MEDAVAKKAM_PAGES = [
         a: 'Yes, properties are within 10 to 15 minutes of ELCOT SEZ Sholinganallur, Siruseri SIPCOT, and Velachery.'
       },
       {
-        q: 'Can bachelors rent without broker fees in Medavakkam?',
-        a: 'Yes, Chennai Rents connects tenants directly with verified homeowners with zero brokerage charges.'
+        q: 'Can bachelors rent with free listing and follow up in Medavakkam?',
+        a: 'Yes, Chennai Rents connects tenants directly with verified homeowners with free listing and follow up.'
       },
       {
         q: 'Is power separate for bachelor flats in Medavakkam?',
@@ -568,7 +568,7 @@ export const MEDAVAKKAM_PAGES = [
     targetPrimaryKeywords: ['co living in medavakkam', 'coliving spaces medavakkam'],
     secondaryKeywords: ['coliving space medavakkam', 'fully managed rooms medavakkam', 'executive stays medavakkam'],
     metaTitle: 'Co-Living Spaces in Medavakkam | Managed Modern Stays',
-    metaDescription: 'Modern co-living accommodations in Medavakkam. High-speed Wi-Fi, daily housekeeping, food options, and zero brokerage hassles near OMR.',
+    metaDescription: 'Modern co-living accommodations in Medavakkam. High-speed Wi-Fi, daily housekeeping, food options, and free listing and follow up near OMR.',
     h1: 'Co-Living Spaces in Medavakkam, Chennai',
     bhk: 'coliving',
     priceRange: { min: 5500, max: 18000, display: '₹5,500 - ₹18,000' },

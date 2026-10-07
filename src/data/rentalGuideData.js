@@ -23,7 +23,7 @@ export const CHENNAI_RENT_HUB_DATA = {
   h1: 'Houses for Rent in Chennai: Find by BHK, Budget and Locality',
   targetKeyword: 'house for rents in Chennai',
   naturalKeywords: ['houses for rent in Chennai', 'house for rent in Chennai', 'rental homes in Chennai'],
-  metaDescription: 'Find houses for rent in Chennai. Practical guide covering 1-3 BHK flats, independent houses, budgets from ₹5,000 to ₹30,000+, water checks, and no-broker owner listings.',
+  metaDescription: 'Find houses for rent in Chennai. Practical guide covering 1-3 BHK flats, independent houses, budgets from ₹5,000 to ₹30,000+, water checks, and free listing and follow up owner listings.',
   canonicalUrl: 'https://www.chennairents.in/house-for-rent-in-chennai',
   lastReviewed: 'October 2026',
   editor: AUTHOR_INFO,
@@ -251,7 +251,7 @@ export const SUPPORTING_RENTAL_PAGES = [
     title: 'House for Rent in Chennai Without Brokers: 100% Direct Owner Homes | Chennai Rents',
     h1: 'House for Rent in Chennai Without Brokers',
     description: 'Skip real estate agent commissions. How to connect directly with genuine Chennai home owners, verify documents, and negotiate rental advances safely.',
-    priceRange: 'All budgets (Zero Brokerage)',
+    priceRange: 'All budgets (Free Listing & Follow Up)',
     recommendedLocalities: ['velachery', 'adyar', 'porur', 't-nagar', 'sholinganallur', 'valasaravakkam'],
   },
   {
