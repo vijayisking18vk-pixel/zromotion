@@ -228,6 +228,7 @@ export function Header() {
             style={{
               ...navLinkStyle({ isActive: false }),
               color: 'var(--c-ink)',
+              textDecoration: 'none',
             }}
           >
             <MapPin size={15} style={{ color: 'var(--c-ripon-red)' }} />
@@ -248,16 +249,16 @@ export function Header() {
           <NavLink to="/chennai/rentals" style={navLinkStyle}>
             <span>Localities</span>
           </NavLink>
-
           <NavLink to="/about" style={navLinkStyle}>
+            <Info size={15} style={{ color: 'var(--c-ink-muted)' }} />
             <span>About</span>
           </NavLink>
 
           {/* List Property CTA Button */}
           <a
             href="/listings/list-property.html"
-            className="btn-red"
             style={{
+              ...navLinkStyle({ isActive: false }),
               padding: '0.45rem 1rem',
               fontSize: '0.85rem',
               minHeight: '38px',
@@ -266,6 +267,10 @@ export function Header() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
+              backgroundColor: 'var(--c-ripon-red)',
+              color: '#fff',
+              textDecoration: 'none',
+              fontWeight: 700,
             }}
           >
             <Plus size={15} strokeWidth={2.5} />
@@ -521,7 +526,6 @@ export function Header() {
                 borderRadius: '8px',
                 marginBottom: '0.5rem',
               }}
-              onClick={() => setMobileMenuOpen(false)}
             >
               <Plus size={16} />
               <span>List Property (Rent or Sell)</span>
@@ -545,7 +549,7 @@ export function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               <MapPin size={17} style={{ color: 'var(--c-ripon-red)' }} />
-              <span>Chennai Rental & Buy Map</span>
+              <span>Chennai Rental &amp; Buy Map</span>
             </Link>
 
             <a
@@ -566,7 +570,7 @@ export function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               <Compass size={17} style={{ color: 'var(--c-marina-blue)' }} />
-              <span>Browse All Listings Feed</span>
+              <span>Browse Listings</span>
             </a>
 
             <Link
@@ -602,6 +606,7 @@ export function Header() {
                 gap: '8px',
                 padding: '0.5rem 0.75rem',
                 borderRadius: '6px',
+                borderBottom: '1px solid var(--c-border-subtle)',
               }}
               onClick={() => setMobileMenuOpen(false)}
             >
@@ -609,6 +614,26 @@ export function Header() {
               <span>About Chennai Rents</span>
             </Link>
 
+            <Link
+              to="/contact"
+              style={{
+                fontFamily: 'var(--font-heading)',
+                fontWeight: 700,
+                color: 'var(--c-ink)',
+                textDecoration: 'none',
+                minHeight: '44px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '0.5rem 0.75rem',
+                borderRadius: '6px',
+              }}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <span>Contact Us</span>
+            </Link>
+
+            {/* Instagram */}
             <a
               href={INSTAGRAM_URL}
               target="_blank"

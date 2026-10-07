@@ -64,7 +64,7 @@ export default function Corrections() {
             <div style={{ background: '#fff', border: '1px solid var(--c-border)', borderRadius: '8px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <Mail size={20} style={{ color: 'var(--c-ripon-red)' }} />
-                <span><strong>Editorial Desk Email:</strong> <a href="mailto:editor@chennairents.in" style={{ color: 'var(--c-ripon-red)', textDecoration: 'none' }}>editor@chennairents.in</a></span>
+                <span><strong>Editorial Desk Email:</strong> <a href="mailto:vijaykumarunfounded@gmail.com" style={{ color: 'var(--c-ripon-red)', textDecoration: 'none' }}>vijaykumarunfounded@gmail.com</a></span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <Send size={20} style={{ color: 'var(--c-marina-blue)' }} />

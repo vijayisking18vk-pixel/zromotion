@@ -124,7 +124,7 @@ export default function Methodology() {
               All locality profiles, rental ranges, and transit maps are audited on a quarterly basis. When new infrastructure opens, such as Chennai Metro Phase 2 corridors or new stormwater drain channels, neighbourhood guides are immediately updated.
             </p>
             <p>
-              To suggest a correction or submit recent rent transaction data for your street, visit our <Link to="/corrections" style={{ color: 'var(--c-ripon-red)', fontWeight: 600 }}>Corrections & Editorial Policy</Link> page or email <a href="mailto:editor@chennairents.in" style={{ color: 'var(--c-ripon-red)' }}>editor@chennairents.in</a>.
+              To suggest a correction or submit recent rent transaction data for your street, visit our <Link to="/corrections" style={{ color: 'var(--c-ripon-red)', fontWeight: 600 }}>Corrections & Editorial Policy</Link> page or email <a href="mailto:vijaykumarunfounded@gmail.com" style={{ color: 'var(--c-ripon-red)' }}>vijaykumarunfounded@gmail.com</a>.
             </p>
           </section>
 

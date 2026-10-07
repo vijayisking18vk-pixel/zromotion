@@ -115,7 +115,7 @@ export default function Verification() {
             </p>
             <ul style={{ paddingLeft: '1.4rem', marginBlock: '0.75rem' }}>
               <li>Click the <strong>"Report this listing"</strong> link on any property card.</li>
-              <li>Or email <a href="mailto:trust@chennairents.in" style={{ color: 'var(--c-ripon-red)', fontWeight: 600 }}>trust@chennairents.in</a> with the listing ID.</li>
+              <li>Or email <a href="mailto:saaiabishek2@gmail.com" style={{ color: 'var(--c-ripon-red)', fontWeight: 600 }}>saaiabishek2@gmail.com</a> with the listing ID.</li>
             </ul>
             <p>
               Reported listings are temporarily hidden and audited by a human editor within 12 hours.

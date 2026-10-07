@@ -38,8 +38,8 @@ export default function Contact() {
 
       <MarinaDivider />
 
-      <div className="container" style={{ maxWidth: '800px', marginTop: '2.5rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '2.5rem' }}>
+      <div className="container" style={{ maxWidth: '860px', marginTop: '2.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem', marginBottom: '2.5rem' }}>
           
           <div style={{ background: '#fff', border: '1px solid var(--c-border)', borderRadius: '8px', padding: '1.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
@@ -49,8 +49,8 @@ export default function Contact() {
             <p style={{ fontSize: '0.95rem', color: 'var(--c-ink-muted)', lineHeight: 1.6, marginBottom: '0.75rem' }}>
               For research inquiries, fact checks, corrections, and publication partnerships:
             </p>
-            <a href="mailto:editor@chennairents.in" style={{ color: 'var(--c-ripon-red)', fontWeight: 700, fontSize: '1.05rem', textDecoration: 'none' }}>
-              editor@chennairents.in
+            <a href="mailto:vijaykumarunfounded@gmail.com" style={{ color: 'var(--c-ripon-red)', fontWeight: 700, fontSize: '1rem', textDecoration: 'none', wordBreak: 'break-all' }}>
+              vijaykumarunfounded@gmail.com
             </a>
           </div>
 
@@ -62,14 +62,27 @@ export default function Contact() {
             <p style={{ fontSize: '0.95rem', color: 'var(--c-ink-muted)', lineHeight: 1.6, marginBottom: '0.75rem' }}>
               To report suspicious listings, advance deposit fraud, or request urgent listing removal:
             </p>
-            <a href="mailto:trust@chennairents.in" style={{ color: 'var(--c-marina-blue)', fontWeight: 700, fontSize: '1.05rem', textDecoration: 'none' }}>
-              trust@chennairents.in
+            <a href="mailto:saaiabishek2@gmail.com" style={{ color: 'var(--c-marina-blue)', fontWeight: 700, fontSize: '1rem', textDecoration: 'none', wordBreak: 'break-all' }}>
+              saaiabishek2@gmail.com
             </a>
           </div>
 
           <div style={{ background: '#fff', border: '1px solid var(--c-border)', borderRadius: '8px', padding: '1.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-              <MapPin size={22} style={{ color: 'var(--c-temple-green)' }} />
+              <MessageSquare size={22} style={{ color: 'var(--c-temple-green)' }} />
+              <h2 style={{ fontSize: '1.2rem', margin: 0, color: 'var(--c-ink)' }}>Write to Us</h2>
+            </div>
+            <p style={{ fontSize: '0.95rem', color: 'var(--c-ink-muted)', lineHeight: 1.6, marginBottom: '0.75rem' }}>
+              For general questions, community feedback, rental stories, or neighbourhood insights:
+            </p>
+            <a href="mailto:saaiunfounded@gmail.com" style={{ color: 'var(--c-temple-green)', fontWeight: 700, fontSize: '1rem', textDecoration: 'none', wordBreak: 'break-all' }}>
+              saaiunfounded@gmail.com
+            </a>
+          </div>
+
+          <div style={{ background: '#fff', border: '1px solid var(--c-border)', borderRadius: '8px', padding: '1.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+              <MapPin size={22} style={{ color: 'var(--c-auto-yellow-dk)' }} />
               <h2 style={{ fontSize: '1.2rem', margin: 0, color: 'var(--c-ink)' }}>Location</h2>
             </div>
             <p style={{ fontSize: '0.95rem', color: 'var(--c-ink-muted)', lineHeight: 1.6, margin: 0 }}>

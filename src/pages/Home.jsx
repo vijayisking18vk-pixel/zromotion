@@ -191,7 +191,7 @@ export default function Home() {
                 </a>
                 <a href="/listings/listings.html" className="btn-yellow">
                   <Compass size={15} />
-                  <span>Browse Feed</span>
+                  <span>Browse Listings</span>
                 </a>
               </div>
             </div>
