@@ -998,6 +998,399 @@
         transition: none !important;
       }
     }
+
+    /* ─── Share Listing Hub on Thank-You Screen ─── */
+    .share-listing-hub {
+      background: #FFFFFF;
+      border: 1px solid var(--c-sand);
+      border-radius: 16px;
+      padding: 24px 20px;
+      margin: 20px 0 28px;
+      text-align: left;
+      box-shadow: 0 4px 20px rgba(31, 26, 23, 0.05);
+    }
+
+    .share-hub-header {
+      margin-bottom: 18px;
+    }
+
+    .share-hub-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--c-turmeric-light);
+      color: #8C6107;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    .share-hub-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--c-ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+
+    .share-hub-subtitle {
+      font-size: 0.9rem;
+      color: var(--c-ink-muted);
+      line-height: 1.5;
+    }
+
+    .share-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .share-channel-card {
+      background: var(--c-card);
+      border-radius: 14px;
+      padding: 16px;
+      border: 1.5px solid var(--c-sand);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .share-channel-card.wa-card {
+      border-color: rgba(37, 211, 102, 0.35);
+      background: linear-gradient(180deg, #F9FCFA 0%, #F5FAF6 100%);
+    }
+
+    .share-channel-card.ig-card {
+      border-color: rgba(221, 42, 123, 0.3);
+      background: linear-gradient(180deg, #FCF8F9 0%, #FAF5F7 100%);
+    }
+
+    .share-channel-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .share-channel-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .wa-icon-bg {
+      background: #25D366;
+      color: #FFFFFF;
+      box-shadow: 0 3px 10px rgba(37, 211, 102, 0.25);
+    }
+
+    .ig-icon-bg {
+      background: linear-gradient(135deg, #F58529 0%, #DD2A7B 50%, #8134AF 100%);
+      color: #FFFFFF;
+      box-shadow: 0 3px 10px rgba(221, 42, 123, 0.25);
+    }
+
+    .share-channel-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--c-ink);
+      line-height: 1.2;
+    }
+
+    .share-channel-desc {
+      font-size: 0.8rem;
+      color: var(--c-ink-muted);
+      margin-top: 2px;
+    }
+
+    .wa-preview-bubble {
+      background: #FFFFFF;
+      border: 1px solid rgba(37, 211, 102, 0.25);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.82rem;
+      color: var(--c-ink);
+      line-height: 1.5;
+      white-space: pre-line;
+      max-height: 140px;
+      overflow-y: auto;
+      margin-bottom: 12px;
+      font-family: inherit;
+    }
+
+    .ig-feature-badge {
+      background: #FFFFFF;
+      border: 1px dashed rgba(221, 42, 123, 0.3);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.82rem;
+      color: var(--c-ink-muted);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .share-btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-wa-primary {
+      flex: 1.4;
+      min-height: 46px;
+      background: #25D366;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s ease, transform 0.1s ease;
+      box-shadow: 0 2px 8px rgba(37, 211, 102, 0.2);
+    }
+
+    .btn-wa-primary:hover {
+      background: #20BA5A;
+      transform: translateY(-1px);
+    }
+
+    .btn-wa-secondary {
+      flex: 1;
+      min-height: 46px;
+      background: #FFFFFF;
+      color: #128C7E;
+      border: 1px solid rgba(18, 140, 126, 0.35);
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-wa-secondary:hover {
+      background: #F0FBF5;
+      border-color: #128C7E;
+    }
+
+    .btn-ig-primary {
+      flex: 1.4;
+      min-height: 46px;
+      background: linear-gradient(135deg, #F58529 0%, #DD2A7B 50%, #8134AF 100%);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.15s ease, transform 0.1s ease;
+      box-shadow: 0 2px 8px rgba(221, 42, 123, 0.25);
+    }
+
+    .btn-ig-primary:hover {
+      opacity: 0.94;
+      transform: translateY(-1px);
+    }
+
+    .btn-ig-secondary {
+      flex: 1;
+      min-height: 46px;
+      background: #FFFFFF;
+      color: #8134AF;
+      border: 1px solid rgba(129, 52, 175, 0.35);
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-ig-secondary:hover {
+      background: #FAF5FD;
+      border-color: #8134AF;
+    }
+
+    .share-link-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-top: 14px;
+      border-top: 1px solid var(--c-sand);
+    }
+
+    .share-link-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--c-ink-muted);
+      white-space: nowrap;
+    }
+
+    .share-link-input {
+      flex: 1;
+      height: 40px;
+      padding: 0 12px;
+      font-size: 0.85rem;
+      border: 1px solid var(--c-sand);
+      border-radius: 8px;
+      background: var(--c-bg);
+      color: var(--c-ink);
+      font-family: monospace;
+    }
+
+    .btn-copy-link {
+      height: 40px;
+      padding: 0 14px;
+      background: var(--c-card);
+      border: 1px solid var(--c-sand);
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--c-ink);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .btn-copy-link:hover {
+      background: var(--c-sand-light);
+      border-color: var(--c-ink-muted);
+    }
+
+    /* Modal Backdrop & Card */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(12, 10, 9, 0.72);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-card {
+      background: #FFFFFF;
+      border-radius: 20px;
+      max-width: 440px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+      position: relative;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      line-height: 1;
+      color: var(--c-ink-muted);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 6px;
+    }
+
+    .close-btn:hover {
+      color: var(--c-ink);
+      background: var(--c-sand-light);
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--c-ink);
+    }
+
+    .story-preview-container {
+      width: 100%;
+      aspect-ratio: 9/16;
+      max-height: 380px;
+      background: #0c0a09;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--c-sand);
+    }
+
+    .story-preview-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .story-modal-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Toast Notification */
+    .toast-pill {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--c-ink);
+      color: #FFFFFF;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      z-index: 2000;
+      opacity: 0;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast-pill.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
   </style>
 </head>
 
@@ -1290,12 +1683,13 @@
                 <label for="deposit-select" class="form-label">
                   Security deposit / அட்வான்ஸ்
                 </label>
-                <select id="deposit-select" class="form-select">
+                <select id="deposit-select" class="form-select" onchange="saveDraftToStorage()">
                   <option value="1 month">1 month rent</option>
                   <option value="2 months">2 months rent</option>
                   <option value="3 months">3 months rent</option>
                   <option value="6 months" selected>6 months rent (standard)</option>
                   <option value="Custom">Custom amount</option>
+                  <option value="Not mentioned">Not mentioned</option>
                 </select>
                 <p class="helper-text">Most Chennai agreements now close at 4 to 6 months.</p>
               </div>
@@ -1305,22 +1699,24 @@
             <div class="form-grid-2">
               <div class="form-group">
                 <label for="furnishing-select" class="form-label">Furnishing status</label>
-                <select id="furnishing-select" class="form-select">
+                <select id="furnishing-select" class="form-select" onchange="saveDraftToStorage()">
                   <option value="Semi-furnished" selected>Semi-furnished (Wardrobes, fans)</option>
                   <option value="Fully furnished">Fully furnished</option>
                   <option value="Unfurnished">Unfurnished</option>
+                  <option value="Not mentioned">Not mentioned</option>
                 </select>
               </div>
 
               <div class="form-group">
                 <label for="facing-select" class="form-label">Facing direction</label>
-                <select id="facing-select" class="form-select">
+                <select id="facing-select" class="form-select" onchange="saveDraftToStorage()">
                   <option value="East" selected>East facing</option>
                   <option value="North">North facing</option>
                   <option value="South">South facing</option>
                   <option value="West">West facing</option>
                   <option value="North-East">North-East facing</option>
                   <option value="South-East">South-East facing</option>
+                  <option value="Not mentioned">Not mentioned</option>
                 </select>
               </div>
             </div>
@@ -1329,24 +1725,26 @@
             <div class="form-grid-2">
               <div class="form-group">
                 <label for="floor-select" class="form-label">Property floor</label>
-                <select id="floor-select" class="form-select">
+                <select id="floor-select" class="form-select" onchange="saveDraftToStorage()">
                   <option value="Ground floor">Ground floor</option>
                   <option value="1st floor" selected>1st floor</option>
                   <option value="2nd floor">2nd floor</option>
                   <option value="3rd floor">3rd floor</option>
                   <option value="4th floor">4th floor</option>
                   <option value="5th floor & above">5th floor & above</option>
+                  <option value="Not mentioned">Not mentioned</option>
                 </select>
               </div>
 
               <div class="form-group">
                 <label for="total-floors-select" class="form-label">Total floors in building</label>
-                <select id="total-floors-select" class="form-select">
+                <select id="total-floors-select" class="form-select" onchange="saveDraftToStorage()">
                   <option value="1 floor (Independent house)">1 floor (Independent house)</option>
                   <option value="2 floors">2 floors</option>
                   <option value="3 floors" selected>3 floors</option>
                   <option value="4 floors">4 floors</option>
                   <option value="5+ floors (Apartment)">5+ floors (Apartment)</option>
+                  <option value="Not mentioned">Not mentioned</option>
                 </select>
               </div>
             </div>
@@ -1355,21 +1753,23 @@
             <div class="form-grid-2">
               <div class="form-group">
                 <label for="age-select" class="form-label">Building age</label>
-                <select id="age-select" class="form-select">
+                <select id="age-select" class="form-select" onchange="saveDraftToStorage()">
                   <option value="Brand new (< 1 year)">Brand new (&lt; 1 year)</option>
                   <option value="1 to 5 years" selected>1 to 5 years</option>
                   <option value="5 to 10 years">5 to 10 years</option>
                   <option value="10+ years">10+ years</option>
+                  <option value="Not mentioned">Not mentioned</option>
                 </select>
               </div>
 
               <div class="form-group">
                 <label for="parking-select" class="form-label">Parking facility</label>
-                <select id="parking-select" class="form-select">
+                <select id="parking-select" class="form-select" onchange="saveDraftToStorage()">
                   <option value="Car + Two-wheeler" selected>Car + Two-wheeler covered</option>
                   <option value="Two-wheeler only">Two-wheeler only</option>
                   <option value="Street parking">Street parking</option>
                   <option value="No parking">No parking</option>
+                  <option value="Not mentioned">Not mentioned</option>
                 </select>
               </div>
             </div>
@@ -1378,20 +1778,22 @@
             <div class="form-grid-2">
               <div class="form-group">
                 <label for="water-select" class="form-label">Water source</label>
-                <select id="water-select" class="form-select">
+                <select id="water-select" class="form-select" onchange="saveDraftToStorage()">
                   <option value="Both Metro water & Borewell" selected>Both Metro water & Borewell</option>
                   <option value="Metro water only">Metro water only</option>
                   <option value="Borewell only">Borewell only</option>
+                  <option value="Not mentioned">Not mentioned</option>
                 </select>
                 <p class="helper-text">Chennai Metro water connection is a big plus for tenants.</p>
               </div>
 
               <div class="form-group">
                 <label for="backup-select" class="form-label">Power backup</label>
-                <select id="backup-select" class="form-select">
+                <select id="backup-select" class="form-select" onchange="saveDraftToStorage()">
                   <option value="Full backup (Generator)">Full backup (Generator)</option>
                   <option value="Inverter / Partial" selected>Inverter / Partial backup</option>
                   <option value="None">None</option>
+                  <option value="Not mentioned">Not mentioned</option>
                 </select>
               </div>
             </div>
@@ -1640,6 +2042,100 @@
           வணக்கம்! We have received your property details. Our editorial team reviews every listing within 2 to 4 hours to verify water scores and keep ChennaiRents 100% broker-free.
         </p>
 
+        <!-- SHARE YOUR LISTING HUB (WhatsApp Group & Instagram Stories) -->
+        <div class="share-listing-hub" id="share-listing-hub">
+          <div class="share-hub-header">
+            <span class="share-hub-pill">⚡ FAST-TRACK LEADS</span>
+            <h3 class="share-hub-title">Share Your Listing</h3>
+            <p class="share-hub-subtitle">
+              Get direct tenants faster without broker spam. Broadcast to Chennai flatmate &amp; housing WhatsApp groups or post a custom Instagram Story card.
+            </p>
+          </div>
+
+          <div class="share-grid">
+            <!-- 1. WHATSAPP GROUP CARD -->
+            <div class="share-channel-card wa-card">
+              <div class="share-channel-top">
+                <div class="share-channel-icon wa-icon-bg">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.012 2c-5.506 0-9.988 4.481-9.988 9.987 0 2.01.6 3.887 1.625 5.462l-1.649 6.051 6.205-1.629c1.517.822 3.245 1.295 5.082 1.295 5.507 0 9.988-4.481 9.988-9.987s-4.481-9.987-9.988-9.987zm.006 1.838c4.493 0 8.15 3.657 8.15 8.15s-3.657 8.15-8.15 8.15c-1.666 0-3.21-.502-4.512-1.356l-.323-.211-3.345.877.893-3.279-.232-.367c-.896-1.423-1.411-3.111-1.411-4.919l.006-.002c-.006-4.492 3.651-8.148 8.144-8.148zm-3.529 3.649c-.19 0-.395.034-.582.164-.236.166-.807.728-.807 1.777s.762 2.059.867 2.203c.106.144 1.47 2.378 3.623 3.284.512.215.912.344 1.222.441.514.161.982.138 1.353.083.413-.061 1.267-.518 1.447-1.02s.181-.933.127-1.021-.19-.133-.402-.239c-.212-.106-1.267-.625-1.463-.695-.195-.072-.338-.106-.481.106-.144.212-.555.696-.68.839-.126.143-.25.161-.462.055-.212-.106-.897-.33-1.708-1.054-.631-.563-1.057-1.258-1.181-1.471-.124-.213-.013-.328.093-.433.095-.095.212-.246.318-.369.106-.123.141-.212.212-.353.07-.141.035-.264-.018-.37-.053-.106-.481-1.161-.66-1.591-.174-.421-.347-.363-.48-.369-.121-.005-.261-.007-.403-.007z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="share-channel-name">WhatsApp Groups</h4>
+                  <p class="share-channel-desc">Share to Flatmates, Apartment &amp; Community groups</p>
+                </div>
+              </div>
+
+              <!-- Message Preview -->
+              <div class="wa-preview-bubble" id="wa-preview-text">
+                Loading property details...
+              </div>
+
+              <div class="share-btn-row">
+                <button type="button" class="btn-wa-primary" onclick="shareListingToWhatsApp()">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.012 2c-5.506 0-9.988 4.481-9.988 9.987 0 2.01.6 3.887 1.625 5.462l-1.649 6.051 6.205-1.629c1.517.822 3.245 1.295 5.082 1.295 5.507 0 9.988-4.481 9.988-9.987s-4.481-9.987-9.988-9.987zm.006 1.838c4.493 0 8.15 3.657 8.15 8.15s-3.657 8.15-8.15 8.15c-1.666 0-3.21-.502-4.512-1.356l-.323-.211-3.345.877.893-3.279-.232-.367c-.896-1.423-1.411-3.111-1.411-4.919l.006-.002c-.006-4.492 3.651-8.148 8.144-8.148zm-3.529 3.649c-.19 0-.395.034-.582.164-.236.166-.807.728-.807 1.777s.762 2.059.867 2.203c.106.144 1.47 2.378 3.623 3.284.512.215.912.344 1.222.441.514.161.982.138 1.353.083.413-.061 1.267-.518 1.447-1.02s.181-.933.127-1.021-.19-.133-.402-.239c-.212-.106-1.267-.625-1.463-.695-.195-.072-.338-.106-.481.106-.144.212-.555.696-.68.839-.126.143-.25.161-.462.055-.212-.106-.897-.33-1.708-1.054-.631-.563-1.057-1.258-1.181-1.471-.124-.213-.013-.328.093-.433.095-.095.212-.246.318-.369.106-.123.141-.212.212-.353.07-.141.035-.264-.018-.37-.053-.106-.481-1.161-.66-1.591-.174-.421-.347-.363-.48-.369-.121-.005-.261-.007-.403-.007z"/>
+                  </svg>
+                  <span>Share to WhatsApp Group</span>
+                </button>
+                <button type="button" class="btn-wa-secondary" id="btn-copy-wa" onclick="copyWhatsAppListingMessage()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  <span>Copy Text</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. INSTAGRAM STORY CARD -->
+            <div class="share-channel-card ig-card">
+              <div class="share-channel-top">
+                <div class="share-channel-icon ig-icon-bg">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="share-channel-name">Instagram Story</h4>
+                  <p class="share-channel-desc">Download or share a 9:16 high-res Story card with photos</p>
+                </div>
+              </div>
+
+              <!-- Story mini badge / preview highlight -->
+              <div class="ig-feature-badge">
+                <span>📸 High-res 1080×1920 Story card created automatically with your property details</span>
+              </div>
+
+              <div class="share-btn-row">
+                <button type="button" class="btn-ig-primary" onclick="shareListingToInstagramStory()">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                  </svg>
+                  <span>Share to Instagram Story</span>
+                </button>
+                <button type="button" class="btn-ig-secondary" onclick="openStoryCardModal()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                  </svg>
+                  <span>Preview Card</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Copy Link Row -->
+          <div class="share-link-row">
+            <span class="share-link-label">Direct Link:</span>
+            <input type="text" class="share-link-input" id="share-listing-url" value="https://www.chennairents.in/listings" readonly onclick="this.select()">
+            <button type="button" class="btn-copy-link" id="btn-copy-url" onclick="copyListingDirectUrl()">
+              <span>Copy Link</span>
+            </button>
+          </div>
+        </div>
+
         <div class="summary-box" id="submission-summary-box">
           <!-- Populated from state -->
         </div>
@@ -1652,6 +2148,54 @@
             Post another property
           </button>
         </div>
+      </div>
+
+      <!-- INSTAGRAM STORY MODAL -->
+      <div class="modal-backdrop" id="story-modal" onclick="closeStoryModal()" style="display: none;">
+        <div class="modal-card" onclick="event.stopPropagation()">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 20px;">📸</span>
+              <span class="modal-title">Instagram Story Card</span>
+            </div>
+            <button type="button" class="close-btn" onclick="closeStoryModal()" aria-label="Close modal">&times;</button>
+          </div>
+
+          <p style="color: var(--c-ink-muted); font-size: 0.88rem; line-height: 1.45; margin-bottom: 14px;">
+            Save this 9:16 vertical card to your photos or open Instagram Stories directly. Remember to add a link sticker to <strong>chennairents.in</strong>!
+          </p>
+
+          <div class="story-preview-container">
+            <img id="story-preview-image" alt="Instagram Story Card Preview" class="story-preview-img" />
+          </div>
+
+          <div class="story-modal-actions">
+            <button type="button" class="btn-primary" id="btn-open-ig-app" onclick="openInstagramApp()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+              </svg>
+              <span>Open Instagram App</span>
+            </button>
+
+            <button type="button" class="btn-secondary" id="btn-download-story" onclick="downloadStoryImage()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Save Image to Photos</span>
+            </button>
+
+            <button type="button" class="btn-secondary" id="btn-copy-sticker-link" onclick="copyStoryStickerLink()">
+              <span>🔗 Copy Link for Sticker</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOAST NOTIFICATION -->
+      <div class="toast-pill" id="toast-pill" role="status" aria-live="polite">
+        <span id="toast-text">Message copied!</span>
       </div>
 
     </main>
@@ -1818,6 +2362,25 @@
           if (errPrice) errPrice.style.display = 'none';
           formState.price = numVal;
         }
+
+        const depEl = document.getElementById('deposit-select');
+        if (depEl) formState.deposit = depEl.value;
+        const furnEl = document.getElementById('furnishing-select');
+        if (furnEl) formState.furnishing = furnEl.value;
+        const faceEl = document.getElementById('facing-select');
+        if (faceEl) formState.facing = faceEl.value;
+        const floorEl = document.getElementById('floor-select');
+        if (floorEl) formState.floor = floorEl.value;
+        const totEl = document.getElementById('total-floors-select');
+        if (totEl) formState.totalFloors = totEl.value;
+        const ageEl = document.getElementById('age-select');
+        if (ageEl) formState.age = ageEl.value;
+        const parkEl = document.getElementById('parking-select');
+        if (parkEl) formState.parking = parkEl.value;
+        const waterEl = document.getElementById('water-select');
+        if (waterEl) formState.water = waterEl.value;
+        const backEl = document.getElementById('backup-select');
+        if (backEl) formState.backup = backEl.value;
       }
 
       if (current === 4) {
@@ -2410,6 +2973,15 @@
         `;
       }
 
+      // Populate WhatsApp preview snippet
+      const waPreviewEl = document.getElementById('wa-preview-text');
+      if (waPreviewEl) {
+        waPreviewEl.textContent = generateWhatsAppShareMessage();
+      }
+
+      // Pre-generate Instagram Story Canvas in background
+      generateInstagramStoryCanvas().catch(err => console.warn("Background story generation error:", err));
+
       // Hide form flow & show Thank You view
       const formWrap = document.getElementById('form-flow-wrap');
       const thankYou = document.getElementById('thank-you-view');
@@ -2434,6 +3006,473 @@
       if (formWrap) formWrap.style.display = 'block';
       if (thankYou) thankYou.style.display = 'none';
       goToStep(1);
+    }
+
+    // ─── SHARE YOUR LISTING LOGIC (WhatsApp Groups & Instagram Stories) ───
+    function generateWhatsAppShareMessage() {
+      const isSale = formState.listingType === 'sale';
+      const isRoom = formState.listingType === 'room';
+      
+      const header = isSale 
+        ? '🏡 *DIRECT OWNER PROPERTY FOR SALE - ZERO BROKERAGE*' 
+        : isRoom 
+        ? '🛏️ *FLATMATE WANTED / ROOM FOR RENT - ZERO BROKERAGE*' 
+        : '🏡 *DIRECT OWNER RENTAL LISTING - ZERO BROKERAGE*';
+
+      const typeDesc = isSale 
+        ? `${formState.bhk} ${formState.propertyCategory || 'Property'}` 
+        : isRoom 
+        ? `${formState.propertyCategory || 'Room in Shared Flat'}` 
+        : `${formState.bhk} ${formState.propertyCategory || 'Apartment'}`;
+
+      const priceLabel = isSale ? 'Asking Price' : 'Monthly Rent';
+      const priceVal = '₹' + formatIndianNumber(formState.price) + (isSale ? '' : '/month');
+      const depositLine = (isSale || !formState.deposit || formState.deposit === 'Not mentioned') ? '' : `\n💰 *Deposit:* ${formState.deposit.includes('month') ? formState.deposit : '₹' + formatIndianNumber(formState.deposit)}`;
+
+      const locationLine = `📍 *Location:* ${formState.area || 'Chennai'}${formState.landmark ? ' (near ' + formState.landmark + ')' : ''}, Chennai`;
+
+      const detailsLines = [];
+      if (formState.furnishing && formState.furnishing !== 'Not mentioned') detailsLines.push(`🛋️ *Furnishing:* ${formState.furnishing}`);
+      if (formState.water && formState.water !== 'Not mentioned') detailsLines.push(`💧 *Water:* ${formState.water}`);
+      if (formState.parking && formState.parking !== 'Not mentioned') detailsLines.push(`🚗 *Parking:* ${formState.parking}`);
+      if (formState.availableFrom) detailsLines.push(`🔑 *Available From:* ${formState.availableFrom}`);
+      if (formState.floor && formState.floor !== 'Not mentioned') {
+        const tot = formState.totalFloors && formState.totalFloors !== 'Not mentioned' ? ` of ${formState.totalFloors}` : '';
+        detailsLines.push(`🏢 *Floor:* ${formState.floor}${tot}`);
+      }
+      if (formState.facing && formState.facing !== 'Not mentioned') detailsLines.push(`🧭 *Facing:* ${formState.facing}`);
+
+      const detailsText = detailsLines.length ? detailsLines.join('\n') + '\n' : '';
+      const photosNote = formState.photos && formState.photos.length > 0 
+        ? `📸 *${formState.photos.length} Verified Photos Attached*\n` 
+        : '';
+
+      const msg = `${header}
+
+${locationLine}
+🏠 *Configuration:* ${typeDesc}
+💵 *${priceLabel}:* ${priceVal}${depositLine}
+${detailsText}${photosNote}
+✨ *100% Zero Brokerage • Direct Owner Verification*
+👉 *View details on Chennai Rents:*
+https://www.chennairents.in/listings
+
+📞 *Contact Owner Directly:* ${formState.name || 'Owner'} (+91 ${formState.phone})
+_Shared via chennairents.in - Chennai's Zero Broker Rental Registry_`;
+
+      return msg;
+    }
+
+    function shareListingToWhatsApp() {
+      const msg = generateWhatsAppShareMessage();
+      const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    }
+
+    function copyWhatsAppListingMessage() {
+      const msg = generateWhatsAppShareMessage();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(msg).then(() => {
+          showToast('✓ WhatsApp message copied to clipboard!');
+          const btn = document.getElementById('btn-copy-wa');
+          if (btn) {
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<span>✓ Copied!</span>';
+            setTimeout(() => { btn.innerHTML = orig; }, 2500);
+          }
+        }).catch(() => {
+          fallbackCopyText(msg);
+        });
+      } else {
+        fallbackCopyText(msg);
+      }
+    }
+
+    function fallbackCopyText(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast('✓ WhatsApp message copied to clipboard!');
+      } catch (e) {
+        prompt('Copy your listing message:', text);
+      }
+      document.body.removeChild(ta);
+    }
+
+    function copyListingDirectUrl() {
+      const url = document.getElementById('share-listing-url')?.value || 'https://www.chennairents.in/listings';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => {
+          showToast('✓ Listing link copied!');
+          const btn = document.getElementById('btn-copy-url');
+          if (btn) {
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<span>✓ Copied</span>';
+            btn.style.color = 'var(--c-green)';
+            setTimeout(() => { btn.innerHTML = orig; btn.style.color = ''; }, 2500);
+          }
+        });
+      }
+    }
+
+    // ─── INSTAGRAM STORY GENERATION & SHARING ───
+    let storyDataUrl = null;
+    let storyBlob = null;
+    let storyFilename = 'chennai-rents-story.png';
+    let isGeneratingStory = false;
+
+    function loadImage(src) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = src;
+      });
+    }
+
+    function roundRect(ctx, x, y, width, height, radius) {
+      if (typeof radius === 'number') {
+        radius = { tl: radius, tr: radius, br: radius, bl: radius };
+      } else {
+        radius = Object.assign({ tl: 0, tr: 0, br: 0, bl: 0 }, radius);
+      }
+      ctx.beginPath();
+      ctx.moveTo(x + radius.tl, y);
+      ctx.lineTo(x + width - radius.tr, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
+      ctx.lineTo(x + width, y + height - radius.br);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
+      ctx.lineTo(x + radius.bl, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
+      ctx.lineTo(x, y + radius.tl);
+      ctx.quadraticCurveTo(x, y, x + radius.tl, y);
+      ctx.closePath();
+    }
+
+    function drawImageCover(ctx, img, x, y, w, h) {
+      const imgRatio = img.width / img.height;
+      const targetRatio = w / h;
+      let sWidth = img.width;
+      let sHeight = img.height;
+      let sx = 0;
+      let sy = 0;
+
+      if (imgRatio > targetRatio) {
+        sWidth = img.height * targetRatio;
+        sx = (img.width - sWidth) / 2;
+      } else {
+        sHeight = img.width / targetRatio;
+        sy = (img.height - sHeight) / 2;
+      }
+
+      ctx.drawImage(img, sx, sy, sWidth, sHeight, x, y, w, h);
+    }
+
+    function drawFittedText(ctx, text, x, y, maxFont, minFont, maxWidth, fontFace, weight) {
+      if (!text) return minFont;
+      let fontSize = maxFont;
+      ctx.font = `${weight || 'normal'} ${fontSize}px ${fontFace || 'sans-serif'}`;
+      while (ctx.measureText(text).width > maxWidth && fontSize > minFont) {
+        fontSize -= 2;
+        ctx.font = `${weight || 'normal'} ${fontSize}px ${fontFace || 'sans-serif'}`;
+      }
+      ctx.fillText(text, x, y);
+      return fontSize;
+    }
+
+    async function generateInstagramStoryCanvas() {
+      if (isGeneratingStory) return;
+      isGeneratingStory = true;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = 1080;
+      canvas.height = 1920;
+      const ctx = canvas.getContext('2d');
+
+      // Dark background
+      ctx.fillStyle = '#0c0a09';
+      ctx.fillRect(0, 0, 1080, 1920);
+
+      const grad = ctx.createRadialGradient(540, 720, 100, 540, 960, 920);
+      grad.addColorStop(0, 'rgba(181, 55, 43, 0.22)');
+      grad.addColorStop(0.5, 'rgba(217, 162, 27, 0.08)');
+      grad.addColorStop(1, 'rgba(0, 0, 0, 0.88)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1080, 1920);
+
+      // Borders
+      ctx.strokeStyle = '#B5372B';
+      ctx.lineWidth = 4;
+      ctx.strokeRect(36, 36, 1008, 1848);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(48, 48, 984, 1824);
+
+      // Top Header Brand
+      ctx.fillStyle = '#FFFFFF';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = "bold 64px 'Outfit', -apple-system, sans-serif";
+      ctx.fillText('chennairents.in', 540, 160);
+
+      ctx.fillStyle = '#D9A21B';
+      ctx.font = "700 22px 'Outfit', sans-serif";
+      ctx.fillText('ZERO BROKERAGE • DIRECT OWNER REGISTRY', 540, 222);
+
+      ctx.strokeStyle = 'rgba(217, 162, 27, 0.4)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(140, 260);
+      ctx.lineTo(940, 260);
+      ctx.stroke();
+
+      let currentY = 310;
+
+      // Render Cover Photo if available
+      const hasCoverPhoto = formState.photos && formState.photos.length > 0 && formState.photos[0].dataUrl;
+      if (hasCoverPhoto) {
+        try {
+          const coverImg = await loadImage(formState.photos[0].dataUrl);
+          const imgW = 880;
+          const imgH = 500;
+          const imgX = (1080 - imgW) / 2;
+          const imgY = currentY;
+
+          ctx.save();
+          roundRect(ctx, imgX, imgY, imgW, imgH, 20);
+          ctx.clip();
+          drawImageCover(ctx, coverImg, imgX, imgY, imgW, imgH);
+          ctx.restore();
+
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+          ctx.lineWidth = 2;
+          roundRect(ctx, imgX, imgY, imgW, imgH, 20);
+          ctx.stroke();
+
+          // Verified Tag
+          ctx.fillStyle = '#B5372B';
+          roundRect(ctx, imgX + 20, imgY + 20, 210, 40, 10);
+          ctx.fill();
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = "700 18px 'Outfit', sans-serif";
+          ctx.fillText('VERIFIED PHOTOS', imgX + 125, imgY + 40);
+
+          currentY += imgH + 44;
+        } catch (e) {
+          currentY = drawGeometricFallback(ctx, currentY);
+        }
+      } else {
+        currentY = drawGeometricFallback(ctx, currentY);
+      }
+
+      // Configuration Tag
+      const isSale = formState.listingType === 'sale';
+      const isRoom = formState.listingType === 'room';
+      const badgeText = isSale 
+        ? `${formState.bhk} • PROPERTY FOR SALE` 
+        : isRoom 
+        ? 'ROOM IN SHARED FLAT' 
+        : `${formState.bhk} • FOR RENT`;
+
+      ctx.fillStyle = '#B5372B';
+      const badgeWidth = 400;
+      roundRect(ctx, (1080 - badgeWidth) / 2, currentY, badgeWidth, 50, 25);
+      ctx.fill();
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = "800 24px 'Outfit', sans-serif";
+      ctx.fillText(badgeText, 540, currentY + 25);
+      currentY += 80;
+
+      // Price
+      const formattedPrice = '₹' + formatIndianNumber(formState.price);
+      ctx.fillStyle = '#FFFFFF';
+      drawFittedText(ctx, formattedPrice, 540, currentY, 84, 52, 880, "'Outfit', sans-serif", '900');
+      currentY += 54;
+
+      ctx.fillStyle = '#D9A21B';
+      ctx.font = "700 26px 'Outfit', sans-serif";
+      ctx.fillText(isSale ? 'Total Asking Price' : '/ month (Zero Broker Fee)', 540, currentY);
+      currentY += 70;
+
+      // Locality
+      const areaName = `in ${formState.area || 'Chennai'}${formState.landmark ? ', near ' + formState.landmark : ''}`;
+      ctx.fillStyle = '#F3F4F6';
+      drawFittedText(ctx, areaName, 540, currentY, 44, 26, 880, "Georgia, serif", 'italic 700');
+      currentY += 60;
+
+      // Highlights
+      const highlights = [];
+      if (formState.furnishing && formState.furnishing !== 'Not mentioned') highlights.push(formState.furnishing);
+      if (formState.water && formState.water !== 'Not mentioned') highlights.push(formState.water.replace(/Both |only /gi, ''));
+      if (formState.parking && formState.parking !== 'Not mentioned') highlights.push(formState.parking);
+      if (formState.availableFrom) highlights.push(`Avail ${formState.availableFrom}`);
+
+      if (highlights.length > 0) {
+        ctx.fillStyle = '#94A3B8';
+        drawFittedText(ctx, highlights.join('   •   '), 540, currentY + 10, 26, 18, 860, "'Outfit', sans-serif", '600');
+        currentY += 60;
+      }
+
+      // Owner Box
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+      roundRect(ctx, 120, currentY, 840, 96, 20);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+      ctx.lineWidth = 1.5;
+      roundRect(ctx, 120, currentY, 840, 96, 20);
+      ctx.stroke();
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = "700 26px 'Outfit', sans-serif";
+      ctx.fillText(`Direct Owner: ${formState.name || 'Owner'}`, 540, currentY + 34);
+      ctx.fillStyle = '#22C55E';
+      ctx.font = "600 24px 'Outfit', sans-serif";
+      ctx.fillText(`📞 WhatsApp / Call: +91 ${formState.phone || ''}`, 540, currentY + 68);
+      currentY += 130;
+
+      // Link Sticker Prompt
+      ctx.fillStyle = '#FFFFFF';
+      roundRect(ctx, 160, currentY, 760, 68, 34);
+      ctx.fill();
+      ctx.fillStyle = '#0C0A09';
+      ctx.font = "800 24px 'Outfit', sans-serif";
+      ctx.fillText('🔗 TAP LINK STICKER TO VIEW ON MAP', 540, currentY + 34);
+
+      // Bottom baseline
+      ctx.fillStyle = '#9CA3AF';
+      ctx.font = "500 22px 'Outfit', sans-serif";
+      ctx.fillText('www.chennairents.in • Chennai Crowdsourced Rental Registry', 540, 1855);
+
+      return new Promise((resolve) => {
+        storyDataUrl = canvas.toDataURL('image/png');
+        storyFilename = `chennai_rents_${(formState.bhk || 'listing').replace(/\s+/g, '_')}_${(formState.area || 'chennai').replace(/[^a-zA-Z0-9]+/g, '_').toLowerCase()}.png`;
+        canvas.toBlob((blob) => {
+          storyBlob = blob;
+          isGeneratingStory = false;
+          const previewEl = document.getElementById('story-preview-image');
+          if (previewEl) previewEl.src = storyDataUrl;
+          resolve({ dataUrl: storyDataUrl, blob: storyBlob, filename: storyFilename });
+        }, 'image/png');
+      });
+    }
+
+    function drawGeometricFallback(ctx, startY) {
+      const pinX = 540;
+      const pinY = startY + 120;
+
+      ctx.beginPath();
+      ctx.arc(pinX, pinY - 50, 70, 0, Math.PI, true);
+      ctx.lineTo(pinX, pinY + 50);
+      ctx.closePath();
+      ctx.fillStyle = '#B5372B';
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(pinX, pinY - 50, 26, 0, Math.PI * 2);
+      ctx.fillStyle = '#0C0A09';
+      ctx.fill();
+
+      return startY + 230;
+    }
+
+    async function shareListingToInstagramStory() {
+      if (!storyDataUrl || !storyBlob) {
+        await generateInstagramStoryCanvas();
+      }
+
+      // If native file sharing is supported, invoke during user tap gesture
+      if (navigator.canShare && storyBlob) {
+        try {
+          const file = new File([storyBlob], storyFilename || 'chennai-rents-story.png', { type: 'image/png' });
+          if (navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              files: [file],
+              title: `Chennai Rents: ${formState.bhk} in ${formState.area || 'Chennai'}`,
+              text: `Direct owner listing on chennairents.in (Zero Brokerage)`,
+              url: 'https://www.chennairents.in/listings'
+            });
+            return;
+          }
+        } catch (err) {
+          if (err.name === 'AbortError') return;
+          console.warn("Native share error, falling back to modal:", err);
+        }
+      }
+
+      openStoryCardModal();
+    }
+
+    function openStoryCardModal() {
+      if (!storyDataUrl) {
+        generateInstagramStoryCanvas().then(() => {
+          const modal = document.getElementById('story-modal');
+          if (modal) modal.style.display = 'flex';
+        });
+      } else {
+        const modal = document.getElementById('story-modal');
+        if (modal) modal.style.display = 'flex';
+      }
+    }
+
+    function closeStoryModal() {
+      const modal = document.getElementById('story-modal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function openInstagramApp() {
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isMobile) {
+        window.location.href = "instagram://story-camera";
+        setTimeout(() => {
+          window.open("https://www.instagram.com/", "_blank");
+        }, 1200);
+      } else {
+        window.open("https://www.instagram.com/", "_blank");
+      }
+    }
+
+    function downloadStoryImage() {
+      if (!storyDataUrl) return;
+      const a = document.createElement('a');
+      a.href = storyDataUrl;
+      a.download = storyFilename || 'chennai-rents-story.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('✓ Story card saved to photos/downloads!');
+    }
+
+    function copyStoryStickerLink() {
+      const link = 'https://www.chennairents.in/listings';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(link).then(() => {
+          showToast('✓ Link copied! Add Link Sticker on Instagram.');
+          const btn = document.getElementById('btn-copy-sticker-link');
+          if (btn) {
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<span>✓ Copied to clipboard!</span>';
+            setTimeout(() => { btn.innerHTML = orig; }, 2500);
+          }
+        });
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast-pill');
+      const text = document.getElementById('toast-text');
+      if (!toast || !text) return;
+      text.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
     }
 
     // 8. Autosave to localStorage inside try/catch
@@ -2504,9 +3543,50 @@
             handleCurrencyInput(pInput);
           }
         }
+        if (draft.deposit) {
+          const dSelect = document.getElementById('deposit-select');
+          if (dSelect) dSelect.value = draft.deposit;
+          formState.deposit = draft.deposit;
+        }
         if (draft.furnishing) {
           const fSelect = document.getElementById('furnishing-select');
           if (fSelect) fSelect.value = draft.furnishing;
+          formState.furnishing = draft.furnishing;
+        }
+        if (draft.facing) {
+          const faceSelect = document.getElementById('facing-select');
+          if (faceSelect) faceSelect.value = draft.facing;
+          formState.facing = draft.facing;
+        }
+        if (draft.floor) {
+          const flSelect = document.getElementById('floor-select');
+          if (flSelect) flSelect.value = draft.floor;
+          formState.floor = draft.floor;
+        }
+        if (draft.totalFloors) {
+          const totSelect = document.getElementById('total-floors-select');
+          if (totSelect) totSelect.value = draft.totalFloors;
+          formState.totalFloors = draft.totalFloors;
+        }
+        if (draft.age) {
+          const aSelect = document.getElementById('age-select');
+          if (aSelect) aSelect.value = draft.age;
+          formState.age = draft.age;
+        }
+        if (draft.parking) {
+          const pkSelect = document.getElementById('parking-select');
+          if (pkSelect) pkSelect.value = draft.parking;
+          formState.parking = draft.parking;
+        }
+        if (draft.water) {
+          const wSelect = document.getElementById('water-select');
+          if (wSelect) wSelect.value = draft.water;
+          formState.water = draft.water;
+        }
+        if (draft.backup) {
+          const bkSelect = document.getElementById('backup-select');
+          if (bkSelect) bkSelect.value = draft.backup;
+          formState.backup = draft.backup;
         }
         if (draft.name) {
           const nInput = document.getElementById('owner-name');

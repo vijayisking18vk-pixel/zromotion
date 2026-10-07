@@ -1442,12 +1442,38 @@ if (ownerSellForm) {
             })
         }).catch(e => console.warn('Email dispatch notice:', e));
 
-        alert("Property listed for Sale successfully! Your pin is now live on the Chennai Map.");
         closeModal("owner-sell-modal");
         ownerSellForm.reset();
         await loadPins();
+
+        window.showListingSuccessAndShare(
+            {
+                bhk: bhk,
+                rent: price,
+                sale_price: price,
+                area: 'Chennai',
+                transaction_type: 'sale',
+                is_listing: true,
+                feedback: `[FOR_SALE: ${bhk} BHK ${propType}]`
+            },
+            "Your property is live on the Chennai Map. Share directly to WhatsApp groups and Instagram Stories to attract buyers!",
+            `<div>• <strong>Type:</strong> ${bhk} BHK ${propType} For Sale</div>
+             <div>• <strong>Price:</strong> ₹${formatInLakhsCrores(price)}</div>
+             <div>• <strong>Contact:</strong> ${phone}</div>`
+        );
     });
 }
+
+window.showListingSuccessAndShare = function(pinData, descText, summaryHtml) {
+    currentPin = pinData;
+    const modal = document.getElementById("listing-success-modal");
+    if (!modal) return;
+    const descEl = document.getElementById("listing-success-desc");
+    if (descEl && descText) descEl.textContent = descText;
+    const sumEl = document.getElementById("listing-success-summary");
+    if (sumEl && summaryHtml) sumEl.innerHTML = summaryHtml;
+    openModal("listing-success-modal");
+};
 
 // Owner Whole Form Submit
 document.getElementById("owner-whole-form").addEventListener("submit", async (e) => {
@@ -1535,10 +1561,27 @@ document.getElementById("owner-whole-form").addEventListener("submit", async (e)
             }).catch(e => console.warn('Email dispatch notice:', e));
         }
 
-        alert("Whole Flat listed successfully! Seekers matching within 2.5km will receive alerts.");
         closeModal("owner-whole-modal");
         document.getElementById("owner-whole-form").reset();
         await loadPins();
+
+        window.showListingSuccessAndShare(
+            {
+                bhk: bhk,
+                rent: rent,
+                deposit: payloadPin.p_deposit,
+                furnishing: payloadPin.p_furnishing,
+                area: 'Chennai',
+                is_listing: true,
+                looking_for_flatmate: false,
+                feedback: 'Direct Owner Whole Flat Listing'
+            },
+            "Your flat is live on the Chennai Rents map. Share directly to WhatsApp groups and Instagram stories to close tenants faster!",
+            `<div>• <strong>Type:</strong> ${bhk} BHK Whole Flat (Rent)</div>
+             <div>• <strong>Rent:</strong> ₹${Number(rent).toLocaleString('en-IN')}/month</div>
+             <div>• <strong>Deposit:</strong> ₹${Number(payloadPin.p_deposit).toLocaleString('en-IN')}</div>
+             <div>• <strong>Contact:</strong> ${phone}</div>`
+        );
     } catch (err) {
         alert(err.message);
     }
@@ -1628,10 +1671,24 @@ document.getElementById("owner-room-form").addEventListener("submit", async (e) 
             }).catch(e => console.warn('Email dispatch notice:', e));
         }
 
-        alert("Room listed successfully! Seekers matching within 2.5km will receive alerts.");
         closeModal("owner-room-modal");
         document.getElementById("owner-room-form").reset();
         await loadPins();
+
+        window.showListingSuccessAndShare(
+            {
+                bhk: 'Room',
+                rent: rent,
+                area: 'Chennai',
+                is_listing: true,
+                looking_for_flatmate: true,
+                feedback: 'Room in Shared Flat Listing'
+            },
+            "Your room listing is live on the Chennai Rents map. Share directly to flatmate WhatsApp groups and your Instagram Story!",
+            `<div>• <strong>Type:</strong> Room in Shared Flat (Flatmate Wanted)</div>
+             <div>• <strong>Rent:</strong> ₹${Number(rent).toLocaleString('en-IN')}/month</div>
+             <div>• <strong>Contact:</strong> ${phone}</div>`
+        );
     } catch (err) {
         alert(err.message);
     }
@@ -2368,9 +2425,31 @@ function calculateAvgRentNearCoords(coords, name) {
 // 14. WhatsApp & Instagram Sharing & Express Interest Flow
 window.shareWhatsApp = function() {
     if (!currentPin) return;
-    const rentFormatted = Number(currentPin.rent).toLocaleString('en-IN');
-    const flatType = currentPin.is_listing ? (currentPin.looking_for_flatmate ? 'Room in shared flat' : 'Whole flat') : 'rent pin';
-    const msg = `Check out this rental on chennairents.in: ${currentPin.bhk} BHK ${flatType} in ${currentPin.area || 'Chennai'} for ₹${rentFormatted}/month. See full details on map: https://www.chennairents.in/listings`;
+    const isSale = currentPin.transaction_type === 'sale' || (currentPin.feedback && currentPin.feedback.includes('[FOR_SALE'));
+    const isRoom = currentPin.looking_for_flatmate;
+    const rentFormatted = Number(currentPin.sale_price || currentPin.rent).toLocaleString('en-IN');
+    const flatType = isSale ? 'Property for Sale' : (currentPin.is_listing ? (isRoom ? 'Room in Shared Flat' : 'Whole Flat') : 'Rental Flat');
+    const priceText = isSale ? `₹${formatInLakhsCrores(currentPin.sale_price || currentPin.rent)}` : `₹${rentFormatted}/month`;
+    const areaName = currentPin.area || 'Chennai';
+
+    const header = isSale 
+        ? '🏡 *DIRECT OWNER PROPERTY FOR SALE - ZERO BROKERAGE*' 
+        : isRoom 
+        ? '🛏️ *FLATMATE WANTED / ROOM FOR RENT - ZERO BROKERAGE*' 
+        : '🏡 *DIRECT OWNER RENTAL - ZERO BROKERAGE*';
+
+    const msg = `${header}
+
+📍 *Location:* ${areaName}, Chennai
+🏠 *Configuration:* ${currentPin.bhk || ''} BHK ${flatType}
+💰 *${isSale ? 'Asking Price' : 'Rent'}:* ${priceText}
+✨ *100% Broker-Free • Verified Registry*
+
+👉 *View verified details on Chennai Rents:*
+https://www.chennairents.in/listings
+
+_Shared via chennairents.in - Chennai's Zero Broker Rental Registry_`;
+
     const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
     window.open(url, '_blank');
 };
