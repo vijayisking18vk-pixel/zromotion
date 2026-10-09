@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { LOCALITY_POSTS, GUIDE_POSTS } from '../data/posts';
 import MarinaDivider from '../components/MarinaDivider';
 import SEOHead from '../components/SEOHead';
+import ReelEmbed from '../components/ReelEmbed';
 import { AutoRickshawDoodle, HandDrawnArrow } from '../components/ChennaiDoodles';
 import { MapPin, Plus, Compass, Instagram, Building2, CheckCircle2, ArrowRight } from 'lucide-react';
 import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../config';
@@ -37,6 +38,20 @@ function getPostCta(post) {
   }
   return `Read ${post.title.split(':')[0]}`;
 }
+
+
+// ── Instagram Reels: new property walk-throughs ─────────────────────────────
+// Add new reel objects here as you post them on @chennai_rents.
+// Only reelId is required; title, bhk, locality, and url enrich the card.
+const REELS = [
+  {
+    reelId: 'DeRJdpJptgl',
+    title: 'New Property Available',
+    bhk: 'New',
+    locality: 'Chennai',
+    url: 'https://www.instagram.com/reel/DeRJdpJptgl/',
+  },
+];
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('all');
@@ -116,7 +131,113 @@ export default function Home() {
 
       <MarinaDivider variant="default" />
 
-      {/* ── DUAL HIGHLIGHT SECTION: RENT MAP & LIST PROPERTY ── */}
+      {/* ── NEW PROPERTIES: INSTAGRAM REELS ── */}
+      {REELS.length > 0 && (
+        <section style={{ backgroundColor: 'var(--c-page-bg)', paddingBlock: '3.5rem', borderBottom: '1px solid var(--c-border)' }}>
+          <div className="container">
+            {/* Section header */}
+            <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '2rem' }}>
+              <div>
+                <span className="tag-eyebrow" style={{ display: 'inline-flex', marginBottom: '0.4rem' }}>
+                  <span className="tag-bullet" />
+                  LIVE NOW · @CHENNAI_RENTS
+                </span>
+                <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, margin: '0 0 0.35rem 0', fontSize: 'clamp(1.5rem, 3vw, 2rem)' }}>
+                  New Properties Available
+                </h2>
+                <p style={{ color: 'var(--c-ink-muted)', fontSize: '0.97rem', margin: 0, maxWidth: '480px', lineHeight: 1.6 }}>
+                  Walk-through video tours of vacant homes — tap to watch before visiting in person.
+                </p>
+              </div>
+              <motion.a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-dark"
+                whileHover={reduce ? {} : { y: -1 }}
+                whileTap={reduce ? {} : { y: 0 }}
+                style={{ flexShrink: 0 }}
+              >
+                <Instagram size={16} />
+                <span>See All on {INSTAGRAM_HANDLE}</span>
+              </motion.a>
+            </div>
+
+            {/* Horizontal scroll row of reel cards */}
+            <div
+              style={{
+                display: 'flex',
+                gap: '1.25rem',
+                overflowX: 'auto',
+                paddingBottom: '1rem',
+                WebkitOverflowScrolling: 'touch',
+                scrollSnapType: 'x mandatory',
+                msOverflowStyle: 'none',
+                scrollbarWidth: 'none',
+              }}
+            >
+              <style>{`.reels-row::-webkit-scrollbar { display: none; }`}</style>
+              {REELS.map((reel) => (
+                <div
+                  key={reel.reelId}
+                  style={{
+                    flexShrink: 0,
+                    scrollSnapAlign: 'start',
+                    width: 'clamp(240px, 30vw, 320px)',
+                  }}
+                >
+                  <ReelEmbed reel={reel} />
+                </div>
+              ))}
+
+              {/* "See more" ghost card — always last */}
+              <motion.a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={reduce ? {} : { y: -3 }}
+                style={{
+                  flexShrink: 0,
+                  scrollSnapAlign: 'start',
+                  width: 'clamp(200px, 22vw, 260px)',
+                  borderRadius: '12px',
+                  border: '2px dashed var(--c-border)',
+                  background: 'var(--c-sand-light)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.75rem',
+                  padding: '2rem 1.5rem',
+                  textDecoration: 'none',
+                  color: 'var(--c-ink)',
+                  cursor: 'pointer',
+                  minHeight: '200px',
+                }}
+              >
+                <div style={{
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--c-auto-yellow)',
+                  border: '2px solid var(--c-ink)',
+                  boxShadow: '3px 3px 0 var(--c-ink)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                  <Instagram size={22} />
+                </div>
+                <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '0.9rem', textAlign: 'center', lineHeight: 1.4 }}>
+                  More homes on {INSTAGRAM_HANDLE}
+                </span>
+              </motion.a>
+            </div>
+          </div>
+        </section>
+      )}
+
+
       <section style={{ backgroundColor: 'var(--c-page-bg)', paddingBlock: '4rem', borderBottom: '1px solid var(--c-border)' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '2.75rem' }}>
