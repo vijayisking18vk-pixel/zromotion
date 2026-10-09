@@ -45,11 +45,11 @@ function getPostCta(post) {
 // Only reelId is required; title, bhk, locality, and url enrich the card.
 const REELS = [
   {
-    reelId: 'DeRJdpJptgl',
-    title: 'New Property Available',
-    bhk: 'New',
-    locality: 'Chennai',
-    url: 'https://www.instagram.com/reel/DeRJdpJptgl/',
+    reelId: 'DeRcRoiJtob',
+    title: '2BHK House • 1,200 sq.ft',
+    bhk: '2 BHK',
+    locality: 'Perungalathur',
+    url: 'https://www.instagram.com/reel/DeRcRoiJtob/?srtk=endnYmxkYzFxNjFp',
   },
 ];
 
@@ -146,7 +146,7 @@ export default function Home() {
                   New Properties Available
                 </h2>
                 <p style={{ color: 'var(--c-ink-muted)', fontSize: '0.95rem', margin: 0, maxWidth: '520px', lineHeight: 1.55 }}>
-                  Walk-through video tours of vacant homes — tap to watch before visiting in person.
+                  Walk-through video tours of vacant homes: tap to watch before visiting in person.
                 </p>
               </div>
               <motion.a
@@ -173,7 +173,7 @@ export default function Home() {
                 </div>
               ))}
 
-              {/* "See more" ghost card — always last */}
+              {/* "See more" ghost card: always last */}
               <motion.a
                 href={INSTAGRAM_URL}
                 target="_blank"

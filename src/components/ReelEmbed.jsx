@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Play, Instagram, ExternalLink, AlertCircle } from 'lucide-react';
+import { Play, Instagram, ExternalLink, AlertCircle, MapPin } from 'lucide-react';
 import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../config';
 
 
@@ -85,45 +85,79 @@ export default function ReelEmbed({ reel }) {
       {/* ── Header bar ────────────────────────────────────────────── */}
       <div
         style={{
-          padding: '0.7rem 1rem',
+          padding: '0.65rem 0.9rem',
           borderBottom: '1px solid var(--c-border)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           background: 'var(--c-header-bg)',
-          gap: '0.5rem',
+          gap: '0.45rem',
         }}
       >
-        <span
-          style={{
-            fontFamily: 'var(--font-heading)',
-            fontSize: '0.85rem',
-            fontWeight: 700,
-            color: 'var(--c-ink)',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {reel.title || 'Vacant Home Video Tour'}
-        </span>
-        {(reel.bhk) && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', minWidth: 0, flex: 1 }}>
           <span
             style={{
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
+              backgroundColor: 'var(--c-ripon-red)',
               flexShrink: 0,
-              fontSize: '0.7rem',
-              fontWeight: 700,
+            }}
+            aria-hidden="true"
+          />
+          <span
+            style={{
               fontFamily: 'var(--font-heading)',
-              padding: '0.15rem 0.5rem',
-              borderRadius: '4px',
-              background: 'var(--c-auto-yellow)',
+              fontSize: '0.85rem',
+              fontWeight: 700,
               color: 'var(--c-ink)',
-              border: '1.5px solid var(--c-ink)',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
             }}
           >
-            {reel.bhk}
+            {reel.title || 'Vacant Home Video Tour'}
           </span>
-        )}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexShrink: 0 }}>
+          {reel.locality && (
+            <span
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.25rem',
+                fontSize: '0.72rem',
+                fontWeight: 600,
+                padding: '0.15rem 0.5rem',
+                borderRadius: '999px',
+                border: '1px solid var(--c-border)',
+                background: 'var(--c-page-bg)',
+                color: 'var(--c-ink)',
+                fontFamily: 'var(--font-body)',
+              }}
+            >
+              <MapPin size={11} style={{ color: 'var(--c-ripon-red)' }} />
+              {reel.locality}
+            </span>
+          )}
+          {reel.bhk && (
+            <span
+              style={{
+                flexShrink: 0,
+                fontSize: '0.7rem',
+                fontWeight: 700,
+                fontFamily: 'var(--font-heading)',
+                padding: '0.15rem 0.5rem',
+                borderRadius: '4px',
+                background: 'var(--c-auto-yellow)',
+                color: 'var(--c-ink)',
+                border: '1.5px solid var(--c-ink)',
+              }}
+            >
+              {reel.bhk}
+            </span>
+          )}
+        </div>
       </div>
 
       {/* ── Video area (9:16 aspect ratio) ────────────────────────── */}
