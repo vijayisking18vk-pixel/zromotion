@@ -146,7 +146,7 @@ export default function Home() {
                   New Properties Available
                 </h2>
                 <p style={{ color: 'var(--c-ink-muted)', fontSize: '0.95rem', margin: 0, maxWidth: '520px', lineHeight: 1.55 }}>
-                  Walk-through video tours of vacant homes — tap to watch before visiting in person.
+                  Walk-through video tours of vacant homes: tap to watch before visiting in person.
                 </p>
               </div>
               <motion.a
