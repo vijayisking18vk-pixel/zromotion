@@ -73,9 +73,8 @@ export default function ReelEmbed({ reel }) {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        minWidth: '270px',
-        maxWidth: '360px',
         width: '100%',
+        maxWidth: '380px',
         borderRadius: '12px',
         border: '2px solid var(--c-border)',
         overflow: 'hidden',
