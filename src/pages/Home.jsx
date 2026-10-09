@@ -45,11 +45,11 @@ function getPostCta(post) {
 // Only reelId is required; title, bhk, locality, and url enrich the card.
 const REELS = [
   {
-    reelId: 'DeRJdpJptgl',
+    reelId: 'DeRcRoiJtob',
     title: '2BHK House · 1,200 sq.ft',
-    bhk: '2 BHK',
-    locality: 'Perungalathur',
-    url: 'https://www.instagram.com/reel/DeRJdpJptgl/',
+    bhk: 'Perungalathur',
+    locality: 'New Perungalathur, Chennai',
+    url: 'https://www.instagram.com/reel/DeRcRoiJtob/',
   },
 ];
 

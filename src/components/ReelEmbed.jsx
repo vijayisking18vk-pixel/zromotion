@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Instagram, ExternalLink, AlertCircle, MapPin } from 'lucide-react';
+import { Instagram, ExternalLink, AlertCircle } from 'lucide-react';
 import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../config';
 
 /**
  * ReelEmbed
  *
  * Clean, properly proportioned Instagram Reel card that respects
- * Instagram's minimum embed geometry (326px+ width, 540px height)
+ * Instagram's minimum embed geometry (326px+ width, 560px height)
  * so the profile header and video controls never clip or overlap.
  */
 export default function ReelEmbed({ reel }) {
@@ -58,8 +58,6 @@ export default function ReelEmbed({ reel }) {
               fontSize: '0.88rem',
               fontWeight: 800,
               color: 'var(--c-ink)',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
               whiteSpace: 'nowrap',
             }}
           >
@@ -67,43 +65,23 @@ export default function ReelEmbed({ reel }) {
           </span>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexShrink: 0 }}>
-          {reel?.locality && (
-            <span
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '3px',
-                fontSize: '0.72rem',
-                fontWeight: 600,
-                color: 'var(--c-ink-muted)',
-                background: 'var(--c-page-bg)',
-                padding: '0.18rem 0.5rem',
-                borderRadius: '999px',
-                border: '1px solid var(--c-border)',
-              }}
-            >
-              <MapPin size={11} style={{ color: 'var(--c-ripon-red)' }} />
-              {reel.locality}
-            </span>
-          )}
-          {reel?.bhk && (
-            <span
-              style={{
-                fontSize: '0.7rem',
-                fontWeight: 800,
-                fontFamily: 'var(--font-heading)',
-                padding: '0.18rem 0.55rem',
-                borderRadius: '6px',
-                background: 'var(--c-auto-yellow)',
-                color: 'var(--c-ink)',
-                border: '1px solid var(--c-ink)',
-              }}
-            >
-              {reel.bhk}
-            </span>
-          )}
-        </div>
+        {reel?.bhk && (
+          <span
+            style={{
+              flexShrink: 0,
+              fontSize: '0.72rem',
+              fontWeight: 800,
+              fontFamily: 'var(--font-heading)',
+              padding: '0.2rem 0.6rem',
+              borderRadius: '6px',
+              background: 'var(--c-auto-yellow)',
+              color: 'var(--c-ink)',
+              border: '1px solid var(--c-ink)',
+            }}
+          >
+            {reel.bhk}
+          </span>
+        )}
       </div>
 
       {/* Instagram Embed Frame - sized to prevent header clipping */}
@@ -111,7 +89,7 @@ export default function ReelEmbed({ reel }) {
         style={{
           position: 'relative',
           width: '100%',
-          height: '545px',
+          height: '560px',
           background: '#FFFFFF',
           overflow: 'hidden',
         }}
@@ -120,16 +98,15 @@ export default function ReelEmbed({ reel }) {
           <iframe
             src={embedUrl}
             title={reel?.title || 'Instagram Property Walk-Through'}
-            loading="lazy"
             style={{
               width: '100%',
-              height: '555px',
+              height: '560px',
               border: 'none',
               display: 'block',
-              marginTop: '2px',
             }}
             scrolling="no"
-            allow="encrypted-media; picture-in-picture"
+            allowTransparency="true"
+            allow="encrypted-media"
             onError={() => setHasError(true)}
           />
         ) : (
