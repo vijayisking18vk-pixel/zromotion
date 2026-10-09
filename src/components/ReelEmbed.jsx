@@ -1,91 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
-import { Play, Instagram, ExternalLink, AlertCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { Instagram, ExternalLink, AlertCircle, MapPin } from 'lucide-react';
 import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../config';
-
 
 /**
  * ReelEmbed
  *
- * Click-to-load Instagram Reel card. Keeps page fast and respects
- * privacy by only mounting the iframe after the user taps "Play".
- *
- * Props:
- *   reel: {
- *     reelId   : string  – short Instagram reel ID (e.g. "DdbmprOsxmq")
- *     title    : string  – card header title
- *     bhk      : string  – e.g. "2 BHK"
- *     locality : string  – neighbourhood label in the footer
- *     poster   : string  – (optional) preview image URL
- *   }
+ * Clean, properly proportioned Instagram Reel card that respects
+ * Instagram's minimum embed geometry (326px+ width, 540px height)
+ * so the profile header and video controls never clip or overlap.
  */
 export default function ReelEmbed({ reel }) {
-  const prefersReduced = useReducedMotion();
-
-  const [phase, setPhase] = useState('idle'); // 'idle' | 'loading' | 'loaded' | 'error'
+  const [hasError, setHasError] = useState(false);
 
   const reelId = reel?.reelId ?? extractReelId(reel?.url);
   const embedUrl = reelId ? `https://www.instagram.com/reel/${reelId}/embed/` : null;
-
-  /* Show a 500 ms spinner before revealing the iframe */
-  function handlePlay() {
-    if (!embedUrl) { setPhase('error'); return; }
-    setPhase('loading');
-  }
-
-  useEffect(() => {
-    if (phase === 'loading') {
-      const t = setTimeout(() => setPhase('loaded'), 500);
-      return () => clearTimeout(t);
-    }
-  }, [phase]);
-
-  /* Card entrance animation – skip if reduced motion */
-  const cardVariants = prefersReduced
-    ? {}
-    : {
-        initial: { opacity: 0, y: 32 },
-        whileInView: { opacity: 1, y: 0 },
-      };
-
-  const cardViewport = { once: true, amount: 0.2 };
-  const cardTransition = { duration: 0.5 };
-
-  /* Hover lift – skip if reduced motion */
-  const hoverEffect = prefersReduced ? {} : { y: -4 };
-  const hoverTransition = prefersReduced
-    ? {}
-    : { type: 'spring', stiffness: 300, damping: 22 };
+  const directUrl = reel?.url || (reelId ? `https://www.instagram.com/reel/${reelId}/` : INSTAGRAM_URL);
 
   return (
-    <motion.div
-      {...(prefersReduced
-        ? {}
-        : {
-            initial: cardVariants.initial,
-            whileInView: cardVariants.whileInView,
-            viewport: cardViewport,
-            transition: cardTransition,
-          })}
-      whileHover={hoverEffect}
-      /* spring props live on the component, not the style */
-      {...(!prefersReduced && { transition: { ...cardTransition, ...hoverTransition } })}
+    <div
       style={{
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
         maxWidth: '380px',
-        borderRadius: '12px',
-        border: '2px solid var(--c-border)',
+        borderRadius: '14px',
+        border: '1.5px solid var(--c-border)',
         overflow: 'hidden',
-        background: 'var(--c-page-bg)',
-        boxShadow: '4px 6px 0 var(--c-border)',
+        background: '#FFFFFF',
+        boxShadow: 'var(--shadow-card, 0 4px 16px rgba(30, 27, 24, 0.06))',
       }}
     >
-      {/* ── Header bar ────────────────────────────────────────────── */}
+      {/* Top editorial bar */}
       <div
         style={{
-          padding: '0.7rem 1rem',
+          padding: '0.75rem 1rem',
           borderBottom: '1px solid var(--c-border)',
           display: 'flex',
           alignItems: 'center',
@@ -94,211 +42,108 @@ export default function ReelEmbed({ reel }) {
           gap: '0.5rem',
         }}
       >
-        <span
-          style={{
-            fontFamily: 'var(--font-heading)',
-            fontSize: '0.85rem',
-            fontWeight: 700,
-            color: 'var(--c-ink)',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {reel.title || 'Vacant Home Video Tour'}
-        </span>
-        {(reel.bhk) && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', minWidth: 0 }}>
           <span
             style={{
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
+              backgroundColor: 'var(--c-ripon-red)',
               flexShrink: 0,
-              fontSize: '0.7rem',
-              fontWeight: 700,
+            }}
+          />
+          <span
+            style={{
               fontFamily: 'var(--font-heading)',
-              padding: '0.15rem 0.5rem',
-              borderRadius: '4px',
-              background: 'var(--c-auto-yellow)',
+              fontSize: '0.88rem',
+              fontWeight: 800,
               color: 'var(--c-ink)',
-              border: '1.5px solid var(--c-ink)',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
             }}
           >
-            {reel.bhk}
+            {reel?.title || 'Featured Property Tour'}
           </span>
-        )}
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexShrink: 0 }}>
+          {reel?.locality && (
+            <span
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '3px',
+                fontSize: '0.72rem',
+                fontWeight: 600,
+                color: 'var(--c-ink-muted)',
+                background: 'var(--c-page-bg)',
+                padding: '0.18rem 0.5rem',
+                borderRadius: '999px',
+                border: '1px solid var(--c-border)',
+              }}
+            >
+              <MapPin size={11} style={{ color: 'var(--c-ripon-red)' }} />
+              {reel.locality}
+            </span>
+          )}
+          {reel?.bhk && (
+            <span
+              style={{
+                fontSize: '0.7rem',
+                fontWeight: 800,
+                fontFamily: 'var(--font-heading)',
+                padding: '0.18rem 0.55rem',
+                borderRadius: '6px',
+                background: 'var(--c-auto-yellow)',
+                color: 'var(--c-ink)',
+                border: '1px solid var(--c-ink)',
+              }}
+            >
+              {reel.bhk}
+            </span>
+          )}
+        </div>
       </div>
 
-      {/* ── Video area (9:16 aspect ratio) ────────────────────────── */}
+      {/* Instagram Embed Frame - sized to prevent header clipping */}
       <div
         style={{
           position: 'relative',
-          aspectRatio: '9 / 16',
           width: '100%',
-          background: '#F5ECE1',
+          height: '545px',
+          background: '#FFFFFF',
           overflow: 'hidden',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
         }}
       >
-
-        {/* ── IDLE: placeholder ─────────────────────────────────────*/}
-        {phase === 'idle' && (
-          <button
-            onClick={handlePlay}
-            aria-label={`Watch home video tour on Instagram: ${reel.title || 'Reel'}`}
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              border: 'none',
-              background: 'none',
-              cursor: 'pointer',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '1.5rem',
-              textAlign: 'center',
-              color: 'var(--c-ink)',
-            }}
-          >
-            {/* Optional blurred poster */}
-            {reel.poster && (
-              <img
-                src={reel.poster}
-                alt=""
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  opacity: 0.3,
-                  filter: 'blur(2px)',
-                }}
-              />
-            )}
-
-            {/* SVG dashed border — kolam effect */}
-            <svg
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
-              aria-hidden="true"
-            >
-              <rect
-                x="10"
-                y="10"
-                width="calc(100% - 20)"
-                height="calc(100% - 20)"
-                rx="6"
-                ry="6"
-                fill="none"
-                stroke="var(--c-border)"
-                strokeWidth="1.5"
-                strokeDasharray="6 5"
-              />
-            </svg>
-
-
-
-            {/* Yellow play button */}
-            <motion.div
-              whileHover={prefersReduced ? {} : { scale: 1.1 }}
-              whileTap={prefersReduced ? {} : { scale: 0.95 }}
-              style={{
-                width: '64px',
-                height: '64px',
-                borderRadius: '50%',
-                backgroundColor: 'var(--c-auto-yellow)',
-                border: '2px solid var(--c-ink)',
-                boxShadow: '3px 4px 0 var(--c-ink)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1rem',
-                zIndex: 2,
-              }}
-            >
-              <Play size={28} fill="var(--c-ink)" stroke="var(--c-ink)" style={{ marginLeft: '4px' }} />
-            </motion.div>
-
-            <p
-              style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: '1.05rem',
-                fontWeight: 700,
-                color: 'var(--c-ink)',
-                marginBottom: '0.35rem',
-                zIndex: 2,
-                position: 'relative',
-              }}
-            >
-              Tap to watch this home
-            </p>
-            <p
-              style={{
-                fontSize: '0.8rem',
-                color: 'var(--c-ink-muted)',
-                lineHeight: 1.4,
-                zIndex: 2,
-                position: 'relative',
-                maxWidth: '210px',
-              }}
-            >
-              on Instagram ({INSTAGRAM_HANDLE})
-            </p>
-          </button>
-        )}
-
-        {/* ── LOADING: spinner ──────────────────────────────────────*/}
-        {phase === 'loading' && (
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '1rem',
-              color: 'var(--c-ink-muted)',
-            }}
-          >
-            {/* Simple CSS spinner */}
-            <div
-              style={{
-                width: '36px',
-                height: '36px',
-                borderRadius: '50%',
-                border: '3px solid var(--c-border)',
-                borderTopColor: 'var(--c-auto-yellow)',
-                animation: 'reel-spin 0.75s linear infinite',
-              }}
-            />
-            <style>{`@keyframes reel-spin { to { transform: rotate(360deg); } }`}</style>
-            <span style={{ fontSize: '0.85rem', fontFamily: 'var(--font-body)' }}>Loading reel…</span>
-          </div>
-        )}
-
-        {/* ── LOADED: iframe ────────────────────────────────────────*/}
-        {phase === 'loaded' && (
+        {!hasError && embedUrl ? (
           <iframe
             src={embedUrl}
-            title={reel.title || 'Instagram Reel'}
-            style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
+            title={reel?.title || 'Instagram Property Walk-Through'}
+            loading="lazy"
+            style={{
+              width: '100%',
+              height: '555px',
+              border: 'none',
+              display: 'block',
+              marginTop: '2px',
+            }}
             scrolling="no"
-            allowTransparency="true"
-            allow="encrypted-media"
-            onError={() => setPhase('error')}
+            allow="encrypted-media; picture-in-picture"
+            onError={() => setHasError(true)}
           />
-        )}
-
-        {/* ── ERROR: fallback ───────────────────────────────────────*/}
-        {(phase === 'error' || (!embedUrl && phase !== 'idle')) && (
+        ) : (
           <div
             style={{
+              height: '100%',
               padding: '2rem 1.5rem',
               textAlign: 'center',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              justifyContent: 'center',
               gap: '0.75rem',
+              background: 'var(--c-page-bg)',
             }}
           >
             <AlertCircle size={36} color="var(--c-ripon-red)" />
@@ -306,95 +151,34 @@ export default function ReelEmbed({ reel }) {
               style={{
                 fontFamily: 'var(--font-heading)',
                 fontSize: '1rem',
-                fontWeight: 600,
+                fontWeight: 700,
                 color: 'var(--c-ink)',
+                margin: 0,
               }}
             >
               Reel preview unavailable
             </p>
-            <p style={{ fontSize: '0.82rem', color: 'var(--c-ink-muted)', lineHeight: 1.4, maxWidth: '220px' }}>
-              Watch this vacant home directly on our official Instagram page.
+            <p style={{ fontSize: '0.85rem', color: 'var(--c-ink-muted)', lineHeight: 1.5, maxWidth: '240px', margin: 0 }}>
+              Watch this property walk-through directly on our official Instagram page.
             </p>
             <a
-              href={INSTAGRAM_URL}
+              href={directUrl}
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.4rem',
-                padding: '0.5rem 1rem',
-                background: 'var(--c-auto-yellow)',
-                color: 'var(--c-ink)',
-                fontFamily: 'var(--font-heading)',
-                fontWeight: 700,
-                fontSize: '0.85rem',
-                borderRadius: '6px',
-                border: '2px solid var(--c-ink)',
-                boxShadow: '2px 3px 0 var(--c-ink)',
-                textDecoration: 'none',
-              }}
+              className="btn-yellow"
+              style={{ marginTop: '0.5rem', fontSize: '0.85rem' }}
             >
-              <Instagram size={16} aria-hidden="true" />
-              Open {INSTAGRAM_HANDLE}
+              <Instagram size={16} />
+              <span>Open {INSTAGRAM_HANDLE}</span>
+              <ExternalLink size={13} />
             </a>
           </div>
         )}
       </div>
-
-      {/* ── Footer bar ────────────────────────────────────────────── */}
-      <div
-        style={{
-          padding: '0.75rem 1rem',
-          borderTop: '1px solid var(--c-border)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          background: 'var(--c-header-bg)',
-          gap: '0.5rem',
-        }}
-      >
-        <span
-          style={{
-            fontSize: '0.82rem',
-            color: 'var(--c-ink-muted)',
-            fontFamily: 'var(--font-body)',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {reel.locality || 'Chennai'}
-        </span>
-        <a
-          href={reel.url ? reel.url : INSTAGRAM_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            flexShrink: 0,
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.3rem',
-            fontSize: '0.82rem',
-            fontFamily: 'var(--font-body)',
-            fontWeight: 700,
-            color: 'var(--c-marina-blue)',
-            textDecoration: 'none',
-          }}
-        >
-          Watch on Instagram <ExternalLink size={13} aria-hidden="true" />
-        </a>
-      </div>
-    </motion.div>
+    </div>
   );
 }
 
-/* ── Helpers ──────────────────────────────────────────────────────── */
-
-/**
- * Extracts the short reel ID from a full Instagram reel URL.
- * Returns null if extraction fails.
- */
 function extractReelId(url) {
   if (!url) return null;
   try {

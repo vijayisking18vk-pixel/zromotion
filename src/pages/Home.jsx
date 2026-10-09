@@ -46,9 +46,9 @@ function getPostCta(post) {
 const REELS = [
   {
     reelId: 'DeRJdpJptgl',
-    title: 'New Property Available',
-    bhk: 'New',
-    locality: 'Chennai',
+    title: '2BHK House · 1,200 sq.ft',
+    bhk: '2 BHK',
+    locality: 'Perungalathur',
     url: 'https://www.instagram.com/reel/DeRJdpJptgl/',
   },
 ];
@@ -131,22 +131,21 @@ export default function Home() {
 
       <MarinaDivider variant="default" />
 
-      {/* ── NEW PROPERTIES: INSTAGRAM REELS ── */}
+      {/* ── NEW PROPERTIES: INSTAGRAM REELS SHOWCASE ── */}
       {REELS.length > 0 && (
         <section className="reels-section" style={{ backgroundColor: 'var(--c-page-bg)', borderBottom: '1px solid var(--c-border)' }}>
           <div className="container">
-            {/* Section header */}
             <div className="reels-header">
               <div>
                 <span className="tag-eyebrow" style={{ display: 'inline-flex', marginBottom: '0.4rem' }}>
                   <span className="tag-bullet" />
-                  LIVE NOW · @CHENNAI_RENTS
+                  LIVE WALK-THROUGH TOURS · @CHENNAI_RENTS
                 </span>
                 <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, margin: '0 0 0.35rem 0', fontSize: 'clamp(1.4rem, 4vw, 2rem)' }}>
                   New Properties Available
                 </h2>
-                <p style={{ color: 'var(--c-ink-muted)', fontSize: '0.95rem', margin: 0, maxWidth: '520px', lineHeight: 1.55 }}>
-                  Walk-through video tours of vacant homes: tap to watch before visiting in person.
+                <p style={{ color: 'var(--c-ink-muted)', fontSize: '0.96rem', margin: 0, maxWidth: '560px', lineHeight: 1.6 }}>
+                  Watch unedited room-by-room video tours of available homes across Chennai before visiting in person.
                 </p>
               </div>
               <motion.a
@@ -158,52 +157,90 @@ export default function Home() {
                 whileTap={reduce ? {} : { y: 0 }}
               >
                 <Instagram size={16} />
-                <span>See All on {INSTAGRAM_HANDLE}</span>
+                <span>See All Reels on {INSTAGRAM_HANDLE}</span>
               </motion.a>
             </div>
 
-            {/* Horizontal scroll row of reel cards */}
-            <div className="reels-scroll-row">
-              {REELS.map((reel) => (
-                <div
-                  key={reel.reelId}
-                  className="reel-card-wrapper"
-                >
-                  <ReelEmbed reel={reel} />
-                </div>
-              ))}
+            <div className="reels-showcase-grid">
+              {/* Left: Properly proportioned Instagram Reel card(s) */}
+              <div className="reels-video-col">
+                {REELS.map((reel) => (
+                  <div key={reel.reelId} className="reel-card-wrapper">
+                    <ReelEmbed reel={reel} />
+                  </div>
+                ))}
+              </div>
 
-              {/* "See more" ghost card — always last */}
-              <motion.a
-                href={INSTAGRAM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={reduce ? {} : { y: -3 }}
-                whileTap={reduce ? {} : { scale: 0.98 }}
-                className="reel-ghost-card"
-              >
-                <div style={{
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '50%',
-                  backgroundColor: 'var(--c-auto-yellow)',
-                  border: '2px solid var(--c-ink)',
-                  boxShadow: '3px 3px 0 var(--c-ink)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                  <Instagram size={22} />
+              {/* Right: Editorial companion card */}
+              <div className="reel-companion-card">
+                <div>
+                  <div
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      padding: '0.35rem 0.75rem',
+                      borderRadius: '999px',
+                      backgroundColor: 'var(--c-card-bg)',
+                      border: '1px solid var(--c-border)',
+                      marginBottom: '1.25rem',
+                    }}
+                  >
+                    <Instagram size={15} style={{ color: 'var(--c-ripon-red)' }} />
+                    <span style={{ fontFamily: 'var(--font-heading)', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.04em', color: 'var(--c-ink)' }}>
+                      DAILY VIDEO TOURS ON INSTAGRAM
+                    </span>
+                  </div>
+
+                  <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: 'clamp(1.25rem, 2.5vw, 1.55rem)', color: 'var(--c-ink)', margin: '0 0 0.85rem 0', lineHeight: 1.3 }}>
+                    Inspect Real Chennai Homes Before Stepping Out
+                  </h3>
+
+                  <p style={{ color: 'var(--c-ink-muted)', fontSize: '0.96rem', lineHeight: 1.65, margin: '0 0 1.5rem 0' }}>
+                    Static photos often hide cramped layouts, poor ventilation, or narrow street access. Every video walk-through published on <strong>{INSTAGRAM_HANDLE}</strong> shows you the actual floor plan, natural light, and neighbourhood surroundings upfront.
+                  </p>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '1.75rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                      <CheckCircle2 size={18} style={{ color: 'var(--c-temple-green)', flexShrink: 0, marginTop: '2px' }} />
+                      <div style={{ fontSize: '0.92rem', color: 'var(--c-ink)', lineHeight: 1.5 }}>
+                        <strong>Unedited Room-by-Room Walkthroughs:</strong> Check living room proportions, kitchen storage, and balcony ventilation in 60 seconds.
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                      <CheckCircle2 size={18} style={{ color: 'var(--c-temple-green)', flexShrink: 0, marginTop: '2px' }} />
+                      <div style={{ fontSize: '0.92rem', color: 'var(--c-ink)', lineHeight: 1.5 }}>
+                        <strong>Clear Locality &amp; Configuration Details:</strong> Square footage, BHK layout, and exact Chennai micro-market tagged on every reel.
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                      <CheckCircle2 size={18} style={{ color: 'var(--c-temple-green)', flexShrink: 0, marginTop: '2px' }} />
+                      <div style={{ fontSize: '0.92rem', color: 'var(--c-ink)', lineHeight: 1.5 }}>
+                        <strong>Direct Inquiry &amp; Free Property Listing:</strong> Reach out directly for available homes or list your own property for free.
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div style={{ textAlign: 'center' }}>
-                  <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '0.95rem', display: 'block', lineHeight: 1.35, marginBottom: '0.25rem' }}>
-                    More homes on {INSTAGRAM_HANDLE}
-                  </span>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--c-ink-muted)' }}>
-                    Watch daily new video walk-throughs &rarr;
-                  </span>
+
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', paddingTop: '1.25rem', borderTop: '1px solid var(--c-border)' }}>
+                  <a
+                    href={INSTAGRAM_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-dark"
+                  >
+                    <Instagram size={16} />
+                    <span>Follow {INSTAGRAM_HANDLE}</span>
+                  </a>
+                  <a
+                    href="/listings/list-property.html"
+                    className="btn-yellow"
+                  >
+                    <Plus size={16} />
+                    <span>List Your Property Free</span>
+                  </a>
                 </div>
-              </motion.a>
+              </div>
             </div>
           </div>
         </section>
@@ -790,11 +827,11 @@ export default function Home() {
         }
         .home-filter-tabs::-webkit-scrollbar { display: none; }
 
-        /* Reels Section: Mobile responsive styles */
+        /* Reels Section: Editorial responsive showcase grid */
         .reels-section {
-          padding-block: 2.25rem;
+          padding-block: 2.5rem;
         }
-        @media (min-width: 640px) {
+        @media (min-width: 768px) {
           .reels-section {
             padding-block: 3.5rem;
           }
@@ -811,7 +848,7 @@ export default function Home() {
             flex-direction: row;
             align-items: flex-end;
             justify-content: space-between;
-            margin-bottom: 2rem;
+            margin-bottom: 2.25rem;
           }
         }
 
@@ -826,49 +863,45 @@ export default function Home() {
           }
         }
 
-        .reels-scroll-row {
-          display: flex;
-          gap: 1rem;
-          overflow-x: auto;
-          padding-bottom: 1rem;
-          -webkit-overflow-scrolling: touch;
-          scroll-snap-type: x mandatory;
-          -ms-overflow-style: none;
-          scrollbar-width: none;
+        .reels-showcase-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+          align-items: stretch;
         }
-        .reels-scroll-row::-webkit-scrollbar {
-          display: none;
-        }
-
-        .reel-card-wrapper {
-          flex-shrink: 0;
-          scroll-snap-align: start;
-          width: 82vw;
-          max-width: 320px;
-        }
-        @media (min-width: 640px) {
-          .reel-card-wrapper {
-            width: 290px;
+        @media (min-width: 768px) {
+          .reels-showcase-grid {
+            grid-template-columns: 360px minmax(0, 1fr);
+            gap: 2rem;
           }
         }
 
-        .reel-ghost-card {
-          flex-shrink: 0;
-          scroll-snap-align: start;
-          width: 70vw;
-          max-width: 260px;
-          border-radius: 12px;
-          border: 2px dashed var(--c-border);
+        .reels-video-col {
+          display: flex;
+          justify-content: center;
+          width: 100%;
+        }
+
+        .reel-card-wrapper {
+          width: 100%;
+          max-width: 360px;
+        }
+
+        .reel-companion-card {
+          border-radius: 14px;
+          border: 1.5px solid var(--c-border);
           background: var(--c-sand-light);
           display: flex;
           flex-direction: column;
-          align-items: center;
-          justifyContent: center;
-          gap: 0.85rem;
-          padding: 1.75rem 1.25rem;
-          text-decoration: none;
+          justify-content: space-between;
+          padding: 1.75rem 1.5rem;
           color: var(--c-ink);
-          cursor: pointer;
+          box-shadow: var(--shadow-card, 0 2px 8px rgba(30, 27, 24, 0.04));
+        }
+        @media (min-width: 768px) {
+          .reel-companion-card {
+            padding: 2.25rem 2.5rem;
+          }
         }
       `}</style>
     </motion.main>
