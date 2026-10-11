@@ -124,11 +124,11 @@ async function generateInventory() {
     });
   });
 
-  // Author Page
-  registerUrl(`${DOMAIN}/author/vijayrajkumar/`, {
-    title: 'R Vijayrajkumar: Founder & Lead Editor | Chennai Rents',
-    metaDescription: 'Author profile and editorial verification standards of R Vijayrajkumar, Lead Editor of Chennai Rents.',
-    canonical: `${DOMAIN}/author/vijayrajkumar/`,
+  // Authors Team Page
+  registerUrl(`${DOMAIN}/authors`, {
+    title: 'Meet the Team | ChennaiRents - Zero-Broker Homes in Chennai',
+    metaDescription: 'Meet the two co-founders behind ChennaiRents: S M Saai Abishek and Vijayrajkumar R.',
+    canonical: `${DOMAIN}/authors`,
     h1: 'R Vijayrajkumar',
     h2h3: 'Editorial Mission | Field Survey Standards | Published Research',
     wordCount: 920,

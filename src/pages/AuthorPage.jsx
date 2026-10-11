@@ -16,7 +16,7 @@ export default function AuthorPage() {
     worksFor: {
       '@type': 'Organization',
       name: 'Chennai Rents',
-      url: 'https://chennairents.in',
+      url: 'https://www.chennairents.in',
     },
     sameAs: AUTHOR_INFO.socialProfiles,
     description: AUTHOR_INFO.bio,
@@ -33,12 +33,12 @@ export default function AuthorPage() {
       <SEOHead
         title={`${AUTHOR_INFO.name}: Founder & Lead Editor | Chennai Rents`}
         description={`Author profile of ${AUTHOR_INFO.name}, Founder and Lead Editorial Reviewer of Chennai Rents. Learn about our crowdsourced methodology and rental transparency standards.`}
-        canonicalUrl={`https://www.chennairents.in/author/${AUTHOR_INFO.slug}`}
+        canonicalUrl="https://www.chennairents.in/authors"
         type="article"
         breadcrumbs={[
           { name: 'Home', url: 'https://www.chennairents.in/' },
-          { name: 'Editorial Team', url: 'https://www.chennairents.in/about' },
-          { name: AUTHOR_INFO.name, url: `https://www.chennairents.in/author/${AUTHOR_INFO.slug}` },
+          { name: 'Editorial Team', url: 'https://www.chennairents.in/authors' },
+          { name: AUTHOR_INFO.name, url: 'https://www.chennairents.in/authors' },
         ]}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(authorSchema) }} />

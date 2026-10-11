@@ -100,8 +100,8 @@ export default function HouseRentChennaiHub({ customSlug }) {
       publisher: {
         '@type': 'Organization',
         name: 'Chennai Rents',
-        url: 'https://chennairents.in',
-        logo: 'https://chennairents.in/chennai-rents-official-logo.jpg',
+        url: 'https://www.chennairents.in',
+        logo: 'https://www.chennairents.in/chennai-rents-official-logo.jpg',
       },
     },
     {
@@ -165,7 +165,7 @@ export default function HouseRentChennaiHub({ customSlug }) {
 
             {/* Author byline and transparency metadata */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap', marginBlock: '0.75rem 1.25rem', fontSize: '0.88rem', color: 'var(--c-ink-muted)' }}>
-              <span>Reviewed by <a href={AUTHOR_INFO.website} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--c-ripon-red)', fontWeight: 700, textDecoration: 'none' }}>{AUTHOR_INFO.name}</a> (<Link to={`/author/${AUTHOR_INFO.slug}`} style={{ color: 'var(--c-marina-blue)', textDecoration: 'none' }}>Editorial Bio</Link>)</span>
+              <span>Reviewed by <a href={AUTHOR_INFO.website} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--c-ripon-red)', fontWeight: 700, textDecoration: 'none' }}>{AUTHOR_INFO.name}</a> (<Link to="/authors" style={{ color: 'var(--c-marina-blue)', textDecoration: 'none' }}>Editorial Team</Link>)</span>
               <span>•</span>
               <span>Last Reviewed: {CHENNAI_RENT_HUB_DATA.lastReviewed}</span>
               <span>•</span>

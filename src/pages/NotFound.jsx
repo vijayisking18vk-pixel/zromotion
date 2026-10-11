@@ -11,7 +11,7 @@ export default function NotFound() {
       <SEOHead
         title="404: Page Not Found | Chennai Rents"
         description="The page you are looking for does not exist on Chennai Rents."
-        canonicalUrl="https://chennairents.in/404"
+        canonicalUrl="https://www.chennairents.in/404"
         robots="noindex, nofollow"
       />
 

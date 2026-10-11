@@ -265,12 +265,12 @@ function QuickFactsCard({ locality }) {
 function RelatedIntentLinks({ locality, activeIntent }) {
   const intents = [
     { label: `Flats for Rent in ${locality.name}`, path: `/chennai/${locality.slug}/flats-for-rent-in-${locality.slug}` },
-    { label: `1 BHK in ${locality.name}`, path: `/chennai/${locality.slug}/1-bhk-for-rent` },
-    { label: `2 BHK in ${locality.name}`, path: `/chennai/${locality.slug}/2-bhk-for-rent` },
-    { label: `3 BHK in ${locality.name}`, path: `/chennai/${locality.slug}/3-bhk-for-rent` },
-    { label: `PG in ${locality.name}`, path: `/chennai/${locality.slug}/pg` },
-    { label: `Furnished flats in ${locality.name}`, path: `/chennai/${locality.slug}/fully-furnished-flats-for-rent` },
-    { label: `Flats under ₹20,000 in ${locality.name}`, path: `/chennai/${locality.slug}/flats-for-rent-under-20000` },
+    { label: `1 BHK in ${locality.name}`, path: `/chennai/${locality.slug}/1bhk-flats-for-rent-in-${locality.slug}` },
+    { label: `2 BHK in ${locality.name}`, path: `/chennai/${locality.slug}/2bhk-flats-for-rent-in-${locality.slug}` },
+    { label: `3 BHK in ${locality.name}`, path: `/chennai/${locality.slug}/3bhk-flats-for-rent-in-${locality.slug}` },
+    { label: `PG in ${locality.name}`, path: `/chennai/${locality.slug}/pg-for-men-in-${locality.slug}` },
+    { label: `Furnished flats in ${locality.name}`, path: `/chennai/${locality.slug}/furnished-flats-for-rent-in-${locality.slug}` },
+    { label: `Flats under ₹20,000 in ${locality.name}`, path: `/chennai/${locality.slug}/flats-for-rent-under-20000-in-${locality.slug}` },
   ];
 
   if (locality.slug === 'anna-nagar' || locality.slug === 'porur' || locality.slug === 't-nagar') {
@@ -496,6 +496,20 @@ export default function LocalityPage({ localitySlug: propSlug }) {
     return <ThoraipakkamLandingPage data={THORAIPAKKAM_PAGES_MAP[intent]} />;
   }
 
+  // Legacy shorthand intent redirects to canonical programmatic landing pages
+  const LEGACY_INTENT_MAP = {
+    'flats-for-rent': `flats-for-rent-in-${locality.slug}`,
+    '1-bhk-for-rent': `1bhk-flats-for-rent-in-${locality.slug}`,
+    '2-bhk-for-rent': `2bhk-flats-for-rent-in-${locality.slug}`,
+    '3-bhk-for-rent': `3bhk-flats-for-rent-in-${locality.slug}`,
+    'pg': `pg-for-men-in-${locality.slug}`,
+    'fully-furnished-flats-for-rent': `furnished-flats-for-rent-in-${locality.slug}`,
+    'flats-for-rent-under-20000': `flats-for-rent-under-20000-in-${locality.slug}`,
+  };
+  if (intent && LEGACY_INTENT_MAP[intent]) {
+    return <Navigate to={`/chennai/${locality.slug}/${LEGACY_INTENT_MAP[intent]}`} replace />;
+  }
+
   const meta = generateSEOMeta({ locality, intent });
   const parsed = parseIntent(intent);
   const pageType = parsed.key || 'locality';
@@ -531,7 +545,7 @@ export default function LocalityPage({ localitySlug: propSlug }) {
       headline: meta.h1,
       description: meta.description,
       datePublished: '2026-06-01',
-      dateModified: '2026-10-02',
+      dateModified: '2026-10-01',
       author: {
         '@type': 'Person',
         name: AUTHOR_INFO.name,
@@ -540,8 +554,8 @@ export default function LocalityPage({ localitySlug: propSlug }) {
       publisher: {
         '@type': 'Organization',
         name: 'Chennai Rents',
-        url: 'https://chennairents.in',
-        logo: 'https://chennairents.in/chennai-rents-official-logo.jpg',
+        url: 'https://www.chennairents.in',
+        logo: 'https://www.chennairents.in/chennai-rents-official-logo.jpg',
       },
     },
     {

@@ -81,53 +81,53 @@ console.log(`✓ Created deliverables/sitemap-url-list.txt (${locMatches.length}
 const intentRows = [
   ['URL', 'Primary Search Intent', 'Target Keywords', 'Page Type', 'Indexation Directive', 'Canonical URL'],
   [`${DOMAIN}/`, 'Brand & Comprehensive City Rental Discovery', 'chennai rents, houses for rent chennai, rent house in chennai', 'Homepage', 'index, follow', `${DOMAIN}/`],
-  [`${DOMAIN}/about/`, 'Company Background, Founder Vision & Value Proposition', 'about chennai rents, transparent rental chennai', 'Informational / About', 'index, follow', `${DOMAIN}/about/`],
-  [`${DOMAIN}/methodology/`, 'Data Authenticity, Empirical Pricing & Water Resilience Audits', 'rental rate methodology chennai, chennai water supply scoring', 'E-E-A-T Trust', 'index, follow', `${DOMAIN}/methodology/`],
-  [`${DOMAIN}/verification/`, 'Listing Integrity, Anti-Fraud & Physical Verification Rules', 'verified rental listings chennai, direct owner verification chennai', 'E-E-A-T Trust', 'index, follow', `${DOMAIN}/verification/`],
-  [`${DOMAIN}/corrections/`, 'Fact-Checking Protocols & Public Community Revision Log', 'chennai rents corrections policy, editorial standards', 'E-E-A-T Trust', 'index, follow', `${DOMAIN}/corrections/`],
-  [`${DOMAIN}/contact/`, 'Editorial Inquiries, Listing Verification & Support Desk', 'contact chennai rents, report rental fraud chennai', 'Contact', 'index, follow', `${DOMAIN}/contact/`],
-  [`${DOMAIN}/privacy/`, 'Data Protection, DPDP Act 2023 & Consent Governance', 'chennai rents privacy policy, data privacy india', 'Legal / Privacy', 'index, follow', `${DOMAIN}/privacy/`],
-  [`${DOMAIN}/data-deletion/`, 'User Data Erasure & Listing Removal Self-Service Protocol', 'delete property listing chennai, data removal chennai rents', 'Legal / Self-Service', 'index, follow', `${DOMAIN}/data-deletion/`],
-  [`${DOMAIN}/listings/`, 'Interactive Spatial Rental Map & Filter Search Application', 'chennai rental map, houses for rent map chennai', 'Web Application / Map', 'index, follow', `${DOMAIN}/listings/`],
-  [`${DOMAIN}/chennai/rentals/`, 'City-Wide Rental Property Directory & Locality Comparison', 'flats for rent in chennai, houses for rent in chennai', 'City Directory Hub', 'index, follow', `${DOMAIN}/chennai/rentals/`],
-  [`${DOMAIN}/chennai/1-bhk-for-rent/`, 'City-Level 1 BHK Budget Property Search', '1 bhk for rent in chennai, 1 bhk flat chennai', 'BHK Category Hub', 'index, follow', `${DOMAIN}/chennai/1-bhk-for-rent/`],
-  [`${DOMAIN}/chennai/2-bhk-for-rent/`, 'City-Level 2 BHK Family Property Search', '2 bhk for rent in chennai, 2 bhk flat chennai', 'BHK Category Hub', 'index, follow', `${DOMAIN}/chennai/2-bhk-for-rent/`],
-  [`${DOMAIN}/chennai/3-bhk-for-rent/`, 'City-Level 3 BHK Luxury/Spacious Property Search', '3 bhk for rent in chennai, 3 bhk flat chennai', 'BHK Category Hub', 'index, follow', `${DOMAIN}/chennai/3-bhk-for-rent/`],
-  [`${DOMAIN}/chennai/pg/`, 'Paying Guest & Student / Single Professional Accommodation', 'pg in chennai, paying guest accommodation chennai', 'Specialty Housing Hub', 'index, follow', `${DOMAIN}/chennai/pg/`],
-  [`${DOMAIN}/house-for-rent-in-chennai/`, 'Master Rental Pillar Guide, Legal Rights, Advance & Water', 'house for rents in chennai, house for rent in chennai', 'Editorial Pillar Hub', 'index, follow', `${DOMAIN}/house-for-rent-in-chennai/`],
-  [`${DOMAIN}/author/vijayrajkumar/`, 'E-E-A-T Author Identity, Editorial Authority & Background', 'r vijayrajkumar, vijayrajkumar chennai rents founder', 'Author Profile', 'index, follow', `${DOMAIN}/author/vijayrajkumar/`],
+  [`${DOMAIN}/about`, 'Company Background, Founder Vision & Value Proposition', 'about chennai rents, transparent rental chennai', 'Informational / About', 'index, follow', `${DOMAIN}/about`],
+  [`${DOMAIN}/methodology`, 'Data Authenticity, Empirical Pricing & Water Resilience Audits', 'rental rate methodology chennai, chennai water supply scoring', 'E-E-A-T Trust', 'index, follow', `${DOMAIN}/methodology`],
+  [`${DOMAIN}/verification`, 'Listing Integrity, Anti-Fraud & Physical Verification Rules', 'verified rental listings chennai, direct owner verification chennai', 'E-E-A-T Trust', 'index, follow', `${DOMAIN}/verification`],
+  [`${DOMAIN}/corrections`, 'Fact-Checking Protocols & Public Community Revision Log', 'chennai rents corrections policy, editorial standards', 'E-E-A-T Trust', 'index, follow', `${DOMAIN}/corrections`],
+  [`${DOMAIN}/contact`, 'Editorial Inquiries, Listing Verification & Support Desk', 'contact chennai rents, report rental fraud chennai', 'Contact', 'index, follow', `${DOMAIN}/contact`],
+  [`${DOMAIN}/privacy`, 'Data Protection, DPDP Act 2023 & Consent Governance', 'chennai rents privacy policy, data privacy india', 'Legal / Privacy', 'index, follow', `${DOMAIN}/privacy`],
+  [`${DOMAIN}/data-deletion`, 'User Data Erasure & Listing Removal Self-Service Protocol', 'delete property listing chennai, data removal chennai rents', 'Legal / Self-Service', 'index, follow', `${DOMAIN}/data-deletion`],
+  [`${DOMAIN}/listings`, 'Interactive Spatial Rental Map & Filter Search Application', 'chennai rental map, houses for rent map chennai', 'Web Application / Map', 'index, follow', `${DOMAIN}/listings`],
+  [`${DOMAIN}/chennai/rentals`, 'City-Wide Rental Property Directory & Locality Comparison', 'flats for rent in chennai, houses for rent in chennai', 'City Directory Hub', 'index, follow', `${DOMAIN}/chennai/rentals`],
+  [`${DOMAIN}/chennai/1-bhk-for-rent`, 'City-Level 1 BHK Budget Property Search', '1 bhk for rent in chennai, 1 bhk flat chennai', 'BHK Category Hub', 'index, follow', `${DOMAIN}/chennai/1-bhk-for-rent`],
+  [`${DOMAIN}/chennai/2-bhk-for-rent`, 'City-Level 2 BHK Family Property Search', '2 bhk for rent in chennai, 2 bhk flat chennai', 'BHK Category Hub', 'index, follow', `${DOMAIN}/chennai/2-bhk-for-rent`],
+  [`${DOMAIN}/chennai/3-bhk-for-rent`, 'City-Level 3 BHK Luxury/Spacious Property Search', '3 bhk for rent in chennai, 3 bhk flat chennai', 'BHK Category Hub', 'index, follow', `${DOMAIN}/chennai/3-bhk-for-rent`],
+  [`${DOMAIN}/chennai/pg`, 'Paying Guest & Student / Single Professional Accommodation', 'pg in chennai, paying guest accommodation chennai', 'Specialty Housing Hub', 'index, follow', `${DOMAIN}/chennai/pg`],
+  [`${DOMAIN}/house-for-rent-in-chennai`, 'Master Rental Pillar Guide, Legal Rights, Advance & Water', 'house for rents in chennai, house for rent in chennai', 'Editorial Pillar Hub', 'index, follow', `${DOMAIN}/house-for-rent-in-chennai`],
+  [`${DOMAIN}/authors`, 'E-E-A-T Editorial Team, Founders & Authority Background', 'chennai rents founders, vijayrajkumar, saai abishek', 'Editorial Team', 'index, follow', `${DOMAIN}/authors`],
 ];
 
 SUPPORTING_RENTAL_PAGES.forEach((sp) => {
   intentRows.push([
-    `${DOMAIN}/${sp.slug}/`,
+    `${DOMAIN}/${sp.slug}`,
     `Targeted Guide: ${sp.h1}`,
     sp.slug.replace(/-/g, ' '),
     'Supporting Editorial Guide',
     'index, follow',
-    `${DOMAIN}/${sp.slug}/`
+    `${DOMAIN}/${sp.slug}`
   ]);
 });
 
 LOCALITIES.forEach((loc) => {
   intentRows.push([
-    `${DOMAIN}/chennai/${loc.slug}/`,
+    `${DOMAIN}/chennai/${loc.slug}`,
     `Hyperlocal Neighborhood Intelligence & Flats for Rent in ${loc.name}`,
     `flats for rent in ${loc.name.toLowerCase()} chennai, rent in ${loc.name.toLowerCase()}`,
     'Locality Authority Hub',
     'index, follow',
-    `${DOMAIN}/chennai/${loc.slug}/`
+    `${DOMAIN}/chennai/${loc.slug}`
   ]);
 });
 
 POSTS.filter((p) => p.type === 'guide').forEach((post) => {
   intentRows.push([
-    `${DOMAIN}/guides/${post.slug}/`,
+    `${DOMAIN}/guides/${post.slug}`,
     `Legal & Practical Rental Advisory: ${post.title}`,
     post.slug.replace(/-/g, ' '),
     'Rental Advisory Guide',
     'index, follow',
-    `${DOMAIN}/guides/${post.slug}/`
+    `${DOMAIN}/guides/${post.slug}`
   ]);
 });
 
@@ -144,46 +144,46 @@ console.log('✓ Created deliverables/page-intent-map.csv');
 const metadataRows = [
   ['URL', 'Page Title', 'Title Length (Chars)', 'Meta Description', 'Description Length (Chars)', 'Primary H1 Tag', 'Robots Directive', 'Canonical URL Tag'],
   [`${DOMAIN}/`, 'Chennai Rents: Locality-First Rental Guide for Chennai', 53, 'Explore real rent rates, water reality, flood history, crowdsourced rental map, and verified direct owner listings in Chennai. Honest locality guides with zero broker fees.', 171, 'Renting in Chennai: Locality by Locality', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1', `${DOMAIN}/`],
-  [`${DOMAIN}/about/`, 'About Chennai Rents: Why We Built an Honest Rental Guide', 55, 'Learn why Chennai Rents was founded: to replace spammy listing portals with honest locality rental intelligence and verified listings in Chennai.', 139, 'Why We Built Chennai Rents', 'index, follow', `${DOMAIN}/about/`],
-  [`${DOMAIN}/methodology/`, 'Research Methodology & Data Verification | Chennai Rents', 55, 'How Chennai Rents collects empirical rental rates, evaluates ground-level water resilience, and verifies direct owner listings in Chennai.', 132, 'Research Methodology & Verification Standards', 'index, follow', `${DOMAIN}/methodology/`],
-  [`${DOMAIN}/verification/`, 'Listing Verification Policy & Anti-Fraud Standards | Chennai Rents', 65, 'Chennai Rents 4-step verification framework: owner property tax and EB bill matching, zero fake listings, and reporting mechanisms.', 127, 'Listing Verification Framework', 'index, follow', `${DOMAIN}/verification/`],
-  [`${DOMAIN}/corrections/`, 'Editorial Corrections & Fact-Checking Policy | Chennai Rents', 60, 'Chennai Rents policy for editorial corrections, empirical data updates, and 48-hour revision turnarounds.', 108, 'Editorial Corrections & Fact-Checking Policy', 'index, follow', `${DOMAIN}/corrections/`],
-  [`${DOMAIN}/contact/`, 'Contact Editorial & Trust Desk | Chennai Rents', 45, 'Reach the Chennai Rents editorial desk, submit locality research corrections, or report listing fraud directly.', 111, 'Contact Editorial & Verification Desk', 'index, follow', `${DOMAIN}/contact/`],
-  [`${DOMAIN}/privacy/`, 'Privacy Policy | Chennai Rents', 30, 'Privacy policy and data governance practices of Chennai Rents under the Digital Personal Data Protection Act 2023.', 110, 'Privacy Policy & Data Protection', 'index, follow', `${DOMAIN}/privacy/`],
-  [`${DOMAIN}/data-deletion/`, 'Data Deletion & Listing Removal Request | Chennai Rents', 55, 'Submit a request to delete your personal data or remove a verified property listing from Chennai Rents.', 104, 'Data Deletion & Listing Removal Request', 'index, follow', `${DOMAIN}/data-deletion/`],
-  [`${DOMAIN}/chennai/rentals/`, 'Flats & Houses for Rent in Chennai | Chennai Rents', 49, 'Find flats, houses, and PG for rent in Chennai. Explore locality-by-locality rent guides, real rent rates, water reports, and flood history. Verified direct listings.', 166, 'Flats & Houses for Rent in Chennai', 'index, follow', `${DOMAIN}/chennai/rentals/`],
-  [`${DOMAIN}/chennai/1-bhk-for-rent/`, '1 BHK Flats for Rent in Chennai | Chennai Rents', 46, 'Browse 1 BHK flats and apartments for rent in Chennai. Honest rent rates across all localities, water supply ratings, and direct owner listings.', 142, '1 BHK Flats for Rent in Chennai', 'index, follow', `${DOMAIN}/chennai/1-bhk-for-rent/`],
-  [`${DOMAIN}/chennai/2-bhk-for-rent/`, '2 BHK Flats for Rent in Chennai | Chennai Rents', 46, 'Browse 2 BHK flats and apartments for rent in Chennai. Honest rent rates across all localities, water supply ratings, and direct owner listings.', 142, '2 BHK Flats for Rent in Chennai', 'index, follow', `${DOMAIN}/chennai/2-bhk-for-rent/`],
-  [`${DOMAIN}/chennai/3-bhk-for-rent/`, '3 BHK Flats for Rent in Chennai | Chennai Rents', 46, 'Browse 3 BHK flats and apartments for rent in Chennai. Honest rent rates across all localities, water supply ratings, and direct owner listings.', 142, '3 BHK Flats for Rent in Chennai', 'index, follow', `${DOMAIN}/chennai/3-bhk-for-rent/`],
-  [`${DOMAIN}/chennai/pg/`, 'PG & Hostel for Rent in Chennai | Chennai Rents', 46, 'Find PG accommodations and paying guest rooms in Chennai. Locality-by-locality rent ranges, food, amenities, and connectivity.', 125, 'PG & Hostel for Rent in Chennai', 'index, follow', `${DOMAIN}/chennai/pg/`],
-  [`${DOMAIN}/house-for-rent-in-chennai/`, CHENNAI_RENT_HUB_DATA.title, CHENNAI_RENT_HUB_DATA.title.length, CHENNAI_RENT_HUB_DATA.metaDescription, CHENNAI_RENT_HUB_DATA.metaDescription.length, CHENNAI_RENT_HUB_DATA.h1, 'index, follow', `${DOMAIN}/house-for-rent-in-chennai/`],
-  [`${DOMAIN}/author/vijayrajkumar/`, `${AUTHOR_INFO.name}: Founder & Lead Editor | Chennai Rents`, 56, `Author profile of ${AUTHOR_INFO.name}, Founder and Lead Editorial Reviewer of Chennai Rents.`, 88, AUTHOR_INFO.name, 'index, follow', `${DOMAIN}/author/vijayrajkumar/`],
+  [`${DOMAIN}/about`, 'About Chennai Rents: Why We Built an Honest Rental Guide', 55, 'Learn why Chennai Rents was founded: to replace spammy listing portals with honest locality rental intelligence and verified listings in Chennai.', 139, 'Why We Built Chennai Rents', 'index, follow', `${DOMAIN}/about`],
+  [`${DOMAIN}/methodology`, 'Research Methodology & Data Verification | Chennai Rents', 55, 'How Chennai Rents collects empirical rental rates, evaluates ground-level water resilience, and verifies direct owner listings in Chennai.', 132, 'Research Methodology & Verification Standards', 'index, follow', `${DOMAIN}/methodology`],
+  [`${DOMAIN}/verification`, 'Listing Verification Policy & Anti-Fraud Standards | Chennai Rents', 65, 'Chennai Rents 4-step verification framework: owner property tax and EB bill matching, zero fake listings, and reporting mechanisms.', 127, 'Listing Verification Framework', 'index, follow', `${DOMAIN}/verification`],
+  [`${DOMAIN}/corrections`, 'Editorial Corrections & Fact-Checking Policy | Chennai Rents', 60, 'Chennai Rents policy for editorial corrections, empirical data updates, and 48-hour revision turnarounds.', 108, 'Editorial Corrections & Fact-Checking Policy', 'index, follow', `${DOMAIN}/corrections`],
+  [`${DOMAIN}/contact`, 'Contact Editorial & Trust Desk | Chennai Rents', 45, 'Reach the Chennai Rents editorial desk, submit locality research corrections, or report listing fraud directly.', 111, 'Contact Editorial & Verification Desk', 'index, follow', `${DOMAIN}/contact`],
+  [`${DOMAIN}/privacy`, 'Privacy Policy | Chennai Rents', 30, 'Privacy policy and data governance practices of Chennai Rents under the Digital Personal Data Protection Act 2023.', 110, 'Privacy Policy & Data Protection', 'index, follow', `${DOMAIN}/privacy`],
+  [`${DOMAIN}/data-deletion`, 'Data Deletion & Listing Removal Request | Chennai Rents', 55, 'Submit a request to delete your personal data or remove a verified property listing from Chennai Rents.', 104, 'Data Deletion & Listing Removal Request', 'index, follow', `${DOMAIN}/data-deletion`],
+  [`${DOMAIN}/chennai/rentals`, 'Flats & Houses for Rent in Chennai | Chennai Rents', 49, 'Find flats, houses, and PG for rent in Chennai. Explore locality-by-locality rent guides, real rent rates, water reports, and flood history. Verified direct listings.', 166, 'Flats & Houses for Rent in Chennai', 'index, follow', `${DOMAIN}/chennai/rentals`],
+  [`${DOMAIN}/chennai/1-bhk-for-rent`, '1 BHK Flats for Rent in Chennai | Chennai Rents', 46, 'Browse 1 BHK flats and apartments for rent in Chennai. Honest rent rates across all localities, water supply ratings, and direct owner listings.', 142, '1 BHK Flats for Rent in Chennai', 'index, follow', `${DOMAIN}/chennai/1-bhk-for-rent`],
+  [`${DOMAIN}/chennai/2-bhk-for-rent`, '2 BHK Flats for Rent in Chennai | Chennai Rents', 46, 'Browse 2 BHK flats and apartments for rent in Chennai. Honest rent rates across all localities, water supply ratings, and direct owner listings.', 142, '2 BHK Flats for Rent in Chennai', 'index, follow', `${DOMAIN}/chennai/2-bhk-for-rent`],
+  [`${DOMAIN}/chennai/3-bhk-for-rent`, '3 BHK Flats for Rent in Chennai | Chennai Rents', 46, 'Browse 3 BHK flats and apartments for rent in Chennai. Honest rent rates across all localities, water supply ratings, and direct owner listings.', 142, '3 BHK Flats for Rent in Chennai', 'index, follow', `${DOMAIN}/chennai/3-bhk-for-rent`],
+  [`${DOMAIN}/chennai/pg`, 'PG & Hostel for Rent in Chennai | Chennai Rents', 46, 'Find PG accommodations and paying guest rooms in Chennai. Locality-by-locality rent ranges, food, amenities, and connectivity.', 125, 'PG & Hostel for Rent in Chennai', 'index, follow', `${DOMAIN}/chennai/pg`],
+  [`${DOMAIN}/house-for-rent-in-chennai`, CHENNAI_RENT_HUB_DATA.title, CHENNAI_RENT_HUB_DATA.title.length, CHENNAI_RENT_HUB_DATA.metaDescription, CHENNAI_RENT_HUB_DATA.metaDescription.length, CHENNAI_RENT_HUB_DATA.h1, 'index, follow', `${DOMAIN}/house-for-rent-in-chennai`],
+  [`${DOMAIN}/authors`, 'Meet the Team | ChennaiRents - Zero-Broker Homes in Chennai', 59, 'Meet the two co-founders behind ChennaiRents: S M Saai Abishek and Vijayrajkumar R.', 80, 'Meet the Team behind ChennaiRents', 'index, follow', `${DOMAIN}/authors`],
 ];
 
 SUPPORTING_RENTAL_PAGES.forEach((sp) => {
   metadataRows.push([
-    `${DOMAIN}/${sp.slug}/`,
+    `${DOMAIN}/${sp.slug}`,
     sp.title,
     sp.title.length,
     sp.description,
     sp.description.length,
     sp.h1,
     'index, follow',
-    `${DOMAIN}/${sp.slug}/`
+    `${DOMAIN}/${sp.slug}`
   ]);
 });
 
 LOCALITIES.forEach((loc) => {
   const meta = generateSEOMeta({ locality: loc });
   metadataRows.push([
-    `${DOMAIN}/chennai/${loc.slug}/`,
+    `${DOMAIN}/chennai/${loc.slug}`,
     meta.title,
     meta.title.length,
     meta.description,
     meta.description.length,
     meta.h1,
     'index, follow',
-    `${DOMAIN}/chennai/${loc.slug}/`
+    `${DOMAIN}/chennai/${loc.slug}`
   ]);
 });
 

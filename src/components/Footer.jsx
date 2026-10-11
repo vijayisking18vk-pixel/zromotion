@@ -323,6 +323,7 @@ export default function Footer() {
             >
               {[
                 { to: '/listings', label: 'Chennai Rent Map & Live Listings' },
+                { to: '/house-for-rent-in-chennai', label: 'Houses for Rent in Chennai (Hub)' },
                 { to: '/house-rent-in-chennai', label: 'House Rent in Chennai: Guide & Rates' },
                 { to: '/guides/advance-deposit-chennai', label: 'Advance Deposit: 10 Months vs Reality' },
                 { to: '/guides/tenant-rules-chennai', label: 'Rental Agreements & Tenant Rights' },
