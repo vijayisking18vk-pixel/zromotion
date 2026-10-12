@@ -604,7 +604,7 @@ export default function LocalityPage({ localitySlug: propSlug }) {
               <span aria-hidden="true">›</span>
               {intent ? (
                 <>
-                  <Link to={`/flats-for-rent-in-${locality.slug}-chennai`}>{locality.name}</Link>
+                  <Link to={`/chennai/${locality.slug}`}>{locality.name}</Link>
                   <span aria-hidden="true">›</span>
                   <span aria-current="page">{intent.replace(/-/g, ' ')}</span>
                 </>
@@ -811,7 +811,7 @@ export default function LocalityPage({ localitySlug: propSlug }) {
               <div className="rail-card">
                 <h4>Popular Localities</h4>
                 {sidebarLocalities.map((l) => (
-                  <Link key={l.slug} to={`/flats-for-rent-in-${l.slug}-chennai`} className="rail-link">
+                  <Link key={l.slug} to={`/chennai/${l.slug}`} className="rail-link">
                     {l.name}
                   </Link>
                 ))}
@@ -820,11 +820,11 @@ export default function LocalityPage({ localitySlug: propSlug }) {
               <div className="rail-card">
                 <h4>Search by BHK</h4>
                 {['1', '2', '3'].map((bhk) => (
-                  <Link key={bhk} to={`/chennai/${locality.slug}/${bhk}-bhk-for-rent`} className="rail-link">
+                  <Link key={bhk} to={`/chennai/${locality.slug}/${bhk}bhk-flats-for-rent-in-${locality.slug}`} className="rail-link">
                     {bhk} BHK in {locality.name}
                   </Link>
                 ))}
-                <Link to={`/chennai/${locality.slug}/pg`} className="rail-link">
+                <Link to={`/chennai/${locality.slug}/pg-for-men-in-${locality.slug}`} className="rail-link">
                   PG in {locality.name}
                 </Link>
               </div>

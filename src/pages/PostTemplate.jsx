@@ -434,7 +434,7 @@ export default function PostTemplate() {
           {post.nearbyAreas?.map((area, i) => (
             <Link
               key={`mob-near-${i}`}
-              to={`/chennai/${area.slug}`}
+              to={`/chennai/${area.slug.replace('rent-in-', '')}`}
               style={{
                 display: 'flex',
                 alignItems: 'center',

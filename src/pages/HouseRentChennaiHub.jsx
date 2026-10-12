@@ -330,7 +330,7 @@ export default function HouseRentChennaiHub({ customSlug }) {
                 {LOCALITIES.map((loc) => (
                   <Link
                     key={loc.slug}
-                    to={`/flats-for-rent-in-${loc.slug}-chennai`}
+                    to={`/chennai/${loc.slug}`}
                     style={{ textDecoration: 'none' }}
                   >
                     <div

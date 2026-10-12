@@ -61,6 +61,8 @@
     { "source": "/chennai/:locality/2-bhk-for-rent", "destination": "/chennai/:locality/2bhk-flats-for-rent-in-:locality", "permanent": true },
     { "source": "/chennai/:locality/3-bhk-for-rent", "destination": "/chennai/:locality/3bhk-flats-for-rent-in-:locality", "permanent": true },
     { "source": "/chennai/:locality/pg", "destination": "/chennai/:locality/pg-for-men-in-:locality", "permanent": true },
+    { "source": "/chennai/:locality/pg-Afor-women-in-:locality", "destination": "/chennai/:locality/pg-for-women-in-:locality", "permanent": true },
+    { "source": "/chennai/velachery/pg-Afor-women-in-velachery", "destination": "/chennai/velachery/pg-for-women-in-velachery", "permanent": true },
     { "source": "/chennai/:locality/fully-furnished-flats-for-rent", "destination": "/chennai/:locality/furnished-flats-for-rent-in-:locality", "permanent": true },
     { "source": "/chennai/:locality/flats-for-rent-under-20000", "destination": "/chennai/:locality/flats-for-rent-under-20000-in-:locality", "permanent": true },
     { "source": "/3-bhk-house-for-rent-in-chennai.html", "destination": "/3-bhk-house-for-rent-in-chennai", "permanent": true },
