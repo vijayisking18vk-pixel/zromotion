@@ -21,7 +21,7 @@ const DIST_DIR = path.resolve(__dirname, 'dist');
 const SSR_DIR = path.resolve(__dirname, 'dist-ssr');
 
 // Import data definitions
-import { LOCALITIES, generateSEOMeta, parseIntent, getIndexingDirective } from './src/data/localities.js';
+import { LOCALITIES, generateSEOMeta } from './src/data/localities.js';
 import { POSTS } from './src/data/posts.js';
 import { CHENNAI_RENT_HUB_DATA, SUPPORTING_RENTAL_PAGES, AUTHOR_INFO } from './src/data/rentalGuideData.js';
 import { VELACHERY_PAGES, VELACHERY_GEO } from './src/data/velacheryLandingPages.js';
@@ -40,16 +40,6 @@ import { CHROMEPET_PAGES, CHROMEPET_GEO } from './src/data/chromepetLandingPages
 import { TARAMANI_PAGES, TARAMANI_GEO } from './src/data/taramaniLandingPages.js';
 import { THIRUVANMIYUR_PAGES, THIRUVANMIYUR_GEO } from './src/data/thiruvanmiyurLandingPages.js';
 import { THORAIPAKKAM_PAGES, THORAIPAKKAM_GEO } from './src/data/thoraipakkamLandingPages.js';
-
-const LOCALITY_FACETS = [
-  'flats-for-rent',
-  '1-bhk-for-rent',
-  '2-bhk-for-rent',
-  '3-bhk-for-rent',
-  'pg',
-  'fully-furnished-flats-for-rent',
-  'flats-for-rent-under-20000',
-];
 
 function escapeHtml(str) {
   if (!str) return '';
@@ -119,7 +109,7 @@ async function runPrerender() {
         description: 'Locality-first rental guide and verified listings for Chennai',
         potentialAction: {
           '@type': 'SearchAction',
-          target: `${DOMAIN}/chennai/{search_term_string}/`,
+          target: `${DOMAIN}/chennai/{search_term_string}`,
           'query-input': 'required name=search_term_string',
         },
       },
@@ -427,26 +417,7 @@ async function runPrerender() {
     });
   });
 
-  // Author profile page
-  routes.push({
-    path: '/author/vijayrajkumar',
-    title: `${AUTHOR_INFO.name}: Founder & Lead Editor | Chennai Rents`,
-    description: `Author profile of ${AUTHOR_INFO.name}, Founder and Lead Editorial Reviewer of Chennai Rents.`,
-    canonical: `${DOMAIN}/author/vijayrajkumar`,
-    robots: 'index, follow',
-    schema: [
-      {
-        '@context': 'https://schema.org',
-        '@type': 'Person',
-        name: AUTHOR_INFO.name,
-        url: AUTHOR_INFO.website,
-        sameAs: AUTHOR_INFO.socialProfiles,
-        jobTitle: AUTHOR_INFO.role,
-      },
-    ],
-  });
-
-  // 2. Locality hub pages (/chennai/:locality and /flats-for-rent-in-:locality-chennai)
+  // 2. Locality hub pages (/chennai/:locality)
   LOCALITIES.forEach((locality) => {
     const meta = generateSEOMeta({ locality });
     const canonical = `${DOMAIN}/chennai/${locality.slug}`;
@@ -485,48 +456,6 @@ async function runPrerender() {
       canonical,
       robots: 'index, follow',
       schema: schemas,
-    });
-
-    // Legacy pattern: /flats-for-rent-in-:locality-chennai (prerendered with canonical pointing to /chennai/:locality)
-    routes.push({
-      path: `/flats-for-rent-in-${locality.slug}-chennai`,
-      title: meta.title,
-      description: meta.description,
-      canonical,
-      robots: 'index, follow',
-      schema: schemas,
-    });
-
-    // 3. Locality facets
-    LOCALITY_FACETS.forEach((facet) => {
-      const facetMeta = generateSEOMeta({ locality, intent: facet });
-      const parsed = parseIntent(facet);
-      const pageType = parsed.key || 'locality';
-      const count = locality.listingCount?.[pageType] ?? locality.listingCount?.total ?? 0;
-      const indexDirective = getIndexingDirective(pageType, count);
-      const facetCanonical = `${DOMAIN}/chennai/${locality.slug}/${facet}`;
-
-      const facetBreadcrumbs = [
-        { '@type': 'ListItem', position: 1, name: 'Chennai Rents', item: `${DOMAIN}/` },
-        { '@type': 'ListItem', position: 2, name: 'Chennai Rentals', item: `${DOMAIN}/chennai/rentals` },
-        { '@type': 'ListItem', position: 3, name: locality.name, item: canonical },
-        { '@type': 'ListItem', position: 4, name: facetMeta.h1, item: facetCanonical },
-      ];
-
-      routes.push({
-        path: `/chennai/${locality.slug}/${facet}`,
-        title: facetMeta.title,
-        description: facetMeta.description,
-        canonical: facetCanonical,
-        robots: indexDirective,
-        schema: [
-          {
-            '@context': 'https://schema.org',
-            '@type': 'BreadcrumbList',
-            itemListElement: facetBreadcrumbs,
-          },
-        ],
-      });
     });
   });
 

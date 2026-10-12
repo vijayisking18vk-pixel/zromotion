@@ -71,7 +71,7 @@ function runTests() {
     { name: 'Data Deletion Request', file: path.join(DIST_DIR, 'data-deletion', 'index.html'), expectedTitle: 'Data Deletion', expectedCanonical: 'https://www.chennairents.in/data-deletion' },
     { name: 'Houses for Rent Pillar Hub', file: path.join(DIST_DIR, 'house-for-rent-in-chennai', 'index.html'), expectedTitle: 'Houses for Rent in Chennai', expectedCanonical: 'https://www.chennairents.in/house-for-rent-in-chennai', expectedBacklink: 'https://www.vijayrajkumar.in' },
     { name: 'House Rent in Chennai Page', file: path.join(DIST_DIR, 'house-rent-in-chennai', 'index.html'), expectedTitle: 'House Rent in Chennai', expectedCanonical: 'https://www.chennairents.in/house-rent-in-chennai', expectedBacklink: 'https://www.vijayrajkumar.in' },
-    { name: 'Author Page (R Vijayrajkumar)', file: path.join(DIST_DIR, 'author', 'vijayrajkumar', 'index.html'), expectedTitle: 'R Vijayrajkumar', expectedCanonical: 'https://www.chennairents.in/author/vijayrajkumar', expectedBacklink: 'https://www.vijayrajkumar.in' },
+    { name: 'Authors Team Page', file: path.join(DIST_DIR, 'authors', 'index.html'), expectedTitle: 'Meet the Team', expectedCanonical: 'https://www.chennairents.in/authors', expectedBacklink: 'https://www.vijayrajkumar.in' },
     { name: '1 BHK Houses Guide', file: path.join(DIST_DIR, '1-bhk-house-for-rent-in-chennai', 'index.html'), expectedTitle: '1 BHK Houses for Rent in Chennai', expectedCanonical: 'https://www.chennairents.in/1-bhk-house-for-rent-in-chennai' },
     { name: '3 BHK Houses Guide', file: path.join(DIST_DIR, '3-bhk-house-for-rent-in-chennai', 'index.html'), expectedTitle: '3 BHK Houses for Rent in Chennai', expectedCanonical: 'https://www.chennairents.in/3-bhk-house-for-rent-in-chennai' },
     { name: 'Chennai Hub', file: path.join(DIST_DIR, 'chennai', 'rentals', 'index.html'), expectedTitle: 'Flats & Houses for Rent in Chennai', expectedCanonical: 'https://www.chennairents.in/chennai/rentals' },
@@ -80,7 +80,7 @@ function runTests() {
     { name: 'Anna Nagar Locality (/chennai/anna-nagar)', file: path.join(DIST_DIR, 'chennai', 'anna-nagar', 'index.html'), expectedTitle: 'Anna Nagar', expectedCanonical: 'https://www.chennairents.in/chennai/anna-nagar' },
     { name: 'OMR Locality (/chennai/omr)', file: path.join(DIST_DIR, 'chennai', 'omr', 'index.html'), expectedTitle: 'OMR', expectedCanonical: 'https://www.chennairents.in/chennai/omr' },
     { name: 'Tambaram Locality (/chennai/tambaram)', file: path.join(DIST_DIR, 'chennai', 'tambaram', 'index.html'), expectedTitle: 'Tambaram', expectedCanonical: 'https://www.chennairents.in/chennai/tambaram' },
-    { name: 'Velachery 1-BHK', file: path.join(DIST_DIR, 'chennai', 'velachery', '1-bhk-for-rent', 'index.html'), expectedTitle: '1 BHK', expectedCanonical: 'https://www.chennairents.in/chennai/velachery/1-bhk-for-rent' },
+    { name: 'Velachery 1-BHK', file: path.join(DIST_DIR, 'chennai', 'velachery', '1bhk-flats-for-rent-in-velachery', 'index.html'), expectedTitle: '1BHK Flats for Rent in Velachery', expectedCanonical: 'https://www.chennairents.in/chennai/velachery/1bhk-flats-for-rent-in-velachery' },
     { name: 'Advance Deposit Guide', file: path.join(DIST_DIR, 'guides', 'advance-deposit-chennai', 'index.html'), expectedTitle: 'Advance Deposit', expectedCanonical: 'https://www.chennairents.in/guides/advance-deposit-chennai' },
     { name: 'Rental Advance Checklist Guide', file: path.join(DIST_DIR, 'guides', 'checklist-rental-advance', 'index.html'), expectedTitle: 'Checklist', expectedCanonical: 'https://www.chennairents.in/guides/checklist-rental-advance' },
     { name: 'How to Write Rental Listing Guide', file: path.join(DIST_DIR, 'guides', 'how-to-write-rental-listing', 'index.html'), expectedTitle: 'Rental Listing', expectedCanonical: 'https://www.chennairents.in/guides/how-to-write-rental-listing' },
@@ -127,8 +127,12 @@ function runTests() {
       }
 
       // Pre-rendered DOM Check
-      const rootMatch = content.match(/<div id="root">([\s\S]*?)<\/div>/i);
-      assert(rootMatch && rootMatch[1].trim().length > 500, `DOM pre-rendered into <div id="root"> (${rootMatch ? rootMatch[1].length : 0} bytes of pre-rendered HTML)`);
+      if (page.name === 'Authors Team Page') {
+        assert(content.length > 5000 && content.includes('<main'), `Static Authors page contains full semantic DOM (${content.length} bytes)`);
+      } else {
+        const rootMatch = content.match(/<div id="root">([\s\S]*?)<\/div>/i);
+        assert(rootMatch && rootMatch[1].trim().length > 500, `DOM pre-rendered into <div id="root"> (${rootMatch ? rootMatch[1].length : 0} bytes of pre-rendered HTML)`);
+      }
       assert(content.includes('<header') && content.includes('<footer'), 'Semantic <header> and <footer> rendered inside page');
 
       // Structured Data

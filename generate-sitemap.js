@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Import locality data, posts, and rental content data
-import { LOCALITIES, shouldIndexPage, parseIntent } from './src/data/localities.js';
+import { LOCALITIES } from './src/data/localities.js';
 import { POSTS } from './src/data/posts.js';
 import { SUPPORTING_RENTAL_PAGES } from './src/data/rentalGuideData.js';
 import { VELACHERY_PAGES } from './src/data/velacheryLandingPages.js';
@@ -27,17 +27,6 @@ import { THIRUVANMIYUR_PAGES } from './src/data/thiruvanmiyurLandingPages.js';
 import { THORAIPAKKAM_PAGES } from './src/data/thoraipakkamLandingPages.js';
 
 const DOMAIN = 'https://www.chennairents.in';
-
-// Programmatic intent facets supported for each locality
-const LOCALITY_FACETS = [
-  'flats-for-rent',
-  '1-bhk-for-rent',
-  '2-bhk-for-rent',
-  '3-bhk-for-rent',
-  'pg',
-  'fully-furnished-flats-for-rent',
-  'flats-for-rent-under-20000',
-];
 
 /**
  * Formats date into ISO 8601 YYYY-MM-DD format (Google Search recommended)
@@ -118,7 +107,7 @@ function generateSitemaps() {
     `${DOMAIN}/chennai/3-bhk-for-rent`,
     `${DOMAIN}/chennai/pg`,
     `${DOMAIN}/house-for-rent-in-chennai`,
-    `${DOMAIN}/author/vijayrajkumar`,
+    `${DOMAIN}/authors`,
     ...SUPPORTING_RENTAL_PAGES.map((p) => `${DOMAIN}/${p.slug}`),
   ];
 
@@ -128,18 +117,8 @@ function generateSitemaps() {
     localityUrls.push(`${DOMAIN}/chennai/${loc.slug}`);
   });
 
-  // 3. Programmatic facet pages (/chennai/:locality/:facet) - ONLY indexable URLs (>= threshold)
+  // 3. Programmatic micro-market landing pages (/chennai/:locality/:slug) - 100% indexable canonical URLs
   const facetUrls = [];
-  LOCALITIES.forEach((loc) => {
-    LOCALITY_FACETS.forEach((facet) => {
-      const parsed = parseIntent(facet);
-      const pageType = parsed.key || 'locality';
-      const count = loc.listingCount?.[pageType] ?? loc.listingCount?.total ?? 0;
-      if (shouldIndexPage(pageType, count)) {
-        facetUrls.push(`${DOMAIN}/chennai/${loc.slug}/${facet}`);
-      }
-    });
-  });
 
   // 3b. Velachery Programmatic SEO Landing Pages (19 long-form micro-markets)
   VELACHERY_PAGES.forEach((page) => {

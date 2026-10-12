@@ -76,8 +76,8 @@ export default function SEOHead({ title, description, canonicalUrl, canonical, r
         'publisher': {
           '@type': 'Organization',
           'name': 'Chennai Rents',
-          'url': 'https://chennairents.in',
-          'logo': 'https://chennairents.in/chennai-rents-official-logo.jpg',
+          'url': 'https://www.chennairents.in',
+          'logo': 'https://www.chennairents.in/chennai-rents-official-logo.jpg',
           'sameAs': [INSTAGRAM_URL]
         },
         'author': {

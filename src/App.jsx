@@ -203,8 +203,9 @@ export default function App() {
             <Route path="/co-living-in-chennai" element={<HouseRentChennaiHub customSlug="co-living-in-chennai" />} />
 
             {/* ── AUTHOR & EDITORIAL PROFILE ── */}
-            <Route path="/author/vijayrajkumar" element={<AuthorPage />} />
-            <Route path="/author/r-vijayrajkumar" element={<AuthorPage />} />
+            <Route path="/author/vijayrajkumar" element={<AuthorsRedirect />} />
+            <Route path="/author/r-vijayrajkumar" element={<AuthorsRedirect />} />
+            <Route path="/author/*" element={<AuthorsRedirect />} />
 
             {/* ── CANONICAL LOCALITY ROUTES (/chennai/:locality) ── */}
             <Route path="/chennai/:locality" element={<LocalityPage />} />
