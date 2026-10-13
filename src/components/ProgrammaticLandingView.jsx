@@ -325,7 +325,11 @@ export default function ProgrammaticLandingView({
               <span>•</span>
               <span>Updated October 2026</span>
               <span>•</span>
-              <span>Verified Direct Owners Only</span>
+              <a href="/methodology" style={{ color: 'inherit', textDecoration: 'underline' }}>Methodology</a>
+              <span>•</span>
+              <a href="/verification" style={{ color: 'inherit', textDecoration: 'underline' }}>Verification</a>
+              <span>•</span>
+              <a href="/corrections" style={{ color: 'inherit', textDecoration: 'underline' }}>Corrections</a>
             </div>
           </div>
         </header>

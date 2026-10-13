@@ -841,16 +841,21 @@ export default function LocalityPage({ localitySlug: propSlug }) {
               <div className="rail-card" style={{ background: 'var(--c-sand-light)' }}>
                 <h4>Editorial Review</h4>
                 <p style={{ fontSize: '0.85rem', color: 'var(--c-ink-muted)', margin: '0 0 0.5rem 0' }}>
-                  Reviewed by {AUTHOR_INFO.name}.
+                  Reviewed by {AUTHOR_INFO.name}. Updated October 2026.
                 </p>
-                <a
-                  href={AUTHOR_INFO.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--c-ripon-red)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
-                >
-                  {AUTHOR_INFO.website.replace('https://', '')} <ExternalLink size={12} />
-                </a>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', marginTop: '0.5rem', fontSize: '0.82rem' }}>
+                  <a
+                    href={AUTHOR_INFO.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ fontWeight: 700, color: 'var(--c-ripon-red)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+                  >
+                    {AUTHOR_INFO.website.replace('https://', '')} <ExternalLink size={12} />
+                  </a>
+                  <Link to="/methodology" style={{ color: 'var(--c-ink-muted)', textDecoration: 'underline' }}>Research Methodology</Link>
+                  <Link to="/verification" style={{ color: 'var(--c-ink-muted)', textDecoration: 'underline' }}>Verification Policy</Link>
+                  <Link to="/corrections" style={{ color: 'var(--c-ink-muted)', textDecoration: 'underline' }}>Report Data Correction</Link>
+                </div>
               </div>
             </aside>
 

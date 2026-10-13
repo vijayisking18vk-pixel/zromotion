@@ -32,7 +32,7 @@ export const PORUR_PAGES = [
     targetPrimaryKeywords: ['flats for rent in porur', 'apartments for rent porur chennai'],
     secondaryKeywords: ['apartments for rent porur', 'house rent porur', 'flats near dlf cybercity', 'west chennai rental flats'],
     metaTitle: 'Flats for Rent in Porur Chennai | 1RK to 3BHK Rentals',
-    metaDescription: 'Explore verified flats for rent in Porur, Chennai. Filter by gated communities and builder floors near DLF Cybercity, L&T Infotech, and Ramachandra Hospital.',
+    metaDescription: 'Explore verified flats for rent in Porur, Chennai. Filter by gated societies and builder floors near DLF Cybercity, L&T Infotech, and Ramachandra Hospital.',
     h1: 'Flats for Rent in Porur, Chennai',
     bhk: 'all',
     priceRange: { min: 5500, max: 48000, display: '₹11,000 - ₹45,000' },

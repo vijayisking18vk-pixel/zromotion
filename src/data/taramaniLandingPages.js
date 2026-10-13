@@ -947,7 +947,7 @@ export const TARAMANI_PAGES = [
     canonical: 'https://www.chennairents.in/chennai/taramani/flats-for-rent-under-20000-in-taramani',
     targetPrimaryKeywords: ['flats for rent under 20000 in taramani', '1bhk 2bhk under 20000 taramani'],
     secondaryKeywords: ['flats in taramani under 20k', '2bhk under 20000 taramani', 'prime 1bhk taramani', 'apartments under 20000 taramani'],
-    metaTitle: 'Flats for Rent Under ₹20,000 in Taramani | Prime 1BHKs & 2BHKs',
+    metaTitle: 'Flats for Rent Under ₹20k in Taramani | Prime 1BHK & 2BHK',
     metaDescription: 'Browse rental apartments under ₹20,000 in Taramani. Modern 1BHK flats and budget 2BHK builder floors with reliable water supply and transit access.',
     h1: 'Flats for Rent Under ₹20,000 in Taramani, Chennai',
     bhk: 'all',

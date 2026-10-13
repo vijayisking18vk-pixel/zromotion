@@ -496,6 +496,7 @@ export const LOCALITIES = [
     id: 'omr',
     slug: 'omr',
     name: 'OMR (Old Mahabalipuram Road)',
+    shortName: 'OMR',
     zone: 'ecr',
     pincode: '600096',
     latitude: 12.9229,
@@ -681,7 +682,7 @@ export function generateSEOMeta({ locality, intent, bhk, propertyType, furnishin
   const activeFurn = furnishing || parsed.furnishing;
   const activeBudget = budgetMax || parsed.budgetMax;
 
-  const localityName = locality?.name || city;
+  const localityName = locality?.shortName || locality?.name || city;
   const bhkStr = activeBhk ? `${BHK_LABELS[activeBhk] || activeBhk} ` : '';
   const propStr = activeProp === 'pg' ? 'PG' : 'Flats';
   const furnStr = activeFurn ? `${FURNISHING_LABELS[activeFurn] || ''} ` : '';

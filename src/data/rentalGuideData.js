@@ -19,11 +19,11 @@ export const AUTHOR_INFO = {
 
 export const CHENNAI_RENT_HUB_DATA = {
   slug: 'house-for-rent-in-chennai',
-  title: 'Houses for Rent in Chennai: Locality, Budget & BHK Guide | Chennai Rents',
+  title: 'Houses for Rent in Chennai: Locality Guide | Chennai Rents',
   h1: 'Houses for Rent in Chennai: Find by BHK, Budget and Locality',
   targetKeyword: 'house for rents in Chennai',
   naturalKeywords: ['houses for rent in Chennai', 'house for rent in Chennai', 'rental homes in Chennai'],
-  metaDescription: 'Find houses for rent in Chennai. Practical guide covering 1-3 BHK flats, independent houses, budgets from ₹5,000 to ₹30,000+, water checks, and free listing and follow up owner listings.',
+  metaDescription: 'Find houses for rent in Chennai across 1-3 BHK flats and independent houses, with budget breakdowns, water reality checks, and verified direct owner listings.',
   canonicalUrl: 'https://www.chennairents.in/house-for-rent-in-chennai',
   lastReviewed: 'October 2026',
   editor: AUTHOR_INFO,
@@ -168,15 +168,15 @@ export const CHENNAI_RENT_HUB_DATA = {
 export const SUPPORTING_RENTAL_PAGES = [
   {
     slug: 'house-rent-in-chennai',
-    title: 'House Rent in Chennai: Verified Rates, Localities & Budgets | Chennai Rents',
+    title: 'House Rent in Chennai: Rates and Localities | Chennai Rents',
     h1: 'House Rent in Chennai: Verified Rates, Localities & Budgets',
-    description: 'Find verified house rent in Chennai across all budgets. Explore 1-3 BHK flats, independent houses, realistic locality rents, water ratings, and direct owner connections.',
+    description: 'Find verified house rent in Chennai across all budgets. Explore 1-3 BHK flats, realistic locality rates, water ratings, and direct property owner connections.',
     priceRange: '₹7,000 – ₹45,000+ / month',
     recommendedLocalities: ['velachery', 'adyar', 'anna-nagar', 'porur', 'omr', 'medavakkam', 'valasaravakkam'],
   },
   {
     slug: '1-bhk-house-for-rent-in-chennai',
-    title: '1 BHK Houses for Rent in Chennai: Prices & Localities | Chennai Rents',
+    title: '1 BHK Houses for Rent in Chennai: Locality Rates | Chennai Rents',
     h1: '1 BHK Houses for Rent in Chennai',
     bhk: '1',
     description: 'Explore verified 1 BHK houses and flats for rent in Chennai. Typical rent benchmarks, bachelor vs family suitability, water reality, and top localities.',
@@ -185,7 +185,7 @@ export const SUPPORTING_RENTAL_PAGES = [
   },
   {
     slug: '2-bhk-house-for-rent-in-chennai',
-    title: '2 BHK Houses for Rent in Chennai: Rates & Top Neighborhoods | Chennai Rents',
+    title: '2 BHK Houses for Rent in Chennai: Rates Guide | Chennai Rents',
     h1: '2 BHK Houses for Rent in Chennai',
     bhk: '2',
     description: 'Find 2 BHK apartments and independent houses for rent in Chennai. Neighborhood price comparisons, parking norms, and verified direct owner listings.',
@@ -194,7 +194,7 @@ export const SUPPORTING_RENTAL_PAGES = [
   },
   {
     slug: '3-bhk-house-for-rent-in-chennai',
-    title: '3 BHK Houses for Rent in Chennai: Luxury, Gated & Family Flats | Chennai Rents',
+    title: '3 BHK Houses for Rent in Chennai: Family Flats | Chennai Rents',
     h1: '3 BHK Houses for Rent in Chennai',
     bhk: '3',
     description: 'Find 3 BHK flats and spacious houses for rent in Chennai. Gated community amenities, parking spaces, and verified direct owner listings across top localities.',
@@ -203,7 +203,7 @@ export const SUPPORTING_RENTAL_PAGES = [
   },
   {
     slug: 'independent-house-for-rent-in-chennai',
-    title: 'Independent Houses for Rent in Chennai: Standalone Homes & Portions | Chennai Rents',
+    title: 'Independent Houses for Rent in Chennai | Chennai Rents',
     h1: 'Independent Houses for Rent in Chennai',
     propertyType: 'independent',
     description: 'Discover independent houses and private floor portions for rent in Chennai. Enjoy private parking, terrace access, and zero monthly apartment maintenance fees.',
@@ -212,7 +212,7 @@ export const SUPPORTING_RENTAL_PAGES = [
   },
   {
     slug: 'house-for-rent-in-chennai-under-10000',
-    title: 'House for Rent in Chennai Below 10000: Real Options & Localities | Chennai Rents',
+    title: 'House for Rent in Chennai Under 10000 | Chennai Rents',
     h1: 'House for Rent in Chennai Below ₹10,000',
     budgetMax: 10000,
     description: 'Looking for a rental house in Chennai under ₹10,000? Check realistic 1 BHK portions and compact flats in Porur, Medavakkam, Chromepet, and suburban belts.',
@@ -221,7 +221,7 @@ export const SUPPORTING_RENTAL_PAGES = [
   },
   {
     slug: 'house-for-rent-in-chennai-under-7000',
-    title: 'House for Rent in Chennai Below 7000: Budget Rental Guide | Chennai Rents',
+    title: 'House for Rent in Chennai Under 7000 | Chennai Rents',
     h1: 'House for Rent in Chennai Below ₹7,000',
     budgetMax: 7000,
     description: 'Realistic guide to finding homes in Chennai under ₹7,000. Compact 1 RKs, student rooms, and suburban independent portions with transparent utility checks.',
@@ -230,7 +230,7 @@ export const SUPPORTING_RENTAL_PAGES = [
   },
   {
     slug: 'house-for-rent-in-chennai-under-5000',
-    title: 'Rent House in Chennai Below 5000: Honest Suburban & Room Guide | Chennai Rents',
+    title: 'Rent House in Chennai Below 5000: Suburban Rooms | Chennai Rents',
     h1: 'House for Rent in Chennai Below ₹5,000',
     budgetMax: 5000,
     description: 'Honest facts about renting in Chennai below ₹5,000. Shared rooms, bachelor PGs, and suburban portions in Avadi, Guduvanchery, and outer transit rings.',
@@ -248,7 +248,7 @@ export const SUPPORTING_RENTAL_PAGES = [
   },
   {
     slug: 'house-for-rent-in-chennai-without-brokers',
-    title: 'House for Rent in Chennai Without Brokers: 100% Direct Owner Homes | Chennai Rents',
+    title: 'House for Rent in Chennai Without Brokers: Direct | Chennai Rents',
     h1: 'House for Rent in Chennai Without Brokers',
     description: 'Skip real estate agent commissions. How to connect directly with genuine Chennai home owners, verify documents, and negotiate rental advances safely.',
     priceRange: 'All budgets (Free Listing & Follow Up)',
@@ -256,7 +256,7 @@ export const SUPPORTING_RENTAL_PAGES = [
   },
   {
     slug: 'bachelor-rentals-in-chennai',
-    title: 'Bachelor House for Rent in Chennai: Welcoming Flats & Rooms | Chennai Rents',
+    title: 'Bachelor Rentals in Chennai: Verified Flats | Chennai Rents',
     h1: 'Bachelor House for Rent in Chennai',
     tenantType: 'bachelor',
     description: 'Find bachelor-friendly rental homes in Chennai. Avoid society restrictions with verified flats, shared apartments, and independent portions near IT parks.',
@@ -265,7 +265,7 @@ export const SUPPORTING_RENTAL_PAGES = [
   },
   {
     slug: 'family-houses-for-rent-in-chennai',
-    title: 'Family Houses for Rent in Chennai: Peaceful & Secure Residential Flats | Chennai Rents',
+    title: 'Family Houses for Rent in Chennai: Peaceful Flats | Chennai Rents',
     h1: 'Family Houses for Rent in Chennai',
     tenantType: 'family',
     description: 'Peaceful residential homes for families in Chennai. Focus on top schools, 24/7 security, metro water supply, car parking, and active community welfare.',
@@ -274,16 +274,16 @@ export const SUPPORTING_RENTAL_PAGES = [
   },
   {
     slug: 'co-living-in-chennai',
-    title: 'Co-Living Spaces in Chennai: Fully Furnished Rooms & Low Deposit | Chennai Rents',
+    title: 'Co-Living Spaces in Chennai: Furnished Rooms | Chennai Rents',
     h1: 'Co-Living Spaces in Chennai',
     tenantType: 'coliving',
-    description: 'Compare co-living spaces and premium PGs in Chennai. Fully furnished rooms with Wi-Fi, food, housekeeping, and minimal 1–2 month security advance.',
+    description: 'Compare co-living spaces and premium PGs in Chennai. Fully furnished rooms with Wi-Fi, food, housekeeping, and minimal 1-2 month security advance.',
     priceRange: '₹8,000 – ₹22,000 / month',
     recommendedLocalities: ['taramani', 'perungudi', 'sholinganallur', 'velachery', 'adyar'],
   },
   {
     slug: 'house-for-rent-in-anna-nagar-chennai',
-    title: 'House for Rent in Anna Nagar, Chennai: Premium West Hub Rentals | Chennai Rents',
+    title: 'House for Rent in Anna Nagar, Chennai: West Hub | Chennai Rents',
     h1: 'House for Rent in Anna Nagar, Chennai',
     locality: 'anna-nagar',
     description: 'Explore rental houses in Anna Nagar, Chennai. Tree-lined avenues, excellent Metro connectivity, top schools, and premium 2 & 3 BHK apartments.',
@@ -292,7 +292,7 @@ export const SUPPORTING_RENTAL_PAGES = [
   },
   {
     slug: 'house-for-rent-in-porur-chennai',
-    title: 'House for Rent in Porur, Chennai: DLF IT Park Hub & West Living | Chennai Rents',
+    title: 'House for Rent in Porur, Chennai: DLF IT Hub | Chennai Rents',
     h1: 'House for Rent in Porur, Chennai',
     locality: 'porur',
     description: 'Find houses for rent in Porur, Chennai. 5-minute access to DLF Cybercity and L&T Infotech, affordable 1-3 BHK flats, and upcoming Metro line.',
@@ -301,7 +301,7 @@ export const SUPPORTING_RENTAL_PAGES = [
   },
   {
     slug: 'house-for-rent-in-t-nagar-chennai',
-    title: 'House for Rent in T. Nagar, Chennai: Central Shopping Hub Rentals | Chennai Rents',
+    title: 'House for Rent in T. Nagar, Chennai: Central Hub | Chennai Rents',
     h1: 'House for Rent in T. Nagar, Chennai',
     locality: 't-nagar',
     description: 'Find houses for rent in T. Nagar, Chennai. Central connectivity, suburban trains at Mambalam, and quiet residential cross-streets behind Usman Road.',

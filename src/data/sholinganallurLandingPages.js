@@ -302,7 +302,7 @@ export const SHOLINGANALLUR_PAGES = [
     canonical: 'https://www.chennairents.in/chennai/sholinganallur/2bhk-flats-for-bachelors-in-sholinganallur',
     targetPrimaryKeywords: ['2bhk flats for bachelors in sholinganallur', 'shared flat bachelors sholinganallur'],
     secondaryKeywords: ['flat sharing bachelors sholinganallur', '2bhk for roommates omr', 'bachelor 2bhk near wipro sholinganallur'],
-    metaTitle: '2BHK Flats for Bachelors in Sholinganallur | Share & Save Rent',
+    metaTitle: '2BHK Flats for Bachelors in Sholinganallur | Bachelor Flats',
     metaDescription: 'Rent verified 2BHK flats for bachelors in Sholinganallur. Split costs with colleagues near Infosys, TCS, and Wipro with zero commute stress.',
     h1: '2BHK Flats for Bachelors in Sholinganallur',
     bhk: '2bhk',

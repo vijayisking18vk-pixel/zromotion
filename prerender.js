@@ -97,7 +97,7 @@ async function runPrerender() {
   routes.push({
     path: '/',
     title: 'Chennai Rents: Locality-First Rental Guide for Chennai',
-    description: 'Explore real rent rates, water reality, flood history, crowdsourced rental map, and verified direct owner listings in Chennai. Honest locality guides with zero broker fees.',
+    description: 'Explore real rental rates, water supply scores, flood history, and verified direct owner homes across Chennai neighborhoods with zero middleman fees.',
     canonical: `${DOMAIN}/`,
     robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
     schema: [
@@ -109,7 +109,7 @@ async function runPrerender() {
         description: 'Locality-first rental guide and verified listings for Chennai',
         potentialAction: {
           '@type': 'SearchAction',
-          target: `${DOMAIN}/chennai/{search_term_string}`,
+          target: `${DOMAIN}/listings?q={search_term_string}`,
           'query-input': 'required name=search_term_string',
         },
       },
@@ -166,7 +166,7 @@ async function runPrerender() {
 
   routes.push({
     path: '/verification',
-    title: 'Listing Verification Policy & Anti-Fraud Standards | Chennai Rents',
+    title: 'Listing Verification Policy | Chennai Rents',
     description: 'Chennai Rents 4-step verification framework: owner property tax and EB bill matching, zero fake listings, and reporting mechanisms.',
     canonical: `${DOMAIN}/verification`,
     robots: 'index, follow',
@@ -184,7 +184,7 @@ async function runPrerender() {
   routes.push({
     path: '/corrections',
     title: 'Editorial Corrections & Fact-Checking Policy | Chennai Rents',
-    description: 'Chennai Rents policy for editorial corrections, empirical data updates, and 48-hour revision turnarounds.',
+    description: 'Chennai Rents policy for editorial corrections, fact-checking standards, empirical data updates, and 48-hour revision turnarounds.',
     canonical: `${DOMAIN}/corrections`,
     robots: 'index, follow',
     schema: [
@@ -201,7 +201,7 @@ async function runPrerender() {
   routes.push({
     path: '/contact',
     title: 'Contact Editorial & Trust Desk | Chennai Rents',
-    description: 'Reach the Chennai Rents editorial desk, submit locality research corrections, or report listing fraud directly.',
+    description: 'Reach the Chennai Rents editorial desk, submit locality research corrections, or report listing fraud directly to our team.',
     canonical: `${DOMAIN}/contact`,
     robots: 'index, follow',
     schema: [
@@ -218,7 +218,7 @@ async function runPrerender() {
   routes.push({
     path: '/privacy',
     title: 'Privacy Policy | Chennai Rents',
-    description: 'Privacy policy and data governance practices of Chennai Rents under the Digital Personal Data Protection Act 2023.',
+    description: 'Privacy policy and user data governance practices of Chennai Rents under India\'s Digital Personal Data Protection Act 2023.',
     canonical: `${DOMAIN}/privacy`,
     robots: 'index, follow',
     schema: [
@@ -234,7 +234,7 @@ async function runPrerender() {
   routes.push({
     path: '/data-deletion',
     title: 'Data Deletion & Listing Removal Request | Chennai Rents',
-    description: 'Submit a request to delete your personal data or remove a verified property listing from Chennai Rents.',
+    description: 'Submit a formal request to delete your personal data or remove a verified property listing from Chennai Rents within 48 hours.',
     canonical: `${DOMAIN}/data-deletion`,
     robots: 'index, follow',
     schema: [
@@ -250,7 +250,7 @@ async function runPrerender() {
   routes.push({
     path: '/chennai/rentals',
     title: 'Flats & Houses for Rent in Chennai | Chennai Rents',
-    description: 'Find flats, houses, and PG for rent in Chennai. Explore locality-by-locality rent guides, real rent rates, water reports, and flood history. Verified direct listings.',
+    description: 'Find flats, houses, and PGs for rent in Chennai. Explore locality rent guides, realistic rental benchmarks, water reports, and verified direct listings.',
     canonical: `${DOMAIN}/chennai/rentals`,
     robots: 'index, follow',
     schema: [
@@ -1563,10 +1563,10 @@ async function runPrerender() {
     });
   });
 
-  // 4. Guide posts (/guides/:slug and /guide/:slug)
+  // 4. Guide posts (/guides/:slug)
   POSTS.filter((p) => p.type === 'guide').forEach((post) => {
     const canonical = `${DOMAIN}/guides/${post.slug}`;
-    const postDesc = post.description || post.summary || post.tagline;
+    const postDesc = post.metaDescription || post.description || post.summary || post.tagline;
     const schemas = [
       {
         '@context': 'https://schema.org',
@@ -1617,21 +1617,12 @@ async function runPrerender() {
       robots: 'index, follow',
       schema: schemas,
     });
-
-    routes.push({
-      path: `/guide/${post.slug}`,
-      title: `${post.title} | Chennai Rents`,
-      description: postDesc,
-      canonical,
-      robots: 'index, follow',
-      schema: schemas,
-    });
   });
 
   // 5. Data stories (/stories/:slug)
   POSTS.filter((p) => p.type === 'story').forEach((story) => {
     const canonical = `${DOMAIN}/stories/${story.slug}`;
-    const storyDesc = story.description || story.summary || story.tagline;
+    const storyDesc = story.metaDescription || story.description || story.summary || story.tagline;
     const schemas = [
       {
         '@context': 'https://schema.org',

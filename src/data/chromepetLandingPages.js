@@ -437,7 +437,7 @@ export const CHROMEPET_PAGES = [
     canonical: 'https://www.chennairents.in/chennai/chromepet/3bhk-flats-for-family-in-chromepet',
     targetPrimaryKeywords: ['3bhk flats for family in chromepet', 'spacious family homes chromepet'],
     secondaryKeywords: ['3bhk gated family apartment chromepet', 'luxury family flat chromepet', '3bhk with parking chromepet', 'chromepet family 3bhk'],
-    metaTitle: '3BHK Flats for Family in Chromepet | Gated Societies & Parking',
+    metaTitle: '3BHK Flats for Family in Chromepet | Gated Societies',
     metaDescription: 'Find spacious 3BHK family flats in Chromepet. Dedicated car parking, lifts, power backup, and quiet residential streets near GST Road.',
     h1: '3BHK Flats for Family in Chromepet, Chennai',
     bhk: '3BHK',

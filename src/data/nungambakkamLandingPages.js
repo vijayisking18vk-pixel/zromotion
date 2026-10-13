@@ -856,7 +856,7 @@ export const NUNGAMBAKKAM_PAGES = [
     canonical: 'https://www.chennairents.in/chennai/nungambakkam/flats-for-rent-under-15000-in-nungambakkam',
     targetPrimaryKeywords: ['flats for rent under 15000 in nungambakkam', '1bhk under 15000 nungambakkam'],
     secondaryKeywords: ['1bhk under 15000 nungambakkam', '2bhk under 15k nungambakkam', 'budget flats sterling road'],
-    metaTitle: 'Flats for Rent Under ₹15,000 in Nungambakkam | 1BHKs & Studios',
+    metaTitle: 'Flats for Rent Under ₹15k in Nungambakkam | 1BHKs & Studios',
     metaDescription: 'Discover rental apartments under ₹15,000 in Nungambakkam. Quality 1RK studios and compact 1BHK builder floors near suburban stations and bus depots.',
     h1: 'Flats for Rent Under ₹15,000 in Nungambakkam',
     bhk: 'budget',

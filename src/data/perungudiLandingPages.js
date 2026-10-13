@@ -930,7 +930,7 @@ export const PERUNGUDI_PAGES = [
     canonical: 'https://www.chennairents.in/chennai/perungudi/flats-for-rent-under-20000-in-perungudi',
     targetPrimaryKeywords: ['flats for rent under 20000 in perungudi', '1bhk 2bhk under 20000 perungudi'],
     secondaryKeywords: ['2bhk under 20000 perungudi', 'flats in perungudi under 20k', '2bhk builder floor under 20k perungudi', 'semi furnished 2bhk perungudi'],
-    metaTitle: 'Flats for Rent Under ₹20,000 in Perungudi | Prime 1BHKs & 2BHKs',
+    metaTitle: 'Flats for Rent Under ₹20k in Perungudi | Prime 1BHK & 2BHK',
     metaDescription: 'Browse rental apartments under ₹20,000 in Perungudi. Modern 1BHK flats and budget 2BHK builder floors with reliable water supply and transit access.',
     h1: 'Flats for Rent Under ₹20,000 in Perungudi, Chennai',
     bhk: '1BHK & 2BHK',

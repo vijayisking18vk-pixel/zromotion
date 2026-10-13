@@ -363,18 +363,37 @@ function initMap() {
 // Search Inputs Handling
 function initSearch() {
     const searchInput = document.getElementById("search-input");
-    searchInput.addEventListener("input", () => {
-        const query = searchInput.value.toLowerCase().trim();
-        if (!query) return;
+    if (!searchInput) return;
 
+    const performSearch = (rawQuery) => {
+        if (!rawQuery) return;
+        const query = rawQuery.toLowerCase().trim();
         // Match with neighbourhood coordinates
         for (const [name, coords] of Object.entries(NEIGHBOURHOOD_CENTERS)) {
             if (name.toLowerCase().includes(query)) {
-                map.setView(coords, 14);
+                if (map) map.setView(coords, 14);
                 break;
             }
         }
+    };
+
+    searchInput.addEventListener("input", () => {
+        performSearch(searchInput.value);
     });
+
+    // Handle incoming query param (e.g. /listings?q=omr or ?search=velachery)
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const queryParam = urlParams.get('q') || urlParams.get('search');
+        if (queryParam) {
+            searchInput.value = queryParam;
+            setTimeout(() => {
+                performSearch(queryParam);
+            }, 300);
+        }
+    } catch (e) {
+        // Fallback gracefully
+    }
 }
 
 // 6. Pin Placement Flow

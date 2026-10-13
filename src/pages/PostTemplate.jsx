@@ -105,8 +105,8 @@ export default function PostTemplate() {
       exit={{ opacity: 0 }}
     >
       <SEOHead 
-        title={`${post.title} | ${isStory ? 'Data Story' : isLocality ? 'Rent' : 'Guide'} | Chennai Rents`}
-        description={post.summary}
+        title={`${post.title} | Chennai Rents`}
+        description={post.metaDescription || post.summary}
         type="article"
         canonical={canonicalUrl}
         faqs={post.faqs || []}
@@ -148,7 +148,7 @@ export default function PostTemplate() {
             </p>
             
             <div className="meta-editorial" style={{ marginTop: '2rem' }}>
-              {post.readTime ? post.readTime.toUpperCase() : '5 MIN READ'} • UPDATED: {post.updatedDate}
+              {post.readTime ? post.readTime.toUpperCase() : '5 MIN READ'} • UPDATED: {post.updatedDate} • <Link to="/methodology" style={{ color: 'inherit', textDecoration: 'underline' }}>METHODOLOGY</Link> • <Link to="/corrections" style={{ color: 'inherit', textDecoration: 'underline' }}>REPORT CORRECTION</Link>
             </div>
           </motion.div>
 
@@ -372,7 +372,7 @@ export default function PostTemplate() {
 
           {/* ── EDITORIAL & LEGAL DISCLAIMER ── */}
           <div style={{ marginTop: '2.5rem', padding: '1.25rem', backgroundColor: '#FAF7F2', borderRadius: '8px', borderLeft: '4px solid var(--c-auto-yellow)', fontSize: '0.85rem', color: 'var(--c-ink-muted)', lineHeight: 1.6 }}>
-            <strong>Editorial & Consumer Advisory:</strong> Rental benchmarks, water observations, and tenancy norms published on Chennai Rents are compiled for transparency from local contributors and public records. They do not constitute formal legal counsel. For specific lease disputes or contract registration, refer to the Tamil Nadu Regulation of Rights and Responsibilities of Landlords and Tenants Act (TNRRRL Act) or consult a qualified legal advocate.
+            <strong>Editorial & Consumer Advisory:</strong> Rental benchmarks, water observations, and tenancy norms published on Chennai Rents are compiled for transparency from local contributors and public records according to our <Link to="/methodology" style={{ color: 'var(--c-ripon-red)', textDecoration: 'underline' }}>research methodology</Link> and <Link to="/verification" style={{ color: 'var(--c-ripon-red)', textDecoration: 'underline' }}>verification standards</Link>. To submit an update or error report, visit our <Link to="/corrections" style={{ color: 'var(--c-ripon-red)', textDecoration: 'underline' }}>corrections desk</Link>.
           </div>
 
         </main>

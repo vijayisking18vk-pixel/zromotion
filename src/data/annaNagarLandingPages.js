@@ -174,7 +174,7 @@ export const ANNA_NAGAR_PAGES = [
     canonical: 'https://www.chennairents.in/chennai/anna-nagar/2bhk-flats-for-rent-in-anna-nagar',
     targetPrimaryKeywords: ['2bhk flats for rent in anna nagar', '2 bedroom flats anna nagar'],
     secondaryKeywords: ['2 bhk flat rent in anna nagar', '2 bedroom apartment anna nagar', 'shanthi colony 2bhk rent'],
-    metaTitle: '2BHK Flats for Rent in Anna Nagar Chennai | Standalone & Gated',
+    metaTitle: '2BHK Flats for Rent in Anna Nagar Chennai | Standalone Homes',
     metaDescription: 'Rent verified 2BHK flats in Anna Nagar. Explore 2-bedroom rental apartments in Anna Nagar East, West, and Shanthi Colony with car parking.',
     h1: '2BHK Flats for Rent in Anna Nagar, Chennai',
     bhk: '2bhk',

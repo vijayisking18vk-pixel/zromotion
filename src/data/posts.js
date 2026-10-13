@@ -117,7 +117,7 @@ export const POSTS = [
   {
     slug: 'advance-deposit-chennai',
     type: 'guide',
-    title: 'Advance Deposit in Chennai: 10 Months Norm, Negotiation & Your Rights',
+    title: 'Advance Deposit Rules in Chennai',
     subheading: 'The Truth About the 10-Month Security Deposit in Chennai',
     tagline: 'Why Chennai landlords ask for 10 months advance, how to negotiate it down to 4-6 months without losing the house, and how to protect your refund.',
     badge: 'Crucial Tenant Guide',
@@ -125,6 +125,7 @@ export const POSTS = [
     readTime: '7 min read',
     updatedDate: 'October 2026',
     coverImage: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&q=80',
+    metaDescription: 'Understand Chennai rental advance norms, legal 3-month caps under the TN tenancy act, and proven tactics to negotiate deposits down to 4 to 6 months.',
     summary: 'The biggest shock for anyone moving to Chennai from Bangalore, Hyderabad, or Mumbai is the advance deposit. While landlords start the conversation at 10 months, almost nobody actually pays 10 months anymore.',
 
     guideSections: [
@@ -365,7 +366,7 @@ Local Chennai Tip:
   {
     slug: 'tenant-rules-chennai',
     type: 'guide',
-    title: 'Rental Agreement & Tenant Rules in Chennai: What You Must Sign & What to Refuse',
+    title: 'Chennai Tenant Rules & Rental Agreements',
     subheading: 'What to Sign & What to Refuse in a Chennai Lease',
     tagline: 'The difference between 11-month non-registered agreements and legally binding registrations, maintenance fee traps, and notice period rights.',
     badge: 'Legal Checklist',
@@ -373,6 +374,7 @@ Local Chennai Tip:
     readTime: '6 min read',
     updatedDate: 'October 2026',
     coverImage: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?w=1200&q=80',
+    metaDescription: 'Essential tenant rights, rental agreement clauses to verify or refuse, notice period standards, and maintenance rules for renting homes across Chennai.',
     summary: 'Signing a rental agreement in Chennai is often treated like a formality on a ₹100 stamp paper. Here are the 5 clauses you must review before signing.',
 
     guideSections: [
@@ -420,7 +422,7 @@ Local Chennai Tip:
   {
     slug: 'how-to-write-rental-listing',
     type: 'guide',
-    title: 'How to Write a Chennai Rental Listing That Attracts Serious Tenants',
+    title: 'How to Write a Chennai Rental Listing',
     subheading: 'Owner Copywriting Playbook: Cut Out Time-Wasters & Attract Verified Tenants',
     tagline: 'Practical copywriting strategies for Chennai property owners. How to specify water reality, EB meter type, parking, and tenant preferences to get quality inquiries fast.',
     badge: 'Owner Playbook',
@@ -428,6 +430,7 @@ Local Chennai Tip:
     readTime: '6 min read',
     updatedDate: 'October 2026',
     coverImage: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80',
+    metaDescription: 'Learn how to write a transparent rental listing in Chennai covering water supply, parking, and house rules to attract genuine tenants without middleman fees.',
     summary: 'A vague rental listing gets dozens of calls asking the same basic questions: Is there Metro water? Is car parking covered? Can bachelors stay? Writing a descriptive, transparent listing saves hours and attracts respectful, credit-worthy tenants.',
     guideSections: [
       {
@@ -488,7 +491,7 @@ This headline pre-qualifies tenants before they even dial your number.`
   {
     slug: 'checklist-rental-advance',
     type: 'guide',
-    title: 'Checklist Before Paying Rental Advance in Chennai: 10 Critical Checks',
+    title: 'Rental Advance Checklist for Chennai',
     subheading: 'Due Diligence Playbook Before Parting With Liquid Cash',
     tagline: 'Ten essential physical, legal, and utility checks before handing over token advance or security deposit to a Chennai property owner.',
     badge: 'Due Diligence',
@@ -496,6 +499,7 @@ This headline pre-qualifies tenants before they even dial your number.`
     readTime: '7 min read',
     updatedDate: 'October 2026',
     coverImage: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&q=80',
+    metaDescription: 'A 10-point checklist before paying rental advance in Chennai. Verify water lines, EB sub-meters, deed clauses, and owner identity to safeguard your deposit.',
     summary: 'Paying a rental advance in Chennai is often treated like a hasty informal transaction. Once money changes hands, resolving water problems or claiming refunds becomes exhausting. Use this 10-point checklist before signing or transferring funds.',
     guideSections: [
       {
@@ -557,7 +561,7 @@ This digital trail prevents arbitrary forfeiture if the landlord introduces unex
   {
     slug: 'how-to-list-flat-directly',
     type: 'guide',
-    title: 'How to List a Flat Directly Without a Broker in Chennai',
+    title: 'List Flats Directly in Chennai Without Brokers',
     subheading: 'Owner Step-by-Step Guide: Save 1 Month Brokerage & Retain Full Tenancy Control',
     tagline: 'How Chennai house owners can list directly, screen corporate tenant profiles, and execute a legally compliant rental agreement without paying broker commissions.',
     badge: 'Owner Guide',
@@ -565,6 +569,7 @@ This digital trail prevents arbitrary forfeiture if the landlord introduces unex
     readTime: '6 min read',
     updatedDate: 'October 2026',
     coverImage: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1200&q=80',
+    metaDescription: 'Step-by-step guide for Chennai owners to list flats directly, screen verified tenants, avoid paying hefty brokerage fees, and close rental agreements quickly.',
     summary: 'Paying a full month rent as brokerage (₹20,000 to ₹40,000+) to a neighborhood middleman who simply opens the door twice is obsolete. In 2026, digital direct listing connects you directly with verified tenants.',
     guideSections: [
       {
@@ -623,7 +628,7 @@ Pricing realistically from Day 1 prevents your property from staying vacant for 
   {
     slug: 'how-to-negotiate-rent',
     type: 'guide',
-    title: 'How to Negotiate Rent in Chennai Using Local Locality Data',
+    title: 'How to Negotiate Rent in Chennai',
     subheading: 'Tactical Negotiation Playbook: Use Hard Evidence Instead of Emotional Haggling',
     tagline: 'How to counter broker markups, leverage advance deposit trade-offs, and secure fair monthly rental rates using crowdsourced Chennai neighborhood data.',
     badge: 'Negotiation',
@@ -631,6 +636,7 @@ Pricing realistically from Day 1 prevents your property from staying vacant for 
     readTime: '6 min read',
     updatedDate: 'October 2026',
     coverImage: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?w=1200&q=80',
+    metaDescription: 'Practical strategies to negotiate house rent in Chennai using empirical locality data, water tanker expenses, advance offers, and long-term lease terms.',
     summary: 'Brokers and owners often start with inflated asking prices to test the waters. By walking into conversations armed with empirical data on closed rent rates, water tanker expenses, and parking reality, you can comfortably negotiate 8% to 15% off the asking rent.',
     guideSections: [
       {
@@ -686,7 +692,7 @@ Pricing realistically from Day 1 prevents your property from staying vacant for 
   {
     slug: 'how-to-price-flat-fairly',
     type: 'guide',
-    title: 'How to Price a Chennai Property Fairly for Rent: Landlord Valuation Guide',
+    title: 'How to Price a Chennai Rental Flat Fairly',
     subheading: 'Maximize Annual Net Yield & Eliminate Expensive Vacancy Months',
     tagline: 'How Chennai house owners can calculate accurate rental yield, factor in Metro and parking premiums, and avoid losing money to prolonged vacancies.',
     badge: 'Pricing Guide',
@@ -694,6 +700,7 @@ Pricing realistically from Day 1 prevents your property from staying vacant for 
     readTime: '6 min read',
     updatedDate: 'October 2026',
     coverImage: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=80',
+    metaDescription: 'Calculate realistic monthly rent for your Chennai flat using BHK benchmarks, locality demand, car parking, and amenities to prevent prolonged vacancy losses.',
     summary: 'Holding out for an extra ₹2,000 per month while your flat sits vacant for three months costs you ₹60,000 to ₹90,000 in permanent cash-flow loss. Learn how to calculate fair market rent that attracts stable, long-term tenants.',
     guideSections: [
       {
@@ -744,7 +751,7 @@ Landlord B earns ₹30,000 MORE in year one while avoiding carrying maintenance 
   {
     slug: 'best-chennai-areas',
     type: 'guide',
-    title: 'Best Chennai Areas for Bachelors, Families, and IT Workers: 2026 Edition',
+    title: 'Best Chennai Areas to Rent in 2026',
     subheading: 'Hyperlocal Neighborhood Comparison: Match Your Life Stage to the Right Chennai Enclave',
     tagline: 'Comprehensive neighborhood breakdown comparing South, West, Central, and Coastal Chennai by commute times, school quality, water supply, and budget.',
     badge: 'Area Guide',
@@ -752,6 +759,7 @@ Landlord B earns ₹30,000 MORE in year one while avoiding carrying maintenance 
     readTime: '8 min read',
     updatedDate: 'October 2026',
     coverImage: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1200&q=80',
+    metaDescription: 'Comprehensive rental guide to top Chennai localities for bachelors, IT workers, and families. Compare rents, commute times, water availability, and schools.',
     summary: 'Chennai is not a single rental market: it is an archipelago of distinctive residential micro-climates. Choosing the wrong locality can mean two hours in traffic on GST Road or paying ₹2,000 monthly for private water tankers. Here is where you should live based on your life stage.',
     guideSections: [
       {
@@ -800,7 +808,7 @@ Landlord B earns ₹30,000 MORE in year one while avoiding carrying maintenance 
   {
     slug: 'broker-fee-vs-direct-owner',
     type: 'guide',
-    title: 'Broker Fees vs Direct-Owner Rentals in Chennai: Real Cost Comparison',
+    title: 'Broker Fees vs Direct Rentals in Chennai',
     subheading: 'Financial Audit: How Middlemen Add ₹25,000+ in Frictions and How to Avoid Them',
     tagline: 'Detailed mathematical breakdown of 1-month brokerage commissions, renewal fee claims, and how direct-owner platforms guarantee transparency and safety.',
     badge: 'Cost Comparison',
@@ -808,6 +816,7 @@ Landlord B earns ₹30,000 MORE in year one while avoiding carrying maintenance 
     readTime: '6 min read',
     updatedDate: 'October 2026',
     coverImage: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&q=80',
+    metaDescription: 'Compare traditional 1-month broker fees against direct owner renting in Chennai. Discover real savings, safety protocols, and direct leasing best practices.',
     summary: 'In Chennai, traditional property brokers charge one full month rent from the tenant and one month rent from the landlord. On a ₹25,000 per month flat, that is ₹50,000 extracted from the transaction for opening a door. Here is how direct leasing protects your capital.',
     guideSections: [
       {
@@ -863,7 +872,7 @@ You keep ₹1,32,000 in your bank account generating interest.`
   {
     slug: 'cost-of-living-chennai-2026',
     type: 'guide',
-    title: 'Cost of Living in Chennai 2026: Rent, Utilities, Food & Commute',
+    title: 'Cost of Living in Chennai (2026 Guide)',
     subheading: 'Comprehensive Monthly Budgeting Guide Across Chennai Micro-Markets',
     tagline: 'Realistic itemized living expenses in Chennai: electricity bills with 100 free units, water tanker costs, groceries, maid salaries, and Metro commute passes.',
     badge: 'Budget Guide',
@@ -871,6 +880,7 @@ You keep ₹1,32,000 in your bank account generating interest.`
     readTime: '7 min read',
     updatedDate: 'October 2026',
     coverImage: 'https://images.unsplash.com/photo-1542665952-14513db15293?w=1200&q=80',
+    metaDescription: 'Complete 2026 breakdown of living expenses in Chennai. Compare rent, food, commute, utilities, and school costs for bachelors, couples, and family households.',
     summary: 'Compared to Bengaluru and Mumbai, Chennai offers high quality of life at 25% to 40% lower monthly living expenses. Here is the realistic month-by-month financial breakdown for bachelors, couples, and families in 2026.',
     guideSections: [
       {
@@ -928,7 +938,7 @@ You keep ₹1,32,000 in your bank account generating interest.`
   {
     slug: 'no-deposit-flats-chennai',
     type: 'guide',
-    title: 'Low Deposit & Free Listing and Follow Up Flats in Chennai: What You Must Know',
+    title: 'Low Deposit Flats in Chennai: Rental Guide',
     subheading: 'Tenant Advisory: How to Access Low-Deposit Rentals Without Falling for Rental Scams',
     tagline: 'Practical legal rights, corporate lease options, co-living alternatives, and red flags when searching for low-deposit homes in Chennai.',
     badge: 'Deposit Guide',
@@ -936,6 +946,7 @@ You keep ₹1,32,000 in your bank account generating interest.`
     readTime: '6 min read',
     updatedDate: 'October 2026',
     coverImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80',
+    metaDescription: 'How to find low deposit rental flats in Chennai. Learn how tenants negotiate 2 to 4 month advances, verify direct owners, and avoid zero-deposit rental traps.',
     summary: 'The 10-month rental advance is the biggest financial friction in Chennai. Discover how modern tenants are successfully securing 2 to 4-month deposit arrangements and how to avoid fraudulent "zero deposit" rental traps.',
     guideSections: [
       {
@@ -982,7 +993,7 @@ While local habit still drives high demands, having knowledge of this statute pr
   {
     slug: 'gated-vs-standalone',
     type: 'story',
-    title: 'Gated vs Standalone Rent Difference in Chennai',
+    title: 'Gated vs Standalone Rent in Chennai',
     subheading: 'Data Analysis: The Real Price Premium for Amenities, Power Backup & Water Security',
     tagline: 'A data-backed comparison of rental rates between gated community societies and standalone builder apartments across Chennai micro-markets.',
     badge: 'Data Story',
@@ -990,6 +1001,7 @@ While local habit still drives high demands, having knowledge of this statute pr
     readTime: '5 min read',
     updatedDate: 'October 2026',
     coverImage: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=80',
+    metaDescription: 'Empirical analysis comparing rental premiums of gated societies versus standalone flats across Chennai, evaluating diesel backup, security, and maintenance.',
     summary: 'A quantitative analysis comparing the rental premium of gated communities versus standalone apartments in Chennai. Uncover how much extra tenants pay for diesel backup, security, and whether high monthly maintenance fees are worth it.',
     guideSections: [
       {
@@ -1040,7 +1052,7 @@ While local habit still drives high demands, having knowledge of this statute pr
   {
     slug: 'localities-heating-up',
     type: 'story',
-    title: 'Which Chennai Localities Are Heating Up?',
+    title: 'Fastest Rising Rental Areas in Chennai',
     subheading: 'Market Report: High-Growth Rental Corridors Driven by Infrastructure and Hybrid Work',
     tagline: 'An empirical data study of rising rental micro-markets across OMR, West Chennai, and central transit corridors in 2026.',
     badge: 'Data Story',
@@ -1048,6 +1060,7 @@ While local habit still drives high demands, having knowledge of this statute pr
     readTime: '5 min read',
     updatedDate: 'October 2026',
     coverImage: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&q=80',
+    metaDescription: 'Analysis of tenant-reported rental data highlighting rapid demand growth and rent surges across Sholinganallur, Porur, Velachery, and Guindy corridors.',
     summary: 'Analyzing tenant-reported rent data reveals specific sub-markets in Chennai experiencing major demand surges. Explore high-growth rental corridors across Sholinganallur, Porur, Velachery, and Guindy.',
     guideSections: [
       {
@@ -1102,6 +1115,7 @@ While local habit still drives high demands, having knowledge of this statute pr
     readTime: '5 min read',
     updatedDate: 'October 2026',
     coverImage: 'https://images.unsplash.com/photo-1517649763962-0c623266ddc0?w=1200&q=80',
+    metaDescription: 'Measuring the exact rental premium for apartments within 1 km of CMRL metro stations in Chennai, comparing transit savings against monthly rent differences.',
     summary: 'The rapid expansion of the Chennai Metro (CMRL) network has reshaped residential rents. We measure the exact rental premium of living within 1 km of a metro station and calculate whether the transit savings offset higher rent.',
     guideSections: [
       {
@@ -1148,7 +1162,7 @@ While local habit still drives high demands, having knowledge of this statute pr
   {
     slug: 'where-2bhk-moving-fastest',
     type: 'story',
-    title: 'Where 2BHK Rents Are Moving Fastest in Chennai',
+    title: 'Where 2BHK Rents Move Fastest in Chennai',
     subheading: 'Market Benchmark: Locality Price Shifts Across Chennai most popular Property Configuration',
     tagline: 'Analyzing transaction velocity, pricing shifts, and tenant demand for 2-bedroom apartments across Chennai suburbs.',
     badge: 'Data Story',
@@ -1156,6 +1170,7 @@ While local habit still drives high demands, having knowledge of this statute pr
     readTime: '5 min read',
     updatedDate: 'October 2026',
     coverImage: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&q=80',
+    metaDescription: 'Examining 2 BHK rental trends across Chennai suburban corridors, analyzing price acceleration, tenant turnover, and fair-market rental benchmarks for 2026.',
     summary: 'The 2 BHK flat is Chennai primary rental benchmark for small families, roommates, and working professionals. Explore the suburban corridors where 2 BHK rents are rising fastest and how to benchmark fair market value.',
     guideSections: [
       {
