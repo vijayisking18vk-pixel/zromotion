@@ -104,7 +104,7 @@ export default function ReelEmbed({ reel }) {
               display: 'block',
             }}
             scrolling="no"
-            allowTransparency="true"
+            allowtransparency="true"
             allow="encrypted-media"
             onError={() => setHasError(true)}
           />
