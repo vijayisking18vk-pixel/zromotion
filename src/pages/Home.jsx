@@ -141,31 +141,33 @@ export default function Home() {
                   New Properties Available
                 </h2>
                 <p style={{ color: 'var(--c-ink-muted)', fontSize: '0.96rem', margin: 0, maxWidth: '580px', lineHeight: 1.6 }}>
-                  Watch unedited room-by-room video tours of available homes across Chennai before visiting in person. Swipe or use arrows to explore all walk-throughs.
+                  Watch unedited room-by-room video tours of available homes across Chennai before visiting in person.
                 </p>
               </div>
 
               <div className="reels-header-actions">
-                <div className="reels-nav-arrows" aria-label="Reels carousel navigation">
-                  <button
-                    type="button"
-                    onClick={() => scrollReels('left')}
-                    className="reels-nav-arrow-btn"
-                    aria-label="Scroll left"
-                    title="Previous reel"
-                  >
-                    <ChevronLeft size={18} />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => scrollReels('right')}
-                    className="reels-nav-arrow-btn"
-                    aria-label="Scroll right"
-                    title="Next reel"
-                  >
-                    <ChevronRight size={18} />
-                  </button>
-                </div>
+                {REELS.length > 1 && (
+                  <div className="reels-nav-arrows" aria-label="Reels carousel navigation">
+                    <button
+                      type="button"
+                      onClick={() => scrollReels('left')}
+                      className="reels-nav-arrow-btn"
+                      aria-label="Scroll left"
+                      title="Previous reel"
+                    >
+                      <ChevronLeft size={18} />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => scrollReels('right')}
+                      className="reels-nav-arrow-btn"
+                      aria-label="Scroll right"
+                      title="Next reel"
+                    >
+                      <ChevronRight size={18} />
+                    </button>
+                  </div>
+                )}
 
                 <motion.a
                   href={INSTAGRAM_URL}
@@ -181,113 +183,179 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Scrollable Reels Carousel Track */}
-            <div className="reels-carousel-container">
-              <div ref={reelsScrollRef} className="reels-carousel-track">
-                {REELS.map((reel) => (
-                  <div key={reel.id || reel.reelId} className="reels-carousel-item">
-                    <ReelEmbed reel={reel} />
-                  </div>
-                ))}
+            {/* Single Reel Showcase (Clean 2-Column Balanced Card Layout) */}
+            {REELS.length === 1 ? (
+              <div className="reels-single-showcase">
+                <div className="reels-single-video-col">
+                  <ReelEmbed reel={REELS[0]} />
+                </div>
 
-                {/* Final "Explore More" Card */}
-                <div className="reels-carousel-item reels-more-card-item">
-                  <div className="reels-more-card">
-                    <div className="reels-more-icon-wrap">
-                      <Instagram size={28} />
+                <div className="reel-companion-card">
+                  <div>
+                    <div className="reels-companion-badge">
+                      <Instagram size={15} style={{ color: 'var(--c-ripon-red)' }} />
+                      <span>DAILY VIDEO TOURS ON INSTAGRAM</span>
                     </div>
-                    <span className="reels-more-badge">INSTAGRAM EXCLUSIVE</span>
-                    <h3 className="reels-more-title">More Tours on Instagram</h3>
-                    <p className="reels-more-desc">
-                      Fresh video walk-throughs are published weekly on {INSTAGRAM_HANDLE}. Follow along for immediate alerts when verified properties hit the market.
+
+                    <h3 className="reels-companion-title">
+                      Inspect Real Chennai Homes Before Stepping Out
+                    </h3>
+
+                    <p className="reels-companion-desc">
+                      Static photos often hide cramped layouts, poor ventilation, or narrow street access. Every video walk-through published on <strong>{INSTAGRAM_HANDLE}</strong> shows you the actual floor plan, natural light, and neighbourhood surroundings upfront.
                     </p>
+
+                    <div className="reels-companion-list">
+                      <div className="reels-companion-item">
+                        <CheckCircle2 size={18} className="reels-check-icon" />
+                        <div className="reels-item-text">
+                          <strong>Unedited Room-by-Room Walkthroughs:</strong> Check living room proportions, kitchen storage, and balcony ventilation in 60 seconds.
+                        </div>
+                      </div>
+                      <div className="reels-companion-item">
+                        <CheckCircle2 size={18} className="reels-check-icon" />
+                        <div className="reels-item-text">
+                          <strong>Verified Property Specifications:</strong> Ground floor, North facing, 2 bathrooms, covered bike parking, Metro Water, and 3-phase EB connection.
+                        </div>
+                      </div>
+                      <div className="reels-companion-item">
+                        <CheckCircle2 size={18} className="reels-check-icon" />
+                        <div className="reels-item-text">
+                          <strong>Direct Inquiry &amp; Free Property Listing:</strong> Reach out directly for available homes or list your own property for free.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="reels-companion-actions">
                     <a
                       href={INSTAGRAM_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-dark reels-more-cta"
+                      className="btn-dark"
                     >
-                      <Instagram size={15} />
+                      <Instagram size={16} />
                       <span>Follow {INSTAGRAM_HANDLE}</span>
-                      <ExternalLink size={12} style={{ opacity: 0.6 }} />
+                    </a>
+                    <a
+                      href="/listings/list-property.html"
+                      className="btn-yellow"
+                    >
+                      <Plus size={16} />
+                      <span>List Your Property Free</span>
                     </a>
                   </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              /* Multi-Reels Carousel Shelf */
+              <>
+                <div className="reels-carousel-container">
+                  <div ref={reelsScrollRef} className="reels-carousel-track">
+                    {REELS.map((reel) => (
+                      <div key={reel.id || reel.reelId} className="reels-carousel-item">
+                        <ReelEmbed reel={reel} />
+                      </div>
+                    ))}
 
-            {/* Full-Width Inspection Companion Guarantee Banner */}
-            <div className="reels-inspection-banner">
-              <div className="reels-inspection-header">
-                <div className="reels-inspection-pill">
-                  <Instagram size={14} style={{ color: 'var(--c-ripon-red)' }} />
-                  <span>VERIFIED VIDEO PROTOCOL</span>
-                </div>
-                <h3 className="reels-inspection-title">
-                  Inspect Real Chennai Homes Before Stepping Out
-                </h3>
-                <p className="reels-inspection-subtitle">
-                  Static photos often hide cramped layouts, poor ventilation, or narrow street access. Every video walk-through published on <strong>{INSTAGRAM_HANDLE}</strong> shows you the actual floor plan, natural light, and neighbourhood surroundings upfront.
-                </p>
-              </div>
-
-              <div className="reels-inspection-features">
-                <div className="reels-feature-card">
-                  <div className="reels-feature-check">
-                    <CheckCircle2 size={18} />
+                    <div className="reels-carousel-item reels-more-card-item">
+                      <div className="reels-more-card">
+                        <div className="reels-more-icon-wrap">
+                          <Instagram size={28} />
+                        </div>
+                        <span className="reels-more-badge">INSTAGRAM EXCLUSIVE</span>
+                        <h3 className="reels-more-title">More Tours on Instagram</h3>
+                        <p className="reels-more-desc">
+                          Fresh video walk-throughs are published weekly on {INSTAGRAM_HANDLE}. Follow along for immediate alerts when verified properties hit the market.
+                        </p>
+                        <a
+                          href={INSTAGRAM_URL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-dark reels-more-cta"
+                        >
+                          <Instagram size={15} />
+                          <span>Follow {INSTAGRAM_HANDLE}</span>
+                          <ExternalLink size={12} style={{ opacity: 0.6 }} />
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="reels-feature-heading">Unedited Walk-Throughs</h4>
-                    <p className="reels-feature-text">
-                      Check living room proportions, kitchen storage, and balcony ventilation in 60 seconds without filtered camera tricks.
+                </div>
+
+                <div className="reels-inspection-banner">
+                  <div className="reels-inspection-header">
+                    <div className="reels-inspection-pill">
+                      <Instagram size={14} style={{ color: 'var(--c-ripon-red)' }} />
+                      <span>VERIFIED VIDEO PROTOCOL</span>
+                    </div>
+                    <h3 className="reels-inspection-title">
+                      Inspect Real Chennai Homes Before Stepping Out
+                    </h3>
+                    <p className="reels-inspection-subtitle">
+                      Static photos often hide cramped layouts, poor ventilation, or narrow street access. Every video walk-through published on <strong>{INSTAGRAM_HANDLE}</strong> shows you the actual floor plan, natural light, and neighbourhood surroundings upfront.
                     </p>
                   </div>
-                </div>
 
-                <div className="reels-feature-card">
-                  <div className="reels-feature-check">
-                    <CheckCircle2 size={18} />
+                  <div className="reels-inspection-features">
+                    <div className="reels-feature-card">
+                      <div className="reels-feature-check">
+                        <CheckCircle2 size={18} />
+                      </div>
+                      <div>
+                        <h4 className="reels-feature-heading">Unedited Walk-Throughs</h4>
+                        <p className="reels-feature-text">
+                          Check living room proportions, kitchen storage, and balcony ventilation in 60 seconds without filtered camera tricks.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="reels-feature-card">
+                      <div className="reels-feature-check">
+                        <CheckCircle2 size={18} />
+                      </div>
+                      <div>
+                        <h4 className="reels-feature-heading">Exact Locality &amp; Pricing</h4>
+                        <p className="reels-feature-text">
+                          Square footage, BHK layout, floor level, advance requirement, and exact Chennai micro-market tagged transparently.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="reels-feature-card">
+                      <div className="reels-feature-check">
+                        <CheckCircle2 size={18} />
+                      </div>
+                      <div>
+                        <h4 className="reels-feature-heading">Direct Inquiry &amp; Free Listing</h4>
+                        <p className="reels-feature-text">
+                          Connect directly with owners for available homes, or list your own property for free with our team.
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="reels-feature-heading">Exact Locality &amp; Pricing</h4>
-                    <p className="reels-feature-text">
-                      Square footage, BHK layout, floor level, advance requirement, and exact Chennai micro-market tagged transparently.
-                    </p>
+
+                  <div className="reels-inspection-actions">
+                    <a
+                      href={INSTAGRAM_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-dark"
+                    >
+                      <Instagram size={16} />
+                      <span>Follow {INSTAGRAM_HANDLE}</span>
+                    </a>
+                    <a
+                      href="/listings/list-property.html"
+                      className="btn-yellow"
+                    >
+                      <Plus size={16} />
+                      <span>List Your Property Free</span>
+                    </a>
                   </div>
                 </div>
-
-                <div className="reels-feature-card">
-                  <div className="reels-feature-check">
-                    <CheckCircle2 size={18} />
-                  </div>
-                  <div>
-                    <h4 className="reels-feature-heading">Direct Inquiry &amp; Free Listing</h4>
-                    <p className="reels-feature-text">
-                      Connect directly with owners for available homes, or list your own property for free with our team.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="reels-inspection-actions">
-                <a
-                  href={INSTAGRAM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-dark"
-                >
-                  <Instagram size={16} />
-                  <span>Follow {INSTAGRAM_HANDLE}</span>
-                </a>
-                <a
-                  href="/listings/list-property.html"
-                  className="btn-yellow"
-                >
-                  <Plus size={16} />
-                  <span>List Your Property Free</span>
-                </a>
-              </div>
-            </div>
+              </>
+            )}
           </div>
         </section>
       )}
@@ -954,6 +1022,108 @@ export default function Home() {
             flex: initial;
             width: auto;
           }
+        }
+
+        /* Single Real Reel Showcase: Clean, balanced 2-column card layout */
+        .reels-single-showcase {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+          align-items: stretch;
+        }
+        @media (min-width: 768px) {
+          .reels-single-showcase {
+            grid-template-columns: minmax(320px, 380px) minmax(0, 1fr);
+            gap: 2rem;
+          }
+        }
+
+        .reels-single-video-col {
+          display: flex;
+          justify-content: center;
+          width: 100%;
+        }
+
+        .reel-companion-card {
+          border-radius: 16px;
+          border: 1.5px solid var(--c-border);
+          background: var(--c-sand-light);
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 1.75rem 1.5rem;
+          color: var(--c-ink);
+          box-shadow: 0 4px 18px rgba(31, 26, 23, 0.04);
+        }
+        @media (min-width: 768px) {
+          .reel-companion-card {
+            padding: 2.25rem 2.5rem;
+          }
+        }
+
+        .reels-companion-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.35rem 0.75rem;
+          border-radius: 999px;
+          background-color: #FFFFFF;
+          border: 1px solid var(--c-border);
+          margin-bottom: 1.25rem;
+          font-family: var(--font-heading);
+          font-size: 0.75rem;
+          font-weight: 800;
+          letter-spacing: 0.04em;
+          color: var(--c-ink);
+        }
+
+        .reels-companion-title {
+          font-family: var(--font-heading);
+          font-weight: 800;
+          font-size: clamp(1.25rem, 2.5vw, 1.55rem);
+          color: var(--c-ink);
+          margin: 0 0 0.85rem 0;
+          line-height: 1.3;
+        }
+
+        .reels-companion-desc {
+          color: var(--c-ink-muted);
+          font-size: 0.96rem;
+          line-height: 1.65;
+          margin: 0 0 1.5rem 0;
+        }
+
+        .reels-companion-list {
+          display: flex;
+          flex-direction: column;
+          gap: 0.85rem;
+          margin-bottom: 1.75rem;
+        }
+
+        .reels-companion-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+        }
+
+        .reels-check-icon {
+          color: var(--c-temple-green);
+          flex-shrink: 0;
+          margin-top: 2px;
+        }
+
+        .reels-item-text {
+          font-size: 0.92rem;
+          color: var(--c-ink);
+          line-height: 1.5;
+        }
+
+        .reels-companion-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.75rem;
+          padding-top: 1.25rem;
+          border-top: 1px solid var(--c-border);
         }
 
         .reels-carousel-container {

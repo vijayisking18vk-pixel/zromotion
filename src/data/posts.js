@@ -65,25 +65,8 @@ export const POSTS = [
 
     whoItSuits: 'Ideal for techies working in Porur DLF / L&T Infotech, media and cinema professionals working in Vadapalani / Kodambakkam, and families looking for established schools without South Chennai prices.',
 
-    // Embedded Instagram Reels of Vacant Homes in Valasaravakkam
-    reels: [
-      {
-        id: 'valas-1',
-        title: 'Spacious 2 BHK on Arcot Road Cross Street',
-        bhk: '2 BHK',
-        locality: 'Valasaravakkam',
-        url: 'https://www.instagram.com/reel/DdbmprOsxmq/',
-        poster: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80'
-      },
-      {
-        id: 'valas-2',
-        title: 'Independent 1st Floor 3 BHK with Car Park',
-        bhk: '3 BHK',
-        locality: 'Kesavardhini, Valasaravakkam',
-        url: 'https://www.instagram.com/reel/Ddi7YGRuzdg/',
-        poster: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80'
-      }
-    ],
+    // Vacant Homes Reels (add real reels as published)
+    reels: [],
 
     faqs: [
       {
@@ -169,17 +152,8 @@ Local Chennai Tip:
       }
     ],
 
-    // Reel embeds highlighting affordable advance homes
-    reels: [
-      {
-        id: 'dep-1',
-        title: '3 BHK in Sholinganallur with 4-Month Advance',
-        bhk: '3 BHK',
-        locality: 'OMR IT Corridor',
-        url: 'https://www.instagram.com/reel/DdrXzwtCUSj/',
-        poster: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80'
-      }
-    ],
+    // Reel embeds (add real reels as published)
+    reels: [],
 
     faqs: [
       {
@@ -254,16 +228,7 @@ Local Chennai Tip:
 
     whoItSuits: 'Prime choice for tech professionals working in Tidel Park, Ascendas, Ramanujan IT City, and OMR. Excellent social life with shopping malls and theatres around.',
 
-    reels: [
-      {
-        id: 'vela-1',
-        title: 'Furnished 2 BHK in Dhandeeswaram Nagar',
-        bhk: '2 BHK',
-        locality: 'Velachery',
-        url: 'https://www.instagram.com/reel/DdbmprOsxmq/',
-        poster: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80'
-      }
-    ],
+    reels: [],
 
     faqs: [
       {
@@ -334,16 +299,7 @@ Local Chennai Tip:
 
     whoItSuits: 'Senior executives, doctors, consulate staff, creative professionals, and families who place high value on air quality, morning walks, and proximity to the sea.',
 
-    reels: [
-      {
-        id: 'adyar-1',
-        title: 'Leafy 3 BHK in Shastri Nagar near Beach',
-        bhk: '3 BHK',
-        locality: 'Adyar',
-        url: 'https://www.instagram.com/reel/Ddi7YGRuzdg/',
-        poster: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80'
-      }
-    ],
+    reels: [],
 
     faqs: [
       {

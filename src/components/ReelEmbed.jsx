@@ -73,9 +73,9 @@ export default function ReelEmbed({ reel }) {
             }}
             aria-label={`Play walk-through tour for ${reel?.title || 'property'}`}
           >
-            {/* Crisp High-Res Poster Image */}
+            {/* Crisp High-Res Real Poster Image */}
             <img
-              src={reel?.poster || 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80'}
+              src={reel?.poster || '/images/reels/madipakkam-2bhk.jpg'}
               alt={reel?.title || 'Property walk-through preview'}
               className="clean-reel-poster-img"
               loading="lazy"
@@ -85,26 +85,34 @@ export default function ReelEmbed({ reel }) {
             <div className="clean-reel-gradient-top" />
             <div className="clean-reel-gradient-bottom" />
 
+            {/* Top Badge */}
+            <div className="clean-reel-badge-top" style={{ position: 'absolute', top: '12px', left: '12px', zIndex: 2 }}>
+              <span className="clean-reel-tag-pill">{reel?.tag || 'Verified Tour'}</span>
+            </div>
+
             {/* Center Glass Play Button */}
             <div className="clean-reel-play-overlay">
               <div className="clean-reel-play-circle">
                 <Play size={26} fill="#FFFFFF" color="#FFFFFF" style={{ marginLeft: '4px' }} />
               </div>
-              <span className="clean-reel-play-text">Watch Tour</span>
+              <span className="clean-reel-play-text">Watch Walk-Through</span>
             </div>
 
             {/* Bottom Card Overlay Details */}
             <div className="clean-reel-overlay-content">
-              {reel?.tag && (
-                <span className="clean-reel-tag-pill">{reel.tag}</span>
-              )}
-              <h3 className="clean-reel-overlay-title">{reel?.title}</h3>
               <div className="clean-reel-overlay-meta">
-                <span>📍 {reel?.locality || 'Chennai'}</span>
-                {reel?.price && (
-                  <span className="clean-reel-overlay-price">{reel.price}</span>
+                <span>📍 {reel?.landmark || reel?.locality || 'Madipakkam, Chennai'}</span>
+                {reel?.bhk && (
+                  <span className="clean-reel-overlay-bhk">{reel.bhk}</span>
                 )}
               </div>
+              {reel?.features && reel.features.length > 0 && (
+                <div className="clean-reel-chips-row">
+                  {reel.features.slice(0, 3).map((f, i) => (
+                    <span key={i} className="clean-reel-chip">{f}</span>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -213,7 +221,7 @@ export default function ReelEmbed({ reel }) {
         .clean-reel-media-stage {
           position: relative;
           width: 100%;
-          height: 440px;
+          height: 480px;
           background: #12100E;
           overflow: hidden;
         }
@@ -330,29 +338,44 @@ export default function ReelEmbed({ reel }) {
           border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        .clean-reel-overlay-title {
-          font-family: var(--font-heading);
-          font-size: 1.05rem;
-          font-weight: 800;
-          color: #FFFFFF;
-          margin: 0;
-          line-height: 1.3;
-          text-shadow: 0 2px 4px rgba(0,0,0,0.4);
-        }
-
         .clean-reel-overlay-meta {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          font-size: 0.82rem;
-          color: rgba(255, 255, 255, 0.85);
-          font-weight: 500;
+          font-size: 0.84rem;
+          color: rgba(255, 255, 255, 0.95);
+          font-weight: 700;
+          font-family: var(--font-heading);
+          text-shadow: 0 1px 3px rgba(0,0,0,0.5);
         }
 
-        .clean-reel-overlay-price {
+        .clean-reel-overlay-bhk {
           font-weight: 800;
           color: var(--c-auto-yellow, #F5B800);
           font-family: var(--font-heading);
+          font-size: 0.8rem;
+          background: rgba(0,0,0,0.4);
+          padding: 0.15rem 0.5rem;
+          border-radius: 4px;
+        }
+
+        .clean-reel-chips-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.35rem;
+          margin-top: 0.35rem;
+        }
+
+        .clean-reel-chip {
+          font-size: 0.68rem;
+          font-weight: 700;
+          font-family: var(--font-heading);
+          background: rgba(18, 16, 14, 0.75);
+          backdrop-filter: blur(6px);
+          color: #FFFFFF;
+          padding: 0.15rem 0.5rem;
+          border-radius: 4px;
+          border: 1px solid rgba(255, 255, 255, 0.25);
         }
 
         .clean-reel-player-box {
@@ -387,7 +410,7 @@ export default function ReelEmbed({ reel }) {
 
         .clean-reel-iframe {
           width: 100%;
-          height: 440px;
+          height: 480px;
           border: none;
           display: block;
         }
