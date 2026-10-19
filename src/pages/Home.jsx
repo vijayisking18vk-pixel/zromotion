@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { LOCALITY_POSTS, GUIDE_POSTS } from '../data/posts';
+import { REELS } from '../data/reels';
 import MarinaDivider from '../components/MarinaDivider';
 import SEOHead from '../components/SEOHead';
 import ReelEmbed from '../components/ReelEmbed';
 import { AutoRickshawDoodle, HandDrawnArrow } from '../components/ChennaiDoodles';
-import { MapPin, Plus, Compass, Instagram, Building2, CheckCircle2, ArrowRight } from 'lucide-react';
+import { MapPin, Plus, Compass, Instagram, Building2, CheckCircle2, ArrowRight, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 import { INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../config';
 
 const POST_CTA_MAP = {
@@ -39,23 +40,17 @@ function getPostCta(post) {
   return `Read ${post.title.split(':')[0]}`;
 }
 
-
-// ── Instagram Reels: new property walk-throughs ─────────────────────────────
-// Add new reel objects here as you post them on @chennai_rents.
-// Only reelId is required; title, bhk, locality, and url enrich the card.
-const REELS = [
-  {
-    reelId: 'DejQkW1JiYy',
-    title: '2BHK House · Ground Floor',
-    bhk: 'Madipakkam',
-    locality: 'Near Bazaar Main Road, Madipakkam',
-    url: 'https://www.instagram.com/reel/DejQkW1JiYy/',
-  },
-];
-
 export default function Home() {
   const [activeTab, setActiveTab] = useState('all');
   const reduce = useReducedMotion();
+  const reelsScrollRef = useRef(null);
+
+  const scrollReels = (direction) => {
+    if (reelsScrollRef.current) {
+      const scrollAmount = direction === 'left' ? -340 : 340;
+      reelsScrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   const filteredPosts = activeTab === 'all'
     ? [...LOCALITY_POSTS, ...GUIDE_POSTS].sort((a, b) => b.updatedDate.localeCompare(a.updatedDate))
@@ -135,111 +130,162 @@ export default function Home() {
       {REELS.length > 0 && (
         <section className="reels-section" style={{ backgroundColor: 'var(--c-page-bg)', borderBottom: '1px solid var(--c-border)' }}>
           <div className="container">
+            {/* Header: Title, Subtitle, and Controls */}
             <div className="reels-header">
               <div>
                 <span className="tag-eyebrow" style={{ display: 'inline-flex', marginBottom: '0.4rem' }}>
                   <span className="tag-bullet" />
-                  LIVE WALK-THROUGH TOURS · @CHENNAI_RENTS
+                  LIVE WALK-THROUGH TOURS · {INSTAGRAM_HANDLE.toUpperCase()}
                 </span>
                 <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 900, margin: '0 0 0.35rem 0', fontSize: 'clamp(1.4rem, 4vw, 2rem)' }}>
                   New Properties Available
                 </h2>
-                <p style={{ color: 'var(--c-ink-muted)', fontSize: '0.96rem', margin: 0, maxWidth: '560px', lineHeight: 1.6 }}>
-                  Watch unedited room-by-room video tours of available homes across Chennai before visiting in person.
+                <p style={{ color: 'var(--c-ink-muted)', fontSize: '0.96rem', margin: 0, maxWidth: '580px', lineHeight: 1.6 }}>
+                  Watch unedited room-by-room video tours of available homes across Chennai before visiting in person. Swipe or use arrows to explore all walk-throughs.
                 </p>
               </div>
-              <motion.a
-                href={INSTAGRAM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-dark reels-header-btn"
-                whileHover={reduce ? {} : { y: -1 }}
-                whileTap={reduce ? {} : { y: 0 }}
-              >
-                <Instagram size={16} />
-                <span>See All Reels on {INSTAGRAM_HANDLE}</span>
-              </motion.a>
+
+              <div className="reels-header-actions">
+                <div className="reels-nav-arrows" aria-label="Reels carousel navigation">
+                  <button
+                    type="button"
+                    onClick={() => scrollReels('left')}
+                    className="reels-nav-arrow-btn"
+                    aria-label="Scroll left"
+                    title="Previous reel"
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => scrollReels('right')}
+                    className="reels-nav-arrow-btn"
+                    aria-label="Scroll right"
+                    title="Next reel"
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
+
+                <motion.a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-dark reels-header-btn"
+                  whileHover={reduce ? {} : { y: -1 }}
+                  whileTap={reduce ? {} : { y: 0 }}
+                >
+                  <Instagram size={16} />
+                  <span>See All on {INSTAGRAM_HANDLE}</span>
+                </motion.a>
+              </div>
             </div>
 
-            <div className="reels-showcase-grid">
-              {/* Left: Properly proportioned Instagram Reel card(s) */}
-              <div className="reels-video-col">
+            {/* Scrollable Reels Carousel Track */}
+            <div className="reels-carousel-container">
+              <div ref={reelsScrollRef} className="reels-carousel-track">
                 {REELS.map((reel) => (
-                  <div key={reel.reelId} className="reel-card-wrapper">
+                  <div key={reel.id || reel.reelId} className="reels-carousel-item">
                     <ReelEmbed reel={reel} />
                   </div>
                 ))}
+
+                {/* Final "Explore More" Card */}
+                <div className="reels-carousel-item reels-more-card-item">
+                  <div className="reels-more-card">
+                    <div className="reels-more-icon-wrap">
+                      <Instagram size={28} />
+                    </div>
+                    <span className="reels-more-badge">INSTAGRAM EXCLUSIVE</span>
+                    <h3 className="reels-more-title">More Tours on Instagram</h3>
+                    <p className="reels-more-desc">
+                      Fresh video walk-throughs are published weekly on {INSTAGRAM_HANDLE}. Follow along for immediate alerts when verified properties hit the market.
+                    </p>
+                    <a
+                      href={INSTAGRAM_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-dark reels-more-cta"
+                    >
+                      <Instagram size={15} />
+                      <span>Follow {INSTAGRAM_HANDLE}</span>
+                      <ExternalLink size={12} style={{ opacity: 0.6 }} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Full-Width Inspection Companion Guarantee Banner */}
+            <div className="reels-inspection-banner">
+              <div className="reels-inspection-header">
+                <div className="reels-inspection-pill">
+                  <Instagram size={14} style={{ color: 'var(--c-ripon-red)' }} />
+                  <span>VERIFIED VIDEO PROTOCOL</span>
+                </div>
+                <h3 className="reels-inspection-title">
+                  Inspect Real Chennai Homes Before Stepping Out
+                </h3>
+                <p className="reels-inspection-subtitle">
+                  Static photos often hide cramped layouts, poor ventilation, or narrow street access. Every video walk-through published on <strong>{INSTAGRAM_HANDLE}</strong> shows you the actual floor plan, natural light, and neighbourhood surroundings upfront.
+                </p>
               </div>
 
-              {/* Right: Editorial companion card */}
-              <div className="reel-companion-card">
-                <div>
-                  <div
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.5rem',
-                      padding: '0.35rem 0.75rem',
-                      borderRadius: '999px',
-                      backgroundColor: 'var(--c-card-bg)',
-                      border: '1px solid var(--c-border)',
-                      marginBottom: '1.25rem',
-                    }}
-                  >
-                    <Instagram size={15} style={{ color: 'var(--c-ripon-red)' }} />
-                    <span style={{ fontFamily: 'var(--font-heading)', fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.04em', color: 'var(--c-ink)' }}>
-                      DAILY VIDEO TOURS ON INSTAGRAM
-                    </span>
+              <div className="reels-inspection-features">
+                <div className="reels-feature-card">
+                  <div className="reels-feature-check">
+                    <CheckCircle2 size={18} />
                   </div>
-
-                  <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: 'clamp(1.25rem, 2.5vw, 1.55rem)', color: 'var(--c-ink)', margin: '0 0 0.85rem 0', lineHeight: 1.3 }}>
-                    Inspect Real Chennai Homes Before Stepping Out
-                  </h3>
-
-                  <p style={{ color: 'var(--c-ink-muted)', fontSize: '0.96rem', lineHeight: 1.65, margin: '0 0 1.5rem 0' }}>
-                    Static photos often hide cramped layouts, poor ventilation, or narrow street access. Every video walk-through published on <strong>{INSTAGRAM_HANDLE}</strong> shows you the actual floor plan, natural light, and neighbourhood surroundings upfront.
-                  </p>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '1.75rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                      <CheckCircle2 size={18} style={{ color: 'var(--c-temple-green)', flexShrink: 0, marginTop: '2px' }} />
-                      <div style={{ fontSize: '0.92rem', color: 'var(--c-ink)', lineHeight: 1.5 }}>
-                        <strong>Unedited Room-by-Room Walkthroughs:</strong> Check living room proportions, kitchen storage, and balcony ventilation in 60 seconds.
-                      </div>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                      <CheckCircle2 size={18} style={{ color: 'var(--c-temple-green)', flexShrink: 0, marginTop: '2px' }} />
-                      <div style={{ fontSize: '0.92rem', color: 'var(--c-ink)', lineHeight: 1.5 }}>
-                        <strong>Clear Locality &amp; Configuration Details:</strong> Square footage, BHK layout, and exact Chennai micro-market tagged on every reel.
-                      </div>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                      <CheckCircle2 size={18} style={{ color: 'var(--c-temple-green)', flexShrink: 0, marginTop: '2px' }} />
-                      <div style={{ fontSize: '0.92rem', color: 'var(--c-ink)', lineHeight: 1.5 }}>
-                        <strong>Direct Inquiry &amp; Free Property Listing:</strong> Reach out directly for available homes or list your own property for free.
-                      </div>
-                    </div>
+                  <div>
+                    <h4 className="reels-feature-heading">Unedited Walk-Throughs</h4>
+                    <p className="reels-feature-text">
+                      Check living room proportions, kitchen storage, and balcony ventilation in 60 seconds without filtered camera tricks.
+                    </p>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', paddingTop: '1.25rem', borderTop: '1px solid var(--c-border)' }}>
-                  <a
-                    href={INSTAGRAM_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-dark"
-                  >
-                    <Instagram size={16} />
-                    <span>Follow {INSTAGRAM_HANDLE}</span>
-                  </a>
-                  <a
-                    href="/listings/list-property.html"
-                    className="btn-yellow"
-                  >
-                    <Plus size={16} />
-                    <span>List Your Property Free</span>
-                  </a>
+                <div className="reels-feature-card">
+                  <div className="reels-feature-check">
+                    <CheckCircle2 size={18} />
+                  </div>
+                  <div>
+                    <h4 className="reels-feature-heading">Exact Locality &amp; Pricing</h4>
+                    <p className="reels-feature-text">
+                      Square footage, BHK layout, floor level, advance requirement, and exact Chennai micro-market tagged transparently.
+                    </p>
+                  </div>
                 </div>
+
+                <div className="reels-feature-card">
+                  <div className="reels-feature-check">
+                    <CheckCircle2 size={18} />
+                  </div>
+                  <div>
+                    <h4 className="reels-feature-heading">Direct Inquiry &amp; Free Listing</h4>
+                    <p className="reels-feature-text">
+                      Connect directly with owners for available homes, or list your own property for free with our team.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="reels-inspection-actions">
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-dark"
+                >
+                  <Instagram size={16} />
+                  <span>Follow {INSTAGRAM_HANDLE}</span>
+                </a>
+                <a
+                  href="/listings/list-property.html"
+                  className="btn-yellow"
+                >
+                  <Plus size={16} />
+                  <span>List Your Property Free</span>
+                </a>
               </div>
             </div>
           </div>
@@ -827,7 +873,7 @@ export default function Home() {
         }
         .home-filter-tabs::-webkit-scrollbar { display: none; }
 
-        /* Reels Section: Editorial responsive showcase grid */
+        /* Reels Section: Horizontal carousel + inspection banner */
         .reels-section {
           padding-block: 2.5rem;
         }
@@ -848,60 +894,272 @@ export default function Home() {
             flex-direction: row;
             align-items: flex-end;
             justify-content: space-between;
-            margin-bottom: 2.25rem;
+            margin-bottom: 2rem;
           }
         }
 
-        .reels-header-btn {
+        .reels-header-actions {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
           width: 100%;
-          justify-content: center;
         }
         @media (min-width: 640px) {
-          .reels-header-btn {
+          .reels-header-actions {
             width: auto;
             flex-shrink: 0;
           }
         }
 
-        .reels-showcase-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 1.5rem;
-          align-items: stretch;
+        .reels-nav-arrows {
+          display: none;
+          align-items: center;
+          gap: 0.4rem;
         }
         @media (min-width: 768px) {
-          .reels-showcase-grid {
-            grid-template-columns: 360px minmax(0, 1fr);
-            gap: 2rem;
+          .reels-nav-arrows {
+            display: flex;
           }
         }
 
-        .reels-video-col {
-          display: flex;
-          justify-content: center;
-          width: 100%;
-        }
-
-        .reel-card-wrapper {
-          width: 100%;
-          max-width: 360px;
-        }
-
-        .reel-companion-card {
-          border-radius: 14px;
+        .reels-nav-arrow-btn {
+          width: 40px;
+          height: 40px;
+          border-radius: 8px;
           border: 1.5px solid var(--c-border);
+          background: #FFFFFF;
+          color: var(--c-ink);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.15s ease;
+          box-shadow: 0 2px 6px rgba(30, 27, 24, 0.04);
+        }
+        .reels-nav-arrow-btn:hover {
+          background: var(--c-auto-yellow);
+          border-color: var(--c-ink);
+          transform: translateY(-1px);
+        }
+        .reels-nav-arrow-btn:active {
+          transform: translateY(0);
+        }
+
+        .reels-header-btn {
+          flex: 1;
+          justify-content: center;
+        }
+        @media (min-width: 640px) {
+          .reels-header-btn {
+            flex: initial;
+            width: auto;
+          }
+        }
+
+        .reels-carousel-container {
+          position: relative;
+          width: 100%;
+          margin-bottom: 2.5rem;
+        }
+
+        .reels-carousel-track {
+          display: flex;
+          gap: 1.25rem;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+          padding-block: 0.5rem 1rem;
+          padding-inline: 2px;
+        }
+        .reels-carousel-track::-webkit-scrollbar {
+          display: none;
+        }
+
+        .reels-carousel-item {
+          flex: 0 0 min(295px, 80vw);
+          scroll-snap-align: start;
+        }
+        @media (min-width: 768px) {
+          .reels-carousel-item {
+            flex: 0 0 320px;
+          }
+        }
+
+        .reels-more-card-item {
+          display: flex;
+        }
+
+        .reels-more-card {
+          width: 100%;
+          border-radius: 16px;
+          border: 1.5px dashed var(--c-border);
           background: var(--c-sand-light);
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
-          padding: 1.75rem 1.5rem;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          padding: 2.25rem 1.5rem;
+          box-shadow: 0 4px 18px rgba(31, 26, 23, 0.04);
+          transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .reels-more-card:hover {
+          transform: translateY(-2px);
+          border-color: var(--c-ripon-red);
+        }
+
+        .reels-more-icon-wrap {
+          width: 58px;
+          height: 58px;
+          border-radius: 50%;
+          background: #FFFFFF;
+          border: 1.5px solid var(--c-border);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--c-ripon-red);
+          margin-bottom: 0.85rem;
+          box-shadow: 0 4px 12px rgba(30, 27, 24, 0.06);
+        }
+
+        .reels-more-badge {
+          font-family: var(--font-heading);
+          font-size: 0.7rem;
+          font-weight: 800;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: var(--c-ripon-red);
+          background: rgba(181, 55, 43, 0.08);
+          padding: 0.2rem 0.6rem;
+          border-radius: 999px;
+          margin-bottom: 0.6rem;
+        }
+
+        .reels-more-title {
+          font-family: var(--font-heading);
+          font-size: 1.2rem;
+          font-weight: 900;
           color: var(--c-ink);
-          box-shadow: var(--shadow-card, 0 2px 8px rgba(30, 27, 24, 0.04));
+          margin: 0 0 0.5rem 0;
+          line-height: 1.25;
+        }
+
+        .reels-more-desc {
+          font-size: 0.88rem;
+          color: var(--c-ink-muted);
+          line-height: 1.55;
+          margin: 0 0 1.5rem 0;
+        }
+
+        .reels-more-cta {
+          width: 100%;
+          justify-content: center;
+          gap: 0.5rem;
+        }
+
+        /* Full-Width Inspection Companion Guarantee Banner */
+        .reels-inspection-banner {
+          border-radius: 16px;
+          border: 1.5px solid var(--c-border);
+          background: var(--c-sand-light);
+          padding: 1.75rem 1.25rem;
+          box-shadow: 0 4px 18px rgba(31, 26, 23, 0.04);
         }
         @media (min-width: 768px) {
-          .reel-companion-card {
-            padding: 2.25rem 2.5rem;
+          .reels-inspection-banner {
+            padding: 2.5rem 2.25rem;
           }
+        }
+
+        .reels-inspection-header {
+          max-width: 720px;
+        }
+
+        .reels-inspection-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          padding: 0.25rem 0.7rem;
+          border-radius: 999px;
+          background: #FFFFFF;
+          border: 1px solid var(--c-border);
+          font-family: var(--font-heading);
+          font-size: 0.72rem;
+          font-weight: 800;
+          letter-spacing: 0.04em;
+          color: var(--c-ink);
+          margin-bottom: 0.85rem;
+        }
+
+        .reels-inspection-title {
+          font-family: var(--font-heading);
+          font-weight: 900;
+          font-size: clamp(1.25rem, 2.8vw, 1.65rem);
+          color: var(--c-ink);
+          margin: 0 0 0.65rem 0;
+          line-height: 1.3;
+        }
+
+        .reels-inspection-subtitle {
+          color: var(--c-ink-muted);
+          font-size: 0.95rem;
+          line-height: 1.65;
+          margin: 0;
+        }
+
+        .reels-inspection-features {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1rem;
+          margin-block: 1.75rem 1.5rem;
+        }
+        @media (min-width: 768px) {
+          .reels-inspection-features {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+          }
+        }
+
+        .reels-feature-card {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.75rem;
+          background: #FFFFFF;
+          border: 1px solid var(--c-border);
+          border-radius: 12px;
+          padding: 1.15rem 1.1rem;
+          box-shadow: 0 2px 8px rgba(30, 27, 24, 0.03);
+        }
+
+        .reels-feature-check {
+          color: var(--c-temple-green);
+          flex-shrink: 0;
+          margin-top: 2px;
+        }
+
+        .reels-feature-heading {
+          font-family: var(--font-heading);
+          font-size: 0.92rem;
+          font-weight: 800;
+          color: var(--c-ink);
+          margin: 0 0 0.25rem 0;
+          line-height: 1.35;
+        }
+
+        .reels-feature-text {
+          font-size: 0.84rem;
+          color: var(--c-ink-muted);
+          line-height: 1.55;
+          margin: 0;
+        }
+
+        .reels-inspection-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.75rem;
+          padding-top: 1.25rem;
+          border-top: 1px solid var(--c-border);
         }
       `}</style>
     </motion.main>
