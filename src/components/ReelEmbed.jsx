@@ -75,7 +75,7 @@ export default function ReelEmbed({ reel }) {
           >
             {/* Crisp High-Res Real Poster Image */}
             <img
-              src={reel?.poster || '/images/reels/madipakkam-2bhk.jpg'}
+              src={reel?.poster || '/images/reels/velachery-3bhk.jpg'}
               alt={reel?.title || 'Property walk-through preview'}
               className="clean-reel-poster-img"
               loading="lazy"
@@ -101,7 +101,7 @@ export default function ReelEmbed({ reel }) {
             {/* Bottom Card Overlay Details */}
             <div className="clean-reel-overlay-content">
               <div className="clean-reel-overlay-meta">
-                <span>📍 {reel?.landmark || reel?.locality || 'Madipakkam, Chennai'}</span>
+                <span>📍 {reel?.landmark || reel?.locality || 'Chennai'}</span>
                 {reel?.bhk && (
                   <span className="clean-reel-overlay-bhk">{reel.bhk}</span>
                 )}
