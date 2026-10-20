@@ -375,7 +375,7 @@ export const MEDAVAKKAM_PAGES = [
     canonical: 'https://www.chennairents.in/chennai/medavakkam/2bhk-flats-for-family-in-medavakkam',
     targetPrimaryKeywords: ['2bhk flats for family in medavakkam', 'family apartments medavakkam'],
     secondaryKeywords: ['safe flats for family medavakkam', 'family 2bhk vadakkupattu', 'flats near crescent school medavakkam'],
-    metaTitle: '2BHK Flats for Family in Medavakkam | Safe Residential Pockets',
+    metaTitle: '2BHK Flats for Family in Medavakkam | Safe Pockets',
     metaDescription: 'Safe and peaceful 2BHK family flats for rent in Medavakkam. Close to BS Abdur Rahman Crescent School, Ravindra Bharathi, clinics, and supermarkets.',
     h1: '2BHK Flats for Family in Medavakkam, Chennai',
     bhk: '2bhk',

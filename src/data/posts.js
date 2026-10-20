@@ -517,7 +517,7 @@ This digital trail prevents arbitrary forfeiture if the landlord introduces unex
   {
     slug: 'how-to-list-flat-directly',
     type: 'guide',
-    title: 'List Flats Directly in Chennai Without Brokers',
+    title: 'List Flats in Chennai Without Brokers',
     subheading: 'Owner Step-by-Step Guide: Save 1 Month Brokerage & Retain Full Tenancy Control',
     tagline: 'How Chennai house owners can list directly, screen corporate tenant profiles, and execute a legally compliant rental agreement without paying broker commissions.',
     badge: 'Owner Guide',

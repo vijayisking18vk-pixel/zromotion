@@ -25,7 +25,7 @@ for (const line of lines) {
   const url = parts[0];
   const title = parts[5];
   const tlen = parseInt(parts[6], 10);
-  if (tlen > 65) {
+  if (tlen > 60) {
     console.log(`[${tlen}] ${url} => ${title}`);
   }
 }

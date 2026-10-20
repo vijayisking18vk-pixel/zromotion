@@ -456,7 +456,7 @@ export const ADYAR_PAGES = [
     canonical: 'https://www.chennairents.in/chennai/adyar/flats-for-bachelors-in-adyar',
     targetPrimaryKeywords: ['flats for bachelors in adyar', 'bachelor accommodation adyar'],
     secondaryKeywords: ['bachelor rooms adyar', 'bachelor accommodation adyar', 'bachelor flat near iit madras'],
-    metaTitle: 'Flats for Bachelors in Adyar | 100% Bachelor-Friendly Rentals',
+    metaTitle: 'Flats for Bachelors in Adyar | Bachelor Rentals',
     metaDescription: 'Explore bachelor flats for rent in Adyar across 1RK, 1BHK, 2BHK, and 3BHK options. Transparent agreements, minimal paperwork, and prime transit access.',
     h1: 'Flats for Bachelors in Adyar',
     bhk: 'all',

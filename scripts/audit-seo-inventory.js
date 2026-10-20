@@ -107,9 +107,10 @@ function runAudit() {
 
     // Title
     const titleMatch = html.match(/<title>([\s\S]*?)<\/title>/i);
-    const title = titleMatch ? titleMatch[1].trim() : '';
+    const rawTitle = titleMatch ? titleMatch[1].trim() : '';
+    const title = rawTitle.replace(/&amp;/g, '&').replace(/&#039;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
     const title_length = title.length;
-    if (title_length > 65) overlongTitles++;
+    if (title_length > 60) overlongTitles++;
 
     // Meta Description
     const descMatch = html.match(/<meta\s+name="description"\s+content="([^"]*)"/i) || html.match(/<meta\s+content="([^"]*)"\s+name="description"/i);
@@ -210,7 +211,7 @@ function runAudit() {
 
   console.log('\n--- BASELINE AUDIT SUMMARY ---');
   console.log(`Total URLs Audited: ${inventory.length}`);
-  console.log(`Overlong Titles (> 65 chars): ${overlongTitles}`);
+  console.log(`Overlong Titles (> 60 chars): ${overlongTitles}`);
   console.log(`Overlong Descriptions (> 160 chars): ${overlongDesc}`);
   console.log(`Short Descriptions (< 120 chars): ${shortDesc}`);
   console.log(`Missing OG Complete: ${missingOg}`);
@@ -219,8 +220,8 @@ function runAudit() {
   console.log(`Multiple H1s: ${multipleH1}`);
   console.log(`Low Word Count (< 300 words): ${lowWordCount}`);
 
-  console.log('\n--- OVERLONG TITLES (> 65 chars) ---');
-  inventory.filter(i => i.title_length > 65).forEach(i => {
+  console.log('\n--- OVERLONG TITLES (> 60 chars) ---');
+  inventory.filter(i => i.title_length > 60).forEach(i => {
     console.log(`[${i.title_length}] ${i.url} => "${i.title}"`);
   });
 

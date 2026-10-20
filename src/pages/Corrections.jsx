@@ -10,7 +10,7 @@ export default function Corrections() {
   return (
     <main style={{ paddingBottom: '4rem' }}>
       <SEOHead
-        title="Corrections & Editorial Policy | Chennai Rents"
+        title="Editorial Corrections Policy | Chennai Rents"
         description="Review our editorial integrity policy, how we fact-check Chennai rental data, and how to submit corrections to our research team."
         canonicalUrl={canonicalUrl}
         type="article"

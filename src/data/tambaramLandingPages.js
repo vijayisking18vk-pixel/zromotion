@@ -424,7 +424,7 @@ export const TAMBARAM_PAGES = [
     canonical: 'https://www.chennairents.in/chennai/tambaram/3bhk-flats-for-family-in-tambaram',
     targetPrimaryKeywords: ['3bhk flats for family in tambaram', 'spacious family homes tambaram'],
     secondaryKeywords: ['3bhk gated family apartment tambaram', 'luxury family flat tambaram', 'gated family flat tambaram', '3bhk selaiyur family'],
-    metaTitle: '3BHK Flats for Family in Tambaram | Gated Societies & Parking',
+    metaTitle: '3BHK Family Flats in Tambaram | Gated & Parking',
     metaDescription: 'Explore large 3BHK family flats in Tambaram. Gated communities with round-the-clock security, backup power, parks, and parking.',
     h1: '3BHK Flats for Family in Tambaram, Chennai',
     bhk: '3BHK',

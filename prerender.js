@@ -183,7 +183,7 @@ async function runPrerender() {
 
   routes.push({
     path: '/corrections',
-    title: 'Editorial Corrections & Fact-Checking Policy | Chennai Rents',
+    title: 'Editorial Corrections Policy | Chennai Rents',
     description: 'Chennai Rents policy for editorial corrections, fact-checking standards, empirical data updates, and 48-hour revision turnarounds.',
     canonical: `${DOMAIN}/corrections`,
     robots: 'index, follow',

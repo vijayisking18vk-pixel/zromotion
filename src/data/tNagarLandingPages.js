@@ -904,7 +904,7 @@ export const T_NAGAR_PAGES = [
     canonical: 'https://www.chennairents.in/chennai/t-nagar/flats-for-rent-under-20000-in-t-nagar',
     targetPrimaryKeywords: ['flats for rent under 20000 in t nagar', '1bhk 2bhk under 20000 t nagar'],
     secondaryKeywords: ['2bhk under 20000 t nagar', 'flats in t nagar under 20k', 'affordable flats bazullah road'],
-    metaTitle: 'Flats for Rent Under ₹20,000 in T Nagar | Prime 1BHKs & 2BHKs',
+    metaTitle: 'Flats Under ₹20,000 in T Nagar | Prime 1BHK & 2BHKs',
     metaDescription: 'Browse rental apartments under ₹20,000 in T. Nagar. Modern 1BHK flats and budget 2BHK builder floors with reliable water supply and transit access.',
     h1: 'Flats for Rent Under ₹20,000 in T. Nagar',
     bhk: 'budget',

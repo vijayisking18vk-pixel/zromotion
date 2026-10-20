@@ -640,7 +640,7 @@ export const ANNA_NAGAR_PAGES = [
     canonical: 'https://www.chennairents.in/chennai/anna-nagar/independent-houses-for-rent-in-anna-nagar',
     targetPrimaryKeywords: ['independent houses for rent in anna nagar', 'individual house rent anna nagar'],
     secondaryKeywords: ['individual house rent anna nagar', 'villa rent anna nagar', 'bungalow rent anna nagar east'],
-    metaTitle: 'Independent Houses for Rent in Anna Nagar | Private Bungalows',
+    metaTitle: 'Independent Houses in Anna Nagar | Private Villas',
     metaDescription: 'Discover independent houses, private villas, and classic bungalows for rent in Anna Nagar. Enjoy private gardens, covered car porches, and rooftop terraces.',
     h1: 'Independent Houses for Rent in Anna Nagar',
     bhk: 'independent',
