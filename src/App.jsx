@@ -46,7 +46,7 @@ function ChennaiRentInRedirect() {
 // Hard-redirect helper to cleanly transition from React SPA router to static listings app
 function ListingsRedirect() {
   useEffect(() => {
-    window.location.replace('/listings/index.html');
+    window.location.href = '/listings';
   }, []);
   return (
     <div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-heading)' }}>

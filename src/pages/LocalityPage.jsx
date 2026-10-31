@@ -793,11 +793,11 @@ export default function LocalityPage({ localitySlug: propSlug }) {
                   Browse our crowdsourced interactive map to check street-by-street water quality, flood history, and direct property owner connections in {locality.name}.
                 </p>
                 <div style={{ display: 'flex', gap: '0.85rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                  <a href="/listings/index.html" className="btn-dark" style={{ textDecoration: 'none' }}>
+                  <a href="/listings" className="btn-dark" style={{ textDecoration: 'none' }}>
                     <MapPin size={16} style={{ color: 'var(--c-auto-yellow)' }} />
                     <span>Explore {locality.name} Map</span>
                   </a>
-                  <a href="/listings/list-property.html" className="btn-red" style={{ textDecoration: 'none' }}>
+                  <a href="/listings/list-property" className="btn-red" style={{ textDecoration: 'none' }}>
                     <Plus size={16} />
                     <span>List Property (Free Listing &amp; Follow Up)</span>
                   </a>

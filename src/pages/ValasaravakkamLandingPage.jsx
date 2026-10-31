@@ -731,7 +731,7 @@ export default function ValasaravakkamLandingPage({ data }) {
               </p>
               <div style={{ display: 'flex', gap: '0.85rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                 <a 
-                  href="/listings/index.html" 
+                  href="/listings" 
                   className="btn-dark" 
                   style={{ 
                     display: 'inline-flex',
@@ -750,7 +750,7 @@ export default function ValasaravakkamLandingPage({ data }) {
                   <span>Open Valasaravakkam Map</span>
                 </a>
                 <a 
-                  href="/listings/list-property.html" 
+                  href="/listings/list-property" 
                   className="btn-red" 
                   style={{ 
                     display: 'inline-flex',

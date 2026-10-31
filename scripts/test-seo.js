@@ -416,7 +416,7 @@ function runTests() {
     assert(vercelConfig.cleanUrls === true, 'vercel.json has cleanUrls enabled');
     assert(vercelConfig.trailingSlash === false, 'vercel.json has trailingSlash: false (canonical consistency)');
     assert(Array.isArray(vercelConfig.redirects) && vercelConfig.redirects.length >= 11, `vercel.json defines ${vercelConfig.redirects?.length || 0} permanent 301 redirects`);
-    assert(vercelConfig.redirects.every((r) => r.permanent === true), 'All redirects are HTTP 301 permanent');
+    assert(vercelConfig.redirects.every((r) => r.permanent === true || r.statusCode === 301), 'All redirects are HTTP 301 permanent');
     assert(Array.isArray(vercelConfig.headers) && vercelConfig.headers.length >= 2, 'vercel.json defines Cache-Control and security headers');
   }
 

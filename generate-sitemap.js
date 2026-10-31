@@ -120,83 +120,27 @@ function generateSitemaps() {
   // 3. Programmatic micro-market landing pages (/chennai/:locality/:slug) - 100% indexable canonical URLs
   const facetUrls = [];
 
-  // 3b. Velachery Programmatic SEO Landing Pages (19 long-form micro-markets)
-  VELACHERY_PAGES.forEach((page) => {
-    facetUrls.push(page.canonical);
-  });
+  // 3b. Programmatic micro-market landing pages across 16 localities (19 per locality)
+  const allLandingPages = [
+    ...VELACHERY_PAGES,
+    ...VALASARAVAKKAM_PAGES,
+    ...ADYAR_PAGES,
+    ...SHOLINGANALLUR_PAGES,
+    ...PORUR_PAGES,
+    ...ANNA_NAGAR_PAGES,
+    ...T_NAGAR_PAGES,
+    ...NUNGAMBAKKAM_PAGES,
+    ...MEDAVAKKAM_PAGES,
+    ...OMR_PAGES,
+    ...PERUNGUDI_PAGES,
+    ...TAMBARAM_PAGES,
+    ...CHROMEPET_PAGES,
+    ...TARAMANI_PAGES,
+    ...THIRUVANMIYUR_PAGES,
+    ...THORAIPAKKAM_PAGES,
+  ];
 
-  // 3c. Valasaravakkam Programmatic SEO Landing Pages (19 long-form micro-markets)
-  VALASARAVAKKAM_PAGES.forEach((page) => {
-    facetUrls.push(page.canonical);
-  });
-
-  // 3d. Adyar Programmatic SEO Landing Pages (19 long-form micro-markets)
-  ADYAR_PAGES.forEach((page) => {
-    facetUrls.push(page.canonical);
-  });
-
-  // 3e. Sholinganallur Programmatic SEO Landing Pages (19 long-form micro-markets)
-  SHOLINGANALLUR_PAGES.forEach((page) => {
-    facetUrls.push(page.canonical);
-  });
-
-  // 3f. Porur Programmatic SEO Landing Pages (19 long-form micro-markets)
-  PORUR_PAGES.forEach((page) => {
-    facetUrls.push(page.canonical);
-  });
-
-  // 3g. Anna Nagar Programmatic SEO Landing Pages (19 long-form micro-markets)
-  ANNA_NAGAR_PAGES.forEach((page) => {
-    facetUrls.push(page.canonical);
-  });
-
-  // 3h. T. Nagar Programmatic SEO Landing Pages (19 long-form micro-markets)
-  T_NAGAR_PAGES.forEach((page) => {
-    facetUrls.push(page.canonical);
-  });
-
-  // 3i. Nungambakkam Programmatic SEO Landing Pages (19 long-form micro-markets)
-  NUNGAMBAKKAM_PAGES.forEach((page) => {
-    facetUrls.push(page.canonical);
-  });
-
-  // 3j. Medavakkam Programmatic SEO Landing Pages (19 long-form micro-markets)
-  MEDAVAKKAM_PAGES.forEach((page) => {
-    facetUrls.push(page.canonical);
-  });
-
-  // 3k. OMR Programmatic SEO Landing Pages (19 long-form micro-markets)
-  OMR_PAGES.forEach((page) => {
-    facetUrls.push(page.canonical);
-  });
-
-  // 3l. Perungudi Programmatic SEO Landing Pages (19 long-form micro-markets)
-  PERUNGUDI_PAGES.forEach((page) => {
-    facetUrls.push(page.canonical);
-  });
-
-  // 3m. Tambaram Programmatic SEO Landing Pages (19 long-form micro-markets)
-  TAMBARAM_PAGES.forEach((page) => {
-    facetUrls.push(page.canonical);
-  });
-
-  // 3n. Chromepet Programmatic SEO Landing Pages (19 long-form micro-markets)
-  CHROMEPET_PAGES.forEach((page) => {
-    facetUrls.push(page.canonical);
-  });
-
-  // 3o. Taramani Programmatic SEO Landing Pages (19 long-form micro-markets)
-  TARAMANI_PAGES.forEach((page) => {
-    facetUrls.push(page.canonical);
-  });
-
-  // 3p. Thiruvanmiyur Programmatic SEO Landing Pages (19 long-form micro-markets)
-  THIRUVANMIYUR_PAGES.forEach((page) => {
-    facetUrls.push(page.canonical);
-  });
-
-  // 3q. Thoraipakkam Programmatic SEO Landing Pages (19 long-form micro-markets)
-  THORAIPAKKAM_PAGES.forEach((page) => {
+  allLandingPages.forEach((page) => {
     facetUrls.push(page.canonical);
   });
 

@@ -188,7 +188,7 @@ export default function HouseRentChennaiHub({ customSlug }) {
 
             {/* Quick action buttons */}
             <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1.5rem' }}>
-              <a href="/listings/index.html" className="btn-dark" style={{ textDecoration: 'none' }}>
+              <a href="/listings" className="btn-dark" style={{ textDecoration: 'none' }}>
                 <MapPin size={16} style={{ color: 'var(--c-auto-yellow)' }} />
                 <span>Explore Interactive Rent Map</span>
               </a>
@@ -465,11 +465,11 @@ export default function HouseRentChennaiHub({ customSlug }) {
                 Browse our crowdsourced interactive map to check street-by-street water quality, flood history, and direct property owner connections across Chennai.
               </p>
               <div style={{ display: 'flex', gap: '0.85rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                <a href="/listings/index.html" className="btn-dark" style={{ textDecoration: 'none' }}>
+                <a href="/listings" className="btn-dark" style={{ textDecoration: 'none' }}>
                   <MapPin size={16} style={{ color: 'var(--c-auto-yellow)' }} />
                   <span>Explore Rent Map</span>
                 </a>
-                <a href="/listings/list-property.html" className="btn-red" style={{ textDecoration: 'none' }}>
+                <a href="/listings/list-property" className="btn-red" style={{ textDecoration: 'none' }}>
                   <Plus size={16} />
                   <span>List Your Property (Free)</span>
                 </a>

@@ -93,7 +93,7 @@ export default function Home() {
 
             {/* Hero Action Buttons — full-width on mobile, inline on desktop */}
             <div className="hero-cta-group">
-              <a href="/listings/index.html" className="btn-dark hero-btn">
+              <a href="/listings" className="btn-dark hero-btn">
                 <MapPin size={17} style={{ color: 'var(--c-auto-yellow)', flexShrink: 0 }} />
                 <span>Explore Rent &amp; Buy Map</span>
               </a>
@@ -101,7 +101,7 @@ export default function Home() {
                 <Compass size={17} style={{ flexShrink: 0 }} />
                 <span>Browse 16 Localities</span>
               </Link>
-              <a href="/listings/list-property.html" className="btn-red hero-btn">
+              <a href="/listings/list-property" className="btn-red hero-btn">
                 <Plus size={17} strokeWidth={2.5} style={{ flexShrink: 0 }} />
                 <span>List Property (Free Listing &amp; Follow Up)</span>
               </a>
@@ -238,7 +238,7 @@ export default function Home() {
                       <span>Follow {INSTAGRAM_HANDLE}</span>
                     </a>
                     <a
-                      href="/listings/list-property.html"
+                      href="/listings/list-property"
                       className="btn-yellow"
                     >
                       <Plus size={16} />
@@ -346,7 +346,7 @@ export default function Home() {
                       <span>Follow {INSTAGRAM_HANDLE}</span>
                     </a>
                     <a
-                      href="/listings/list-property.html"
+                      href="/listings/list-property"
                       className="btn-yellow"
                     >
                       <Plus size={16} />
@@ -429,11 +429,11 @@ export default function Home() {
               </div>
 
               <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                <a href="/listings/index.html" className="btn-dark">
+                <a href="/listings" className="btn-dark">
                   <span>Launch Live Map</span>
                   <ArrowRight size={15} />
                 </a>
-                <a href="/listings/listings.html" className="btn-yellow">
+                <a href="/listings/listings" className="btn-yellow">
                   <Compass size={15} />
                   <span>Browse Listings</span>
                 </a>
@@ -512,7 +512,7 @@ export default function Home() {
               </div>
 
               <div>
-                <a href="/listings/list-property.html" className="btn-red">
+                <a href="/listings/list-property" className="btn-red">
                   <Plus size={16} strokeWidth={2.5} />
                   <span>List Property Free</span>
                   <ArrowRight size={15} />

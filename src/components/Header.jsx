@@ -236,7 +236,7 @@ export function Header() {
           </Link>
 
           <a
-            href="/listings/listings.html"
+            href="/listings/listings"
             style={{
               ...navLinkStyle({ isActive: false }),
               color: 'var(--c-ink)',
@@ -256,7 +256,7 @@ export function Header() {
 
           {/* List Property CTA Button */}
           <a
-            href="/listings/list-property.html"
+            href="/listings/list-property"
             style={{
               ...navLinkStyle({ isActive: false }),
               padding: '0.45rem 1rem',
@@ -372,7 +372,7 @@ export function Header() {
           className="cr-mobile-controls"
         >
           <a
-            href="/listings/list-property.html"
+            href="/listings/list-property"
             className="btn-red"
             style={{
               padding: '0.38rem 0.75rem',
@@ -517,7 +517,7 @@ export function Header() {
             </div>
 
             <a
-              href="/listings/list-property.html"
+              href="/listings/list-property"
               className="btn-red"
               style={{
                 width: '100%',
@@ -553,7 +553,7 @@ export function Header() {
             </Link>
 
             <a
-              href="/listings/listings.html"
+              href="/listings/listings"
               style={{
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 700,

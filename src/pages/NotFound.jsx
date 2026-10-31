@@ -44,7 +44,7 @@ export default function NotFound() {
               <span>Explore Chennai Localities</span>
             </Link>
             <a
-              href="/listings/index.html"
+              href="/listings"
               style={{
                 textDecoration: 'none',
                 display: 'inline-flex',
