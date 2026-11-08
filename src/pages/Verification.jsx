@@ -55,7 +55,7 @@ export default function Verification() {
                   <strong style={{ fontSize: '1.05rem' }}>1. Identity Verification</strong>
                 </div>
                 <p style={{ fontSize: '0.92rem', color: 'var(--c-ink-muted)', margin: 0, lineHeight: 1.55 }}>
-                  The listing author’s phone number is verified via automated SMS OTP. Government ID proof (Aadhaar/PAN) is cross-checked during manual editorial review.
+                  Listing authors provide direct phone contact details. Ownership details can be cross-checked during editorial review when requested.
                 </p>
               </div>
 

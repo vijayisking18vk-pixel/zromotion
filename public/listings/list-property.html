@@ -746,33 +746,6 @@
       color: var(--c-ink);
     }
 
-    /* OTP Flow */
-    .otp-action-row {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-top: 8px;
-    }
-
-    .btn-otp {
-      min-height: 48px;
-      padding: 0 16px;
-      background: var(--c-blue);
-      color: #FFFFFF;
-      border: none;
-      border-radius: 12px;
-      font-family: var(--font-sans);
-      font-size: 0.92rem;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.15s ease;
-    }
-
-    .btn-otp:hover {
-      background: #184b6e;
-    }
-
     .verified-badge {
       display: inline-flex;
       align-items: center;
@@ -1910,9 +1883,9 @@
             </div>
           </div>
 
-          <!-- STEP 5: CONTACT & OTP VERIFICATION -->
+          <!-- STEP 5: CONTACT & PUBLISH -->
           <div class="step-card" id="step-section-5" style="display: none;">
-            <h2 class="step-card-heading">5. Owner contact &amp; verification</h2>
+            <h2 class="step-card-heading">5. Owner contact</h2>
             <p class="step-card-sub">You stay in control of who connects with you.</p>
 
             <!-- Name Field -->
@@ -1947,39 +1920,7 @@
               </p>
               <p class="field-error" id="error-phone">Enter a valid 10-digit Indian phone number.</p>
 
-              <!-- OTP Verification Row -->
-              <div class="otp-action-row" id="otp-controls-row">
-                <button type="button" class="btn-otp" id="btn-send-otp" onclick="handleSendOtp()">
-                  Verify with OTP
-                </button>
-                <div id="verified-phone-badge" class="verified-badge" style="display: none;">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  <span>Phone verified</span>
-                </div>
-              </div>
-
-              <!-- OTP Input Box (revealed after Send OTP) -->
-              <div id="otp-input-wrap" style="display: none; margin-top: 12px;">
-                <label for="otp-code-input" class="form-label">Enter 4-digit OTP</label>
-                <div style="display: flex; gap: 8px;">
-                  <input
-                    type="text"
-                    id="otp-code-input"
-                    class="form-input"
-                    placeholder="Enter OTP"
-                    maxlength="6"
-                    inputmode="numeric"
-                    style="max-width: 180px;"
-                  >
-                  <button type="button" class="btn-otp" onclick="handleVerifyOtp()">Submit OTP</button>
-                </div>
-                <p class="helper-text" id="otp-sent-status">OTP sent to your number.</p>
-              </div>
-            </div>
-
-            <!-- WhatsApp Same Checkbox -->
+              <!-- WhatsApp Same Checkbox -->
             <div class="form-group" style="margin-top: 18px;">
               <label class="checkbox-wrap">
                 <input type="checkbox" id="whatsapp-same" checked onchange="toggleWhatsappSame(this.checked)">
@@ -2248,8 +2189,7 @@
       photos: [], // array of { id, dataUrl, name, size }
       name: '',
       phone: '',
-      isPhoneVerified: false,
-      whatsappSame: true,
+            whatsappSame: true,
       whatsappNumber: ''
     };
 
@@ -2869,57 +2809,7 @@
       saveDraftToStorage();
     }
 
-    // 6. Contact, Phone Verification & WhatsApp
-    function handleSendOtp() {
-      const phoneInput = document.getElementById('owner-phone');
-      const errPhone = document.getElementById('error-phone');
-      const cleanPhone = phoneInput.value.replace(/\D/g, '');
-
-      if (!/^[6-9]\d{9}$/.test(cleanPhone)) {
-        if (errPhone) errPhone.style.display = 'block';
-        phoneInput.focus();
-        return;
-      }
-
-      if (errPhone) errPhone.style.display = 'none';
-      formState.phone = cleanPhone;
-
-      // Reveal simulated OTP verification input
-      const otpWrap = document.getElementById('otp-input-wrap');
-      const statusEl = document.getElementById('otp-sent-status');
-      if (otpWrap) otpWrap.style.display = 'block';
-      if (statusEl) statusEl.textContent = `OTP code sent to +91 ${cleanPhone.substring(0, 5)} ${cleanPhone.substring(5)}. Enter 1234 or your code.`;
-
-      const otpInput = document.getElementById('otp-code-input');
-      if (otpInput) {
-        otpInput.value = '1234'; // Pre-filled for effortless test flow
-        otpInput.focus();
-      }
-    }
-
-    function handleVerifyOtp() {
-      const otpInput = document.getElementById('otp-code-input');
-      const otpVal = otpInput.value.trim();
-
-      if (otpVal.length < 4) {
-        alert("Please enter a 4-digit OTP.");
-        return;
-      }
-
-      formState.isPhoneVerified = true;
-
-      // Show verified badge & hide OTP controls
-      const badge = document.getElementById('verified-phone-badge');
-      const btnSend = document.getElementById('btn-send-otp');
-      const otpWrap = document.getElementById('otp-input-wrap');
-
-      if (badge) badge.style.display = 'inline-flex';
-      if (btnSend) btnSend.style.display = 'none';
-      if (otpWrap) otpWrap.style.display = 'none';
-
-      saveDraftToStorage();
-    }
-
+    // 6. Contact & WhatsApp
     function toggleWhatsappSame(checked) {
       formState.whatsappSame = checked;
       const wrap = document.getElementById('whatsapp-separate-wrap');
