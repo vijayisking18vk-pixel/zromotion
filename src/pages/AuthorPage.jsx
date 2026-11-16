@@ -142,7 +142,7 @@ export default function AuthorPage() {
                 </div>
               </Link>
 
-              <Link to="/flats-for-rent-in-adyar-chennai" style={{ textDecoration: 'none' }}>
+              <Link to="/chennai/adyar" style={{ textDecoration: 'none' }}>
                 <div className="rail-card" style={{ height: '100%', padding: '1.25rem', transition: 'border-color 0.15s ease' }}>
                   <span className="tag-eyebrow" style={{ fontSize: '0.7rem' }}>LOCALITY REPORT</span>
                   <h4 style={{ fontSize: '1.05rem', margin: '0.4rem 0 0.5rem 0', color: 'var(--c-ink)' }}>Flats for Rent in Adyar</h4>
@@ -150,11 +150,11 @@ export default function AuthorPage() {
                 </div>
               </Link>
 
-              <Link to="/guide/advance-deposit-chennai" style={{ textDecoration: 'none' }}>
+              <Link to="/guides/advance-deposit-chennai" style={{ textDecoration: 'none' }}>
                 <div className="rail-card" style={{ height: '100%', padding: '1.25rem', transition: 'border-color 0.15s ease' }}>
                   <span className="tag-eyebrow" style={{ fontSize: '0.7rem' }}>TENANT RIGHTS</span>
                   <h4 style={{ fontSize: '1.05rem', margin: '0.4rem 0 0.5rem 0', color: 'var(--c-ink)' }}>Advance Deposit Norms</h4>
-                  <p style={{ fontSize: '0.88rem', color: 'var(--c-ink-muted)', margin: 0 }}>Debunking the 10-month advance myth and negotiating down to 4–6 months safely.</p>
+                  <p style={{ fontSize: '0.88rem', color: 'var(--c-ink-muted)', margin: 0 }}>Debunking the 10-month advance myth and negotiating down to 4 to 6 months safely.</p>
                 </div>
               </Link>
             </div>
